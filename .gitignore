@@ -32,7 +32,3 @@ yarn-error.log*
 
 # vercel
 .vercel
-
-#cache - not sure if this will need to be deleted later?
-.next/*
-public/sw.js.map

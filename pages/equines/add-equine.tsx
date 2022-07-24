@@ -1,5 +1,7 @@
 import React, {useState, useContext} from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
+
 
 export default function NewEquine (){
     const [name, setName] = useState('');
@@ -11,11 +13,16 @@ export default function NewEquine (){
     const [training, setTraining] = useState('');
     const [onHold, setOnHold] = useState(false);
 
+    const Form = styled.form`
+        display: flex;
+        flex-direction: column;
+    `;
+
     return(
         <div>
             <h1>Add an Equine</h1>
             <div>
-                <form action="/data/equines" method='post' className='new_form'>
+                <Form action="/data/equines" method='post' >
                     <label htmlFor="name">Name:</label>
                     <input type="text" id='name' name='name' onChange={(e) => setName(e.target.value)}/>
 
@@ -50,7 +57,7 @@ export default function NewEquine (){
 
                     <label htmlFor="on_hold">On Hold:</label>
                     <input type="checkbox" onChange={(e) => setOnHold(e.target.checked)}/>
-                </form>
+                </Form>
             </div>
             <div>
                 <Link href='/equines'>

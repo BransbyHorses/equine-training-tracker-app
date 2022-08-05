@@ -2,6 +2,9 @@ import React, {useState, useContext} from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '@mui/material';
+import Form from '../components/form';
+import Input from '../components/input';
+import Select from '../components/select';
 
 export default function NewEquine (){
     const [name, setName] = useState('');
@@ -12,17 +15,6 @@ export default function NewEquine (){
     const [skills, setSkills] = useState('');
     const [training, setTraining] = useState('');
     const [onHold, setOnHold] = useState(false);
-
-    const Form = styled.form`
-        display: flex;
-        flex-direction: column;
-    `;
-    const Input = styled.input`
-        height: 30px;
-    `
-    const Select = styled.select`
-        height: 40px;
-    `
 
     const submitEquine = () => {
         const equineData = {

@@ -5,40 +5,38 @@ import { Button } from '@mui/material';
 import Form from '../components/form';
 import Input from '../components/input';
 import Select from '../components/select';
+import { setServers } from 'dns';
 
 export default function NewEquine (){
-    const [name, setName] = useState('');
-    const [yard, setYard] = useState('');
-    const [trainer, setTrainer] = useState(0);
-    const [category, setCategory] = useState('');
-    const [programme, setProgramme] = useState('');
-    const [skills, setSkills] = useState('');
-    const [training, setTraining] = useState('');
-    const [onHold, setOnHold] = useState(false);
+
+    const [newEquine, setNewEquine] = useState({
+        name: '',
+        yard: '',
+        trainer: 0,
+        category: '',
+        programme: '',
+        skills: '',
+        training: '',
+        onHold: false
+    });
 
     const submitEquine = () => {
-        const equineData = {
-            name,
-            yard,
-            trainer,
-            category,
-            programme,
-            skills,
-            training,
-            onHold
-        };
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify(equineData)
+            body: JSON.stringify(newEquine)
         })
         .then(response => response.json())
         .catch(rejected => {
             console.log(rejected);
         });
     };
+
+    const handleChange = (e: any) => {
+        setNewEquine({...newEquine, [e.target.name] : e.target.value})
+    }
 
     return (
         <div>
@@ -50,15 +48,14 @@ export default function NewEquine (){
                         type="text"
                         id="name"
                         name="name"
-                        defaultValue={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={handleChange}
                     />
 
                     <label htmlFor="equine_yard">Yard:</label>
                     <Select
                         name="yard"
                         id="equine_yard"
-                        onChange={e => setYard(e.target.value)}
+                        onChange={handleChange}
                     >
                         <option value="yard 1">Yard 1</option>
                         <option value="yard 2">Yard 2</option>
@@ -73,17 +70,15 @@ export default function NewEquine (){
                         id="trainer_id"
                         min="1"
                         max="20"
-                        onChange={e => setTrainer(parseInt(e.target.value))}
+                        name='trainer'
+                        onChange={handleChange}
                     />
 
                     <label htmlFor="category">Category:</label>
                     <Select
                         name="category"
                         id="new_yard"
-                        onChange={e => {
-                            setCategory(e.target.value);
-                            e.preventDefault();
-                        }}
+                        onChange={handleChange}
                     >
                         <option value="red">Red</option>
                         <option value="amber">Amber</option>
@@ -96,7 +91,7 @@ export default function NewEquine (){
                         type="text"
                         id="programme"
                         name="programme"
-                        onChange={e => setProgramme(e.target.value)}
+                        onChange={handleChange}
                     />
 
                     <label htmlFor="skills">Skills:</label>
@@ -104,7 +99,7 @@ export default function NewEquine (){
                         type="text"
                         id="skills"
                         name="skills"
-                        onChange={e => setSkills(e.target.value)}
+                        onChange={handleChange}
                     />
 
                     <label htmlFor="training">Training:</label>
@@ -112,13 +107,14 @@ export default function NewEquine (){
                         type="text"
                         id="training"
                         name="training"
-                        onChange={e => setTrainer(parseInt(e.target.value))}
+                        onChange={handleChange}
                     />
 
                     <label htmlFor="on_hold">On Hold:</label>
                     <Input
                         type="checkbox"
-                        onChange={e => setOnHold(e.target.checked)}
+                        name='onHold'
+                        onChange={handleChange}
                     />
                     <Button variant="contained" onSubmit={submitEquine}>
                         Submit

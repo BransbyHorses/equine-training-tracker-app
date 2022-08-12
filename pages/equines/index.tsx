@@ -1,19 +1,12 @@
 import Link from 'next/link';
 import {
     Button,
-    Select,
     Typography,
     Container,
-    TextField,
-    MenuItem,
-    Checkbox,
-    FormControlLabel,
-    FormControl,
-    FormGroup,
-    Grid,
     Card
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { Box } from '@mui/system';
 
 export default function Equines() {
     
@@ -47,36 +40,48 @@ export default function Equines() {
             <Typography variant="h3" color="textSecondary" gutterBottom>
                 Bransby Equines
             </Typography>
-            <div>
-                {equines.map(equine => {
-                    return (
-                        <Card key={equine.id} raised sx={{ my: '1rem' }}>
-                            <Typography
-                                variant="h5"
-                                color="#616161"
-                                gutterBottom
-                                sx={{ my: '1rem', mx: '1rem' }}
-                            >
-                                {equine.name}
-                            </Typography>
-                        </Card>
-                    );
-                })}
-            </div>
-            <Container>
+            {equines.length > 0 ? (
+                <div>
+                    {equines.map(equine => {
+                        return (
+                            <Card key={equine.id} raised sx={{ my: '1rem' }}>
+                                <Typography
+                                    variant="h5"
+                                    color="#616161"
+                                    gutterBottom
+                                    sx={{ my: '1rem', mx: '1rem' }}
+                                >
+                                    {equine.name}
+                                </Typography>
+                            </Card>
+                        );
+                    })}
+                </div>
+            ) : (
+                <Typography
+                variant="h5"
+                color="#616161"
+                gutterBottom
+                sx={{ my: '1rem', mx: '1rem' }}
+            >
+                No equines here...☹️...yet!
+            </Typography>
+            )}
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-around'
+                }}
+            >
                 <Button color="primary" variant="contained">
-                    <Link href="/" >
-                        <Typography color='lightBlue[50]'>
-                        Go to the homepage
-                        </Typography>      
-                    </Link>
-                </Button>
-                <Button>
                     <Link href="/equines/add-equine">
-                        <a>Add a new equine</a>
+                        <Typography color="lightBlue[50]">
+                            Create new equine
+                        </Typography>
                     </Link>
                 </Button>
-            </Container>
+            </Box>
         </Container>
     );
 }

@@ -1,11 +1,9 @@
 import React, {useState, useContext} from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
-import { Button } from '@mui/material';
-import Form from '../components/form';
-import Input from '../components/input';
-import Select from '../components/select';
-import { setServers } from 'dns';
+import {Button, Select, Typography, Container, TextField, MenuItem, Input, Checkbox, FormControlLabel} from '@mui/material';
+
+import Form from '../../components/styles/form';
+
 
 export default function NewEquine (){
 
@@ -38,83 +36,85 @@ export default function NewEquine (){
         setNewEquine({...newEquine, [e.target.name] : e.target.value})
     }
 
+    const handleClick = (e: any) => {
+        console.log(e);
+        
+    }
     return (
-        <div>
-            <h1>Add an Equine</h1>
+        <Container>
+            <Typography variant="h5" color="textSecondary" gutterBottom>
+                Add an Equine
+            </Typography>
             <div>
-                <Form action="/data/equines" method="post">
-                    <label htmlFor="name">Name:</label>
-                    <Input
-                        type="text"
+                <Form>
+                    <TextField
                         id="name"
-                        name="name"
+                        label="Name"
+                        variant="outlined"
+                        color="secondary"
+                        name='name'
                         onChange={handleChange}
+                        required
                     />
 
-                    <label htmlFor="equine_yard">Yard:</label>
                     <Select
-                        name="yard"
-                        id="equine_yard"
+                        label="Yard"
+                        id="yard"
+                        name='yard'
+                        defaultValue={'yard 1'}
                         onChange={handleChange}
+                        required
                     >
-                        <option value="yard 1">Yard 1</option>
-                        <option value="yard 2">Yard 2</option>
-                        <option value="yard 3">Yard 3</option>
-                        <option value="yard 4">Yard 4</option>
-                        <option value="yard 5">Yard 5</option>
+                        <MenuItem value="yard 1">Yard 1</MenuItem>
+                        <MenuItem value="yard 2">Yard 2</MenuItem>
+                        <MenuItem value="yard 3">Yard 3</MenuItem>
+                        <MenuItem value="yard 4">Yard 4</MenuItem>
+                        <MenuItem value="yard 5">Yard 5</MenuItem>
                     </Select>
-
-                    <label htmlFor="trainer-id">Trainer:</label>
                     <Input
                         type="number"
                         id="trainer_id"
-                        min="1"
-                        max="20"
-                        name='trainer'
+                        name="trainer"
                         onChange={handleChange}
                     />
-
-                    <label htmlFor="category">Category:</label>
                     <Select
                         name="category"
-                        id="new_yard"
+                        id="category"
+                        value={'red'}
                         onChange={handleChange}
                     >
-                        <option value="red">Red</option>
-                        <option value="amber">Amber</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
+                        <MenuItem value="red">Red</MenuItem>
+                        <MenuItem value="amber">Amber</MenuItem>
+                        <MenuItem value="blue">Blue</MenuItem>
+                        <MenuItem value="green">Green</MenuItem>
                     </Select>
-
-                    <label htmlFor="programme">Programme:</label>
-                    <Input
-                        type="text"
+                    <TextField
                         id="programme"
-                        name="programme"
+                        label="Programme"
+                        variant="outlined"
+                        color="secondary"
+                        name='programme'
                         onChange={handleChange}
+                        required
                     />
-
-                    <label htmlFor="skills">Skills:</label>
-                    <Input
-                        type="text"
+                    <TextField
                         id="skills"
-                        name="skills"
+                        label="Skills"
+                        variant="outlined"
+                        color="secondary"
+                        name='skills'
                         onChange={handleChange}
                     />
-
-                    <label htmlFor="training">Training:</label>
-                    <Input
-                        type="text"
+                    <TextField
                         id="training"
-                        name="training"
+                        label="Training"
+                        name='training'
                         onChange={handleChange}
+                        required
                     />
-
-                    <label htmlFor="on_hold">On Hold:</label>
-                    <Input
-                        type="checkbox"
-                        name='onHold'
-                        onChange={handleChange}
+                    <FormControlLabel
+                        control={<Checkbox name='onHold' checked={newEquine.onHold} onClick={handleClick} />}
+                        label="On Hold"
                     />
                     <Button variant="contained" onSubmit={submitEquine}>
                         Submit
@@ -122,10 +122,12 @@ export default function NewEquine (){
                 </Form>
             </div>
             <div>
-                <Link href="/equines">
-                    <a>Go back to Equines</a>
-                </Link>
+                <Button variant="outlined">
+                    <Link href="/equines">
+                        <Typography>Go back to Equines</Typography>
+                    </Link>
+                </Button>
             </div>
-        </div>
+        </Container>
     );
 }

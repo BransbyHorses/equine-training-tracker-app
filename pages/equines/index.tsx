@@ -45,7 +45,7 @@ export default function Equines() {
                 <Link href="/">
                     <a>Go to the homepage</a>
                 </Link>
-                <Link href="equines/add-equine">
+                <Link href="/equines/add-equine">
                     <a>Add a new equine</a>
                 </Link>
             </div>

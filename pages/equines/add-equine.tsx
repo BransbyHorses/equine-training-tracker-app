@@ -1,7 +1,18 @@
 import React, {useState, useContext} from 'react';
 import Link from 'next/link';
-import {Button, Select, Typography, Container, TextField, MenuItem, Input, Checkbox, FormControlLabel} from '@mui/material';
-
+import {
+    Button,
+    Select,
+    Typography,
+    Container,
+    TextField,
+    MenuItem,
+    Checkbox,
+    FormControlLabel,
+    FormControl,
+    FormGroup,
+    Grid
+} from '@mui/material';
 import Form from '../../components/styles/form';
 
 
@@ -18,7 +29,8 @@ export default function NewEquine (){
         onHold: false
     });
 
-    const submitEquine = () => {
+    const submitEquine = (e: any) => {
+        e.preventDefault();
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`,{
             method: 'POST',
             headers: {
@@ -26,7 +38,10 @@ export default function NewEquine (){
               },
             body: JSON.stringify(newEquine)
         })
-        .then(response => response.json())
+        .then(response => {
+            response.json(); 
+        })
+        .then()
         .catch(rejected => {
             console.log(rejected);
         });
@@ -37,8 +52,7 @@ export default function NewEquine (){
     }
 
     const handleClick = (e: any) => {
-        console.log(e);
-        
+        setNewEquine({...newEquine, [e.target.name] : !newEquine.onHold})
     }
     return (
         <Container>
@@ -46,83 +60,106 @@ export default function NewEquine (){
                 Add an Equine
             </Typography>
             <div>
-                <Form>
+                <form onSubmit={submitEquine}>
+                <Grid container direction="column" >
                     <TextField
                         id="name"
                         label="Name"
                         variant="outlined"
                         color="secondary"
-                        name='name'
+                        name="name"
                         onChange={handleChange}
                         required
+                        sx={{my: "1rem"}}
                     />
-
-                    <Select
-                        label="Yard"
-                        id="yard"
-                        name='yard'
-                        defaultValue={'yard 1'}
-                        onChange={handleChange}
-                        required
-                    >
-                        <MenuItem value="yard 1">Yard 1</MenuItem>
-                        <MenuItem value="yard 2">Yard 2</MenuItem>
-                        <MenuItem value="yard 3">Yard 3</MenuItem>
-                        <MenuItem value="yard 4">Yard 4</MenuItem>
-                        <MenuItem value="yard 5">Yard 5</MenuItem>
-                    </Select>
-                    <Input
+                    <FormControl sx={{my: "1rem"}}>
+                        <Select
+                            label="Yard"
+                            id="yard"
+                            name="yard"
+                            value={newEquine.yard}
+                            onChange={handleChange}
+                            required
+                        >
+                            <MenuItem value="yard 1">Yard 1</MenuItem>
+                            <MenuItem value="yard 2">Yard 2</MenuItem>
+                            <MenuItem value="yard 3">Yard 3</MenuItem>
+                            <MenuItem value="yard 4">Yard 4</MenuItem>
+                            <MenuItem value="yard 5">Yard 5</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <TextField
                         type="number"
                         id="trainer_id"
+                        label="Trainer Id"
                         name="trainer"
                         onChange={handleChange}
+                        sx={{my: "1rem"}}
                     />
-                    <Select
-                        name="category"
-                        id="category"
-                        value={'red'}
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="red">Red</MenuItem>
-                        <MenuItem value="amber">Amber</MenuItem>
-                        <MenuItem value="blue">Blue</MenuItem>
-                        <MenuItem value="green">Green</MenuItem>
-                    </Select>
+                    <FormControl>
+                        <Select
+                            name="category"
+                            label="Category"
+                            id="category"
+                            value={newEquine.category}
+                            onChange={handleChange}
+                            sx={{my: "1rem"}}
+                        >
+                            <MenuItem value="red">Red</MenuItem>
+                            <MenuItem value="amber">Amber</MenuItem>
+                            <MenuItem value="blue">Blue</MenuItem>
+                            <MenuItem value="green">Green</MenuItem>
+                        </Select>
+                    </FormControl>
                     <TextField
+                        sx={{my: "1rem"}}
                         id="programme"
                         label="Programme"
                         variant="outlined"
                         color="secondary"
-                        name='programme'
+                        name="programme"
                         onChange={handleChange}
                         required
                     />
                     <TextField
+                        sx={{my: "1rem"}}
                         id="skills"
                         label="Skills"
                         variant="outlined"
                         color="secondary"
-                        name='skills'
+                        name="skills"
                         onChange={handleChange}
                     />
                     <TextField
+                        sx={{my: "1rem"}}
                         id="training"
                         label="Training"
-                        name='training'
+                        name="training"
                         onChange={handleChange}
                         required
                     />
-                    <FormControlLabel
-                        control={<Checkbox name='onHold' checked={newEquine.onHold} onClick={handleClick} />}
+                    <FormGroup>
+                        <FormControlLabel
+                        sx={{my: "1rem"}}
+                           control={
+                            <Checkbox
+                                name="onHold"
+                                checked={newEquine.onHold}
+                                onClick={handleClick}
+                            />
+                        }
                         label="On Hold"
-                    />
-                    <Button variant="contained" onSubmit={submitEquine}>
+                        />
+                    </FormGroup>
+
+                    <Button variant="contained" type='submit'>
                         Submit
                     </Button>
-                </Form>
+                    </Grid>
+                </form>
             </div>
             <div>
-                <Button variant="outlined">
+                <Button variant="outlined" sx={{my: "1rem"}}>
                     <Link href="/equines">
                         <Typography>Go back to Equines</Typography>
                     </Link>

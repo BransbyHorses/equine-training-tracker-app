@@ -13,7 +13,6 @@ import {
     FormGroup,
     Grid
 } from '@mui/material';
-import Form from '../../components/styles/form';
 
 
 export default function NewEquine (){

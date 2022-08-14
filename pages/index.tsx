@@ -10,7 +10,6 @@ export default function Home() {
     signIn('cognito', {
       callbackUrl: `${window.location.origin}/equines`
     })
-    
   }
 
   const signOutUser = () => {
@@ -34,7 +33,7 @@ export default function Home() {
                           variant="contained"
                           onClick={signInUser}
                       >
-                          Sign In 
+                          Sign In
                       </Button>
                   </SignInContainer>
               )}

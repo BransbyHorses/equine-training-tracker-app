@@ -1,4 +1,4 @@
-import { Container, Box, Button, Link, Typography } from '@mui/material';
+import { Container, Box, Button, Link, Typography, Card } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { keyframes } from 'styled-components';
@@ -52,14 +52,40 @@ export default function EquineId() {
                     alignItems: 'center'
                 }}
             >
-                <Typography
-                    variant="h5"
-                    color="#616161"
-                    gutterBottom
-                    sx={{ my: '1rem', mx: '1rem' }}
-                >
-                    {equine.name}
-                </Typography>
+                <Card sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px',  }}>
+                    <Typography
+                        variant="h5"
+                        color="#616161"
+                        gutterBottom
+                        sx={{ my: '1rem', mx: '1rem' }}
+                    >
+                        Name: {equine.name}
+                    </Typography>
+                </Card>
+                <Card sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px',  }}>
+                    <Typography
+                        variant="h5"
+                        color="#616161"
+                        gutterBottom
+                        sx={{ my: '1rem', mx: '1rem' }}
+                    >
+                        Yard: {equine.yard}
+                    </Typography>
+                </Card>
+                
+                {equine.onHold ? 
+                <Card sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px',  }}>
+                    <Typography
+                            variant="h5"
+                            color="#616161"
+                            gutterBottom
+                            sx={{ my: '1rem', mx: '1rem' }}
+                        >
+                            This Equine is currently on hold.
+                    </Typography>
+                </Card>
+            : null}
+                
 
                 <Button variant="outlined" sx={{ my: '1rem' }}>
                     <Link href="/equines">

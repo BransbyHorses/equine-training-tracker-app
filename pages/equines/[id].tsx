@@ -1,9 +1,16 @@
-import { Container, Box, Button, Link, Typography, Card } from '@mui/material';
+import { Container, Box, Button, Link, Typography, Card, Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { keyframes } from 'styled-components';
+import { withRouter, NextRouter } from 'next/router'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-export default function EquineId() {
+interface WithRouterProps {
+    router: NextRouter
+}
+
+interface MyComponentProps extends WithRouterProps {}
+
+const EquineId: React.FC<MyComponentProps> = (props) => {
     interface MyEquine {
         id: number;
         name: string;
@@ -29,8 +36,8 @@ export default function EquineId() {
 
     const router = useRouter();
 
-    function getEquineFromId() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${router.query.id}`)
+    const getEquineFromId = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${router.query.id}`)
             .then(response => response.json())
             .then(data => setEquine(data))
             .catch(rejected => {
@@ -38,9 +45,21 @@ export default function EquineId() {
             });
     }
 
+    const deleteEquineForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${router.query.id}`, {method: 'DELETE'} )
+        .then(response => response.json())
+        .then(() => {
+            router.push('/equines')
+        })
+        .catch(rejected => {
+            console.log(rejected);
+        });
+    }
+
     useEffect(() => {
         getEquineFromId();
     }, []);
+    
 
     return (
         <Container>
@@ -52,7 +71,9 @@ export default function EquineId() {
                     alignItems: 'center'
                 }}
             >
-                <Card sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px',  }}>
+                <Card
+                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
+                >
                     <Typography
                         variant="h5"
                         color="#616161"
@@ -62,7 +83,9 @@ export default function EquineId() {
                         Name: {equine.name}
                     </Typography>
                 </Card>
-                <Card sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px',  }}>
+                <Card
+                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
+                >
                     <Typography
                         variant="h5"
                         color="#616161"
@@ -72,20 +95,29 @@ export default function EquineId() {
                         Yard: {equine.yard}
                     </Typography>
                 </Card>
-                
-                {equine.onHold ? 
-                <Card sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px',  }}>
-                    <Typography
+
+                {equine.onHold ? (
+                    <Card
+                        sx={{
+                            my: '1rem',
+                            cursor: 'pointer',
+                            borderRadius: '20px'
+                        }}
+                    >
+                        <Typography
                             variant="h5"
                             color="#616161"
                             gutterBottom
                             sx={{ my: '1rem', mx: '1rem' }}
                         >
                             This Equine is currently on hold.
-                    </Typography>
-                </Card>
-            : null}
-                
+                        </Typography>
+                    </Card>
+                ) : null}
+
+                <Button variant="outlined" sx={{ my: '1rem' }} onClick={deleteEquineForever}>
+                    <DeleteForeverIcon />
+                </Button>
 
                 <Button variant="outlined" sx={{ my: '1rem' }}>
                     <Link href="/equines">
@@ -97,4 +129,6 @@ export default function EquineId() {
             </Box>
         </Container>
     );
-}
+};
+
+export default withRouter(EquineId);

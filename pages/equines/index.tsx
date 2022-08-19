@@ -44,15 +44,17 @@ export default function Equines() {
                 <div>
                     {equines.map(equine => {
                         return (
-                            <Card key={equine.id} raised sx={{ my: '1rem' }}>
-                                <Typography
-                                    variant="h5"
-                                    color="#616161"
-                                    gutterBottom
-                                    sx={{ my: '1rem', mx: '1rem' }}
-                                >
-                                    {equine.name}
-                                </Typography>
+                            <Card key={equine.id} raised sx={{ my: '1rem', cursor: 'pointer' }}>
+                                <Link href={`equines/${equine.id}`}>
+                                    <Typography
+                                        variant="h5"
+                                        color="#616161"
+                                        gutterBottom
+                                        sx={{ my: '1rem', mx: '1rem' }}
+                                    >
+                                        {equine.name}
+                                    </Typography>
+                                </Link>
                             </Card>
                         );
                     })}

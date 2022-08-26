@@ -8,7 +8,7 @@ export default function Home() {
 
   const signInUser = () => {
     signIn('cognito', {
-      callbackUrl: `${window.location.origin}/equines`
+      callbackUrl: `${window.location.origin}/dashboard/admin`
     })
   }
 

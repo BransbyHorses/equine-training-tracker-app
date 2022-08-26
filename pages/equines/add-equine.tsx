@@ -28,10 +28,6 @@ interface Equine {
     yard: string;
 }
 
-interface Learners {
-    learners: Array
-}
-
 interface WithRouterProps {
     router: NextRouter
 }
@@ -39,6 +35,8 @@ interface WithRouterProps {
 interface MyComponentProps extends WithRouterProps {}
 
 const NewEquine: React.FC<MyComponentProps> = (props) => {
+    
+    const learners = options.typeOfLearner;
     
     const [newEquine, setNewEquine] = useState({
         name: '',
@@ -50,8 +48,6 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
         training: '',
         onHold: false
     });
-
-    const learners = options.typeOfLearner;
 
 
     const submitEquine = async (e: any) => {
@@ -95,31 +91,27 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
                             required
                             sx={{ my: '1rem' }}
                         />
-                        <FormControl sx={{ my: '1rem' }}>
-                            <Select
-                                label="Yard"
-                                id="yard"
-                                name="yard"
-                                value={newEquine.yard}
-                                onChange={handleChange}
-                                required
-                            >
-                               {learners.map((learner, index) => {
-                                    return(
-                                        <MenuItem value="yard 2" key={index}>{learner}</MenuItem>
-                                    )
-                               })}
-                                
-                                {/* <MenuItem value="yard 1">Yard 1</MenuItem>
-                                <MenuItem value="yard 2">Yard 2</MenuItem>
-                                <MenuItem value="yard 3">Yard 3</MenuItem>
-                                <MenuItem value="yard 4">Yard 4</MenuItem>
-                                <MenuItem value="yard 5">Yard 5</MenuItem> */}
-                            </Select>
-                        </FormControl>
+
+                        <Select
+                            label="Yard"
+                            id="yard"
+                            name="yard"
+                            value={newEquine.yard}
+                            onChange={handleChange}
+                            required
+                        >
+                            {learners.map((learner, index) => {
+                                return (
+                                    <MenuItem value="yard 2" key={index}>
+                                        {learner}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
                         {Object.keys(options.typeOfLearner).forEach(learner => {
                             <Typography>learner</Typography>;
                         })}
+
                         <TextField
                             type="number"
                             id="trainer_id"
@@ -192,8 +184,8 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
             </div>
             <div>
                 <Button variant="outlined" sx={{ my: '1rem' }}>
-                    <Link href="/equines">
-                        <Typography>Go back to Equines</Typography>
+                    <Link href="/dashboard/admin">
+                        <Typography>Go back to Dashboard</Typography>
                     </Link>
                 </Button>
             </div>

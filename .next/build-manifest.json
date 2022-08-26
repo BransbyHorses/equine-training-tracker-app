@@ -30,11 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/equines.js"
     ],
-    "/equines/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/equines/[id].js"
-    ],
     "/equines/add-equine": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

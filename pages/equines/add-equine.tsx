@@ -14,6 +14,7 @@ import {
     FormGroup,
     Grid
 } from '@mui/material';
+import options from '../../properties/properties';
 
 interface Equine {
     id: number;
@@ -25,6 +26,10 @@ interface Equine {
     trainerId: number;
     training: string;
     yard: string;
+}
+
+interface Learners {
+    learners: Array
 }
 
 interface WithRouterProps {
@@ -45,6 +50,9 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
         training: '',
         onHold: false
     });
+
+    const learners = options.typeOfLearner;
+
 
     const submitEquine = async (e: any) => {
         e.preventDefault();
@@ -96,13 +104,22 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
                                 onChange={handleChange}
                                 required
                             >
-                                <MenuItem value="yard 1">Yard 1</MenuItem>
+                               {learners.map((learner, index) => {
+                                    return(
+                                        <MenuItem value="yard 2" key={index}>{learner}</MenuItem>
+                                    )
+                               })}
+                                
+                                {/* <MenuItem value="yard 1">Yard 1</MenuItem>
                                 <MenuItem value="yard 2">Yard 2</MenuItem>
                                 <MenuItem value="yard 3">Yard 3</MenuItem>
                                 <MenuItem value="yard 4">Yard 4</MenuItem>
-                                <MenuItem value="yard 5">Yard 5</MenuItem>
+                                <MenuItem value="yard 5">Yard 5</MenuItem> */}
                             </Select>
                         </FormControl>
+                        {Object.keys(options.typeOfLearner).forEach(learner => {
+                            <Typography>learner</Typography>;
+                        })}
                         <TextField
                             type="number"
                             id="trainer_id"
@@ -185,3 +202,7 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
 };
 
 export default withRouter(NewEquine);
+function learnerType(learnerType: any): React.ReactNode {
+    throw new Error('Function not implemented.');
+}
+

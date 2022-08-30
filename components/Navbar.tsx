@@ -5,7 +5,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import HomeIcon from './HomeIcon';
 
 export default function ButtonAppBar() {
     const { data: session, status } = useSession();
@@ -13,21 +15,24 @@ export default function ButtonAppBar() {
 
     const signInUser = () => {
         signIn('cognito', {
-          callbackUrl: `${window.location.origin}/equines`
-        })
-        
-      }
-    
-      const signOutUser = () => {
+            callbackUrl: `${window.location.origin}/equines`
+        });
+    };
+
+    const signOutUser = () => {
         signOut({
             callbackUrl: `${window.location.origin}/`
-          })
-      }
-    
+        });
+    };
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar sx={{
+                    flexDirection: "row",
+                    justifyContent: "space-between"
+                }}>
+                    <MenuIcon />
                     <IconButton
                         size="large"
                         edge="start"
@@ -35,30 +40,16 @@ export default function ButtonAppBar() {
                         aria-label="menu"
                         sx={{ mr: 2 }}
                     >
-                        {/* <MenuIcon /> */}
+                        <HomeIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                    >
-                        Bransby Horse Rescue and Welfare
-                    </Typography>
 
                     {!session && (
-                            <Button
-                                color="inherit"
-                                onClick={signInUser}
-                            >
-                                Login
-                            </Button>
-                      
+                        <Button color="inherit" onClick={signInUser}>
+                            Login
+                        </Button>
                     )}
                     {session && (
-                        <Button
-                            color="inherit"
-                            onClick={signOutUser}
-                        >
+                        <Button color="inherit" onClick={signOutUser}>
                             Sign Out
                         </Button>
                     )}

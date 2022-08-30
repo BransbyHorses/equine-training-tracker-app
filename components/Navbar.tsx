@@ -32,7 +32,7 @@ export default function ButtonAppBar() {
                     flexDirection: "row",
                     justifyContent: "space-between"
                 }}>
-                    <MenuIcon />
+                    <MenuIcon sx={{ height: '2.1rem', width: '2.1rem'}}/>
                     <IconButton
                         size="large"
                         edge="start"

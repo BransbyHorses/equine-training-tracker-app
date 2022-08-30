@@ -1,7 +1,6 @@
-import React, { useState, FC } from 'react';
-import Link from 'next/link';
+import React, { FC } from 'react';
 import { withRouter, NextRouter } from 'next/router';
-import { Button, Typography, Container, Grid, Card } from '@mui/material';
+import { Typography, Container, Grid, Card } from '@mui/material';
 import options from '../../properties/properties';
 import LinkButton from '../../components/LinkButton';
 
@@ -13,7 +12,7 @@ const adminActions = options.adminActions;
 
 interface MyComponentProps extends WithRouterProps {}
 
-const adminDashboard: React.FC<MyComponentProps> = props => {
+const adminDashboard: FC <MyComponentProps> = props => {
     return (
         <Container>
             <Typography variant="h3" color="textSecondary" gutterBottom>

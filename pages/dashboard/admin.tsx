@@ -32,6 +32,14 @@ const adminDashboard: FC <MyComponentProps> = props => {
                                 </Typography>
                                 <Grid container direction={'column'}>
                                     <LinkButton
+                                        buttonHref={action.seeAllLink}
+                                        buttonTitle={action.buttonTitle}
+                                        action="See all"
+                                        variant={action.deleteVariant}
+                                        size={action.deleteSize}
+                                        color="red"
+                                    />
+                                    <LinkButton
                                         buttonHref={action.newLink}
                                         buttonTitle={action.buttonTitle}
                                         action="Add New"

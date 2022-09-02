@@ -9,10 +9,12 @@ const LinkButton = (props: any) => {
                 variant={props.variant}
                 size={props.size}
                 sx={{
-                    margin: "5px 20px"
+                    margin: '5px 20px'
                 }}
             >
-                <Typography color={props.color ? props.color : null}>{props.action} {props.buttonTitle}</Typography>
+                <Typography color={props.color ? props.color : null}>
+                    {props.action} {props.action === "See all" ? props.buttonTitle + "s" : props.buttonTitle }
+                </Typography>
             </Button>
         </Link>
     );

@@ -8,9 +8,8 @@ export default function Home() {
 
   const signInUser = () => {
     signIn('cognito', {
-      callbackUrl: `${window.location.origin}/equines`
+      callbackUrl: `${window.location.origin}/dashboard/admin`
     })
-    
   }
 
   const signOutUser = () => {
@@ -34,7 +33,7 @@ export default function Home() {
                           variant="contained"
                           onClick={signInUser}
                       >
-                          Sign In 
+                          Sign In
                       </Button>
                   </SignInContainer>
               )}

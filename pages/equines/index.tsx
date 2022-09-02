@@ -1,6 +1,12 @@
 import Link from 'next/link';
-import type { NextApiHandler } from 'next';
+import {
+    Button,
+    Typography,
+    Container,
+    Card
+} from '@mui/material';
 import { useEffect, useState } from 'react';
+import { Box } from '@mui/system';
 
 export default function Equines() {
     
@@ -30,25 +36,54 @@ export default function Equines() {
 
     
     return (
-        <div>
-            <h1>EQUINES Page</h1>
-            <div>
-                {equines.map((equine, index) => {
-                    return(
-                        <div key={equine.id}>
-                            <h2>{equine.name}</h2>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <Link href="/">
-                    <a>Go to the homepage</a>
-                </Link>
-                <Link href="/equines/add-equine">
-                    <a>Add a new equine</a>
-                </Link>
-            </div>
-        </div>
+        <Container>
+            <Typography variant="h3" color="textSecondary" gutterBottom>
+                Bransby Equines
+            </Typography>
+            {equines.length > 0 ? (
+                <div>
+                    {equines.map(equine => {
+                        return (
+                            <Card key={equine.id} raised sx={{ my: '1rem', cursor: 'pointer' }}>
+                                <Link href={`equines/${equine.id}`}>
+                                    <Typography
+                                        variant="h5"
+                                        color="#616161"
+                                        gutterBottom
+                                        sx={{ my: '1rem', mx: '1rem' }}
+                                    >
+                                        {equine.name}
+                                    </Typography>
+                                </Link>
+                            </Card>
+                        );
+                    })}
+                </div>
+            ) : (
+                <Typography
+                variant="h5"
+                color="#616161"
+                gutterBottom
+                sx={{ my: '1rem', mx: '1rem' }}
+            >
+                No equines here...☹️...yet!
+            </Typography>
+            )}
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-around'
+                }}
+            >
+                <Button color="primary" variant="contained">
+                    <Link href="/equines/add-equine">
+                        <Typography color="lightBlue[50]">
+                            Create new equine
+                        </Typography>
+                    </Link>
+                </Button>
+            </Box>
+        </Container>
     );
 }

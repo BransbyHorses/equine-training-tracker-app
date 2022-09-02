@@ -30,10 +30,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/admin.js"
     ],
-    "/learner-types/add-learner-type": [
+    "/equines": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/learner-types/add-learner-type.js"
+      "static/chunks/pages/equines.js"
+    ],
+    "/equines/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/equines/[id].js"
+    ],
+    "/equines/add-equine": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/equines/add-equine.js"
     ]
   },
   "ampFirstPages": []

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, Typography } from '@mui/material';
 
-const LinkButton = (props: any) => {
+const LinkButton = (props: any) => {    
     return (
         <Link href={props.buttonHref} passHref>
             <Button

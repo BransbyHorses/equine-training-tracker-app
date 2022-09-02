@@ -37,7 +37,7 @@ const adminDashboard: FC <MyComponentProps> = props => {
                                         action="See all"
                                         variant={action.deleteVariant}
                                         size={action.deleteSize}
-                                        color="red"
+                                        color={action.seeAllVariant}
                                     />
                                     <LinkButton
                                         buttonHref={action.newLink}

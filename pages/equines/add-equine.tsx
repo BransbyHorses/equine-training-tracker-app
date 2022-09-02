@@ -12,7 +12,8 @@ import {
     FormControlLabel,
     FormControl,
     FormGroup,
-    Grid
+    Grid,
+    InputLabel
 } from '@mui/material';
 import options from '../../properties/properties';
 
@@ -25,7 +26,7 @@ interface Equine {
     skills: string;
     trainerId: number;
     training: string;
-    yard: string;
+    learnerType: string;
 }
 
 interface WithRouterProps {
@@ -40,7 +41,7 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
     
     const [newEquine, setNewEquine] = useState({
         name: '',
-        yard: '',
+        learnerType: '',
         trainer: 0,
         category: '',
         programme: '',
@@ -92,25 +93,26 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
                             sx={{ my: '1rem' }}
                         />
 
-                        <Select
-                            label="Yard"
-                            id="yard"
-                            name="yard"
-                            value={newEquine.yard}
-                            onChange={handleChange}
-                            required
-                        >
-                            {learners.map((learner, index) => {
-                                return (
-                                    <MenuItem value="yard 2" key={index}>
-                                        {learner}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                        {Object.keys(options.typeOfLearner).forEach(learner => {
-                            <Typography>learner</Typography>;
-                        })}
+                        <FormControl>
+                            <InputLabel id="learner_type_label">
+                                Learner Type
+                            </InputLabel>
+                            <Select
+                                labelId="learner_type_label"
+                                label="Learner Type"
+                                name="learnerType"
+                                value={props.children}
+                                onChange={handleChange}
+                            >
+                                {learners.map((learner, index) => {
+                                    return (
+                                        <MenuItem value={learner} key={index}>
+                                            {learner}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
 
                         <TextField
                             type="number"
@@ -120,14 +122,17 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
                             onChange={handleChange}
                             sx={{ my: '1rem' }}
                         />
+
                         <FormControl>
+                            <InputLabel id="category_label">
+                                Category
+                            </InputLabel>
                             <Select
-                                name="category"
+                                labelId="category_label"
                                 label="Category"
-                                id="category"
+                                name="category"
                                 value={newEquine.category}
                                 onChange={handleChange}
-                                sx={{ my: '1rem' }}
                             >
                                 <MenuItem value="red">Red</MenuItem>
                                 <MenuItem value="amber">Amber</MenuItem>
@@ -135,6 +140,7 @@ const NewEquine: React.FC<MyComponentProps> = (props) => {
                                 <MenuItem value="green">Green</MenuItem>
                             </Select>
                         </FormControl>
+
                         <TextField
                             sx={{ my: '1rem' }}
                             id="programme"

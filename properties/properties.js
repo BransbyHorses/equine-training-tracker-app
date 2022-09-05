@@ -19,7 +19,7 @@ const options = {
             buttonTitle: 'Equine',
             newLink: '/equines/add-equine',
             editLink: '/equines/edit-equine',
-            deleteLink: 'equines/delete-equine',
+            deleteLink: '/equines/delete-equine',
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',

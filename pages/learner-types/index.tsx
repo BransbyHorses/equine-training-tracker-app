@@ -1,5 +1,12 @@
 import Link from 'next/link';
+import {
+    Button,
+    Typography,
+    Container,
+    Card
+} from '@mui/material';
 import { useEffect, useState } from 'react';
+import { Box } from '@mui/system';
 
 export default function LearnerTypes() {
     
@@ -7,12 +14,12 @@ export default function LearnerTypes() {
         id: number,
         name: string,
     }
-    const [yards, setYards] = useState<MyLearnerTypes[]>([]);
+    const [learnerTypes, setLearnerType] = useState<MyLearnerTypes[]>([]);
 
     function getLearnerTypes(){
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`)
         .then(response => response.json())
-        .then(data => setYards(data))
+        .then(data => setLearnerType(data))
         .catch(rejected => {
             console.log(rejected);
         });
@@ -22,25 +29,62 @@ export default function LearnerTypes() {
 
     
     return (
-        <div>
-            <h1>Learner Types</h1>
-            <div>
-                {yards.map((learnerTypes) => {
-                    return(
-                        <div key={learnerTypes.id}>
-                            <h2>{learnerTypes.name}</h2>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <Link href="/">
-                    <a>Go to the homepage</a>
-                </Link>
-                <Link href="/learner-types/add-learner-type">
-                    <a>Add a new Learner Type</a>
-                </Link>
-            </div>
-        </div>
+        <Container>
+            <Typography variant="h3" color="textSecondary" gutterBottom>
+                Bransby Equines
+            </Typography>
+            {learnerTypes.length > 0 ? (
+                <div>
+                    {learnerTypes.map(learnerType => {
+                        return (
+                            <Card key={learnerType.id} raised sx={{ my: '1rem', cursor: 'pointer' }}>
+                                <Link href={`learner-types/${learnerType.id}`}>
+                                    <Typography
+                                        variant="h5"
+                                        color="#616161"
+                                        gutterBottom
+                                        sx={{ my: '1rem', mx: '1rem' }}
+                                    >
+                                        {learnerType.name}
+                                    </Typography>
+                                </Link>
+                            </Card>
+                        );
+                    })}
+                </div>
+            ) : (
+                <Typography
+                variant="h5"
+                color="#616161"
+                gutterBottom
+                sx={{ my: '1rem', mx: '1rem' }}
+            >
+                No Learner Types here...☹️!
+            </Typography>
+            )}
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-around'
+                }}
+            >
+                <Button color="primary" variant="contained">
+                    <Link href="/learner-types/add-learner-type">
+                        <Typography color="lightBlue[50]">
+                            Create new Learner Type
+                        </Typography>
+                    </Link>
+                </Button>
+
+                <Button color="primary" variant="contained">
+                    <Link href="/dashboard/admin">
+                        <Typography color="lightBlue[50]">
+                            Back to Dashboard
+                        </Typography>
+                    </Link>
+                </Button>
+            </Box>
+        </Container>
     );
 }

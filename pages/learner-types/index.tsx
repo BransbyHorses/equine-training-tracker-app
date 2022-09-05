@@ -76,6 +76,15 @@ export default function LearnerTypes() {
                         </Typography>
                     </Link>
                 </Button>
+
+                <Button color="primary" variant="contained">
+                    <Link href="/dashboard/admin">
+                        <Typography color="lightBlue[50]">
+                            Back to Dashboard
+                        </Typography>
+                    </Link>
+                </Button>
+                
             </Box>
         </Container>
     );

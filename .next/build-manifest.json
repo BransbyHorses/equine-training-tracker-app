@@ -30,10 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/admin.js"
     ],
-    "/learner-types/add-learner-type": [
+    "/learner-types": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/learner-types/add-learner-type.js"
+      "static/chunks/pages/learner-types.js"
     ]
   },
   "ampFirstPages": []

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
+import { withRouter, NextRouter } from 'next/router'
 import {
     Button,
     Typography,
@@ -8,8 +9,13 @@ import {
     Grid
 } from '@mui/material';
 
+interface WithRouterProps {
+    router: NextRouter
+}
 
-export default function NewLearnerType (){
+interface MyComponentProps extends WithRouterProps {}
+
+const AddLearnerTypes: React.FC<MyComponentProps> = (props) => {
 
     const [learnerType, setLearnerType] = useState({
         name: '',
@@ -24,10 +30,8 @@ export default function NewLearnerType (){
               },
             body: JSON.stringify(learnerType)
         })
-        .then(response => {
-            response.json(); 
-        })
-        .then()
+        .then(response => response.json())
+        .then(data => props.router.push(`/learner-types/${data.id}`))
         .catch(rejected => {
             console.log(rejected);
         });
@@ -70,4 +74,5 @@ export default function NewLearnerType (){
             </div>
         </Container>
     );
-}
+};
+export default withRouter(AddLearnerTypes);

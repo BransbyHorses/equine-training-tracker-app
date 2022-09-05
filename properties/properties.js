@@ -19,13 +19,15 @@ const options = {
             buttonTitle: 'Equine',
             newLink: '/equines/add-equine',
             editLink: '/equines/edit-equine',
-            deleteLink: 'equines/delete-equine',
+            deleteLink: '/equines/delete-equine',
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/equines'
         },
         {
             title: 'Skills',
@@ -36,9 +38,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/skills'
         },
         {
             title: 'Yards',
@@ -49,9 +53,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/yards'
         },
         {
             title: 'Distruptions',
@@ -62,9 +68,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/distruptions'
         },
         {
             title: 'Training Methods',
@@ -75,9 +83,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/training-methods'
         },
         {
             title: 'Categories',
@@ -88,9 +98,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/categories'
         },
         {
             title: 'Environments',
@@ -101,9 +113,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/environments'
         },
         {
             title: 'Learner Types',
@@ -114,9 +128,11 @@ const options = {
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
+            seeAllVariant: 'green',
             newSize: 'large',
             editSize: 'large',
-            deleteSize: 'small'
+            deleteSize: 'small',
+            seeAllLink: '/learner-types'
         }
     ]
 }

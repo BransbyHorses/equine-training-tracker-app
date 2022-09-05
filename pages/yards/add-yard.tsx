@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
 import {
     Button,
@@ -7,7 +7,6 @@ import {
     TextField,
     Grid
 } from '@mui/material';
-import Form from '../../components/styles/form';
 
 
 export default function NewYard (){
@@ -38,9 +37,6 @@ export default function NewYard (){
         setNewYard({...newYard, [e.target.name] : e.target.value})
     }
 
-    const handleClick = (e: any) => {
-        setNewYard({...newYard, [e.target.name] : e.target.value})
-    }
     return (
         <Container>
             <Typography variant="h5" color="textSecondary" gutterBottom>

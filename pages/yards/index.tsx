@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import type { NextApiHandler } from 'next';
 import { useEffect, useState } from 'react';
 
 export default function Yards() {

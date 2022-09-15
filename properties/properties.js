@@ -17,6 +17,7 @@ const options = {
         {
             title: 'Equines',
             buttonTitle: 'Equine',
+            link: '/equines',
             newLink: '/equines/add-equine',
             editLink: '/equines/edit-equine',
             deleteLink: '/equines/delete-equine',
@@ -32,6 +33,7 @@ const options = {
         {
             title: 'Skills',
             buttonTitle: 'Skill',
+            link: '/skills',
             newLink: '/skills/add-skill',
             editLink: '/skills/edit-skill',
             deleteLink: '/skills/delete-skill',
@@ -47,6 +49,7 @@ const options = {
         {
             title: 'Yards',
             buttonTitle: 'Yard',
+            link: '/yards',
             newLink: '/yards/add-yard',
             editLink: '/yards/edit-yard',
             deleteLink: '/yards/delete-yard',
@@ -62,6 +65,7 @@ const options = {
         {
             title: 'Distruptions',
             buttonTitle: 'Distruption',
+            link: '/distruptions',
             newLink: '/distruptions/add-distruption',
             editLink: '/distruptions/edit-distruption',
             deleteLink: '/distruptions/delete-distruption',
@@ -77,6 +81,7 @@ const options = {
         {
             title: 'Training Methods',
             buttonTitle: 'Training Method',
+            link: '/training-methods',
             newLink: '/training-methods/add-training-method',
             editLink: '/training-methods/edit-training-method',
             deleteLink: '/training-methods/delete-training-method',
@@ -92,6 +97,7 @@ const options = {
         {
             title: 'Categories',
             buttonTitle: 'Category',
+            link: '/categories',
             newLink: '/categories/add-category',
             editLink: '/categories/edit-category',
             deleteLink: '/categories/delete-category',
@@ -107,6 +113,7 @@ const options = {
         {
             title: 'Environments',
             buttonTitle: 'Environment',
+            link: '/environments',
             newLink: '/environments/add-environment',
             editLink: '/environments/edit-environment',
             deleteLink: '/environments/delete-environment',
@@ -122,6 +129,7 @@ const options = {
         {
             title: 'Learner Types',
             buttonTitle: 'Learner Type',
+            link: '/learner-types',
             newLink: '/learner-types/add-learner-type',
             editLink: '/learner-types/edit-learner-type',
             deleteLink: '/learner-types/delete-learner-type',

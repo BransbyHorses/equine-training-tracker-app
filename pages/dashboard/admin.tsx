@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { withRouter, NextRouter } from 'next/router';
-import { Typography, Container, Grid, Card } from '@mui/material';
+import { Typography, Container, Grid, Card, Button } from '@mui/material';
 import options from '../../properties/properties';
-import LinkButton from '../../components/LinkButton';
+import Link from 'next/link';
 
 interface WithRouterProps {
     router: NextRouter;
@@ -21,46 +21,19 @@ const adminDashboard: FC <MyComponentProps> = props => {
             <Grid container spacing={6}>
                 {adminActions.map((action, index) => {
                     return (
-                        <Grid item xs={6} key={index}>
+                        <Grid item xs={12} key={index}>
                             <Card>
-                                <Typography
-                                    variant="h5"
-                                    color="primary"
-                                    gutterBottom
-                                >
-                                    {action.title}
-                                </Typography>
                                 <Grid container direction={'column'}>
-                                    <LinkButton
-                                        buttonHref={action.seeAllLink}
-                                        buttonTitle={action.buttonTitle}
-                                        action="See all"
-                                        variant={action.deleteVariant}
-                                        size={action.deleteSize}
-                                        color={action.seeAllVariant}
-                                    />
-                                    <LinkButton
-                                        buttonHref={action.newLink}
-                                        buttonTitle={action.buttonTitle}
-                                        action="Add New"
-                                        variant={action.newVariant}
-                                        size={action.newSize}
-                                    />
-                                    <LinkButton
-                                        buttonHref={action.editLink}
-                                        buttonTitle={action.buttonTitle}
-                                        action="Edit"
-                                        variant={action.editVariant}
-                                        size={action.editSize}
-                                    />
-                                    <LinkButton
-                                        buttonHref={action.deleteLink}
-                                        buttonTitle={action.buttonTitle}
-                                        action="Delete"
-                                        variant={action.deleteVariant}
-                                        size={action.deleteSize}
-                                        color="red"
-                                    />
+                                    <Link href={action.link}>
+                                        <Button>
+                                            <Typography
+                                                variant="h5"
+                                                color="primary"
+                                            >
+                                                {action.title}
+                                            </Typography>
+                                        </Button>
+                                    </Link>
                                 </Grid>
                             </Card>
                         </Grid>

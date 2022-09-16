@@ -141,6 +141,22 @@ const options = {
             editSize: 'large',
             deleteSize: 'small',
             seeAllLink: '/learner-types'
+        },
+        {
+            title: 'Programmes',
+            buttonTitle: 'Programmes',
+            link: '/programmes',
+            newLink: '/programmes/add-programme',
+            editLink: '/programmes/edit-programme',
+            deleteLink: '/programmes/delete-programme',
+            newVariant: 'contained',
+            editVariant: 'outlined',
+            deleteVariant: 'outlined',
+            seeAllVariant: 'green',
+            newSize: 'large',
+            editSize: 'large',
+            deleteSize: 'small',
+            seeAllLink: '/programmes'
         }
     ]
 }

@@ -3,10 +3,12 @@ import {
     Button,
     Typography,
     Container,
-    Card
+    Grid
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
+import LinkButton from '../../components/LinkButton';
+import EntityCard from '../../components/EntityCard';
 
 export default function LearnerTypes() {
     
@@ -29,61 +31,61 @@ export default function LearnerTypes() {
 
     
     return (
-        <Container>
-            <Typography variant="h3" color="textSecondary" gutterBottom>
-                Bransby Equines
+        <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <Typography variant="h4" color="primary" gutterBottom>
+                LEARNER TYPES
             </Typography>
             {learnerTypes.length > 0 ? (
-                <div>
+                <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="stretch"
+            >
                     {learnerTypes.map(learnerType => {
-                        return (
-                            <Card key={learnerType.id} raised sx={{ my: '1rem', cursor: 'pointer' }}>
-                                <Link href={`learner-types/${learnerType.id}`}>
-                                    <Typography
-                                        variant="h5"
-                                        color="#616161"
-                                        gutterBottom
-                                        sx={{ my: '1rem', mx: '1rem' }}
-                                    >
-                                        {learnerType.name}
-                                    </Typography>
-                                </Link>
-                            </Card>
+                         return (
+                            <Grid item xs={2} sm={4} md={4} key={learnerType.id}>
+                                <EntityCard
+                                    link={`learner-types/${learnerType.id}`}
+                                    title={learnerType.name}
+                                />
+                            </Grid>
                         );
                     })}
-                </div>
+                </Grid>
             ) : (
                 <Typography
-                variant="h5"
-                color="#616161"
-                gutterBottom
-                sx={{ my: '1rem', mx: '1rem' }}
-            >
-                No Learner Types here...☹️!
-            </Typography>
+                    variant="h5"
+                    color="#616161"
+                    gutterBottom
+                    sx={{ my: '1rem', mx: '1rem' }}
+                >
+                    No Learner Types here...☹️!
+                </Typography>
             )}
 
             <Box
                 sx={{
                     display: 'flex',
+                    flexDirection: 'column',
                     justifyContent: 'space-around'
                 }}
             >
-                <Button color="primary" variant="contained">
-                    <Link href="/learner-types/add-learner-type">
-                        <Typography color="lightBlue[50]">
-                            Create new Learner Type
-                        </Typography>
-                    </Link>
-                </Button>
+                <LinkButton
+                    color="lightBlue[50]"
+                    variant="contained"
+                    buttonHref="/learner-types/add-learner-type"
+                    buttonTitle="Create new Learner Type"
+                ></LinkButton>
 
-                <Button color="primary" variant="contained">
-                    <Link href="/dashboard/admin">
-                        <Typography color="lightBlue[50]">
-                            Back to Dashboard
-                        </Typography>
-                    </Link>
-                </Button>
+                <LinkButton
+                    color="lightBlue[50]"
+                    variant="contained"
+                    buttonHref="/dashboard/admin"
+                    buttonTitle="Back to Dashboard"
+                ></LinkButton>
             </Box>
         </Container>
     );

@@ -25,15 +25,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/dashboard/admin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/dashboard/admin.js"
+    ],
     "/equines": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/equines.js"
     ],
-    "/equines/[id]": [
+    "/yards": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/equines/[id].js"
+      "static/chunks/pages/yards.js"
     ]
   },
   "ampFirstPages": []

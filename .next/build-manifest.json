@@ -25,25 +25,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/dashboard/admin": [
+    "/environments/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/dashboard/admin.js"
+      "static/chunks/pages/environments/[id].js"
     ],
-    "/skills": [
+    "/learner-types": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/skills.js"
+      "static/chunks/pages/learner-types.js"
     ],
-    "/skills/[id]": [
+    "/learner-types/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/skills/[id].js"
+      "static/chunks/pages/learner-types/[id].js"
     ],
-    "/skills/add-skill": [
+    "/learner-types/add-learner-type": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/skills/add-skill.js"
+      "static/chunks/pages/learner-types/add-learner-type.js"
     ]
   },
   "ampFirstPages": []

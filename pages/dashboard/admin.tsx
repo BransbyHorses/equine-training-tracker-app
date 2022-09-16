@@ -14,8 +14,8 @@ interface MyComponentProps extends WithRouterProps {}
 
 const adminDashboard: FC<MyComponentProps> = props => {
     return (
-        <Container>
-            <Typography variant="h3" color="textSecondary" gutterBottom>
+        <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <Typography variant="h4" color="primary" gutterBottom >
                 Dashboard
             </Typography>
             <Grid

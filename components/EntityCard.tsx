@@ -1,29 +1,23 @@
 import Link from 'next/link';
-import {
-    Button,
-    Typography,
-    Container,
-    Card
-} from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Box } from '@mui/system';
+import { Typography, Button, Card, Grid } from '@mui/material';
 
-export default function EntityCard(props: any){
-    return(
+export default function EntityCard(props: any) {
+    return (
         <Card
-        raised
-        sx={{ my: '1rem', cursor: 'pointer' }}
-    >
-        <Link href={`${props.link}`}>
-            <Typography
-                variant="h5"
-                color="#616161"
-                gutterBottom
-                sx={{ my: '1rem', mx: '1rem' }}
-            >
-                {props.title}
-            </Typography>
-        </Link>
-    </Card>
-    )
-};
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%'
+            }}
+        >
+            <Link href={`${props.link}`}>
+                <Button>
+                    <Typography variant="h6" color="primary">
+                        {props.title}
+                    </Typography>
+                </Button>
+            </Link>
+        </Card>
+    );
+}

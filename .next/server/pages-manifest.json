@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/equines": "pages/equines.js",
-  "/yards": "pages/yards.js"
+  "/skills/add-skill": "pages/skills/add-skill.js",
+  "/skills/[id]": "pages/skills/[id].js",
+  "/dashboard/admin": "pages/dashboard/admin.js"
 }

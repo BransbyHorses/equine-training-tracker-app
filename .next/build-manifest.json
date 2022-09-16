@@ -30,20 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/admin.js"
     ],
-    "/skills": [
+    "/learner-types": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/skills.js"
-    ],
-    "/skills/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/skills/[id].js"
-    ],
-    "/skills/add-skill": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/skills/add-skill.js"
+      "static/chunks/pages/learner-types.js"
     ]
   },
   "ampFirstPages": []

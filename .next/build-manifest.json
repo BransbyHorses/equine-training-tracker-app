@@ -30,6 +30,16 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/admin.js"
     ],
+    "/equines": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/equines.js"
+    ],
+    "/equines/add-equine": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/equines/add-equine.js"
+    ],
     "/learner-types": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

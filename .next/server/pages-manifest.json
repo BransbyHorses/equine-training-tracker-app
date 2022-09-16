@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/dashboard/admin": "pages/dashboard/admin.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/equines": "pages/equines.js",
-  "/equines/add-equine": "pages/equines/add-equine.js"
+  "/dashboard/admin": "pages/dashboard/admin.js"
 }

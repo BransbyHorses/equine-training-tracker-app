@@ -30,20 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/admin.js"
     ],
-    "/equines": [
+    "/programmes": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/equines.js"
+      "static/chunks/pages/programmes.js"
     ],
-    "/equines/add-equine": [
+    "/programmes/add-programme": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/equines/add-equine.js"
-    ],
-    "/learner-types": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/learner-types.js"
+      "static/chunks/pages/programmes/add-programme.js"
     ]
   },
   "ampFirstPages": []

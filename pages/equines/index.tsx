@@ -7,8 +7,11 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
+import options from '../../properties/properties';
+import LinkButton from '../../components/LinkButton';
 
 export default function Equines() {
+    const actions = options.adminActions[0];
     
     interface MyEquines {
         id: number,
@@ -37,14 +40,18 @@ export default function Equines() {
     
     return (
         <Container>
-            <Typography variant="h3" color="textSecondary" gutterBottom>
+            <Typography variant="h4" color="textSecondary" gutterBottom>
                 Bransby Equines
             </Typography>
             {equines.length > 0 ? (
                 <div>
                     {equines.map(equine => {
                         return (
-                            <Card key={equine.id} raised sx={{ my: '1rem', cursor: 'pointer' }}>
+                            <Card
+                                key={equine.id}
+                                raised
+                                sx={{ my: '1rem', cursor: 'pointer' }}
+                            >
                                 <Link href={`equines/${equine.id}`}>
                                     <Typography
                                         variant="h5"
@@ -61,36 +68,35 @@ export default function Equines() {
                 </div>
             ) : (
                 <Typography
-                variant="h5"
-                color="#616161"
-                gutterBottom
-                sx={{ my: '1rem', mx: '1rem' }}
-            >
-                No equines here...☹️...yet!
-            </Typography>
+                    variant="h5"
+                    color="#616161"
+                    gutterBottom
+                    sx={{ my: '1rem', mx: '1rem' }}
+                >
+                    No equines here...☹️...yet!
+                </Typography>
             )}
 
             <Box
                 sx={{
                     display: 'flex',
+                    flexDirection: 'column',
                     justifyContent: 'space-around'
                 }}
             >
-                <Button color="primary" variant="contained">
-                    <Link href="/equines/add-equine">
-                        <Typography color="lightBlue[50]">
-                            Create new equine
-                        </Typography>
-                    </Link>
-                </Button>
+                <LinkButton
+                    color="lightBlue[50]"
+                    variant="contained"
+                    buttonHref="/equines/add-equine"
+                    buttonTitle="Create new equine"
+                ></LinkButton>
 
-                <Button color="primary" variant="contained">
-                    <Link href="/dashboard/admin">
-                        <Typography color="lightBlue[50]">
-                            Back to Dashboard
-                        </Typography>
-                    </Link>
-                </Button>
+                <LinkButton
+                    color="lightBlue[50]"
+                    variant="contained"
+                    buttonHref="/dashboard/admin"
+                    buttonTitle="Back to Dashboard"
+                ></LinkButton>
             </Box>
         </Container>
     );

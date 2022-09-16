@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import LinkButton from '../../components/LinkButton';
 
 interface WithRouterProps {
     router: NextRouter
@@ -12,32 +13,45 @@ interface MyComponentProps extends WithRouterProps {}
 
 const EquineId: React.FC<MyComponentProps> = (props) => {
     interface MyEquine {
-        id: number;
-        name: string;
-        category: string;
-        onHold: boolean;
-        programme: string;
-        skills: string;
-        trainerId: number;
-        training: string;
-        yard: string;
-    }
+        category: {
+          id: number,
+          name: string
+        },
+        id: number,
+        name: string,
+        programme: {
+          id: number,
+          name: string
+        },
+        skills: Array<any>,
+        yard: {
+          id: number,
+          name: string
+        }
+      }
     const [equine, setEquine] = useState<MyEquine>({
+        category: {
+          id: 0,
+          name: ""
+        },
         id: 0,
-        name: 'string',
-        category: 'string',
-        onHold: false,
-        programme: '',
-        skills: '',
-        trainerId: 0,
-        training: '',
-        yard: ''
-    });
+        name: "",
+        programme: {
+          id: 0,
+          name: ""
+        },
+        skills: [],
+        yard: {
+          id: 0,
+          name: ""
+        }
+      });
 
     const router = useRouter();
 
     const getEquineFromId = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${router.query.id}`)
+        const equineId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
             .then(response => response.json())
             .then(data => setEquine(data))
             .catch(rejected => {
@@ -46,10 +60,9 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
     }
 
     const deleteEquineForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${router.query.id}`, {method: 'DELETE'} )
-        .then(response => response.json())
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {method: 'DELETE'} )
         .then(() => {
-            router.push('/equines')
+            props.router.push('/equines')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -92,40 +105,25 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Yard: {equine.yard}
+                        Yard: {equine.yard.name}
                     </Typography>
                 </Card>
 
-                {equine.onHold ? (
-                    <Card
-                        sx={{
-                            my: '1rem',
-                            cursor: 'pointer',
-                            borderRadius: '20px'
-                        }}
-                    >
-                        <Typography
-                            variant="h5"
-                            color="#616161"
-                            gutterBottom
-                            sx={{ my: '1rem', mx: '1rem' }}
-                        >
-                            This Equine is currently on hold.
-                        </Typography>
-                    </Card>
-                ) : null}
-
-                <Button variant="outlined" sx={{ my: '1rem' }} onClick={deleteEquineForever}>
+                <Button
+                    variant="outlined"
+                    sx={{ my: '1rem' }}
+                    onClick={deleteEquineForever}
+                >
                     <DeleteForeverIcon />
                 </Button>
 
-                <Button variant="outlined" sx={{ my: '1rem' }}>
-                    <Link href="/equines">
-                        <Typography color="prima">
-                            Go back to Equines
-                        </Typography>
-                    </Link>
-                </Button>
+                <LinkButton
+                    buttonHref="/equines"
+                    variant="contained"
+                    size="Large"
+                    color="white"
+                    action="Go back to equines"
+                />
             </Box>
         </Container>
     );

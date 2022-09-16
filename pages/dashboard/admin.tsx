@@ -12,29 +12,33 @@ const adminActions = options.adminActions;
 
 interface MyComponentProps extends WithRouterProps {}
 
-const adminDashboard: FC <MyComponentProps> = props => {
+const adminDashboard: FC<MyComponentProps> = props => {
     return (
-        <Container>
-            <Typography variant="h3" color="textSecondary" gutterBottom>
+        <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <Typography variant="h4" color="primary" gutterBottom >
                 Dashboard
             </Typography>
-            <Grid container spacing={6}>
+            <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                alignContent="stretch"
+                alignItems="stretch"
+            >
                 {adminActions.map((action, index) => {
                     return (
-                        <Grid item xs={12} key={index}>
-                            <Card>
-                                <Grid container direction={'column'}>
-                                    <Link href={action.link}>
-                                        <Button>
-                                            <Typography
-                                                variant="h5"
-                                                color="primary"
-                                            >
-                                                {action.title}
-                                            </Typography>
-                                        </Button>
-                                    </Link>
-                                </Grid>
+                        <Grid item xs={6} key={index} >
+                            <Card sx={{display: "flex", alignItems: "center", justifyContent: "center", height:'100%'}}>
+                                <Link href={action.link}>
+                                    <Button>
+                                        <Typography
+                                            variant="h6"
+                                            color="primary"
+                                        >
+                                            {action.title}
+                                        </Typography>
+                                    </Button>
+                                </Link>
                             </Card>
                         </Grid>
                     );
@@ -45,3 +49,4 @@ const adminDashboard: FC <MyComponentProps> = props => {
 };
 
 export default withRouter(adminDashboard);
+

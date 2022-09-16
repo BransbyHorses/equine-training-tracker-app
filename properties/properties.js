@@ -63,12 +63,12 @@ const options = {
             seeAllLink: '/yards'
         },
         {
-            title: 'Distruptions',
-            buttonTitle: 'Distruption',
-            link: '/distruptions',
-            newLink: '/distruptions/add-distruption',
-            editLink: '/distruptions/edit-distruption',
-            deleteLink: '/distruptions/delete-distruption',
+            title: 'Disruptions',
+            buttonTitle: 'Disruption',
+            link: '/disruptions',
+            newLink: '/disruptions/add-disruption',
+            editLink: '/disruptions/edit-disruption',
+            deleteLink: '/disruptions/delete-disruption',
             newVariant: 'contained',
             editVariant: 'outlined',
             deleteVariant: 'outlined',
@@ -76,7 +76,7 @@ const options = {
             newSize: 'large',
             editSize: 'large',
             deleteSize: 'small',
-            seeAllLink: '/distruptions'
+            seeAllLink: '/disruptions'
         },
         {
             title: 'Training Methods',

@@ -1,71 +1,62 @@
 import Link from 'next/link';
-import {
-    Button,
-    Typography,
-    Container,
-    Card
-} from '@mui/material';
+import { Typography, Container, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
-import options from '../../properties/properties';
 import LinkButton from '../../components/LinkButton';
+import EntityCard from '../../components/EntityCard';
 
 export default function Equines() {
-    const actions = options.adminActions[0];
-    
     interface MyEquines {
-        id: number,
-        name: string,
-        category: string,
-        onHold: boolean,
-        programme: string,
-        skills: string,
-        trainerId: number,
-        training: string,
-        yard: string
+        id: number;
+        name: string;
+        category: string;
+        onHold: boolean;
+        programme: string;
+        skills: string;
+        trainerId: number;
+        training: string;
+        yard: string;
     }
     const [equines, setEquines] = useState<MyEquines[]>([]);
 
-    function getEquines(){
+    function getEquines() {
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`)
-        .then(response => response.json())
-        .then(data => setEquines(data))
-        .catch(rejected => {
-            console.log(rejected);
-        });
-    };
+            .then(response => response.json())
+            .then(data => setEquines(data))
+            .catch(rejected => {
+                console.log(rejected);
+            });
+    }
 
-    useEffect( () => {getEquines()},[]);
+    useEffect(() => {
+        getEquines();
+    }, []);
 
-    
     return (
         <Container>
-            <Typography variant="h4" color="textSecondary" gutterBottom>
-                Bransby Equines
+            <Typography variant="h4" color="primary" gutterBottom>
+                EQUINES
             </Typography>
             {equines.length > 0 ? (
-                <div>
+                <Grid
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="stretch"
+                >
                     {equines.map(equine => {
                         return (
-                            <Card
-                                key={equine.id}
-                                raised
-                                sx={{ my: '1rem', cursor: 'pointer' }}
-                            >
-                                <Link href={`equines/${equine.id}`}>
-                                    <Typography
-                                        variant="h5"
-                                        color="#616161"
-                                        gutterBottom
-                                        sx={{ my: '1rem', mx: '1rem' }}
-                                    >
-                                        {equine.name}
-                                    </Typography>
-                                </Link>
-                            </Card>
+                            <Grid item xs={2} sm={4} md={4} key={equine.id}>
+                                <EntityCard
+                                    link={`equines/${equine.id}`}
+                                    title={equine.name}
+                                />
+                            </Grid>
                         );
                     })}
-                </div>
+                </Grid>
             ) : (
                 <Typography
                     variant="h5"
@@ -101,3 +92,4 @@ export default function Equines() {
         </Container>
     );
 }
+

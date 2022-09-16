@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { withRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
 import {
     Button,
@@ -8,8 +9,13 @@ import {
     Grid
 } from '@mui/material';
 
+interface WithRouterProps {
+    router: NextRouter;
+}
 
-export default function NewYard (){
+interface MyComponentProps extends WithRouterProps {}
+
+const NewYard: React.FC<MyComponentProps> = props =>{
 
     const [newYard, setNewYard] = useState({
         name: '',
@@ -27,7 +33,7 @@ export default function NewYard (){
         .then(response => {
             response.json(); 
         })
-        .then()
+        .then(data => props.router.push('/yards'))
         .catch(rejected => {
             console.log(rejected);
         });
@@ -70,4 +76,6 @@ export default function NewYard (){
             </div>
         </Container>
     );
-}
+};
+
+export default withRouter(NewYard);

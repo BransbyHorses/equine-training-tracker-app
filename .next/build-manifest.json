@@ -25,15 +25,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/equines": [
+    "/dashboard/admin": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/equines.js"
+      "static/chunks/pages/dashboard/admin.js"
     ],
-    "/equines/[id]": [
+    "/skills": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/equines/[id].js"
+      "static/chunks/pages/skills.js"
+    ],
+    "/skills/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/skills/[id].js"
+    ],
+    "/skills/add-skill": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/skills/add-skill.js"
     ]
   },
   "ampFirstPages": []

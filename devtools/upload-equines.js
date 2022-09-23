@@ -1,10 +1,5 @@
 const axios = require('axios');
 
-const endPoints = [
-    "disruptions",
-    "learner-types",
-    "programmes",
-]
 
 const yard = {"name": "Lunar House"}
 
@@ -42,11 +37,11 @@ const equine = {
 
 // node devtools/upload-equines.js
 
-async function uploadData(endPoint, jsonModel) {
+function uploadData(endPoint, jsonModel) {
    return axios
          .post(`http://localhost:8080/data/${endPoint}`, jsonModel)
          .then(res => {
-           return`statusCode: ${res.status}`;
+           console.log(`${endPoint} statusCode: ${res.status}`);
             //console.log(res);
         })
         .catch(error => {
@@ -54,16 +49,26 @@ async function uploadData(endPoint, jsonModel) {
         });
 };
 
-async function uploadEquines() 
+function uploadEquines()
 {
-    console.log(await uploadData("skills", skill));
-    console.log(await uploadData("yards", yard));
-    console.log(await uploadData("categories", category);
-    uploadData("programmes", programme);
     for (i = 0; i < 100; i++)
     {
-        console.log("i");
+     uploadData("equines", equine);
     }
 }
 
-uploadEquines();
+function uploadFields() 
+{
+    uploadData("skills", skill);
+    uploadData("yards", yard);
+    uploadData("categories", category);
+    uploadData("programmes", programme);
+    
+}
+
+function populateData(type)
+{
+    type == "fields" ? uploadFields() : uploadEquines();
+}
+
+populateData(process.argv[2]);

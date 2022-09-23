@@ -30,20 +30,19 @@ export default function ButtonAppBar() {
             <AppBar position="static">
                 <Toolbar sx={{
                     flexDirection: "row",
-                    justifyContent: "space-between"
+                    justifyContent: "center"
                 }}>
-                    <MenuIcon sx={{ height: '2.1rem', width: '2.1rem'}}/>
+                    <MenuIcon sx={{ height: '2.1rem', width: '2.1rem', display: "none"}}/>
                     <IconButton
                         size="small"
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{marginLeft: "50px"}}
                     >
                         <HomeIcon />
                     </IconButton>
 
-                    {!session && (
+                    {/* {!session && (
                         <Button color="inherit" onClick={signInUser}>
                             Login
                         </Button>
@@ -52,7 +51,7 @@ export default function ButtonAppBar() {
                         <Button color="inherit" onClick={signOutUser}>
                             Sign Out
                         </Button>
-                    )}
+                    )} */}
                 </Toolbar>
             </AppBar>
         </Box>

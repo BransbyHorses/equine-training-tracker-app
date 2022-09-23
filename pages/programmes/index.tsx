@@ -1,55 +1,50 @@
 import Link from 'next/link';
-import {
-    Button,
-    Typography,
-    Container,
-    Grid
-} from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Typography, Container, Grid } from '@mui/material';
 import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
 
-export default function LearnerTypes() {
+export default function Programmes() {
     
-    interface MyLearnerTypes {
+    interface MyProgrammes {
         id: number,
         name: string,
     }
-    const [learnerTypes, setLearnerType] = useState<MyLearnerTypes[]>([]);
+    const [programmes, setProgrammes] = useState<MyProgrammes[]>([]);
 
-    function getLearnerTypes(){
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`)
+    function getProgrammes(){
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes`)
         .then(response => response.json())
-        .then(data => setLearnerType(data))
+        .then(data => setProgrammes(data))
         .catch(rejected => {
             console.log(rejected);
         });
     };
 
-    useEffect( () => {getLearnerTypes()},[]);
+    useEffect( () => {getProgrammes()},[]);
 
     
     return (
         <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <Typography variant="h4" color="primary" gutterBottom>
-                LEARNER TYPES
+                Programmes
             </Typography>
-            {learnerTypes.length > 0 ? (
+            {programmes.length > 0 ? (
                 <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
-                direction="row"
-                justifyContent="space-evenly"
-                alignItems="stretch"
-            >
-                    {learnerTypes.map(learnerType => {
-                         return (
-                            <Grid item xs={2} sm={4} md={4} key={learnerType.id}>
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="stretch"
+                >
+                    {programmes.map(programme => {
+                        return (
+                            <Grid item xs={2} sm={4} md={4} key={programme.id}>
                                 <EntityCard
-                                    link={`learner-types/${learnerType.id}`}
-                                    title={learnerType.name}
+                                    link={`programmes/${programme.id}`}
+                                    title={programme.name}
                                 />
                             </Grid>
                         );
@@ -62,7 +57,7 @@ export default function LearnerTypes() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No Learner Types here...☹️!
+                    No Programmes here...☹️...yet!
                 </Typography>
             )}
 
@@ -76,8 +71,8 @@ export default function LearnerTypes() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/learner-types/add-learner-type"
-                    buttonTitle="Create new Learner Type"
+                    buttonHref="/programmes/add-programme"
+                    buttonTitle="Create new Programme"
                 ></LinkButton>
 
                 <LinkButton
@@ -90,3 +85,4 @@ export default function LearnerTypes() {
         </Container>
     );
 }
+

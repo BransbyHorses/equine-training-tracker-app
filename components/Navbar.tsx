@@ -34,11 +34,11 @@ export default function ButtonAppBar() {
                 }}>
                     <MenuIcon sx={{ height: '2.1rem', width: '2.1rem'}}/>
                     <IconButton
-                        size="large"
+                        size="small"
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{marginLeft: "50px"}}
                     >
                         <HomeIcon />
                     </IconButton>

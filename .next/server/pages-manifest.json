@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/learner-types/[id]": "pages/learner-types/[id].js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/learner-types/add-learner-type": "pages/learner-types/add-learner-type.js",
-  "/learner-types": "pages/learner-types.js"
+  "/dashboard/admin": "pages/dashboard/admin.js"
 }

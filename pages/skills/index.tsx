@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
 
 export default function Skills() {
     
@@ -30,6 +31,13 @@ export default function Skills() {
             <Typography variant="h4" color="primary" gutterBottom>
                 SKILLS
             </Typography>
+
+            <AutoCompleteBox
+                options={skills.map(skill => ({optionName: skill.name, optionId: skill.id}))}
+                label='Search for a skill'
+                linkName={"skills"}
+            />
+
             {skills.length > 0 ? (
                 <Grid
                     container

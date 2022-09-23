@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
 
 export default function Disruptions() {
     
@@ -30,6 +31,11 @@ export default function Disruptions() {
             <Typography variant="h4" color="primary" gutterBottom>
                 Disruptions
             </Typography>
+            <AutoCompleteBox
+                options={disruptions.map(disruption => ({optionName: disruption.name, optionId: disruption.id}))}
+                label='Search for a disruption'
+                linkName={"disruptions"}
+            />
             {disruptions.length > 0 ? (
                 <Grid
                     container

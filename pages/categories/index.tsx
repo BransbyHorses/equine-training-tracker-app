@@ -1,35 +1,62 @@
-import Link from 'next/link';
-import { Typography, Container, Grid } from '@mui/material';
+import { withRouter, NextRouter } from 'next/router';
+import {
+    Typography,
+    Container,
+    Grid,
+    TextField,
+    Autocomplete
+} from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox'
 
-export default function Categories() {
-    
+interface WithRouterProps {
+    router: NextRouter;
+}
+
+interface MyComponentProps extends WithRouterProps {}
+
+const Categories: React.FC<MyComponentProps> = props => {
     interface MyCategories {
-        id: number,
-        name: string,
+        id: number;
+        name: string;
     }
     const [categories, setCategories] = useState<MyCategories[]>([]);
 
-    function getCategories(){
+    function getCategories() {
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories`)
-        .then(response => response.json())
-        .then(data => setCategories(data))
-        .catch(rejected => {
-            console.log(rejected);
-        });
-    };
+            .then(response => response.json())
+            .then(data => setCategories(data))
+            .catch(rejected => {
+                console.log(rejected);
+            });
+    }
 
-    useEffect( () => {getCategories()},[]);
+    useEffect(() => {
+        getCategories();
+    }, []);
 
-    
     return (
-        <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
             <Typography variant="h4" color="primary" gutterBottom>
                 CATEGORIES
             </Typography>
+
+            <AutoCompleteBox
+                options={categories.map(category => ({optionName: category.name, optionId: category.id}))}
+                label='Search for a category'
+                linkName={"categories"}
+            />
+
             {categories.length > 0 ? (
                 <Grid
                     container
@@ -84,5 +111,6 @@ export default function Categories() {
             </Box>
         </Container>
     );
-}
+};
 
+export default withRouter(Categories);

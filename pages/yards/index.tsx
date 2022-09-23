@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
 
 export default function Yards() {
     
@@ -30,6 +31,11 @@ export default function Yards() {
             <Typography variant="h4" color="primary" gutterBottom>
                 YARDS
             </Typography>
+            <AutoCompleteBox
+                options={yards.map(yard => ({optionName: yard.name, optionId: yard.id}))}
+                label='Search for a yard'
+                linkName={"yards"}
+            />
             {yards.length > 0 ? (
                 <Grid
                     container

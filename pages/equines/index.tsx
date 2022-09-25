@@ -3,9 +3,9 @@ import { Typography, Container, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
 import LinkButton from '../../components/LinkButton';
-import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
 import PageTitle from '../../components/PageTitle';
+import ListCard from '../../components/ListCard';
 
 export default function Equines() {
     interface MyEquines {
@@ -35,7 +35,14 @@ export default function Equines() {
     }, []);
 
     return (
-        <Container>
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
             <PageTitle title={'Equines'} />
             <AutoCompleteBox
                 options={equines.map(equine => ({
@@ -48,19 +55,21 @@ export default function Equines() {
             {equines.length > 0 ? (
                 <Grid
                     container
-                    rowSpacing={4}
-                    columnSpacing={{ xs: 2, sm: 2, md: 3 }}
-                    spacing={{ xs: 4, md: 3 }}
+                    // rowSpacing={4}
+                    // columnSpacing={{ xs: 2, sm: 2, md: 3 }}
+                    // spacing={{ xs: 4, md: 3 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
-                    direction="row"
+                    direction="column"
                     justifyContent="space-evenly"
                     alignItems="stretch"
                     paddingBottom="20px"
+                    paddingTop="0px"
+                    marginTop="0px"
                 >
                     {equines.map(equine => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={equine.id}>
-                                <EntityCard
+                            <Grid item xs={2} sm={4} md={4} sx={{ padding: "0px"}} key={equine.id}>
+                                <ListCard
                                     link={`equines/${equine.id}`}
                                     title={equine.name}
                                 />

@@ -35,10 +35,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/equines.js"
     ],
-    "/programmes": [
+    "/skills": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/programmes.js"
+      "static/chunks/pages/skills.js"
     ]
   },
   "ampFirstPages": []

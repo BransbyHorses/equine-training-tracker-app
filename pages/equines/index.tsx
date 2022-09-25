@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
+import PageTitle from '../../components/PageTitle';
 
 export default function Equines() {
     interface MyEquines {
@@ -34,17 +36,26 @@ export default function Equines() {
 
     return (
         <Container>
-            <Typography variant="h4" color="primary" gutterBottom>
-                EQUINES
-            </Typography>
+            <PageTitle title={'Equines'} />
+            <AutoCompleteBox
+                options={equines.map(equine => ({
+                    optionName: equine.name,
+                    optionId: equine.id
+                }))}
+                label="Search for an equine"
+                linkName={'equines'}
+            />
             {equines.length > 0 ? (
                 <Grid
                     container
-                    spacing={{ xs: 2, md: 3 }}
+                    rowSpacing={4}
+                    columnSpacing={{ xs: 2, sm: 2, md: 3 }}
+                    spacing={{ xs: 4, md: 3 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                     direction="row"
                     justifyContent="space-evenly"
                     alignItems="stretch"
+                    paddingBottom="20px"
                 >
                     {equines.map(equine => {
                         return (
@@ -92,4 +103,3 @@ export default function Equines() {
         </Container>
     );
 }
-

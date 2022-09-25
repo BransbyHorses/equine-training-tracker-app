@@ -30,25 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/admin.js"
     ],
-    "/disruptions": [
+    "/equines": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/disruptions.js"
+      "static/chunks/pages/equines.js"
     ],
-    "/disruptions/[id]": [
+    "/programmes": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/disruptions/[id].js"
-    ],
-    "/disruptions/add-disruption": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/disruptions/add-disruption.js"
-    ],
-    "/training-methods": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/training-methods.js"
+      "static/chunks/pages/programmes.js"
     ]
   },
   "ampFirstPages": []

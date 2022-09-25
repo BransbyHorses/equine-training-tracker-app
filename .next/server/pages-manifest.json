@@ -3,5 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/dashboard/admin": "pages/dashboard/admin.js",
-  "/training-methods": "pages/training-methods.js"
+  "/equines": "pages/equines.js"
 }

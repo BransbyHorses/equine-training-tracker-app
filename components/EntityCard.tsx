@@ -8,12 +8,14 @@ export default function EntityCard(props: any) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '100%'
+                height: '100px',
+                backgroundColor: 'primary.light',
+                borderRadius: '0px'
             }}
         >
             <Link href={`${props.link}`}>
                 <Button>
-                    <Typography variant="h6" color="primary">
+                    <Typography variant="h6" color="common.white">
                         {props.title}
                     </Typography>
                 </Button>

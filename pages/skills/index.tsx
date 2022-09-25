@@ -5,47 +5,51 @@ import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
+import PageTitle from '../../components/PageTitle';
 
 export default function Skills() {
-    
     interface MySkills {
-        id: number,
-        name: string,
+        id: number;
+        name: string;
     }
     const [skills, setSkills] = useState<MySkills[]>([]);
 
-    function getSkills(){
+    function getSkills() {
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills`)
-        .then(response => response.json())
-        .then(data => setSkills(data))
-        .catch(rejected => {
-            console.log(rejected);
-        });
-    };
+            .then(response => response.json())
+            .then(data => setSkills(data))
+            .catch(rejected => {
+                console.log(rejected);
+            });
+    }
 
-    useEffect( () => {getSkills()},[]);
+    useEffect(() => {
+        getSkills();
+    }, []);
 
-    
     return (
-        <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-            <Typography variant="h4" color="primary" gutterBottom>
-                SKILLS
-            </Typography>
-
+        <Container>
+            <PageTitle title={'Skills'} />
             <AutoCompleteBox
-                options={skills.map(skill => ({optionName: skill.name, optionId: skill.id}))}
-                label='Search for a skill'
-                linkName={"skills"}
+                options={skills.map(skill => ({
+                    optionName: skill.name,
+                    optionId: skill.id
+                }))}
+                label="Search for a skill"
+                linkName={'skills'}
             />
 
             {skills.length > 0 ? (
                 <Grid
                     container
-                    spacing={{ xs: 2, md: 3 }}
+                    rowSpacing={4}
+                    columnSpacing={{ xs: 2, sm: 2, md: 3 }}
+                    spacing={{ xs: 4, md: 3 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                     direction="row"
                     justifyContent="space-evenly"
                     alignItems="stretch"
+                    paddingBottom="20px"
                 >
                     {skills.map(skill => {
                         return (
@@ -93,4 +97,3 @@ export default function Skills() {
         </Container>
     );
 }
-

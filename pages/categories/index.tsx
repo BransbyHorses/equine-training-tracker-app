@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox'
+import PageTitle from '../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter;
@@ -47,9 +48,7 @@ const Categories: React.FC<MyComponentProps> = props => {
                 alignItems: 'center'
             }}
         >
-            <Typography variant="h4" color="primary" gutterBottom>
-                CATEGORIES
-            </Typography>
+            <PageTitle title={'Categories'}/>
 
             <AutoCompleteBox
                 options={categories.map(category => ({optionName: category.name, optionId: category.id}))}
@@ -59,12 +58,15 @@ const Categories: React.FC<MyComponentProps> = props => {
 
             {categories.length > 0 ? (
                 <Grid
-                    container
-                    spacing={{ xs: 2, md: 3 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="stretch"
+                container
+                rowSpacing={4}
+                columnSpacing={{ xs: 2, sm: 2, md: 3 }}
+                spacing={{ xs: 4, md: 3 }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="stretch"
+                paddingBottom="20px"
                 >
                     {categories.map(category => {
                         return (

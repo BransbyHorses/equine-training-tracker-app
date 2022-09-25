@@ -5,6 +5,7 @@ import options from '../../properties/properties';
 import Link from 'next/link';
 
 import DashboardCard from '../../components/DashboardCard';
+import PageTitle from '../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter;
@@ -17,12 +18,10 @@ interface MyComponentProps extends WithRouterProps {}
 const adminDashboard: FC<MyComponentProps> = props => {
     return (
         <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-            <Typography variant="h4" color="primary" gutterBottom >
-                Dashboard
-            </Typography>
+            <PageTitle title={'Dashboard'}/>
             <Grid
                 container
-                rowSpacing={2}
+                rowSpacing={4}
                 columnSpacing={{ xs: 2, sm: 2, md: 3 }}
                 alignContent="stretch"
                 alignItems="stretch"

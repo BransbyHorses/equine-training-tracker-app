@@ -11,7 +11,8 @@ export default function DashboardCard(props: any) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     height: '100px',
-                    backgroundColor: 'primary.light'
+                    backgroundColor: 'primary.light',
+                    borderRadius: '0px'
                 }}
             >
                 <Link href={props.link}>

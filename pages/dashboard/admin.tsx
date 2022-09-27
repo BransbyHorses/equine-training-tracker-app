@@ -4,6 +4,10 @@ import { Typography, Container, Grid, Card, Button } from '@mui/material';
 import options from '../../properties/properties';
 import Link from 'next/link';
 
+import DashboardCard from '../../components/DashboardCard';
+import PageTitle from '../../components/PageTitle';
+import InfoGrid from '../../components/InfoGrid';
+
 interface WithRouterProps {
     router: NextRouter;
 }
@@ -15,35 +19,8 @@ interface MyComponentProps extends WithRouterProps {}
 const adminDashboard: FC<MyComponentProps> = props => {
     return (
         <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-            <Typography variant="h4" color="primary" gutterBottom >
-                Dashboard
-            </Typography>
-            <Grid
-                container
-                rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                alignContent="stretch"
-                alignItems="stretch"
-            >
-                {adminActions.map((action, index) => {
-                    return (
-                        <Grid item xs={6} key={index} >
-                            <Card sx={{display: "flex", alignItems: "center", justifyContent: "center", height:'100%'}}>
-                                <Link href={action.link}>
-                                    <Button>
-                                        <Typography
-                                            variant="h6"
-                                            color="primary"
-                                        >
-                                            {action.title}
-                                        </Typography>
-                                    </Button>
-                                </Link>
-                            </Card>
-                        </Grid>
-                    );
-                })}
-            </Grid>
+            <PageTitle title={'Dashboard'}/>
+            <InfoGrid listItems={adminActions}/> 
         </Container>
     );
 };

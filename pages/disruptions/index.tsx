@@ -4,40 +4,58 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
+import PageTitle from '../../components/PageTitle';
 
 export default function Disruptions() {
-    
     interface MyDisruptions {
-        id: number,
-        name: string,
+        id: number;
+        name: string;
     }
     const [disruptions, setDisruptions] = useState<MyDisruptions[]>([]);
 
-    function getDisruptions(){
+    function getDisruptions() {
         fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions`)
-        .then(response => response.json())
-        .then(data => setDisruptions(data))
-        .catch(rejected => {
-            console.log(rejected);
-        });
-    };
+            .then(response => response.json())
+            .then(data => setDisruptions(data))
+            .catch(rejected => {
+                console.log(rejected);
+            });
+    }
 
-    useEffect( () => {getDisruptions()},[]);
+    useEffect(() => {
+        getDisruptions();
+    }, []);
 
-    
     return (
-        <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-            <Typography variant="h4" color="primary" gutterBottom>
-                Disruptions
-            </Typography>
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
+            <PageTitle title={'Disruptions'} />
+            <AutoCompleteBox
+                options={disruptions.map(disruption => ({
+                    optionName: disruption.name,
+                    optionId: disruption.id
+                }))}
+                label="Search for a disruption"
+                linkName={'disruptions'}
+            />
             {disruptions.length > 0 ? (
                 <Grid
                     container
-                    spacing={{ xs: 2, md: 3 }}
+                    rowSpacing={4}
+                    columnSpacing={{ xs: 2, sm: 2, md: 3 }}
+                    spacing={{ xs: 4, md: 3 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                     direction="row"
                     justifyContent="space-evenly"
                     alignItems="stretch"
+                    paddingBottom="20px"
                 >
                     {disruptions.map(disruption => {
                         return (
@@ -85,4 +103,3 @@ export default function Disruptions() {
         </Container>
     );
 }
-

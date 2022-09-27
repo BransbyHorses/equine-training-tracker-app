@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../components/LinkButton';
+import PageTitle from '../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter
@@ -50,7 +51,8 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
     const router = useRouter();
 
     const getEquineFromId = async () => {
-        const equineId = await router.query.id;
+        const equineId = await props.router.query.id;
+        
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
             .then(response => response.json())
             .then(data => setEquine(data))
@@ -84,17 +86,10 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                     alignItems: 'center'
                 }}
             >
+                <PageTitle title={equine.name} sx={{ justifySelf: 'start' }}/>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
                 >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Name: {equine.name}
-                    </Typography>
                 </Card>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}

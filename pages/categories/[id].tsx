@@ -1,7 +1,7 @@
-import { Container, Box, Button, Link, Typography, Card, Grid } from '@mui/material';
+import { Container, Box, Button, Typography, Card } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, NextRouter } from 'next/router';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../components/LinkButton';
 

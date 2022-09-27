@@ -6,6 +6,7 @@ import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
 import PageTitle from '../../components/PageTitle';
+import ListGrid from '../../components/ListGrid';
 
 export default function Skills() {
     interface MySkills {
@@ -40,28 +41,7 @@ export default function Skills() {
             />
 
             {skills.length > 0 ? (
-                <Grid
-                    container
-                    rowSpacing={4}
-                    columnSpacing={{ xs: 2, sm: 2, md: 3 }}
-                    spacing={{ xs: 4, md: 3 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="stretch"
-                    paddingBottom="20px"
-                >
-                    {skills.map(skill => {
-                        return (
-                            <Grid item xs={2} sm={4} md={4} key={skill.id}>
-                                <EntityCard
-                                    link={`skills/${skill.id}`}
-                                    title={skill.name}
-                                />
-                            </Grid>
-                        );
-                    })}
-                </Grid>
+                <ListGrid listItems={skills} listUrl={'skills'}/>
             ) : (
                 <Typography
                     variant="h5"

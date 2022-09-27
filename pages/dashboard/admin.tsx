@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import DashboardCard from '../../components/DashboardCard';
 import PageTitle from '../../components/PageTitle';
+import InfoGrid from '../../components/InfoGrid';
 
 interface WithRouterProps {
     router: NextRouter;
@@ -19,19 +20,7 @@ const adminDashboard: FC<MyComponentProps> = props => {
     return (
         <Container sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <PageTitle title={'Dashboard'}/>
-            <Grid
-                container
-                rowSpacing={4}
-                columnSpacing={{ xs: 2, sm: 2, md: 3 }}
-                alignContent="stretch"
-                alignItems="stretch"
-            >
-                {adminActions.map((action, index) => {
-                    return (
-                        <DashboardCard key={index} link={action.link} title={action.title}/>
-                    );
-                })}
-            </Grid>
+            <InfoGrid listItems={adminActions}/> 
         </Container>
     );
 };

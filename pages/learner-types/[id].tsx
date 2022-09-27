@@ -1,18 +1,26 @@
-import { Container, Box, Button, Link, Typography, Card, Grid } from '@mui/material';
+import {
+    Container,
+    Box,
+    Button,
+    Link,
+    Typography,
+    Card,
+    Grid
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, NextRouter } from 'next/router';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import PageTitle from '../../components/PageTitle';
+import LinkButton from '../../components/LinkButton';
 
 interface WithRouterProps {
-    router: NextRouter
+    router: NextRouter;
 }
 
 interface MyComponentProps extends WithRouterProps {}
 
-
-const LearnerTypeId: React.FC<MyComponentProps> = (props) => {
-
+const LearnerTypeId: React.FC<MyComponentProps> = props => {
     interface MyLearnerTypes {
         id: number;
         name: string;
@@ -25,28 +33,32 @@ const LearnerTypeId: React.FC<MyComponentProps> = (props) => {
     const router = useRouter();
 
     const getLearnerTypeFromId = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types/${router.query.id}`)
+        await fetch(
+            `${process.env.NEXT_PUBLIC_URL}/data/learner-types/${router.query.id}`
+        )
             .then(response => response.json())
             .then(data => setLearnerType(data))
             .catch(rejected => {
                 console.log(rejected);
             });
-    }
+    };
 
     const deleteLearnerTypeForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types/${router.query.id}`, {method: 'DELETE'} )
-        .then(() => {
-            router.push('/learner-types')
-        })
-        .catch(rejected => {
-            console.log(rejected);
-        });
-    }
+        await fetch(
+            `${process.env.NEXT_PUBLIC_URL}/data/learner-types/${router.query.id}`,
+            { method: 'DELETE' }
+        )
+            .then(() => {
+                router.push('/learner-types');
+            })
+            .catch(rejected => {
+                console.log(rejected);
+            });
+    };
 
     useEffect(() => {
         getLearnerTypeFromId();
     }, []);
-    
 
     return (
         <Container>
@@ -58,6 +70,13 @@ const LearnerTypeId: React.FC<MyComponentProps> = (props) => {
                     alignItems: 'center'
                 }}
             >
+                <PageTitle
+                    title={learnerType.name}
+                    sx={{ justifySelf: 'start' }}
+                />
+                <Card
+                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
+                ></Card>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
                 >
@@ -67,7 +86,7 @@ const LearnerTypeId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Learner Type: {learnerType.name}
+                        LearnerType: {learnerType.name}
                     </Typography>
                 </Card>
 
@@ -79,13 +98,13 @@ const LearnerTypeId: React.FC<MyComponentProps> = (props) => {
                     <DeleteForeverIcon />
                 </Button>
 
-                <Link href="/learner-types">
-                    <Button variant="outlined" sx={{ my: '1rem' }}>
-                        <Typography color="prima">
-                            Go back to Learner Types
-                        </Typography>
-                    </Button>
-                </Link>
+                <LinkButton
+                    buttonHref="/learner-types"
+                    variant="contained"
+                    size="Large"
+                    color="white"
+                    action="Go back to learner types"
+                />
             </Box>
         </Container>
     );

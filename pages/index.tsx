@@ -1,5 +1,5 @@
 import {signIn, signOut, useSession } from 'next-auth/react';
-import { Container, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import SignInContainer from '../components/styles/signInContainer';
 
 export default function Home() {
@@ -18,7 +18,6 @@ export default function Home() {
 
   return (
       <main>
-          <Container>
               {!session && (
                   <SignInContainer>
                       <Typography
@@ -46,7 +45,6 @@ export default function Home() {
                       Sign Out
                   </Button>
               )}
-          </Container>
       </main>
   );
 }

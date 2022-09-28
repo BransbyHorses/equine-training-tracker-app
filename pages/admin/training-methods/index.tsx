@@ -1,30 +1,33 @@
 import Link from 'next/link';
-import { Typography, Container, Grid } from '@mui/material';
+import { Typography, Container, Grid, Card, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import LinkButton from '../../components/LinkButton';
-import EntityCard from '../../components/EntityCard';
-import AutoCompleteBox from '../../components/AutoCompleteBox';
-import PageTitle from '../../components/PageTitle';
+import LinkButton from '../../../components/LinkButton';
+import EntityCard from '../../../components/EntityCard';
+import AutoCompleteBox from '../../../components/AutoCompleteBox';
+import PageTitle from '../../../components/PageTitle';
 
-export default function Disruptions() {
-    interface MyDisruptions {
+export default function TrainingMethods() {
+    interface MyTrainingMethods {
         id: number;
         name: string;
+        description: string;
     }
-    const [disruptions, setDisruptions] = useState<MyDisruptions[]>([]);
+    const [trainingMethods, setTrainingMethods] = useState<MyTrainingMethods[]>(
+        []
+    );
 
-    function getDisruptions() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions`)
+    function getTrainingMethods() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods`)
             .then(response => response.json())
-            .then(data => setDisruptions(data))
+            .then(data => setTrainingMethods(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getDisruptions();
+        getTrainingMethods();
     }, []);
 
     return (
@@ -36,16 +39,16 @@ export default function Disruptions() {
                 alignItems: 'center'
             }}
         >
-            <PageTitle title={'Disruptions'} />
+            <PageTitle title={'Training Methods'} />
             <AutoCompleteBox
-                options={disruptions.map(disruption => ({
-                    optionName: disruption.name,
-                    optionId: disruption.id
+                options={trainingMethods.map(trainingMethod => ({
+                    optionName: trainingMethod.name,
+                    optionId: trainingMethod.id
                 }))}
-                label="Search for a disruption"
-                linkName={'disruptions'}
+                label="Search for a training method"
+                linkName={'trainingMethods'}
             />
-            {disruptions.length > 0 ? (
+            {trainingMethods.length > 0 ? (
                 <Grid
                     container
                     rowSpacing={4}
@@ -57,12 +60,12 @@ export default function Disruptions() {
                     alignItems="stretch"
                     paddingBottom="20px"
                 >
-                    {disruptions.map(disruption => {
+                    {trainingMethods.map(trainingMethod => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={disruption.id}>
+                            <Grid item xs={2} sm={4} md={4} key={trainingMethod.id}>
                                 <EntityCard
-                                    link={`disruptions/${disruption.id}`}
-                                    title={disruption.name}
+                                    link={`training-methods/${trainingMethod.id}`}
+                                    title={trainingMethod.name}
                                 />
                             </Grid>
                         );
@@ -75,7 +78,7 @@ export default function Disruptions() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No Disruptions here...☹️...yet!
+                    No Training Methods here...☹️...yet!
                 </Typography>
             )}
 
@@ -89,8 +92,8 @@ export default function Disruptions() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/disruptions/add-disruption"
-                    buttonTitle="Create new disruption"
+                    buttonHref="/training-methods/add-training-method"
+                    buttonTitle="Create new Training Method"
                 ></LinkButton>
 
                 <LinkButton

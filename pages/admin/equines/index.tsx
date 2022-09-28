@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { Typography, Container, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
-import LinkButton from '../../components/LinkButton';
-import AutoCompleteBox from '../../components/AutoCompleteBox';
-import PageTitle from '../../components/PageTitle';
-import ListCard from '../../components/ListCard';
-import ListGrid from '../../components/ListGrid';
+import LinkButton from '../../../components/LinkButton';
+import AutoCompleteBox from '../../../components/AutoCompleteBox';
+import PageTitle from '../../../components/PageTitle';
+import ListCard from '../../../components/ListCard';
+import ListGrid from '../../../components/ListGrid';
 
 export default function Equines() {
     interface MyEquines {

@@ -1,52 +1,44 @@
 import Link from 'next/link';
-import { Button, Typography, Container, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Typography, Container, Grid } from '@mui/material';
 import { Box } from '@mui/system';
-import LinkButton from '../../components/LinkButton';
-import EntityCard from '../../components/EntityCard';
-import AutoCompleteBox from '../../components/AutoCompleteBox';
+import { useEffect, useState } from 'react';
+import LinkButton from '../../../components/LinkButton';
+import EntityCard from '../../../components/EntityCard';
+import AutoCompleteBox from '../../../components/AutoCompleteBox';
+import PageTitle from '../../../components/PageTitle';
 
-export default function LearnerTypes() {
-    interface MyLearnerTypes {
+export default function Yards() {
+    interface MyYards {
         id: number;
         name: string;
     }
-    const [learnerTypes, setLearnerType] = useState<MyLearnerTypes[]>([]);
+    const [yards, setYards] = useState<MyYards[]>([]);
 
-    function getLearnerTypes() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`)
+    function getYards() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
             .then(response => response.json())
-            .then(data => setLearnerType(data))
+            .then(data => setYards(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getLearnerTypes();
+        getYards();
     }, []);
 
     return (
-        <Container
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}
-        >
-            <Typography variant="h4" color="primary" gutterBottom>
-                LEARNER TYPES
-            </Typography>
+        <Container>
+            <PageTitle title={'Yards'} />
             <AutoCompleteBox
-                options={learnerTypes.map(learnerType => ({
-                    optionName: learnerType.name,
-                    optionId: learnerType.id
+                options={yards.map(yard => ({
+                    optionName: yard.name,
+                    optionId: yard.id
                 }))}
-                label="Search for a learner type"
-                linkName={'learner-types'}
+                label="Search for a yard"
+                linkName={'yards'}
             />
-            {learnerTypes.length > 0 ? (
+            {yards.length > 0 ? (
                 <Grid
                     container
                     rowSpacing={4}
@@ -58,18 +50,12 @@ export default function LearnerTypes() {
                     alignItems="stretch"
                     paddingBottom="20px"
                 >
-                    {learnerTypes.map(learnerType => {
+                    {yards.map(yard => {
                         return (
-                            <Grid
-                                item
-                                xs={2}
-                                sm={4}
-                                md={4}
-                                key={learnerType.id}
-                            >
+                            <Grid item xs={2} sm={4} md={4} key={yard.id}>
                                 <EntityCard
-                                    link={`learner-types/${learnerType.id}`}
-                                    title={learnerType.name}
+                                    link={`yards/${yard.id}`}
+                                    title={yard.name}
                                 />
                             </Grid>
                         );
@@ -82,7 +68,7 @@ export default function LearnerTypes() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No Learner Types here...☹️!
+                    No yards here...☹️...yet!
                 </Typography>
             )}
 
@@ -96,8 +82,8 @@ export default function LearnerTypes() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/learner-types/add-learner-type"
-                    buttonTitle="Create new Learner Type"
+                    buttonHref="/yards/add-yard"
+                    buttonTitle="Create new yard"
                 ></LinkButton>
 
                 <LinkButton

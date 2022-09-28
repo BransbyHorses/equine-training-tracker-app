@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../../../components/LinkButton';
 
 interface WithRouterProps {
     router: NextRouter

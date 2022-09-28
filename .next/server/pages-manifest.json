@@ -1,9 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/skills": "pages/skills.js",
-  "/disruptions": "pages/disruptions.js",
-  "/equines/[id]": "pages/equines/[id].js",
-  "/yards": "pages/yards.js"
-}

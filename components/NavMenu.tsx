@@ -35,6 +35,7 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 	const theme = useTheme();
 	const router = useRouter();
 	const session = useSession();
+
 	return (
 		<Drawer
 			sx={{
@@ -69,7 +70,7 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 						<ListItemText primary="Home" />
 					</ListItemButton>
 				</ListItem>
-				{session.role === "ADMIN" && (
+				{session.data.role === "ADMIN" && (
 					<ListItem disablePadding>
 						<ListItemButton
 							onClick={() => router.push(`${window.location.origin}/`)}
@@ -85,13 +86,8 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 			<Divider />
 			<List>
 				<ListItem disablePadding>
-					<ListItemButton>
-						<Button
-							color="primary"
-							variant="contained"
-							onClick={signOut}
-							sx={{ width: "100%" }}
-						>
+					<ListItemButton onClick={signOut}>
+						<Button color="primary" variant="contained" sx={{ width: "100%" }}>
 							Sign Out
 						</Button>
 					</ListItemButton>

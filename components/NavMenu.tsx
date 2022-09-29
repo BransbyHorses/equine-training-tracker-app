@@ -37,9 +37,9 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 	const session = useSession();
 
 	const handleMenuNavigation = (path: string) => {
-		collapse()
+		collapse();
 		router.push(`${window.location.origin}/${path}`);
-	}
+	};
 
 	return (
 		<Drawer
@@ -86,12 +86,15 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 			</List>
 			<Divider />
 			<List>
-				<ListItem disablePadding>
-					<ListItemButton onClick={signOut}>
-						<Button color="primary" variant="contained" sx={{ width: "100%" }}>
-							Sign Out
-						</Button>
-					</ListItemButton>
+				<ListItem>
+					<Button
+						onClick={signOut}
+						color="primary"
+						variant="contained"
+						sx={{ width: "100%" }}
+					>
+						Sign Out
+					</Button>
 				</ListItem>
 			</List>
 		</Drawer>

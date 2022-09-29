@@ -36,6 +36,11 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 	const router = useRouter();
 	const session = useSession();
 
+	const handleMenuNavigation = (path: string) => {
+		collapse()
+		router.push(`${window.location.origin}/${path}`);
+	}
+
 	return (
 		<Drawer
 			sx={{
@@ -61,20 +66,16 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 			<Divider />
 			<List>
 				<ListItem disablePadding>
-					<ListItemButton
-						onClick={() => router.push(`${window.location.origin}/`)}
-					>
+					<ListItemButton onClick={() => handleMenuNavigation("")}>
 						<ListItemIcon>
 							<HomeIcon />
 						</ListItemIcon>
 						<ListItemText primary="Home" />
 					</ListItemButton>
 				</ListItem>
-				{session.data.role === "ADMIN" && (
+				{session.data && session.data.role === "ADMIN" && (
 					<ListItem disablePadding>
-						<ListItemButton
-							onClick={() => router.push(`${window.location.origin}/`)}
-						>
+						<ListItemButton onClick={() => handleMenuNavigation("admin")}>
 							<ListItemIcon>
 								<AdminPanelSettingsIcon />
 							</ListItemIcon>

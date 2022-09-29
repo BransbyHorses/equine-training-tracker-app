@@ -1,5 +1,5 @@
 import * as React from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import Drawer from "@mui/material/Drawer";
@@ -15,6 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { styled, useTheme } from "@mui/material/styles";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
@@ -25,14 +26,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 interface NavMenuProps {
-	drawerWidth: number,
-	open: boolean,
-	collapse: () => void
+	drawerWidth: number;
+	open: boolean;
+	collapse: () => void;
 }
 
 const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 	const theme = useTheme();
 	const router = useRouter();
+	const session = useSession();
 	return (
 		<Drawer
 			sx={{
@@ -57,18 +59,28 @@ const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
 			</DrawerHeader>
 			<Divider />
 			<List>
-				{["Home"].map((text) => (
-					<ListItem key={text} disablePadding>
+				<ListItem disablePadding>
+					<ListItemButton
+						onClick={() => router.push(`${window.location.origin}/`)}
+					>
+						<ListItemIcon>
+							<HomeIcon />
+						</ListItemIcon>
+						<ListItemText primary="Home" />
+					</ListItemButton>
+				</ListItem>
+				{session.role === "ADMIN" && (
+					<ListItem disablePadding>
 						<ListItemButton
 							onClick={() => router.push(`${window.location.origin}/`)}
 						>
 							<ListItemIcon>
-								<HomeIcon />
+								<AdminPanelSettingsIcon />
 							</ListItemIcon>
-							<ListItemText primary={text} />
+							<ListItemText primary="Admin" />
 						</ListItemButton>
 					</ListItem>
-				))}
+				)}
 			</List>
 			<Divider />
 			<List>

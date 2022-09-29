@@ -1,4 +1,5 @@
 import Table from "@mui/material/Table";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,9 +10,15 @@ import Paper from "@mui/material/Paper";
 import useEquines from "../utils/hooks/useEquines";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+
+import Typography from "@mui/material/Typography";
+import { Equine } from "../utils/types";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
+
+	// add a search filter using Hugo's autocomplete b
 
 	if (fetchingData) {
 		return (
@@ -19,15 +26,46 @@ export default function Home() {
 				<LoadingSpinner />
 			</Box>
 		);
-  }
-  
-  if (error) {
-    return (
+	}
+
+	if (error) {
+		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<Alert severity="error">An unexpected error occurred. Please refresh the page to try again.</Alert>
+				<Alert severity="error">
+					An unexpected error occurred. Please refresh the page to try again.
+				</Alert>
 			</Box>
 		);
-  }
+	}
+
+	const mapEquineRows = (equineArray: Equine[]) => {
+		return equineArray.map((equine, i) => {
+			return (
+				<TableRow
+					key={equine.id}
+					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+				>
+					<TableCell component="th" scope="row">
+						{equine.name}
+					</TableCell>
+					<TableCell component="th" scope="row">
+						{equine.equineStatus ? equine.equineStatus.name : <MoreHorizIcon />}
+					</TableCell>
+					<TableCell component="th" scope="row">
+						{equine.yard ? equine.yard.name : <MoreHorizIcon />}
+					</TableCell>
+					<TableCell component="th" scope="row">
+						View
+					</TableCell>
+					<TableCell component="th" scope="row">
+						<Button color="primary" variant="contained" sx={{ width: "100%" }}>
+							View Profile
+						</Button>
+					</TableCell>
+				</TableRow>
+			);
+		});
+	};
 
 	return (
 		<TableContainer component={Paper}>
@@ -35,10 +73,10 @@ export default function Home() {
 				<TableHead>
 					<TableRow>
 						<TableCell>Name</TableCell>
-						<TableCell align="right">Yard</TableCell>
-						<TableCell align="right">Status</TableCell>
-						<TableCell align="right">Programme</TableCell>
-						<TableCell align="right">Manage</TableCell>
+						<TableCell>Status</TableCell>
+						<TableCell>Yard</TableCell>
+						<TableCell>Training Programme</TableCell>
+						<TableCell>Manage</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -60,24 +98,25 @@ export default function Home() {
 							</TableCell>
 						</TableRow>
 					) : (
-						{}
+						mapEquineRows(equines)
 					)}
-					{/* {rows.map((row) => (
-						<TableRow
-							key={row.name}
-							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-						>
-							<TableCell component="th" scope="row">
-								{row.name}
-							</TableCell>
-							<TableCell align="right">{row.calories}</TableCell>
-							<TableCell align="right">{row.fat}</TableCell>
-							<TableCell align="right">{row.carbs}</TableCell>
-							<TableCell align="right">{row.protein}</TableCell>
-						</TableRow>
-					))} */}
 				</TableBody>
 			</Table>
 		</TableContainer>
 	);
 }
+
+// {/* {rows.map((row) => (
+// 	<TableRow
+// 		key={row.name}
+// 		sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+// 	>
+// 		<TableCell component="th" scope="row">
+// 			{row.name}
+// 		</TableCell>
+// 		<TableCell align="right">{row.calories}</TableCell>
+// 		<TableCell align="right">{row.fat}</TableCell>
+// 		<TableCell align="right">{row.carbs}</TableCell>
+// 		<TableCell align="right">{row.protein}</TableCell>
+// 	</TableRow>
+// ))} */}

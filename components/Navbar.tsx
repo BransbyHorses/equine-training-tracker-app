@@ -28,7 +28,7 @@ export default function ButtonAppBar() {
 	};
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box sx={{ flexGrow: 1, marginBottom: '50px' }}>
 			<AppBar position="static">
 				<Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
 					<IconButton size="small" color="inherit" aria-label="home">

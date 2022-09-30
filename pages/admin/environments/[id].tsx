@@ -36,7 +36,7 @@ const EnvironmentId: React.FC<MyComponentProps> = (props) => {
     const deleteEnvironmentForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/environments/${router.query.id}`, {method: 'DELETE'} )
         .then(() => {
-            router.push('/admin/environments')
+            router.push('/environments')
         })
         .catch(rejected => {
             console.log(rejected);

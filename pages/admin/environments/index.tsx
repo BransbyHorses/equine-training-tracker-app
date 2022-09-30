@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { Typography, Container, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import LinkButton from '../../../components/LinkButton';
-import EntityCard from '../../../components/EntityCard';
-import AutoCompleteBox from '../../../components/AutoCompleteBox';
+import LinkButton from '../../components/LinkButton';
+import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
 
 export default function Environments() {
     interface MyEnvironments {
@@ -90,14 +90,14 @@ export default function Environments() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/admin/environments/add-environment"
+                    buttonHref="/environments/add-environment"
                     buttonTitle="Create new environment"
                 ></LinkButton>
 
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/admin"
+                    buttonHref="/dashboard/admin"
                     buttonTitle="Back to Dashboard"
                 ></LinkButton>
             </Box>

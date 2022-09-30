@@ -1,10 +1,9 @@
-import { Container, Box, Button, Link, Typography, Card, Grid } from '@mui/material';
+import { Container, Box, Button, Typography, Card } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, NextRouter } from 'next/router';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../components/LinkButton';
-import PageTitle from '../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter
@@ -12,59 +11,32 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const EquineId: React.FC<MyComponentProps> = (props) => {
-    interface MyEquine {
-        category: {
-          id: number,
-          name: string
-        },
+const CategoryId: React.FC<MyComponentProps> = (props) => {
+    interface MyCategory {
         id: number,
-        name: string,
-        programme: {
-          id: number,
-          name: string
-        },
-        skills: Array<any>,
-        yard: {
-          id: number,
-          name: string
-        }
+        name: string
       }
-    const [equine, setEquine] = useState<MyEquine>({
-        category: {
-          id: 0,
-          name: ""
-        },
+    const [category, setCategory] = useState<MyCategory>({
         id: 0,
-        name: "",
-        programme: {
-          id: 0,
-          name: ""
-        },
-        skills: [],
-        yard: {
-          id: 0,
-          name: ""
-        }
+        name: ""
       });
 
     const router = useRouter();
 
-    const getEquineFromId = async () => {
-        const equineId = await props.router.query.id;
-        
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
+    const getCategoryFromId = async () => {
+        const categoryId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${categoryId}`)
             .then(response => response.json())
-            .then(data => setEquine(data))
+            .then(data => setCategory(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteEquineForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {method: 'DELETE'} )
+    const deleteCategoryForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${category.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/equines')
+            props.router.push('/categories')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -72,7 +44,7 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getEquineFromId();
+        getCategoryFromId();
     }, []);
     
 
@@ -86,11 +58,6 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                     alignItems: 'center'
                 }}
             >
-                <PageTitle title={equine.name} sx={{ justifySelf: 'start' }}/>
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                </Card>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
                 >
@@ -100,28 +67,28 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Yard: {equine.yard.name}
+                        Name: {category.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteEquineForever}
+                    onClick={deleteCategoryForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/equines"
+                    buttonHref="/categories"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to equines"
+                    action="Go back to Categories"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(EquineId);
+export default withRouter(CategoryId);

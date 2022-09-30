@@ -15,41 +15,45 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const NewYard: React.FC<MyComponentProps> = props =>{
+const NewSkill: React.FC<MyComponentProps> = props => {
 
-    const [newYard, setNewYard] = useState({
+    const [newSkill, setNewSkill] = useState({
         name: '',
     });
 
-    const submitYard = (e: any) => {
+    const submitSkill = (e: any) => {
         e.preventDefault();
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`,{
+        const skillToPost = {
+            id: 0,
+            name: newSkill.name
+        }
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify(newYard)
+            body: JSON.stringify(skillToPost)
         })
         .then(response => {
             response.json(); 
         })
-        .then(data => props.router.push('/yards'))
+        .then(data => props.router.push('/skills'))
         .catch(rejected => {
             console.log(rejected);
         });
     };
 
     const handleChange = (e: any) => {
-        setNewYard({...newYard, [e.target.name] : e.target.value})
+        setNewSkill({...newSkill, [e.target.name] : e.target.value})
     }
 
     return (
         <Container>
             <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add a Yard
+                Add a Skill
             </Typography>
             <div>
-                <form onSubmit={submitYard}>
+                <form onSubmit={submitSkill}>
                 <Grid container direction="column" >
                     <TextField
                         id="name"
@@ -69,13 +73,12 @@ const NewYard: React.FC<MyComponentProps> = props =>{
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/yards">
-                        <Typography>Go back to Yards</Typography>
+                    <Link href="/skills">
+                        <Typography>Go back to Skills</Typography>
                     </Link>
                 </Button>
             </div>
         </Container>
     );
 };
-
-export default withRouter(NewYard);
+export default withRouter(NewSkill);

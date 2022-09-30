@@ -5,40 +5,48 @@ import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
-import PageTitle from '../../components/PageTitle';
 
-export default function Yards() {
-    interface MyYards {
+export default function Environments() {
+    interface MyEnvironments {
         id: number;
         name: string;
     }
-    const [yards, setYards] = useState<MyYards[]>([]);
+    const [environments, setEnvironment] = useState<MyEnvironments[]>([]);
 
-    function getYards() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+    function getEnvironments() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/environments`)
             .then(response => response.json())
-            .then(data => setYards(data))
+            .then(data => setEnvironment(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getYards();
+        getEnvironments();
     }, []);
 
     return (
-        <Container>
-            <PageTitle title={'Yards'} />
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
+            <Typography variant="h4" color="primary" gutterBottom>
+                ENVIRONMENTS
+            </Typography>
             <AutoCompleteBox
-                options={yards.map(yard => ({
-                    optionName: yard.name,
-                    optionId: yard.id
+                options={environments.map(environment => ({
+                    optionName: environment.name,
+                    optionId: environment.id
                 }))}
-                label="Search for a yard"
-                linkName={'yards'}
+                label="Search for a environment"
+                linkName={'environments'}
             />
-            {yards.length > 0 ? (
+            {environments.length > 0 ? (
                 <Grid
                     container
                     rowSpacing={4}
@@ -50,12 +58,12 @@ export default function Yards() {
                     alignItems="stretch"
                     paddingBottom="20px"
                 >
-                    {yards.map(yard => {
+                    {environments.map(environment => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={yard.id}>
+                            <Grid item xs={2} sm={4} md={4} key={environment.id}>
                                 <EntityCard
-                                    link={`yards/${yard.id}`}
-                                    title={yard.name}
+                                    link={`environments/${environment.id}`}
+                                    title={environment.name}
                                 />
                             </Grid>
                         );
@@ -68,7 +76,7 @@ export default function Yards() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No yards here...☹️...yet!
+                    No environments here...☹️...yet!
                 </Typography>
             )}
 
@@ -82,8 +90,8 @@ export default function Yards() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/yards/add-yard"
-                    buttonTitle="Create new yard"
+                    buttonHref="/environments/add-environment"
+                    buttonTitle="Create new environment"
                 ></LinkButton>
 
                 <LinkButton

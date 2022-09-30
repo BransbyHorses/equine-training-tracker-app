@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../components/LinkButton';
-import PageTitle from '../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter
@@ -12,59 +11,32 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const EquineId: React.FC<MyComponentProps> = (props) => {
-    interface MyEquine {
-        category: {
-          id: number,
-          name: string
-        },
+const TrainingMethodId: React.FC<MyComponentProps> = (props) => {
+    interface MyTrainingMethod {
         id: number,
-        name: string,
-        programme: {
-          id: number,
-          name: string
-        },
-        skills: Array<any>,
-        yard: {
-          id: number,
-          name: string
-        }
+        name: string
       }
-    const [equine, setEquine] = useState<MyEquine>({
-        category: {
-          id: 0,
-          name: ""
-        },
+    const [trainingMethod, setTrainingMethod] = useState<MyTrainingMethod>({
         id: 0,
-        name: "",
-        programme: {
-          id: 0,
-          name: ""
-        },
-        skills: [],
-        yard: {
-          id: 0,
-          name: ""
-        }
+        name: ""
       });
 
     const router = useRouter();
 
-    const getEquineFromId = async () => {
-        const equineId = await props.router.query.id;
-        
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
+    const getTrainingMethodFromId = async () => {
+        const trainingMethodId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods/${trainingMethodId}`)
             .then(response => response.json())
-            .then(data => setEquine(data))
+            .then(data => setTrainingMethod(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteEquineForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {method: 'DELETE'} )
+    const deleteTrainingMethodForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods/${trainingMethod.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/equines')
+            props.router.push('/training-methods')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -72,7 +44,7 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getEquineFromId();
+        getTrainingMethodFromId();
     }, []);
     
 
@@ -86,11 +58,6 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                     alignItems: 'center'
                 }}
             >
-                <PageTitle title={equine.name} sx={{ justifySelf: 'start' }}/>
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                </Card>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
                 >
@@ -100,28 +67,28 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Yard: {equine.yard.name}
+                        Name: {trainingMethod.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteEquineForever}
+                    onClick={deleteTrainingMethodForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/equines"
+                    buttonHref="/training-methods"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to equines"
+                    action="Go back to TrainingMethods"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(EquineId);
+export default withRouter(TrainingMethodId);

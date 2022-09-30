@@ -1,60 +1,47 @@
 import Link from 'next/link';
 import { Typography, Container, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
+import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
 import PageTitle from '../../components/PageTitle';
-import ListCard from '../../components/ListCard';
 import ListGrid from '../../components/ListGrid';
 
-export default function Equines() {
-    interface MyEquines {
+export default function Skills() {
+    interface MySkills {
         id: number;
         name: string;
-        category: string;
-        onHold: boolean;
-        programme: string;
-        skills: string;
-        trainerId: number;
-        training: string;
-        yard: string;
     }
-    const [equines, setEquines] = useState<MyEquines[]>([]);
+    const [skills, setSkills] = useState<MySkills[]>([]);
 
-    function getEquines() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`)
+    function getSkills() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills`)
             .then(response => response.json())
-            .then(data => setEquines(data))
+            .then(data => setSkills(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getEquines();
+        getSkills();
     }, []);
 
     return (
-        <Container
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}
-        >
-            <PageTitle title={'Equines'} />
+        <Container>
+            <PageTitle title={'Skills'} />
             <AutoCompleteBox
-                options={equines.map(equine => ({
-                    optionName: equine.name,
-                    optionId: equine.id
+                options={skills.map(skill => ({
+                    optionName: skill.name,
+                    optionId: skill.id
                 }))}
-                label="Search for an equine"
-                linkName={'equines'}
+                label="Search for a skill"
+                linkName={'skills'}
             />
-            {equines.length > 0 ? (
-                <ListGrid listItems={equines} listUrl={'equines'}/>
+
+            {skills.length > 0 ? (
+                <ListGrid listItems={skills} listUrl={'skills'}/>
             ) : (
                 <Typography
                     variant="h5"
@@ -62,7 +49,7 @@ export default function Equines() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No equines here...☹️...yet!
+                    No skills here...☹️...yet!
                 </Typography>
             )}
 
@@ -76,8 +63,8 @@ export default function Equines() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/equines/add-equine"
-                    buttonTitle="Create new equine"
+                    buttonHref="/skills/add-skill"
+                    buttonTitle="Create new skill"
                 ></LinkButton>
 
                 <LinkButton

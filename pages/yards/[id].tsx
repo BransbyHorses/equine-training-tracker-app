@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../components/LinkButton';
-import PageTitle from '../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter
@@ -12,59 +11,32 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const EquineId: React.FC<MyComponentProps> = (props) => {
-    interface MyEquine {
-        category: {
-          id: number,
-          name: string
-        },
+const YardId: React.FC<MyComponentProps> = (props) => {
+    interface MyYard {
         id: number,
-        name: string,
-        programme: {
-          id: number,
-          name: string
-        },
-        skills: Array<any>,
-        yard: {
-          id: number,
-          name: string
-        }
+        name: string
       }
-    const [equine, setEquine] = useState<MyEquine>({
-        category: {
-          id: 0,
-          name: ""
-        },
+    const [yard, setYard] = useState<MyYard>({
         id: 0,
-        name: "",
-        programme: {
-          id: 0,
-          name: ""
-        },
-        skills: [],
-        yard: {
-          id: 0,
-          name: ""
-        }
+        name: ""
       });
 
     const router = useRouter();
 
-    const getEquineFromId = async () => {
-        const equineId = await props.router.query.id;
-        
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
+    const getYardFromId = async () => {
+        const yardId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards/${yardId}`)
             .then(response => response.json())
-            .then(data => setEquine(data))
+            .then(data => setYard(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteEquineForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {method: 'DELETE'} )
+    const deleteYardForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards/${yard.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/equines')
+            props.router.push('/yards')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -72,7 +44,7 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getEquineFromId();
+        getYardFromId();
     }, []);
     
 
@@ -86,11 +58,6 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                     alignItems: 'center'
                 }}
             >
-                <PageTitle title={equine.name} sx={{ justifySelf: 'start' }}/>
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                </Card>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
                 >
@@ -100,28 +67,28 @@ const EquineId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Yard: {equine.yard.name}
+                        Name: {yard.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteEquineForever}
+                    onClick={deleteYardForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/equines"
+                    buttonHref="/yards"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to equines"
+                    action="Go back to Yards"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(EquineId);
+export default withRouter(YardId);

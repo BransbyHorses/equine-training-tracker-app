@@ -15,41 +15,45 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const NewYard: React.FC<MyComponentProps> = props =>{
+const NewProgramme: React.FC<MyComponentProps> = props => {
 
-    const [newYard, setNewYard] = useState({
+    const [newProgramme, setNewProgramme] = useState({
         name: '',
     });
 
-    const submitYard = (e: any) => {
+    const submitProgramme = (e: any) => {
         e.preventDefault();
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`,{
+        const programmeToPost = {
+            id: 0,
+            name: newProgramme.name
+        }
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify(newYard)
+            body: JSON.stringify(programmeToPost)
         })
         .then(response => {
             response.json(); 
         })
-        .then(data => props.router.push('/yards'))
+        .then(data => props.router.push('/programmes'))
         .catch(rejected => {
             console.log(rejected);
         });
     };
 
     const handleChange = (e: any) => {
-        setNewYard({...newYard, [e.target.name] : e.target.value})
+        setNewProgramme({...newProgramme, [e.target.name] : e.target.value})
     }
 
     return (
         <Container>
             <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add a Yard
+                Add a Programme
             </Typography>
             <div>
-                <form onSubmit={submitYard}>
+                <form onSubmit={submitProgramme}>
                 <Grid container direction="column" >
                     <TextField
                         id="name"
@@ -69,13 +73,12 @@ const NewYard: React.FC<MyComponentProps> = props =>{
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/yards">
-                        <Typography>Go back to Yards</Typography>
+                    <Link href="/programmes">
+                        <Typography>Go back to Programmes</Typography>
                     </Link>
                 </Button>
             </div>
         </Container>
     );
 };
-
-export default withRouter(NewYard);
+export default withRouter(NewProgramme);

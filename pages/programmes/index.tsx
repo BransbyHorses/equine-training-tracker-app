@@ -5,40 +5,48 @@ import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
 import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
-import PageTitle from '../../components/PageTitle';
 
-export default function Yards() {
-    interface MyYards {
+export default function Programmes() {
+    interface MyProgrammes {
         id: number;
         name: string;
     }
-    const [yards, setYards] = useState<MyYards[]>([]);
+    const [programmes, setProgrammes] = useState<MyProgrammes[]>([]);
 
-    function getYards() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+    function getProgrammes() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes`)
             .then(response => response.json())
-            .then(data => setYards(data))
+            .then(data => setProgrammes(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getYards();
+        getProgrammes();
     }, []);
 
     return (
-        <Container>
-            <PageTitle title={'Yards'} />
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
+            <Typography variant="h4" color="primary" gutterBottom>
+                Programmes
+            </Typography>
             <AutoCompleteBox
-                options={yards.map(yard => ({
-                    optionName: yard.name,
-                    optionId: yard.id
+                options={programmes.map(programme => ({
+                    optionName: programme.name,
+                    optionId: programme.id
                 }))}
-                label="Search for a yard"
-                linkName={'yards'}
+                label="Search for a programme"
+                linkName={'programmes'}
             />
-            {yards.length > 0 ? (
+            {programmes.length > 0 ? (
                 <Grid
                     container
                     rowSpacing={4}
@@ -50,12 +58,12 @@ export default function Yards() {
                     alignItems="stretch"
                     paddingBottom="20px"
                 >
-                    {yards.map(yard => {
+                    {programmes.map(programme => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={yard.id}>
+                            <Grid item xs={2} sm={4} md={4} key={programme.id}>
                                 <EntityCard
-                                    link={`yards/${yard.id}`}
-                                    title={yard.name}
+                                    link={`programmes/${programme.id}`}
+                                    title={programme.name}
                                 />
                             </Grid>
                         );
@@ -68,7 +76,7 @@ export default function Yards() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No yards here...☹️...yet!
+                    No Programmes here...☹️...yet!
                 </Typography>
             )}
 
@@ -82,8 +90,8 @@ export default function Yards() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/yards/add-yard"
-                    buttonTitle="Create new yard"
+                    buttonHref="/programmes/add-programme"
+                    buttonTitle="Create new Programme"
                 ></LinkButton>
 
                 <LinkButton

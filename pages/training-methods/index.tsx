@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Typography, Container, Grid } from '@mui/material';
+import { Typography, Container, Grid, Card, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import LinkButton from '../../components/LinkButton';
@@ -7,38 +7,48 @@ import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
 import PageTitle from '../../components/PageTitle';
 
-export default function Yards() {
-    interface MyYards {
+export default function TrainingMethods() {
+    interface MyTrainingMethods {
         id: number;
         name: string;
+        description: string;
     }
-    const [yards, setYards] = useState<MyYards[]>([]);
+    const [trainingMethods, setTrainingMethods] = useState<MyTrainingMethods[]>(
+        []
+    );
 
-    function getYards() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+    function getTrainingMethods() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods`)
             .then(response => response.json())
-            .then(data => setYards(data))
+            .then(data => setTrainingMethods(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getYards();
+        getTrainingMethods();
     }, []);
 
     return (
-        <Container>
-            <PageTitle title={'Yards'} />
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
+            <PageTitle title={'Training Methods'} />
             <AutoCompleteBox
-                options={yards.map(yard => ({
-                    optionName: yard.name,
-                    optionId: yard.id
+                options={trainingMethods.map(trainingMethod => ({
+                    optionName: trainingMethod.name,
+                    optionId: trainingMethod.id
                 }))}
-                label="Search for a yard"
-                linkName={'yards'}
+                label="Search for a training method"
+                linkName={'trainingMethods'}
             />
-            {yards.length > 0 ? (
+            {trainingMethods.length > 0 ? (
                 <Grid
                     container
                     rowSpacing={4}
@@ -50,12 +60,12 @@ export default function Yards() {
                     alignItems="stretch"
                     paddingBottom="20px"
                 >
-                    {yards.map(yard => {
+                    {trainingMethods.map(trainingMethod => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={yard.id}>
+                            <Grid item xs={2} sm={4} md={4} key={trainingMethod.id}>
                                 <EntityCard
-                                    link={`yards/${yard.id}`}
-                                    title={yard.name}
+                                    link={`training-methods/${trainingMethod.id}`}
+                                    title={trainingMethod.name}
                                 />
                             </Grid>
                         );
@@ -68,7 +78,7 @@ export default function Yards() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No yards here...☹️...yet!
+                    No Training Methods here...☹️...yet!
                 </Typography>
             )}
 
@@ -82,8 +92,8 @@ export default function Yards() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/yards/add-yard"
-                    buttonTitle="Create new yard"
+                    buttonHref="/training-methods/add-training-method"
+                    buttonTitle="Create new Training Method"
                 ></LinkButton>
 
                 <LinkButton

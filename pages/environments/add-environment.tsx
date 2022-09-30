@@ -9,47 +9,46 @@ import {
     Grid
 } from '@mui/material';
 
+
 interface WithRouterProps {
-    router: NextRouter;
+    router: NextRouter
 }
 
 interface MyComponentProps extends WithRouterProps {}
 
-const NewYard: React.FC<MyComponentProps> = props =>{
+const AddEnvironments: React.FC<MyComponentProps> = (props) => {
 
-    const [newYard, setNewYard] = useState({
+    const [environment, setEnvironment] = useState({
         name: '',
     });
 
-    const submitYard = (e: any) => {
+    const submitEnvironment = (e: any) => {
         e.preventDefault();
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`,{
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/environments`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify(newYard)
+            body: JSON.stringify(environment)
         })
-        .then(response => {
-            response.json(); 
-        })
-        .then(data => props.router.push('/yards'))
+        .then(response => response.json())
+        .then(data => props.router.push(`/environments/${data.id}`))
         .catch(rejected => {
             console.log(rejected);
         });
     };
 
     const handleChange = (e: any) => {
-        setNewYard({...newYard, [e.target.name] : e.target.value})
+        setEnvironment({...environment, [e.target.name] : e.target.value})
     }
-
+    
     return (
         <Container>
             <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add a Yard
+                Add an Environment
             </Typography>
             <div>
-                <form onSubmit={submitYard}>
+                <form onSubmit={submitEnvironment}>
                 <Grid container direction="column" >
                     <TextField
                         id="name"
@@ -69,13 +68,12 @@ const NewYard: React.FC<MyComponentProps> = props =>{
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/yards">
-                        <Typography>Go back to Yards</Typography>
+                    <Link href="/environments">
+                        <Typography>Go back to Environment</Typography>
                     </Link>
                 </Button>
             </div>
         </Container>
     );
 };
-
-export default withRouter(NewYard);
+export default withRouter(AddEnvironments);

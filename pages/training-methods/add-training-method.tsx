@@ -15,41 +15,42 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const NewYard: React.FC<MyComponentProps> = props =>{
+const NewTrainingMethod: React.FC<MyComponentProps> = props =>{
 
-    const [newYard, setNewYard] = useState({
+    const [newTrainingMethod, setNewTrainingMethod] = useState({
         name: '',
+        description: ''
     });
 
-    const submitYard = (e: any) => {
+    const submitTrainingMethod = (e: any) => {
         e.preventDefault();
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`,{
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify(newYard)
+            body: JSON.stringify(newTrainingMethod)
         })
         .then(response => {
             response.json(); 
         })
-        .then(data => props.router.push('/yards'))
+        .then(data => props.router.push('/training-methods'))
         .catch(rejected => {
             console.log(rejected);
         });
     };
 
     const handleChange = (e: any) => {
-        setNewYard({...newYard, [e.target.name] : e.target.value})
+        setNewTrainingMethod({...newTrainingMethod, [e.target.name] : e.target.value})
     }
 
     return (
         <Container>
             <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add a Yard
+                Add a Training Method
             </Typography>
             <div>
-                <form onSubmit={submitYard}>
+                <form onSubmit={submitTrainingMethod}>
                 <Grid container direction="column" >
                     <TextField
                         id="name"
@@ -57,6 +58,16 @@ const NewYard: React.FC<MyComponentProps> = props =>{
                         variant="outlined"
                         color="secondary"
                         name="name"
+                        onChange={handleChange}
+                        required
+                        sx={{my: "1rem"}}
+                    />
+                    <TextField
+                        id="description"
+                        label="Description"
+                        variant="outlined"
+                        color="secondary"
+                        name="description"
                         onChange={handleChange}
                         required
                         sx={{my: "1rem"}}
@@ -69,8 +80,8 @@ const NewYard: React.FC<MyComponentProps> = props =>{
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/yards">
-                        <Typography>Go back to Yards</Typography>
+                    <Link href="/training-methods">
+                        <Typography>Go back to Training Methods</Typography>
                     </Link>
                 </Button>
             </div>
@@ -78,4 +89,4 @@ const NewYard: React.FC<MyComponentProps> = props =>{
     );
 };
 
-export default withRouter(NewYard);
+export default withRouter(NewTrainingMethod);

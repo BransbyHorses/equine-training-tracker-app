@@ -7,38 +7,45 @@ import EntityCard from '../../components/EntityCard';
 import AutoCompleteBox from '../../components/AutoCompleteBox';
 import PageTitle from '../../components/PageTitle';
 
-export default function Yards() {
-    interface MyYards {
+export default function Disruptions() {
+    interface MyDisruptions {
         id: number;
         name: string;
     }
-    const [yards, setYards] = useState<MyYards[]>([]);
+    const [disruptions, setDisruptions] = useState<MyDisruptions[]>([]);
 
-    function getYards() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+    function getDisruptions() {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions`)
             .then(response => response.json())
-            .then(data => setYards(data))
+            .then(data => setDisruptions(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
     useEffect(() => {
-        getYards();
+        getDisruptions();
     }, []);
 
     return (
-        <Container>
-            <PageTitle title={'Yards'} />
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
+            <PageTitle title={'Disruptions'} />
             <AutoCompleteBox
-                options={yards.map(yard => ({
-                    optionName: yard.name,
-                    optionId: yard.id
+                options={disruptions.map(disruption => ({
+                    optionName: disruption.name,
+                    optionId: disruption.id
                 }))}
-                label="Search for a yard"
-                linkName={'yards'}
+                label="Search for a disruption"
+                linkName={'disruptions'}
             />
-            {yards.length > 0 ? (
+            {disruptions.length > 0 ? (
                 <Grid
                     container
                     rowSpacing={4}
@@ -50,12 +57,12 @@ export default function Yards() {
                     alignItems="stretch"
                     paddingBottom="20px"
                 >
-                    {yards.map(yard => {
+                    {disruptions.map(disruption => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={yard.id}>
+                            <Grid item xs={2} sm={4} md={4} key={disruption.id}>
                                 <EntityCard
-                                    link={`yards/${yard.id}`}
-                                    title={yard.name}
+                                    link={`disruptions/${disruption.id}`}
+                                    title={disruption.name}
                                 />
                             </Grid>
                         );
@@ -68,7 +75,7 @@ export default function Yards() {
                     gutterBottom
                     sx={{ my: '1rem', mx: '1rem' }}
                 >
-                    No yards here...☹️...yet!
+                    No Disruptions here...☹️...yet!
                 </Typography>
             )}
 
@@ -82,8 +89,8 @@ export default function Yards() {
                 <LinkButton
                     color="lightBlue[50]"
                     variant="contained"
-                    buttonHref="/yards/add-yard"
-                    buttonTitle="Create new yard"
+                    buttonHref="/disruptions/add-disruption"
+                    buttonTitle="Create new disruption"
                 ></LinkButton>
 
                 <LinkButton

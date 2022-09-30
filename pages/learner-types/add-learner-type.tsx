@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { withRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
+import { withRouter, NextRouter } from 'next/router'
 import {
     Button,
     Typography,
@@ -10,46 +10,44 @@ import {
 } from '@mui/material';
 
 interface WithRouterProps {
-    router: NextRouter;
+    router: NextRouter
 }
 
 interface MyComponentProps extends WithRouterProps {}
 
-const NewYard: React.FC<MyComponentProps> = props =>{
+const AddLearnerTypes: React.FC<MyComponentProps> = (props) => {
 
-    const [newYard, setNewYard] = useState({
+    const [learnerType, setLearnerType] = useState({
         name: '',
     });
 
-    const submitYard = (e: any) => {
+    const submitLearnerType = (e: any) => {
         e.preventDefault();
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`,{
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify(newYard)
+            body: JSON.stringify(learnerType)
         })
-        .then(response => {
-            response.json(); 
-        })
-        .then(data => props.router.push('/yards'))
+        .then(response => response.json())
+        .then(data => props.router.push(`/learner-types/${data.id}`))
         .catch(rejected => {
             console.log(rejected);
         });
     };
 
     const handleChange = (e: any) => {
-        setNewYard({...newYard, [e.target.name] : e.target.value})
+        setLearnerType({...learnerType, [e.target.name] : e.target.value})
     }
-
+    
     return (
         <Container>
             <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add a Yard
+                Add a Learner Type
             </Typography>
             <div>
-                <form onSubmit={submitYard}>
+                <form onSubmit={submitLearnerType}>
                 <Grid container direction="column" >
                     <TextField
                         id="name"
@@ -69,13 +67,12 @@ const NewYard: React.FC<MyComponentProps> = props =>{
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/yards">
-                        <Typography>Go back to Yards</Typography>
+                    <Link href="/learner-types">
+                        <Typography>Go back to Learner Type</Typography>
                     </Link>
                 </Button>
             </div>
         </Container>
     );
 };
-
-export default withRouter(NewYard);
+export default withRouter(AddLearnerTypes);

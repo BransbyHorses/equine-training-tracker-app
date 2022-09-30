@@ -29,7 +29,7 @@ Use upload-equines.js in devtools to populate the database with a given number o
 
 ## Usage examples
 
-On first instance, pass "fields" to the script to add the required data:
+On first instance, pass "fields" to the script to add the required data. (Note: The API might throw an error if the DB contains duplicate fields - just ignore it).
 
 ```
 node devtools/upload-equines.js "fields"

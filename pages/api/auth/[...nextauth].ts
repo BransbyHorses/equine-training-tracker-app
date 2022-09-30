@@ -6,8 +6,8 @@ export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     CognitoProvider({
-      clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
-      clientSecret: process.env.NEXT_PUBLIC_COGNITO_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
+      clientSecret: process.env.NEXT_PUBLIC_COGNITO_CLIENT_SECRET!,
       issuer: process.env.NEXT_PUBLIC_COGNITO_ISSUER
     }),
   ],

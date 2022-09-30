@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Table from "@mui/material/Table";
 import Button from "@mui/material/Button";
@@ -13,34 +13,36 @@ import useEquines from "../utils/hooks/useEquines";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import Link from "next/link";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Theme, useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
-import { Equine } from "../utils/types";
+import { Equine, Yard } from "../utils/types";
+import useYards from "../utils/hooks/useYards";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
+	const {
+		fetchingData: fetchingYardData,
+		yards,
+		error: yardDataError,
+	} = useYards();
 
-	if (fetchingData) {
-		return (
-			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<LoadingSpinner />
-			</Box>
-		);
-	}
+	const [tableData, setTableData] = useState<Equine[]>([]);
+	const [yardFilter, setYardFilter] = useState<string>("");
 
-	if (error) {
-		return (
-			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<Alert severity="error">
-					An unexpected error occurred. Please refresh the page.
-				</Alert>
-			</Box>
-		);
-	}
+	useEffect(() => {
+		setTableData(equines);
+	}, [equines]);
 
 	const mapEquineRows = (equineArray: Equine[]) => {
-		return equineArray.map((equine, i) => {
+		return equineArray.map((equine) => {
 			return (
 				<TableRow
 					key={equine.id}
@@ -67,18 +69,73 @@ export default function Home() {
 		});
 	};
 
+	const mapYardOptions = (yardsArray: Yard[]) => {
+		if (yardDataError) {
+			return <MenuItem disabled>Unavailable</MenuItem>;
+		}
+
+		return yardsArray.map((yard, i) => {
+			return (
+				<MenuItem key={yard.id} value={yard.name}>
+					{yard.name}
+				</MenuItem>
+			);
+		});
+	};
+
+	const filterEquinesByYard = (event: SelectChangeEvent) => {
+		setYardFilter(event.target.value);
+
+		event.target.value === "all"
+			? setTableData(equines)
+			: setTableData(
+					equines.filter(
+						(equine) => equine.yard && equine.yard.name === event.target.value
+					)
+			  );
+	};
+
+	if (fetchingData) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<LoadingSpinner />
+			</Box>
+		);
+	}
+
+	if (error) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<Alert severity="error">
+					An unexpected error occurred. Please refresh the page.
+				</Alert>
+			</Box>
+		);
+	}
+
 	return (
 		<>
-			<Box sx={{ marginBottom: "25px" }}>
-				<Button
-					size="small"
-					color="info"
-					variant="contained"
-					sx={{ display: "flex", alignItems: "center" }}
+			<FormControl sx={{ minWidth: "150px" }} size="small">
+				<InputLabel id="yard-label">Yard</InputLabel>
+				<Select
+					id="yard"
+					labelId="yard-label"
+					label="Yard"
+					value={yardFilter}
+					onChange={filterEquinesByYard}
 				>
-					Filter
-					<FilterListIcon sx={{ marginLeft: "10px" }} />
-				</Button>
+					<MenuItem value="all">All Yards</MenuItem>
+					{mapYardOptions(yards)}
+				</Select>
+			</FormControl>
+			<Box sx={{ margin: "20px 0px" }}>
+				<TextField
+					id="outlined-basic"
+					label="Search equines"
+					variant="outlined"
+					size="small"
+					fullWidth
+				/>
 			</Box>
 			<TableContainer component={Paper}>
 				<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -102,14 +159,14 @@ export default function Home() {
 								<LoadingSpinner />
 							</Box>
 						)}
-						{equines.length === 0 && !fetchingData ? (
+						{tableData.length === 0 && !fetchingData ? (
 							<TableRow>
 								<TableCell component="th">
 									There are currently no equines to display.
 								</TableCell>
 							</TableRow>
 						) : (
-							mapEquineRows(equines)
+							mapEquineRows(tableData)
 						)}
 					</TableBody>
 				</Table>

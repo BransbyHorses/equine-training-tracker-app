@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 
 import Table from "@mui/material/Table";
 import Button from "@mui/material/Button";
@@ -33,6 +33,7 @@ export default function Home() {
 		yards,
 		error: yardDataError,
 	} = useYards();
+	const theme = useTheme();
 
 	const [tableData, setTableData] = useState<Equine[]>([]);
 	const [yardFilter, setYardFilter] = useState<string>("all");
@@ -95,7 +96,7 @@ export default function Home() {
 			  );
 	};
 
-	const filterEquinesByName = (event: SelectChangeEvent) => {
+	const filterEquinesByName = (event: any) => {
 		let filteredEquines: Equine[] = equines.filter(
 			(equine) => equine.name.toLowerCase().indexOf(event.target.value) > -1
 		);
@@ -122,13 +123,32 @@ export default function Home() {
 
 	return (
 		<>
-			<FormControl sx={{ minWidth: "150px" }} size="small" variant="outlined">
-				<Select id="yard" value={yardFilter} onChange={filterEquinesByYard}>
-					<MenuItem value="all">All Yards</MenuItem>
-					{mapYardOptions(yards)}
-				</Select>
-			</FormControl>
-			<Box sx={{ margin: "20px 0px" }}>
+			<Box
+				sx={{
+					marginBottom: "20px",
+					[theme.breakpoints.between("sm", "xl")]: {
+						display: "flex",
+					},
+				}}
+			>
+				<FormControl
+					sx={{
+						minWidth: "150px",
+						[theme.breakpoints.between("sm", "xl")]: {
+							marginRight: "10px",
+						},
+						[theme.breakpoints.between("xs", "sm")]: {
+							marginBottom: "10px",
+						},
+					}}
+					size="small"
+					variant="outlined"
+				>
+					<Select id="yard" value={yardFilter} onChange={filterEquinesByYard}>
+						<MenuItem value="all">All Yards</MenuItem>
+						{mapYardOptions(yards)}
+					</Select>
+				</FormControl>
 				<TextField
 					id="outlined-basic"
 					label="Search equines"

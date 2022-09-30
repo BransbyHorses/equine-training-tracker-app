@@ -7,6 +7,15 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../public/css/main.css";
 
 const Theme = createTheme({
+	breakpoints: {
+		values: {
+			xs: 0,
+			sm: 600,
+			md: 900,
+			lg: 1200,
+			xl: 3000,
+		},
+	},
 	palette: {
 		primary: {
 			main: "#222853",

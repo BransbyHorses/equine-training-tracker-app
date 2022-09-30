@@ -32,7 +32,7 @@ const AddEnvironments: React.FC<MyComponentProps> = (props) => {
             body: JSON.stringify(environment)
         })
         .then(response => response.json())
-        .then(data => props.router.push(`/environments/${data.id}`))
+        .then(data => props.router.push(`/admin/environments/${data.id}`))
         .catch(rejected => {
             console.log(rejected);
         });

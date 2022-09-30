@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 import Link from "next/link";
 
-import useEquines from "../utils/hooks/useEquines";
+import { useEquines } from "../utils/hooks/equine";
 import { Equine, Yard } from "../utils/types";
 import useYards from "../utils/hooks/useYards";
 
@@ -21,7 +21,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 import Table from "@mui/material/Table";
 import Button from "@mui/material/Button";
@@ -20,7 +19,6 @@ import Link from "next/link";
 import { Equine } from "../utils/types";
 
 export default function Home() {
-	const router = useRouter();
 	const { fetchingData, equines, error } = useEquines();
 
 	if (fetchingData) {

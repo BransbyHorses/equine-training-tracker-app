@@ -35,7 +35,7 @@ export default function Home() {
 	} = useYards();
 
 	const [tableData, setTableData] = useState<Equine[]>([]);
-	const [yardFilter, setYardFilter] = useState<string>("");
+	const [yardFilter, setYardFilter] = useState<string>("all");
 
 	useEffect(() => {
 		setTableData(equines);
@@ -95,6 +95,13 @@ export default function Home() {
 			  );
 	};
 
+	const filterEquinesByName = (event: SelectChangeEvent) => {
+		let filteredEquines: Equine[] = equines.filter(
+			(equine) => equine.name.toLowerCase().indexOf(event.target.value) > -1
+		);
+		setTableData(filteredEquines);
+	};
+
 	if (fetchingData) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -115,15 +122,8 @@ export default function Home() {
 
 	return (
 		<>
-			<FormControl sx={{ minWidth: "150px" }} size="small">
-				<InputLabel id="yard-label">Yard</InputLabel>
-				<Select
-					id="yard"
-					labelId="yard-label"
-					label="Yard"
-					value={yardFilter}
-					onChange={filterEquinesByYard}
-				>
+			<FormControl sx={{ minWidth: "150px" }} size="small" variant="outlined">
+				<Select id="yard" value={yardFilter} onChange={filterEquinesByYard}>
 					<MenuItem value="all">All Yards</MenuItem>
 					{mapYardOptions(yards)}
 				</Select>
@@ -135,6 +135,7 @@ export default function Home() {
 					variant="outlined"
 					size="small"
 					fullWidth
+					onChange={filterEquinesByName}
 				/>
 			</Box>
 			<TableContainer component={Paper}>

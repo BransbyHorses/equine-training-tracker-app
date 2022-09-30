@@ -49,7 +49,7 @@ export default function Home() {
 					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 				>
 					<TableCell component="th" scope="row">
-						{equine.name}
+						<Link href={`/equines/${equine.id}`}>{equine.name}</Link>
 					</TableCell>
 					<TableCell component="th" scope="row">
 						{equine.equineStatus ? equine.equineStatus.name : <MoreHorizIcon />}
@@ -58,10 +58,11 @@ export default function Home() {
 						{equine.yard ? equine.yard.name : <MoreHorizIcon />}
 					</TableCell>
 					<TableCell component="th" scope="row">
-						<Link href="">View</Link>
-					</TableCell>
-					<TableCell component="th" scope="row">
-						<Link href={`/equines/${equine.id}`}>Profile</Link>
+						{equine.trainingProgrammes.length === 0 ? (
+							<MoreHorizIcon />
+						) : (
+							<Link href="">View</Link>
+						)}
 					</TableCell>
 				</TableRow>
 			);
@@ -89,7 +90,6 @@ export default function Home() {
 							<TableCell>Status</TableCell>
 							<TableCell>Yard</TableCell>
 							<TableCell>Current Training Programme</TableCell>
-							<TableCell>Manage</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>

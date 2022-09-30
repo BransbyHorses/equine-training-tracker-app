@@ -23,7 +23,7 @@ export default NextAuth({
         // console.log(account);
         
         token.accessToken = account.access_token;
-        let decodedToken: string = jwt_decode(account.access_token!);
+        let decodedToken: any = jwt_decode(account.access_token!);
         token.role = decodedToken["cognito:groups"] ? decodedToken["cognito:groups"][0] : null;
         token.sub = decodedToken['sub'];
       }

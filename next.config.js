@@ -8,5 +8,7 @@ module.exports = withPWA({
     runtimeCaching,
   },
   reactStrictMode: true,
-  output: 'standalone',
+  experimental: {
+    outputStandalone: true
+  },  
 })

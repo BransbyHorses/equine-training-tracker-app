@@ -1,7 +1,11 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
+import Link from "next/link";
+
+import useEquines from "../utils/hooks/useEquines";
+import { Equine, Yard } from "../utils/types";
+import useYards from "../utils/hooks/useYards";
 
 import Table from "@mui/material/Table";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,22 +13,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useEquines from "../utils/hooks/useEquines";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Link from "next/link";
 import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Theme, useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import { useTheme } from "@mui/material/styles";
 
-import { Equine, Yard } from "../utils/types";
-import useYards from "../utils/hooks/useYards";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();

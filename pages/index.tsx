@@ -183,7 +183,7 @@ export default function Home() {
 						{tableData.length === 0 && !fetchingData ? (
 							<TableRow>
 								<TableCell component="th">
-									There are currently no equines to display.
+									<em>No equines found</em>
 								</TableCell>
 							</TableRow>
 						) : (

@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../../../components/LinkButton';
+import PageTitle from '../../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter
@@ -11,32 +12,59 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const DisruptionId: React.FC<MyComponentProps> = (props) => {
-    interface MyDisruption {
+const EquineId: React.FC<MyComponentProps> = (props) => {
+    interface MyEquine {
+        category: {
+          id: number,
+          name: string
+        },
         id: number,
-        name: string
+        name: string,
+        programme: {
+          id: number,
+          name: string
+        },
+        skills: Array<any>,
+        yard: {
+          id: number,
+          name: string
+        }
       }
-    const [disruption, setDisruption] = useState<MyDisruption>({
+    const [equine, setEquine] = useState<MyEquine>({
+        category: {
+          id: 0,
+          name: ""
+        },
         id: 0,
-        name: ""
+        name: "",
+        programme: {
+          id: 0,
+          name: ""
+        },
+        skills: [],
+        yard: {
+          id: 0,
+          name: ""
+        }
       });
 
     const router = useRouter();
 
-    const getDisruptionFromId = async () => {
-        const disruptionId = await router.query.id;
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions/${disruptionId}`)
+    const getEquineFromId = async () => {
+        const equineId = await props.router.query.id;
+        
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
             .then(response => response.json())
-            .then(data => setDisruption(data))
+            .then(data => setEquine(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteDisruptionForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions/${disruption.id}`, {method: 'DELETE'} )
+    const deleteEquineForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/disruptions')
+            props.router.push('/equines')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -44,7 +72,7 @@ const DisruptionId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getDisruptionFromId();
+        getEquineFromId();
     }, []);
     
 
@@ -58,6 +86,11 @@ const DisruptionId: React.FC<MyComponentProps> = (props) => {
                     alignItems: 'center'
                 }}
             >
+                <PageTitle title={equine.name} sx={{ justifySelf: 'start' }}/>
+                <Card
+                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
+                >
+                </Card>
                 <Card
                     sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
                 >
@@ -67,28 +100,28 @@ const DisruptionId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Name: {disruption.name}
+                        Yard: {equine.yard.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteDisruptionForever}
+                    onClick={deleteEquineForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/disruptions"
+                    buttonHref="/equines"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to Disruptions"
+                    action="Go back to equines"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(DisruptionId);
+export default withRouter(EquineId);

@@ -8,10 +8,10 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import LinkButton from '../../components/LinkButton';
-import EntityCard from '../../components/EntityCard';
-import AutoCompleteBox from '../../components/AutoCompleteBox'
-import PageTitle from '../../components/PageTitle';
+import LinkButton from '../../../components/LinkButton';
+import EntityCard from '../../../components/EntityCard';
+import AutoCompleteBox from '../../../components/AutoCompleteBox'
+import PageTitle from '../../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter;

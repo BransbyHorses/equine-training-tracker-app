@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 export default function DashboardCard(props: any) {
     return (
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
             <Card
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100px',
+                    justifyContent: 'space-between',
+                    height: '75px',
                     backgroundColor: 'primary.light',
                     borderRadius: '0px'
                 }}

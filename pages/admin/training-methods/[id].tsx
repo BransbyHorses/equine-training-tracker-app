@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../../../components/LinkButton';
 
 interface WithRouterProps {
     router: NextRouter
@@ -11,32 +11,32 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const SkillId: React.FC<MyComponentProps> = (props) => {
-    interface MySkill {
+const TrainingMethodId: React.FC<MyComponentProps> = (props) => {
+    interface MyTrainingMethod {
         id: number,
         name: string
       }
-    const [skill, setSkill] = useState<MySkill>({
+    const [trainingMethod, setTrainingMethod] = useState<MyTrainingMethod>({
         id: 0,
         name: ""
       });
 
     const router = useRouter();
 
-    const getSkillFromId = async () => {
-        const skillId = await router.query.id;
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills/${skillId}`)
+    const getTrainingMethodFromId = async () => {
+        const trainingMethodId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods/${trainingMethodId}`)
             .then(response => response.json())
-            .then(data => setSkill(data))
+            .then(data => setTrainingMethod(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteSkillForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills/${skill.id}`, {method: 'DELETE'} )
+    const deleteTrainingMethodForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods/${trainingMethod.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/skills')
+            props.router.push('/training-methods')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -44,7 +44,7 @@ const SkillId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getSkillFromId();
+        getTrainingMethodFromId();
     }, []);
     
 
@@ -67,28 +67,28 @@ const SkillId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Name: {skill.name}
+                        Name: {trainingMethod.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteSkillForever}
+                    onClick={deleteTrainingMethodForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/skills"
+                    buttonHref="/training-methods"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to Skills"
+                    action="Go back to TrainingMethods"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(SkillId);
+export default withRouter(TrainingMethodId);

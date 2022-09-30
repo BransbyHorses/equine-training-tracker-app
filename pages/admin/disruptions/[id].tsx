@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../../../components/LinkButton';
 
 interface WithRouterProps {
     router: NextRouter
@@ -11,32 +11,32 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const ProgrammeId: React.FC<MyComponentProps> = (props) => {
-    interface MyProgramme {
+const DisruptionId: React.FC<MyComponentProps> = (props) => {
+    interface MyDisruption {
         id: number,
         name: string
       }
-    const [programme, setProgramme] = useState<MyProgramme>({
+    const [disruption, setDisruption] = useState<MyDisruption>({
         id: 0,
         name: ""
       });
 
     const router = useRouter();
 
-    const getProgrammeFromId = async () => {
-        const programmeId = await router.query.id;
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes/${programmeId}`)
+    const getDisruptionFromId = async () => {
+        const disruptionId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions/${disruptionId}`)
             .then(response => response.json())
-            .then(data => setProgramme(data))
+            .then(data => setDisruption(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteProgrammeForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes/${programme.id}`, {method: 'DELETE'} )
+    const deleteDisruptionForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions/${disruption.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/programmes')
+            props.router.push('/disruptions')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -44,7 +44,7 @@ const ProgrammeId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getProgrammeFromId();
+        getDisruptionFromId();
     }, []);
     
 
@@ -67,28 +67,28 @@ const ProgrammeId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Name: {programme.name}
+                        Name: {disruption.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteProgrammeForever}
+                    onClick={deleteDisruptionForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/programmes"
+                    buttonHref="/disruptions"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to Programmes"
+                    action="Go back to Disruptions"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(ProgrammeId);
+export default withRouter(DisruptionId);

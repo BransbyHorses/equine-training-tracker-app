@@ -1,59 +1,56 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import HomeIcon from './HomeIcon';
+import { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { signOut } from "next-auth/react";
+import HomeIcon from "./HomeIcon";
+import NavMenu from "./NavMenu";
 
 export default function ButtonAppBar() {
-    const { data: session, status } = useSession();
-    const loading = status === 'loading';
+	const [navMenuOpen, setNavMenuOpen] = useState(false);
 
-    const signInUser = () => {
-        signIn('cognito', {
-            callbackUrl: `${window.location.origin}/equines`
-        });
-    };
+	const openNavMenu = () => {
+		setNavMenuOpen(true);
+	};
 
-    const signOutUser = () => {
-        signOut({
-            callbackUrl: `${window.location.origin}/`
-        });
-    };
+	const closeNavMenu = () => {
+		setNavMenuOpen(false);
+	};
 
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar sx={{
-                    flexDirection: "row",
-                    justifyContent: "center"
-                }}>
-                    <MenuIcon sx={{ height: '2.1rem', width: '2.1rem', display: "none"}}/>
-                    <IconButton
-                        size="small"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                    >
-                        <HomeIcon />
-                    </IconButton>
+	const navMenuWidth = 250;
 
-                    {/* {!session && (
-                        <Button color="inherit" onClick={signInUser}>
-                            Login
-                        </Button>
-                    )}
-                    {session && (
-                        <Button color="inherit" onClick={signOutUser}>
-                            Sign Out
-                        </Button>
-                    )} */}
-                </Toolbar>
-            </AppBar>
-        </Box>
-    );
+	const signOutUser = () => {
+		signOut({
+			callbackUrl: `${window.location.origin}/`,
+		});
+	};
+
+	return (
+		<Box sx={{ flexGrow: 1 }}>
+			<AppBar position="static">
+				<Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+					<IconButton size="small" color="inherit" aria-label="home">
+						<HomeIcon />
+					</IconButton>
+					<IconButton color="inherit" aria-label="open navigation menu">
+						<MenuIcon
+							sx={{
+								height: "2.1rem",
+								width: "2.1rem",
+								...(navMenuOpen && { display: "none" }),
+							}}
+							onClick={openNavMenu}
+						/>
+					</IconButton>
+				</Toolbar>
+			</AppBar>
+			<NavMenu
+				drawerWidth={navMenuWidth}
+				open={navMenuOpen}
+				collapse={() => closeNavMenu()}
+			/>
+		</Box>
+	);
 }

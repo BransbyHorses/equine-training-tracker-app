@@ -37,7 +37,7 @@ const NewProgramme: React.FC<MyComponentProps> = props => {
         .then(response => {
             response.json(); 
         })
-        .then(data => props.router.push('/programmes'))
+        .then(data => props.router.push('/training-programmes'))
         .catch(rejected => {
             console.log(rejected);
         });
@@ -73,7 +73,7 @@ const NewProgramme: React.FC<MyComponentProps> = props => {
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/programmes">
+                    <Link href="/training-programmes">
                         <Typography>Go back to Programmes</Typography>
                     </Link>
                 </Button>

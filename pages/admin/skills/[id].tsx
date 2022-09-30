@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LinkButton from '../../components/LinkButton';
+import LinkButton from '../../../components/LinkButton';
 
 interface WithRouterProps {
     router: NextRouter
@@ -11,32 +11,32 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const YardId: React.FC<MyComponentProps> = (props) => {
-    interface MyYard {
+const SkillId: React.FC<MyComponentProps> = (props) => {
+    interface MySkill {
         id: number,
         name: string
       }
-    const [yard, setYard] = useState<MyYard>({
+    const [skill, setSkill] = useState<MySkill>({
         id: 0,
         name: ""
       });
 
     const router = useRouter();
 
-    const getYardFromId = async () => {
-        const yardId = await router.query.id;
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards/${yardId}`)
+    const getSkillFromId = async () => {
+        const skillId = await router.query.id;
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills/${skillId}`)
             .then(response => response.json())
-            .then(data => setYard(data))
+            .then(data => setSkill(data))
             .catch(rejected => {
                 console.log(rejected);
             });
     }
 
-    const deleteYardForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards/${yard.id}`, {method: 'DELETE'} )
+    const deleteSkillForever = async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills/${skill.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/yards')
+            props.router.push('/skills')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -44,7 +44,7 @@ const YardId: React.FC<MyComponentProps> = (props) => {
     }
 
     useEffect(() => {
-        getYardFromId();
+        getSkillFromId();
     }, []);
     
 
@@ -67,28 +67,28 @@ const YardId: React.FC<MyComponentProps> = (props) => {
                         gutterBottom
                         sx={{ my: '1rem', mx: '1rem' }}
                     >
-                        Name: {yard.name}
+                        Name: {skill.name}
                     </Typography>
                 </Card>
 
                 <Button
                     variant="outlined"
                     sx={{ my: '1rem' }}
-                    onClick={deleteYardForever}
+                    onClick={deleteSkillForever}
                 >
                     <DeleteForeverIcon />
                 </Button>
 
                 <LinkButton
-                    buttonHref="/yards"
+                    buttonHref="/skills"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to Yards"
+                    action="Go back to Skills"
                 />
             </Box>
         </Container>
     );
 };
 
-export default withRouter(YardId);
+export default withRouter(SkillId);

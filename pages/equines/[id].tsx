@@ -17,6 +17,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { findLatestTrainingProgramme } from "../../utils/helpers";
+import { TrainingProgramme } from "../../utils/types";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -47,6 +49,9 @@ const EquineProfile = () => {
 		);
 	}
 
+	const currentTrainingProgramme: TrainingProgramme =
+		findLatestTrainingProgramme(equine?.trainingProgrammes || []);
+
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">
@@ -69,14 +74,15 @@ const EquineProfile = () => {
 						<Grid xs={12} md={6}>
 							<Item>
 								<Typography variant="h6">Training Programme</Typography>
-								{equine && equine.trainingProgrammes}
-								{/* {!equine ? (
-									<Typography>{equine?.yard.name}</Typography>
+								{equine && currentTrainingProgramme ? (
+									<Typography>
+										{currentTrainingProgramme.trainingCategory.name}
+									</Typography>
 								) : (
 									<Typography>
-										<em>{equine?.name} is not in training.</em>
+										<em>{equine?.name} is currently not in training</em>
 									</Typography>
-								)} */}
+								)}
 							</Item>
 						</Grid>
 						<Grid xs={12} md={6}>
@@ -150,7 +156,7 @@ const EquineProfile = () => {
 									alignItems: "center",
 								}}
 							>
-								<Typography variant="h6">ViewTraining Programme</Typography>
+								<Typography variant="h6">View Training Programme</Typography>
 								<ArrowRightIcon fontSize="large" />
 							</Box>
 						</Paper>

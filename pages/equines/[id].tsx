@@ -4,13 +4,21 @@ import { useRouter } from "next/router";
 import { useEquine } from "../../utils/hooks/equine";
 
 import { Box } from "@mui/system";
-import { Alert, Breadcrumbs, Link, Typography, Paper } from "@mui/material";
+import {
+	Alert,
+	Breadcrumbs,
+	Link,
+	Typography,
+	Paper,
+	Grid,
+	styled,
+} from "@mui/material";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 const EquineProfile = () => {
 	const router = useRouter();
-	const { id: urlId } = router.query;
-	const { fetchingData, equine, error, notFound } = useEquine(urlId);
+	const { id: equineId } = router.query;
+	const { fetchingData, equine, error, notFound } = useEquine(equineId);
 
 	if (fetchingData) {
 		return (
@@ -32,17 +40,80 @@ const EquineProfile = () => {
 		);
 	}
 
+	const Item = styled(Box)(({ theme }) => ({
+		padding: theme.spacing(1.5),
+	}));
+
 	return (
 		<>
-			<Breadcrumbs aria-label="breadcrumb" mb={3}>
+			<Breadcrumbs aria-label="breadcrumb">
 				<Link underline="hover" color="inherit" href="/">
 					Equines
 				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
 			<Paper>
-				<Box p={3}>
+				<Box
+					p={1}
+					mt={2}
+					color="common.white"
+					sx={{ backgroundColor: "primary.light" }}
+				>
 					<Typography variant="h4">{equine?.name}</Typography>
+				</Box>
+				<Box py={1} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
+					<Grid container sx={{ backgroundColor: "common.white" }}>
+						<Grid xs={12} md={6}>
+							<Item>
+								<Typography variant="h6">Current Training Programme</Typography>
+								{/* {!equine ? (
+									<Typography>{equine?.yard.name}</Typography>
+								) : (
+									<Typography>
+										<em>{equine?.name} is not in training.</em>
+									</Typography>
+								)} */}
+							</Item>
+						</Grid>
+						<Grid xs={12} md={6}>
+							<Item>
+								<Typography variant="h6">
+									Current Yard
+									{equine && equine.yard ? (
+										<Typography>{equine.yard.name}</Typography>
+									) : (
+										<Typography>
+											<em>Not defined</em>
+										</Typography>
+									)}
+								</Typography>
+							</Item>
+						</Grid>
+						<Grid xs={12} md={6}>
+							<Item>
+								<Typography variant="h6">Status</Typography>
+								{equine && equine.equineStatus ? (
+									<Typography>{equine.equineStatus.name}</Typography>
+								) : (
+									<Typography>
+										<em>No defined</em>
+									</Typography>
+								)}
+							</Item>
+						</Grid>
+						<Grid xs={12} md={6}>
+							<Item>
+								<Typography variant="h6">Type of learner</Typography>
+								{equine && equine.learnerType ? (
+									<Typography>{equine.learnerType.name}</Typography>
+								) : (
+									<Typography>
+										<em>Not defined</em>
+									</Typography>
+								)}
+							</Item>
+						</Grid>
+					</Grid>
 				</Box>
 			</Paper>
 		</>

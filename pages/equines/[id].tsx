@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { findLatestTrainingProgramme } from "../../utils/helpers";
@@ -79,24 +80,18 @@ const EquineProfile = () => {
 										{currentTrainingProgramme.trainingCategory.name}
 									</Typography>
 								) : (
-									<Typography>
-										<em>{equine?.name} is currently not in training</em>
-									</Typography>
+									<MoreHorizIcon sx={{ color: "gray" }} />
 								)}
 							</Item>
 						</Grid>
 						<Grid xs={12} md={6}>
 							<Item>
-								<Typography variant="h6">
-									Current Yard
-									{equine && equine.yard ? (
-										<Typography>{equine.yard.name}</Typography>
-									) : (
-										<Typography>
-											<em>Not defined</em>
-										</Typography>
-									)}
-								</Typography>
+								<Typography variant="h6">Current Yard</Typography>
+								{equine && equine.yard ? (
+									<Typography>{equine.yard.name}</Typography>
+								) : (
+									<MoreHorizIcon sx={{ color: "gray" }} />
+								)}
 							</Item>
 						</Grid>
 						<Grid xs={12} md={6}>
@@ -105,9 +100,7 @@ const EquineProfile = () => {
 								{equine && equine.equineStatus ? (
 									<Typography>{equine.equineStatus.name}</Typography>
 								) : (
-									<Typography>
-										<em>No defined</em>
-									</Typography>
+									<MoreHorizIcon sx={{ color: "gray" }} />
 								)}
 							</Item>
 						</Grid>
@@ -117,9 +110,7 @@ const EquineProfile = () => {
 								{equine && equine.learnerType ? (
 									<Typography>{equine.learnerType.name}</Typography>
 								) : (
-									<Typography>
-										<em>Not defined</em>
-									</Typography>
+									<MoreHorizIcon sx={{ color: "gray" }} />
 								)}
 							</Item>
 						</Grid>
@@ -127,74 +118,72 @@ const EquineProfile = () => {
 				</Box>
 			</Paper>
 			<hr style={{ margin: "20px 0" }} />
-			<Box mt={2}>
-				<Grid container rowSpacing={3} columnSpacing={2}>
-					<Grid item xs={12} sm={6}>
-						<Paper>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<Typography variant="h6">Log Training</Typography>
-								<AddCircleIcon fontSize="large" />
-							</Box>
-						</Paper>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Paper>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<Typography variant="h6">View Training Programme</Typography>
-								<ArrowRightIcon fontSize="large" />
-							</Box>
-						</Paper>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Paper>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<Typography variant="h6">Training History</Typography>
-								<ArrowRightIcon fontSize="large" />
-							</Box>
-						</Paper>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Paper>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<Typography variant="h6">Update Details</Typography>
-								<ArrowRightIcon fontSize="large" />
-							</Box>
-						</Paper>
-					</Grid>
+			<Grid container rowSpacing={3} columnSpacing={2}>
+				<Grid item xs={12} sm={6}>
+					<Paper>
+						<Box
+							px={2}
+							py={2}
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}
+						>
+							<Typography variant="h6">Log Training</Typography>
+							<AddCircleIcon fontSize="large" />
+						</Box>
+					</Paper>
 				</Grid>
-			</Box>
+				<Grid item xs={12} sm={6}>
+					<Paper>
+						<Box
+							px={2}
+							py={2}
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}
+						>
+							<Typography variant="h6">View Training Programme</Typography>
+							<ArrowRightIcon fontSize="large" />
+						</Box>
+					</Paper>
+				</Grid>
+				<Grid item xs={12} sm={6}>
+					<Paper>
+						<Box
+							px={2}
+							py={2}
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}
+						>
+							<Typography variant="h6">Training History</Typography>
+							<ArrowRightIcon fontSize="large" />
+						</Box>
+					</Paper>
+				</Grid>
+				<Grid item xs={12} sm={6}>
+					<Paper>
+						<Box
+							px={2}
+							py={2}
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}
+						>
+							<Typography variant="h6">Update Details</Typography>
+							<ArrowRightIcon fontSize="large" />
+						</Box>
+					</Paper>
+				</Grid>
+			</Grid>
 		</>
 	);
 };

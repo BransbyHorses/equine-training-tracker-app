@@ -23,8 +23,17 @@ import { TrainingProgramme } from "../../utils/types";
 
 const EquineProfile = () => {
 	const router = useRouter();
-	const { id: equineId } = router.query;
-	const { fetchingData, equine, error, notFound } = useEquine(equineId);
+	const [equineId, setEquineId] = useState(undefined);
+	const { fetchingData, equine, error, notFound } = useEquine(
+		equineId,
+		router.isReady
+	);
+
+	useEffect(() => {
+		if (router.isReady) {
+			setEquineId(router.query.id);
+		}
+	}, [router.isReady]);
 
 	const Item = styled(Box)(({ theme }) => ({
 		padding: theme.spacing(1.5),

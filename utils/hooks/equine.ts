@@ -33,7 +33,8 @@ export const useEquines = (): {
 };
 
 export const useEquine = (
-	id: number
+	id: number,
+	routerReady: boolean
 ): {
 	fetchingData: boolean;
 	equine: Equine | undefined;
@@ -46,22 +47,26 @@ export const useEquine = (
 	const [notFound, setNotFound] = useState(false);
 
 	useEffect(() => {
-		setFetchingData(true);
-		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}data/equines/${id}`)
-			.then(({ data }) => {
-				setEquine(data);
-				setFetchingData(false);
-			})
-			.catch((err) => {
-				setFetchingData(false);
-				const { status } = err.response;
-				setError(true);
-				if (status === 404) {
-					setNotFound(true);
-				}
-			});
-	}, []);
+		if (routerReady) {
+			setFetchingData(true);
+			axios
+				.get(`${process.env.NEXT_PUBLIC_URL}data/equines/${id}`)
+				.then(({ data }) => {
+					setEquine(data);
+					setFetchingData(false);
+				})
+				.catch((err) => {
+					setFetchingData(false);
+					const { status } = err.response;
+					setError(true);
+					if (status === 404) {
+						setNotFound(true);
+					}
+				});
+		} else {
+			setFetchingData(true);
+		}
+	}, [routerReady, id]);
 
 	return {
 		fetchingData,

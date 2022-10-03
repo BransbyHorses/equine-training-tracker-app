@@ -12,7 +12,11 @@ import {
 	Paper,
 	Grid,
 	styled,
+	Divider,
 } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 const EquineProfile = () => {
@@ -116,6 +120,75 @@ const EquineProfile = () => {
 					</Grid>
 				</Box>
 			</Paper>
+			<hr style={{ margin: "20px 0" }} />
+			<Box mt={2}>
+				<Grid container rowSpacing={3} columnSpacing={2}>
+					<Grid item xs={12} sm={6}>
+						<Paper>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Typography variant="h6">Log Training</Typography>
+								<AddCircleIcon fontSize="large" />
+							</Box>
+						</Paper>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<Paper>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Typography variant="h6">Training Programme</Typography>
+								<ArrowRightIcon fontSize="large" />
+							</Box>
+						</Paper>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<Paper>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Typography variant="h6">Training History</Typography>
+								<ArrowRightIcon fontSize="large" />
+							</Box>
+						</Paper>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<Paper>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Typography variant="h6">Update Details</Typography>
+								<ArrowRightIcon fontSize="large" />
+							</Box>
+						</Paper>
+					</Grid>
+				</Grid>
+			</Box>
 		</>
 	);
 };

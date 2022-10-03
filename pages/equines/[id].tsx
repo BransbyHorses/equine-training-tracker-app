@@ -237,7 +237,7 @@ const EquineProfile = () => {
 								alignItems: "center",
 							}}
 						>
-							<Typography variant="h6">Training History</Typography>
+							<Typography variant="h6">Training History ({equine?.trainingProgrammes.length})</Typography>
 							<ArrowRightIcon fontSize="large" />
 						</Box>
 					</Paper>

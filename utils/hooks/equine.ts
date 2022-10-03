@@ -33,8 +33,8 @@ export const useEquines = (): {
 };
 
 export const useEquine = (
-	id: number,
-	routerReady: boolean
+	routerReady: boolean,
+	id?: string
 ): {
 	fetchingData: boolean;
 	equine: Equine | undefined;

@@ -12,7 +12,6 @@ import {
 	Paper,
 	Grid,
 	styled,
-	Divider,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -23,6 +22,10 @@ const EquineProfile = () => {
 	const router = useRouter();
 	const { id: equineId } = router.query;
 	const { fetchingData, equine, error, notFound } = useEquine(equineId);
+
+	const Item = styled(Box)(({ theme }) => ({
+		padding: theme.spacing(1.5),
+	}));
 
 	if (fetchingData) {
 		return (
@@ -43,10 +46,6 @@ const EquineProfile = () => {
 			</Box>
 		);
 	}
-
-	const Item = styled(Box)(({ theme }) => ({
-		padding: theme.spacing(1.5),
-	}));
 
 	return (
 		<>
@@ -69,7 +68,8 @@ const EquineProfile = () => {
 					<Grid container sx={{ backgroundColor: "common.white" }}>
 						<Grid xs={12} md={6}>
 							<Item>
-								<Typography variant="h6">Current Training Programme</Typography>
+								<Typography variant="h6">Training Programme</Typography>
+								{equine && equine.trainingProgrammes}
 								{/* {!equine ? (
 									<Typography>{equine?.yard.name}</Typography>
 								) : (
@@ -150,7 +150,7 @@ const EquineProfile = () => {
 									alignItems: "center",
 								}}
 							>
-								<Typography variant="h6">Training Programme</Typography>
+								<Typography variant="h6">ViewTraining Programme</Typography>
 								<ArrowRightIcon fontSize="large" />
 							</Box>
 						</Paper>

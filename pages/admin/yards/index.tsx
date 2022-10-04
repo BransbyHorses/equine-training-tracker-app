@@ -54,7 +54,7 @@ export default function Yards() {
 							return (
 								<Grid item xs={2} sm={4} md={4} key={yard.id}>
 									<EntityCard
-										link={`admin/yards/${yard.id}`}
+										link={`yards/${yard.id}`}
 										title={yard.name}
 									/>
 								</Grid>

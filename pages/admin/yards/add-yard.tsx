@@ -33,7 +33,7 @@ const NewYard: React.FC<MyComponentProps> = props =>{
         .then(response => {
             response.json(); 
         })
-        .then(data => props.router.push('/yards'))
+        .then(data => props.router.push('/admin/yards'))
         .catch(rejected => {
             console.log(rejected);
         });
@@ -69,7 +69,7 @@ const NewYard: React.FC<MyComponentProps> = props =>{
             </div>
             <div>
                 <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/yards">
+                    <Link href="/admin/yards">
                         <Typography>Go back to Yards</Typography>
                     </Link>
                 </Button>

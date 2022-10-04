@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { useEquine } from "../../utils/hooks/equine";
+import { useEquine } from "../../../utils/hooks/equine";
 
 import { Box } from "@mui/system";
 import {
@@ -22,9 +22,9 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import LoadingSpinner from "../../components/LoadingSpinner";
-import { findLatestTrainingProgramme } from "../../utils/helpers";
-import { TrainingProgramme } from "../../utils/types";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+import { findLatestTrainingProgramme } from "../../../utils/helpers";
+import { TrainingProgramme } from "../../../utils/types";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -37,7 +37,7 @@ const EquineProfile = () => {
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEquineId(router.query.id);
+			setEquineId(router.query.equineId);
 		}
 	}, [router.isReady]);
 
@@ -76,7 +76,10 @@ const EquineProfile = () => {
 				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
-			<Accordion expanded={showEquineData} onChange={() => setShowEquineData(!showEquineData)}>
+			<Accordion
+				expanded={showEquineData}
+				onChange={() => setShowEquineData(!showEquineData)}
+			>
 				<Box
 					mt={2}
 					color="common.white"
@@ -237,7 +240,9 @@ const EquineProfile = () => {
 								alignItems: "center",
 							}}
 						>
-							<Typography variant="h6">Training History ({equine?.trainingProgrammes.length})</Typography>
+							<Typography variant="h6">
+								Training History ({equine?.trainingProgrammes.length})
+							</Typography>
 							<ArrowRightIcon fontSize="large" />
 						</Box>
 					</Paper>

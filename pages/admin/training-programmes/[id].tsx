@@ -36,7 +36,7 @@ const ProgrammeId: React.FC<MyComponentProps> = (props) => {
     const deleteProgrammeForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes/${programme.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/programmes')
+            props.router.push("/admin/programmes");
         })
         .catch(rejected => {
             console.log(rejected);
@@ -49,46 +49,44 @@ const ProgrammeId: React.FC<MyComponentProps> = (props) => {
     
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Name: {programme.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							Name: {programme.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteProgrammeForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteProgrammeForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <LinkButton
-                    buttonHref="/programmes"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Go back to Programmes"
-                />
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						buttonHref="/admin/programmes"
+						variant="contained"
+						size="Large"
+						color="white"
+						action="Go back to Programmes"
+					/>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(ProgrammeId);

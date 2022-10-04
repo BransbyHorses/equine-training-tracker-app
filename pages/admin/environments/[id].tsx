@@ -49,46 +49,42 @@ const EnvironmentId: React.FC<MyComponentProps> = (props) => {
     
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Environment: {environment.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							Environment: {environment.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteEnvironmentForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteEnvironmentForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <Link href="/environments">
-                    <Button variant="outlined" sx={{ my: '1rem' }}>
-                        <Typography color="prima">
-                            Go back to Environments
-                        </Typography>
-                    </Button>
-                </Link>
-            </Box>
-        </Container>
-    );
+					<Link href="/admin/environments">
+						<Button variant="outlined" sx={{ my: "1rem" }}>
+							<Typography color="prima">Go back to Environments</Typography>
+						</Button>
+					</Link>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(EnvironmentId);

@@ -49,46 +49,44 @@ const YardId: React.FC<MyComponentProps> = (props) => {
     
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Name: {yard.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							Name: {yard.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteYardForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteYardForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <LinkButton
-                    buttonHref="/yards"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Go back to Yards"
-                />
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						buttonHref="/admin/yards"
+						variant="contained"
+						size="Large"
+						color="white"
+						action="Go back to Yards"
+					/>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(YardId);

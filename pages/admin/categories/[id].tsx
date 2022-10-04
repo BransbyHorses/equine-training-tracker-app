@@ -36,7 +36,7 @@ const CategoryId: React.FC<MyComponentProps> = (props) => {
     const deleteCategoryForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${category.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/categories')
+            props.router.push("/admin/categories");
         })
         .catch(rejected => {
             console.log(rejected);
@@ -80,7 +80,7 @@ const CategoryId: React.FC<MyComponentProps> = (props) => {
                 </Button>
 
                 <LinkButton
-                    buttonHref="/categories"
+                    buttonHref="/admin/categories"
                     variant="contained"
                     size="Large"
                     color="white"

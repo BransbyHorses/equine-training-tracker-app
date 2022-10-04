@@ -36,7 +36,7 @@ const SkillId: React.FC<MyComponentProps> = (props) => {
     const deleteSkillForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills/${skill.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/skills')
+            props.router.push("/admin/skills");
         })
         .catch(rejected => {
             console.log(rejected);
@@ -49,46 +49,44 @@ const SkillId: React.FC<MyComponentProps> = (props) => {
     
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Name: {skill.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							Name: {skill.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteSkillForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteSkillForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <LinkButton
-                    buttonHref="/skills"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Go back to Skills"
-                />
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						buttonHref="/admin/skills"
+						variant="contained"
+						size="Large"
+						color="white"
+						action="Go back to Skills"
+					/>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(SkillId);

@@ -36,7 +36,7 @@ const DisruptionId: React.FC<MyComponentProps> = (props) => {
     const deleteDisruptionForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/disruptions/${disruption.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/disruptions')
+            props.router.push("/admin/disruptions");
         })
         .catch(rejected => {
             console.log(rejected);
@@ -49,46 +49,44 @@ const DisruptionId: React.FC<MyComponentProps> = (props) => {
     
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Name: {disruption.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							Name: {disruption.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteDisruptionForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteDisruptionForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <LinkButton
-                    buttonHref="/disruptions"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Go back to Disruptions"
-                />
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						buttonHref="/admin/disruptions"
+						variant="contained"
+						size="Large"
+						color="white"
+						action="Go back to Disruptions"
+					/>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(DisruptionId);

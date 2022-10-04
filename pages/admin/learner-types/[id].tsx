@@ -49,7 +49,7 @@ const LearnerTypeId: React.FC<MyComponentProps> = props => {
             { method: 'DELETE' }
         )
             .then(() => {
-                router.push('/learner-types');
+                router.push("/admin/learner-types");
             })
             .catch(rejected => {
                 console.log(rejected);
@@ -61,53 +61,48 @@ const LearnerTypeId: React.FC<MyComponentProps> = props => {
     }, []);
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <PageTitle
-                    title={learnerType.name}
-                    sx={{ justifySelf: 'start' }}
-                />
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                ></Card>
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        LearnerType: {learnerType.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<PageTitle title={learnerType.name} sx={{ justifySelf: "start" }} />
+					<Card
+						sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}
+					></Card>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							LearnerType: {learnerType.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteLearnerTypeForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteLearnerTypeForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <LinkButton
-                    buttonHref="/learner-types"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Go back to learner types"
-                />
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						buttonHref="/admin/learner-types"
+						variant="contained"
+						size="Large"
+						color="white"
+						action="Go back to learner types"
+					/>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(LearnerTypeId);

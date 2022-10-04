@@ -21,6 +21,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
+import { findLatestTrainingProgramme } from "../utils/helpers";
+import { MemoizedCurrentTrainingProgramme } from "../components/CurrentTrainingProgramme";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
@@ -40,6 +42,10 @@ export default function Home() {
 
 	const mapEquineRows = (equineArray: Equine[]) => {
 		return equineArray.map((equine) => {
+			const currentTrainingProgramme = findLatestTrainingProgramme(
+				equine.trainingProgrammes
+			);
+
 			return (
 				<TableRow
 					key={equine.id}
@@ -49,17 +55,23 @@ export default function Home() {
 						<Link href={`/equines/${equine.id}`}>{equine.name}</Link>
 					</TableCell>
 					<TableCell component="th" scope="row">
-						{equine.equineStatus ? equine.equineStatus.name : <MoreHorizIcon />}
-					</TableCell>
-					<TableCell component="th" scope="row">
-						{equine.yard ? equine.yard.name : <MoreHorizIcon />}
-					</TableCell>
-					<TableCell component="th" scope="row">
-						{equine.trainingProgrammes.length === 0 ? (
-							<MoreHorizIcon />
+						{equine.equineStatus ? (
+							equine.equineStatus.name
 						) : (
-							<Link href="">View</Link>
+							<MoreHorizIcon sx={{ color: "gray" }} />
 						)}
+					</TableCell>
+					<TableCell component="th" scope="row">
+						{equine.yard ? (
+							equine.yard.name
+						) : (
+							<MoreHorizIcon sx={{ color: "gray" }} />
+						)}
+					</TableCell>
+					<TableCell component="th" scope="row">
+						<MemoizedCurrentTrainingProgramme
+							trainingProgrammes={equine.trainingProgrammes}
+						/>
 					</TableCell>
 				</TableRow>
 			);

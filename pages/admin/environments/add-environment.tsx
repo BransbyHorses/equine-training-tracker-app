@@ -43,37 +43,37 @@ const AddEnvironments: React.FC<MyComponentProps> = (props) => {
     }
     
     return (
-        <Container>
-            <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add an Environment
-            </Typography>
-            <div>
-                <form onSubmit={submitEnvironment}>
-                <Grid container direction="column" >
-                    <TextField
-                        id="name"
-                        label="Name"
-                        variant="outlined"
-                        color="secondary"
-                        name="name"
-                        onChange={handleChange}
-                        required
-                        sx={{my: "1rem"}}
-                    />
-                    <Button variant="contained" type='submit'>
-                        Submit
-                    </Button>
-                    </Grid>
-                </form>
-            </div>
-            <div>
-                <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/environments">
-                        <Typography>Go back to Environment</Typography>
-                    </Link>
-                </Button>
-            </div>
-        </Container>
-    );
+			<Container>
+				<Typography variant="h5" color="textSecondary" gutterBottom>
+					Add an Environment
+				</Typography>
+				<div>
+					<form onSubmit={submitEnvironment}>
+						<Grid container direction="column">
+							<TextField
+								id="name"
+								label="Name"
+								variant="outlined"
+								color="secondary"
+								name="name"
+								onChange={handleChange}
+								required
+								sx={{ my: "1rem" }}
+							/>
+							<Button variant="contained" type="submit">
+								Submit
+							</Button>
+						</Grid>
+					</form>
+				</div>
+				<div>
+					<Button variant="outlined" sx={{ my: "1rem" }}>
+						<Link href="/admin/environments">
+							<Typography>Go back to Environment</Typography>
+						</Link>
+					</Button>
+				</div>
+			</Container>
+		);
 };
 export default withRouter(AddEnvironments);

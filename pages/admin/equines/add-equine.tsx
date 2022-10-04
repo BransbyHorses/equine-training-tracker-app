@@ -75,17 +75,17 @@ const NewEquine: React.FC<MyComponentProps> = props => {
           }
           
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(equineToPost)
-        })
-            .then(response => response.json())
-            .then(data => props.router.push(`/equines/${data.id}`))
-            .catch((rejected: any) => {
-                console.log(rejected);
-            });
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(equineToPost),
+				})
+					.then((response) => response.json())
+					.then((data) => props.router.push(`/admin/equines/${data.id}`))
+					.catch((rejected: any) => {
+						console.log(rejected);
+					});
     };
 
     const handleChange = (e: any) => {
@@ -213,7 +213,7 @@ const NewEquine: React.FC<MyComponentProps> = props => {
             </div>
             <div>
                 <Button variant="outlined" sx={{ my: '1rem' }}>
-                    <Link href="/dashboard/admin">
+                    <Link href="/admin">
                         <Typography>Go back to Dashboard</Typography>
                     </Link>
                 </Button>

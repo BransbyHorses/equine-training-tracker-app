@@ -27,20 +27,20 @@ const NewProgramme: React.FC<MyComponentProps> = props => {
             id: 0,
             name: newProgramme.name
         }
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify(programmeToPost)
-        })
-        .then(response => {
-            response.json(); 
-        })
-        .then(data => props.router.push('/training-programmes'))
-        .catch(rejected => {
-            console.log(rejected);
-        });
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(programmeToPost),
+				})
+					.then((response) => {
+						response.json();
+					})
+					.then((data) => props.router.push("/admin/training-programmes"))
+					.catch((rejected) => {
+						console.log(rejected);
+					});
     };
 
     const handleChange = (e: any) => {
@@ -48,37 +48,37 @@ const NewProgramme: React.FC<MyComponentProps> = props => {
     }
 
     return (
-        <Container>
-            <Typography variant="h5" color="textSecondary" gutterBottom>
-                Add a Programme
-            </Typography>
-            <div>
-                <form onSubmit={submitProgramme}>
-                <Grid container direction="column" >
-                    <TextField
-                        id="name"
-                        label="Name"
-                        variant="outlined"
-                        color="secondary"
-                        name="name"
-                        onChange={handleChange}
-                        required
-                        sx={{my: "1rem"}}
-                    />
-                    <Button variant="contained" type='submit'>
-                        Submit
-                    </Button>
-                    </Grid>
-                </form>
-            </div>
-            <div>
-                <Button variant="outlined" sx={{my: "1rem"}}>
-                    <Link href="/training-programmes">
-                        <Typography>Go back to Programmes</Typography>
-                    </Link>
-                </Button>
-            </div>
-        </Container>
-    );
+			<Container>
+				<Typography variant="h5" color="textSecondary" gutterBottom>
+					Add a Programme
+				</Typography>
+				<div>
+					<form onSubmit={submitProgramme}>
+						<Grid container direction="column">
+							<TextField
+								id="name"
+								label="Name"
+								variant="outlined"
+								color="secondary"
+								name="name"
+								onChange={handleChange}
+								required
+								sx={{ my: "1rem" }}
+							/>
+							<Button variant="contained" type="submit">
+								Submit
+							</Button>
+						</Grid>
+					</form>
+				</div>
+				<div>
+					<Button variant="outlined" sx={{ my: "1rem" }}>
+						<Link href="/admin/training-programmes">
+							<Typography>Go back to Programmes</Typography>
+						</Link>
+					</Button>
+				</div>
+			</Container>
+		);
 };
 export default withRouter(NewProgramme);

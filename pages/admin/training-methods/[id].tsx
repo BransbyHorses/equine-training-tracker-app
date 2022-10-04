@@ -36,7 +36,7 @@ const TrainingMethodId: React.FC<MyComponentProps> = (props) => {
     const deleteTrainingMethodForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods/${trainingMethod.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/training-methods')
+            props.router.push("/admin/training-methods");
         })
         .catch(rejected => {
             console.log(rejected);
@@ -49,46 +49,44 @@ const TrainingMethodId: React.FC<MyComponentProps> = (props) => {
     
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
-                    sx={{ my: '1rem', cursor: 'pointer', borderRadius: '20px' }}
-                >
-                    <Typography
-                        variant="h5"
-                        color="#616161"
-                        gutterBottom
-                        sx={{ my: '1rem', mx: '1rem' }}
-                    >
-                        Name: {trainingMethod.name}
-                    </Typography>
-                </Card>
+			<Container>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+						alignItems: "center",
+					}}
+				>
+					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
+						<Typography
+							variant="h5"
+							color="#616161"
+							gutterBottom
+							sx={{ my: "1rem", mx: "1rem" }}
+						>
+							Name: {trainingMethod.name}
+						</Typography>
+					</Card>
 
-                <Button
-                    variant="outlined"
-                    sx={{ my: '1rem' }}
-                    onClick={deleteTrainingMethodForever}
-                >
-                    <DeleteForeverIcon />
-                </Button>
+					<Button
+						variant="outlined"
+						sx={{ my: "1rem" }}
+						onClick={deleteTrainingMethodForever}
+					>
+						<DeleteForeverIcon />
+					</Button>
 
-                <LinkButton
-                    buttonHref="/training-methods"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Go back to TrainingMethods"
-                />
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						buttonHref="/admin/training-methods"
+						variant="contained"
+						size="Large"
+						color="white"
+						action="Go back to TrainingMethods"
+					/>
+				</Box>
+			</Container>
+		);
 };
 
 export default withRouter(TrainingMethodId);

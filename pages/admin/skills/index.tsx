@@ -29,51 +29,51 @@ export default function Skills() {
     }, []);
 
     return (
-        <Container>
-            <PageTitle title={'Skills'} />
-            <AutoCompleteBox
-                options={skills.map(skill => ({
-                    optionName: skill.name,
-                    optionId: skill.id
-                }))}
-                label="Search for a skill"
-                linkName={'skills'}
-            />
+			<Container>
+				<PageTitle title={"Skills"} />
+				<AutoCompleteBox
+					options={skills.map((skill) => ({
+						optionName: skill.name,
+						optionId: skill.id,
+					}))}
+					label="Search for a skill"
+					linkName={"skills"}
+				/>
 
-            {skills.length > 0 ? (
-                <ListGrid listItems={skills} listUrl={'skills'}/>
-            ) : (
-                <Typography
-                    variant="h5"
-                    color="#616161"
-                    gutterBottom
-                    sx={{ my: '1rem', mx: '1rem' }}
-                >
-                    No skills here...☹️...yet!
-                </Typography>
-            )}
+				{skills.length > 0 ? (
+					<ListGrid listItems={skills} listUrl={"skills"} />
+				) : (
+					<Typography
+						variant="h5"
+						color="#616161"
+						gutterBottom
+						sx={{ my: "1rem", mx: "1rem" }}
+					>
+						No skills here...☹️...yet!
+					</Typography>
+				)}
 
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around'
-                }}
-            >
-                <LinkButton
-                    color="lightBlue[50]"
-                    variant="contained"
-                    buttonHref="/skills/add-skill"
-                    buttonTitle="Create new skill"
-                ></LinkButton>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-around",
+					}}
+				>
+					<LinkButton
+						color="lightBlue[50]"
+						variant="contained"
+						buttonHref="/admin/skills/add-skill"
+						buttonTitle="Create new skill"
+					></LinkButton>
 
-                <LinkButton
-                    color="lightBlue[50]"
-                    variant="contained"
-                    buttonHref="/dashboard/admin"
-                    buttonTitle="Back to Dashboard"
-                ></LinkButton>
-            </Box>
-        </Container>
-    );
+					<LinkButton
+						color="lightBlue[50]"
+						variant="contained"
+						buttonHref="/admin"
+						buttonTitle="Back to Dashboard"
+					></LinkButton>
+				</Box>
+			</Container>
+		);
 }

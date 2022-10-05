@@ -20,6 +20,9 @@ export const useEquines = (): {
 				setEquines(data);
 			})
 			.catch((err) => {
+				console.error(
+					`Failed to fetch equines data. Failed with error message: ${err}.`
+				);
 				setError(true);
 			})
 			.finally(() => setFetchingData(false));
@@ -62,6 +65,9 @@ export const useEquine = (
 					if (status === 404) {
 						setNotFound(true);
 					}
+					console.error(
+						`Failed to fetch equine data. Failed with error message: ${err}.`
+					);
 				});
 		} else {
 			setFetchingData(true);

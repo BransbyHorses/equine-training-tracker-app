@@ -1,12 +1,12 @@
 import { TrainingProgramme } from "./types";
 
-export const findLatestTrainingProgramme = (
+export const findCurrentTrainingProgramme = (
 	trainingProgrammes: TrainingProgramme[]
 ) => {
 	if (!trainingProgrammes) {
 		return null;
 	}
-	
+
 	const filteredTrainingProgrammes = trainingProgrammes.filter(
 		(t) => !t.endDate
 	);

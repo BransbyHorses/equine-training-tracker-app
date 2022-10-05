@@ -67,9 +67,6 @@ const EquineProfile = () => {
 		);
 	}
 
-	const currentTrainingProgramme: TrainingProgramme =
-		findLatestTrainingProgramme(equine?.trainingProgrammes);
-
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">

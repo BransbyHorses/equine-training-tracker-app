@@ -1,5 +1,5 @@
 import React from "react";
-import { findLatestTrainingProgramme } from "../../../../utils/helpers";
+import { findCurrentTrainingProgramme } from "../../../../utils/helpers";
 import { TrainingProgramme } from "../../../../utils/types";
 
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -7,10 +7,10 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 const CurrentTrainingProgramme = ({
 	trainingProgrammes,
 }: {
-	trainingProgrammes: TrainingProgramme[];
+	trainingProgrammes?: TrainingProgramme[];
 }) => {
 	const currentTrainingProgramme =
-		findLatestTrainingProgramme(trainingProgrammes);
+		findCurrentTrainingProgramme(trainingProgrammes);
 
 	if (!currentTrainingProgramme)
 		return <MoreHorizIcon sx={{ color: "gray" }} />;

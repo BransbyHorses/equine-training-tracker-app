@@ -94,9 +94,11 @@ const EquineProfile = () => {
 							<Grid xs={12} md={6}>
 								<Item>
 									<Typography variant="h6">Training Programme</Typography>
-									<CurrentTrainingProgramme
-										trainingProgrammes={equine?.trainingProgrammes}
-									/>
+									<Typography>
+										<CurrentTrainingProgramme
+											trainingProgrammes={equine?.trainingProgrammes}
+										/>
+									</Typography>
 								</Item>
 							</Grid>
 							<Grid xs={12} md={6}>

@@ -38,6 +38,7 @@ const EquineProfile = () => {
 
 	useEffect(() => {
 		if (router.isReady) {
+			console.log(router.query);
 			setEquineId(router.query.equineId);
 		}
 	}, [router.isReady]);
@@ -67,7 +68,7 @@ const EquineProfile = () => {
 	}
 
 	const currentTrainingProgramme: TrainingProgramme =
-		findLatestTrainingProgramme(equine?.trainingProgrammes || []);
+		findLatestTrainingProgramme(equine?.trainingProgrammes);
 
 	return (
 		<>

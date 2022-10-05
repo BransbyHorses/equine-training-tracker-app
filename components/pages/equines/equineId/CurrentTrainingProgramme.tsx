@@ -1,6 +1,6 @@
 import React from "react";
-import { findLatestTrainingProgramme } from "../utils/helpers";
-import { TrainingProgramme } from "../utils/types";
+import { findLatestTrainingProgramme } from "../../../../utils/helpers";
+import { TrainingProgramme } from "../../../../utils/types";
 
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 

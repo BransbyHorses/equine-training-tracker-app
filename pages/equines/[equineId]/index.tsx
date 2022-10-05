@@ -25,7 +25,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { findLatestTrainingProgramme } from "../../../utils/helpers";
 import { TrainingProgramme } from "../../../utils/types";
-import CurrentTrainingProgramme from "../../../components/CurrentTrainingProgramme";
+import CurrentTrainingProgramme from "../../../components/pages/equines/equineId/CurrentTrainingProgramme";
 
 const EquineProfile = () => {
 	const router = useRouter();

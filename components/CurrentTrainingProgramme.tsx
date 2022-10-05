@@ -4,7 +4,7 @@ import { TrainingProgramme } from "../utils/types";
 
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-export const CurrentTrainingProgramme = ({
+const CurrentTrainingProgramme = ({
 	trainingProgrammes,
 }: {
 	trainingProgrammes: TrainingProgramme[];
@@ -18,6 +18,4 @@ export const CurrentTrainingProgramme = ({
 	return <span>{currentTrainingProgramme.trainingCategory.name}</span>;
 };
 
-export const MemoizedCurrentTrainingProgramme = React.memo(
-	CurrentTrainingProgramme
-);
+export default React.memo(CurrentTrainingProgramme);

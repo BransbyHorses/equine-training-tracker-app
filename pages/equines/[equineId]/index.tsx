@@ -25,6 +25,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { findLatestTrainingProgramme } from "../../../utils/helpers";
 import { TrainingProgramme } from "../../../utils/types";
+import CurrentTrainingProgramme from "../../../components/CurrentTrainingProgramme";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -95,13 +96,9 @@ const EquineProfile = () => {
 							<Grid xs={12} md={6}>
 								<Item>
 									<Typography variant="h6">Training Programme</Typography>
-									{equine && currentTrainingProgramme ? (
-										<Typography>
-											{currentTrainingProgramme.trainingCategory.name}
-										</Typography>
-									) : (
-										<MoreHorizIcon sx={{ color: "gray" }} />
-									)}
+									<CurrentTrainingProgramme
+										trainingProgrammes={equine?.trainingProgrammes}
+									/>
 								</Item>
 							</Grid>
 							<Grid xs={12} md={6}>

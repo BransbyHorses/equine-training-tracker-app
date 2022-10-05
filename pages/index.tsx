@@ -22,7 +22,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
 import { findLatestTrainingProgramme } from "../utils/helpers";
-import { MemoizedCurrentTrainingProgramme } from "../components/CurrentTrainingProgramme";
+import CurrentTrainingProgramme from "../components/CurrentTrainingProgramme";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
@@ -69,7 +69,7 @@ export default function Home() {
 						)}
 					</TableCell>
 					<TableCell component="th" scope="row">
-						<MemoizedCurrentTrainingProgramme
+						<CurrentTrainingProgramme
 							trainingProgrammes={equine.trainingProgrammes}
 						/>
 					</TableCell>

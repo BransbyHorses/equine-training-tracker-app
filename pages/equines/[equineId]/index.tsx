@@ -159,7 +159,7 @@ const EquineProfile = () => {
 						</Grid>
 						<Grid xs={12} md={6}>
 							<Item>
-								<Typography variant="h6">Current Yard</Typography>
+								<Typography variant="h6">Yard</Typography>
 								{equine && equine.yard ? (
 									<Typography>{equine.yard.name}</Typography>
 								) : (

@@ -23,9 +23,8 @@ import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import LoadingSpinner from "../../../components/LoadingSpinner";
-import { findLatestTrainingProgramme } from "../../../utils/helpers";
-import { TrainingProgramme } from "../../../utils/types";
 import CurrentTrainingProgramme from "../../../components/pages/equines/equineId/CurrentTrainingProgramme";
+import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -38,10 +37,11 @@ const EquineProfile = () => {
 
 	useEffect(() => {
 		if (router.isReady) {
-			console.log(router.query);
 			setEquineId(router.query.equineId);
 		}
 	}, [router.isReady]);
+
+	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
 
 	const Item = styled(Box)(({ theme }) => ({
 		padding: theme.spacing(1.5),
@@ -194,6 +194,62 @@ const EquineProfile = () => {
 			</Paper> */}
 			<hr style={{ margin: "20px 0" }} />
 			<Grid container rowSpacing={3} columnSpacing={2}>
+				{isInTraining ? (
+					<>
+						<Grid item xs={12} sm={6}>
+							<Paper>
+								<Box
+									px={2}
+									py={2}
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}
+								>
+									<Typography variant="h6">Log Training</Typography>
+									<AddCircleIcon fontSize="large" />
+								</Box>
+							</Paper>
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<Paper>
+								<Box
+									px={2}
+									py={2}
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}
+								>
+									<Typography variant="h6">View Training Programme</Typography>
+									<ArrowRightIcon fontSize="large" />
+								</Box>
+							</Paper>
+						</Grid>
+					</>
+				) : (
+					<>
+						<Grid item xs={12} sm={6}>
+							<Paper>
+								<Box
+									px={2}
+									py={2}
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}
+								>
+									<Typography variant="h6">New Training Programme</Typography>
+									<ArrowRightIcon fontSize="large" />
+								</Box>
+							</Paper>
+						</Grid>
+					</>
+				)}
+
 				<Grid item xs={12} sm={6}>
 					<Paper>
 						<Box
@@ -205,41 +261,7 @@ const EquineProfile = () => {
 								alignItems: "center",
 							}}
 						>
-							<Typography variant="h6">Log Training</Typography>
-							<AddCircleIcon fontSize="large" />
-						</Box>
-					</Paper>
-				</Grid>
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Typography variant="h6">View Training Programme</Typography>
-							<ArrowRightIcon fontSize="large" />
-						</Box>
-					</Paper>
-				</Grid>
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Typography variant="h6">
-								Training History ({equine?.trainingProgrammes.length})
-							</Typography>
+							<Typography variant="h6">Training History</Typography>
 							<ArrowRightIcon fontSize="large" />
 						</Box>
 					</Paper>

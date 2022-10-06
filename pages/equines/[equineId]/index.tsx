@@ -12,15 +12,11 @@ import {
 	Paper,
 	Grid,
 	styled,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import CurrentTrainingProgramme from "../../../components/pages/equines/equineId/CurrentTrainingProgramme";

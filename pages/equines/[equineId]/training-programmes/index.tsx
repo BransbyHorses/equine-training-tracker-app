@@ -16,7 +16,8 @@ const EquineTrainingProgrammes = () => {
 				>
 					<ArrowLeftIcon /> Back
 				</Link>
-			</Breadcrumbs>
+            </Breadcrumbs>
+            
 		</>
 	);
 };

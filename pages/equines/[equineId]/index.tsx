@@ -29,7 +29,6 @@ const EquineProfile = () => {
 		router.isReady,
 		equineId
 	);
-	const [showEquineData, setShowEquineData] = useState(true);
 
 	useEffect(() => {
 		if (router.isReady) {

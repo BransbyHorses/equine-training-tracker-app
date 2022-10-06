@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { Typography, Container, Grid } from "@mui/material";
-import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
-import LinkButton from "../../../components/LinkButton";
-import EntityCard from "../../../components/EntityCard";
-import AutoCompleteBox from "../../../components/AutoCompleteBox";
+import Link from 'next/link';
+import { Typography, Container, Grid } from '@mui/material';
+import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
+import LinkButton from '../../components/LinkButton';
+import EntityCard from '../../components/EntityCard';
+import AutoCompleteBox from '../../components/AutoCompleteBox';
 
 export default function Environments() {
 	interface MyEnvironments {

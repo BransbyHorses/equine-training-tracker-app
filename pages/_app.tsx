@@ -7,6 +7,36 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../public/css/main.css";
 
 const Theme = createTheme({
+	components: {
+		MuiTypography: {
+			defaultProps: {
+				variantMapping: {
+					h1: "h1",
+					h2: "h2",
+					h3: "h3",
+					h4: "h4",
+					h5: "h5",
+					h6: "h6",
+					body1: "p",
+				},
+			},
+		},
+	},
+	typography: {
+		h6: {
+			fontSize: "20px",
+			fontWeight: 500,
+		},
+	},
+	breakpoints: {
+		values: {
+			xs: 0,
+			sm: 600,
+			md: 900,
+			lg: 1200,
+			xl: 3000,
+		},
+	},
 	palette: {
 		primary: {
 			main: "#222853",

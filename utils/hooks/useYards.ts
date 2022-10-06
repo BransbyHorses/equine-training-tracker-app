@@ -16,10 +16,13 @@ const useYards = (): {
 		axios
 			.get(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
 			.then(({ data }) => {
-				console.log(data)
+				console.log(data);
 				setYards(data);
 			})
 			.catch((err) => {
+				console.error(
+					`Failed to fetch yards data. Failed with error message: ${err}.`
+				);
 				setError(true);
 			})
 			.finally(() => setFetchingData(false));

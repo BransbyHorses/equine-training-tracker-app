@@ -1,7 +1,7 @@
 import { TrainingProgramme } from "./types";
 
 export const findCurrentTrainingProgramme = (
-	trainingProgrammes: TrainingProgramme[]
+	trainingProgrammes?: TrainingProgramme[]
 ) => {
 	if (!trainingProgrammes) {
 		return null;

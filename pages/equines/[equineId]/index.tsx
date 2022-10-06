@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import { useEquine } from "../../../utils/hooks/equine";
 
@@ -7,11 +8,12 @@ import { Box } from "@mui/system";
 import {
 	Alert,
 	Breadcrumbs,
-	Link,
+	Link as MuiLink,
 	Typography,
 	Paper,
 	Grid,
 	styled,
+	IconButton,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -65,9 +67,9 @@ const EquineProfile = () => {
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">
-				<Link underline="hover" color="inherit" href="/">
+				<MuiLink underline="hover" color="inherit" href="/">
 					Equines
-				</Link>
+				</MuiLink>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
 
@@ -185,18 +187,21 @@ const EquineProfile = () => {
 
 				<Grid item xs={12} sm={6}>
 					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Typography variant="h6">Training History</Typography>
-							<ArrowRightIcon fontSize="large" />
-						</Box>
+						<Link href={`/equines/${equineId}/training-programmes`}>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+									cursor: "pointer",
+								}}
+							>
+								<Typography variant="h6">Training History</Typography>
+								<ArrowRightIcon fontSize="large" />
+							</Box>
+						</Link>
 					</Paper>
 				</Grid>
 				<Grid item xs={12} sm={6}>

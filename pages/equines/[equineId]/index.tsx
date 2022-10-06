@@ -75,66 +75,6 @@ const EquineProfile = () => {
 				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
-			{/* <Accordion
-				expanded={showEquineData}
-				onChange={() => setShowEquineData(!showEquineData)}
-			>
-				<Box
-					mt={2}
-					color="common.white"
-					sx={{ backgroundColor: "primary.light" }}
-				>
-					<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="large" />}>
-						<Typography variant="h4">{equine?.name}</Typography>
-					</AccordionSummary>
-				</Box>
-				<AccordionDetails>
-					<Box sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
-						<Grid container>
-							<Grid xs={12} md={6}>
-								<Item>
-									<Typography variant="h6">Training Programme</Typography>
-									<Typography>
-										<CurrentTrainingProgramme
-											trainingProgrammes={equine?.trainingProgrammes}
-										/>
-									</Typography>
-								</Item>
-							</Grid>
-							<Grid xs={12} md={6}>
-								<Item>
-									<Typography variant="h6">Current Yard</Typography>
-									{equine && equine.yard ? (
-										<Typography>{equine.yard.name}</Typography>
-									) : (
-										<MoreHorizIcon sx={{ color: "gray" }} />
-									)}
-								</Item>
-							</Grid>
-							<Grid xs={12} md={6}>
-								<Item>
-									<Typography variant="h6">Status</Typography>
-									{equine && equine.equineStatus ? (
-										<Typography>{equine.equineStatus.name}</Typography>
-									) : (
-										<MoreHorizIcon sx={{ color: "gray" }} />
-									)}
-								</Item>
-							</Grid>
-							<Grid xs={12} md={6}>
-								<Item>
-									<Typography variant="h6">Type of learner</Typography>
-									{equine && equine.learnerType ? (
-										<Typography>{equine.learnerType.name}</Typography>
-									) : (
-										<MoreHorizIcon sx={{ color: "gray" }} />
-									)}
-								</Item>
-							</Grid>
-						</Grid>
-					</Box>
-				</AccordionDetails>
-			</Accordion> */}
 
 			<Paper>
 				<Box

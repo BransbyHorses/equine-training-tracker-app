@@ -75,7 +75,7 @@ const EquineProfile = () => {
 				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
-			<Accordion
+			{/* <Accordion
 				expanded={showEquineData}
 				onChange={() => setShowEquineData(!showEquineData)}
 			>
@@ -134,29 +134,27 @@ const EquineProfile = () => {
 						</Grid>
 					</Box>
 				</AccordionDetails>
-			</Accordion>
+			</Accordion> */}
 
-			{/* <Paper>
+			<Paper>
 				<Box
-					p={1}
+					p={2}
 					mt={2}
 					color="common.white"
 					sx={{ backgroundColor: "primary.light" }}
 				>
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
-				<Box py={1} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
-					<Grid container sx={{ backgroundColor: "common.white" }}>
+				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
+					<Grid container>
 						<Grid xs={12} md={6}>
 							<Item>
 								<Typography variant="h6">Training Programme</Typography>
-								{equine && currentTrainingProgramme ? (
-									<Typography>
-										{currentTrainingProgramme.trainingCategory.name}
-									</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
+								<Typography>
+									<CurrentTrainingProgramme
+										trainingProgrammes={equine?.trainingProgrammes}
+									/>
+								</Typography>
 							</Item>
 						</Grid>
 						<Grid xs={12} md={6}>
@@ -191,7 +189,7 @@ const EquineProfile = () => {
 						</Grid>
 					</Grid>
 				</Box>
-			</Paper> */}
+			</Paper>
 			<hr style={{ margin: "20px 0" }} />
 			<Grid container rowSpacing={3} columnSpacing={2}>
 				{isInTraining ? (

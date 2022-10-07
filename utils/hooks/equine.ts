@@ -55,12 +55,10 @@ export const useEquine = (
 			axios
 				.get(`${process.env.NEXT_PUBLIC_URL}/data/equines/${id}`)
 				.then(({ data }) => {
-					console.log("In get ");
 					setEquine(data);
 					setFetchingData(false);
 				})
 				.catch((err) => {
-					console.log("In catch " + err);
 					setFetchingData(false);
 					const { status } = err.response;
 					setError(true);

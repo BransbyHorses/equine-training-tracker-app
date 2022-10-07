@@ -101,7 +101,7 @@ const TrainingProgrammesTable = ({
 				</Typography>
 			) : (
 				<TableContainer component={Paper}>
-					<Table>
+					<Table sx={{ minWidth: 650 }} aria-label="equine table">
 						{mapTableHead()}
 						<TableBody>{mapTableRows(trainingProgrammes)}</TableBody>
 					</Table>

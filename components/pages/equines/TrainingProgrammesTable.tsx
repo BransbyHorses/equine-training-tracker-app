@@ -17,6 +17,7 @@ import {
 	findCurrentTrainingProgramme,
 	findLastTrainingSession,
 } from "../../../utils/helpers";
+import Link from "next/link";
 
 const TrainingProgrammesTable = ({
 	trainingProgrammes,
@@ -32,7 +33,13 @@ const TrainingProgrammesTable = ({
 					key={trainingProgramme.id}
 					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 				>
-					<TableCell>{trainingProgramme.trainingCategory.name}</TableCell>
+					<TableCell>
+						<Link
+							href={`/equines/${trainingProgramme.equine.id}/training-programmes/${trainingProgramme.id}`}
+						>
+							{trainingProgramme.trainingCategory.name}
+						</Link>
+					</TableCell>
 					{data === "active" ? (
 						<>
 							<TableCell>

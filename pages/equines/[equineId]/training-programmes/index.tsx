@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import useTrainingProgrammes from "../../../../utils/hooks/useTrainingProgrammes";
@@ -9,17 +9,17 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 
 const EquineTrainingProgrammes = () => {
 	const router = useRouter();
-	const { fetchingData, trainingProgrammes, error } = useTrainingProgrammes(1);
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	const { fetchingData, trainingProgrammes, error } = useTrainingProgrammes(
+		equineId
+	);
 
-	const trainingProgrammes = [];
-
-	if (fetchingData) {
-		return (
-			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<LoadingSpinner />
-			</Box>
-		);
-	}
+	useEffect(() => {
+		console.log(router.query.equineId);
+		if (router.isReady) {
+			setEquineId(router.query["equineId"]);
+		}
+	}, [router.isReady]);
 
 	if (error) {
 		return (
@@ -27,6 +27,14 @@ const EquineTrainingProgrammes = () => {
 				<Alert severity="error">
 					An unexpected error occurred. Please refresh the page.
 				</Alert>
+			</Box>
+		);
+	}
+
+	if (fetchingData) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<LoadingSpinner />
 			</Box>
 		);
 	}
@@ -52,7 +60,7 @@ const EquineTrainingProgrammes = () => {
 						alignItems: "center",
 					}}
 				>
-					<Alert severity="info">No Training Programmes available</Alert>
+					<Alert severity="info">No Training History Available</Alert>
 				</Box>
 			)}
 		</>

@@ -21,7 +21,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import CurrentTrainingProgramme from "../components/pages/equines/equineId/CurrentTrainingProgramme";
+import CurrentTrainingProgramme from "../components/pages/equines/CurrentTrainingProgramme";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();

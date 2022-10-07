@@ -20,7 +20,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
 import LoadingSpinner from "../../../components/LoadingSpinner";
-import CurrentTrainingProgramme from "../../../components/pages/equines/equineId/CurrentTrainingProgramme";
+import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
 import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 
 const EquineProfile = () => {

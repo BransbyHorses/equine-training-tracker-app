@@ -71,7 +71,6 @@ const TrainingProgrammesTable = ({
 							</TableCell>
 						</>
 					)}
-					<TableCell>{trainingProgramme.skillProgressRecords.length}</TableCell>
 					<TableCell>
 						{trainingProgramme.skillTrainingSessions.length}
 					</TableCell>
@@ -94,7 +93,6 @@ const TrainingProgrammesTable = ({
 						<TableCell>Ended On</TableCell>
 					</>
 				)}
-				<TableCell>Skills in Programme</TableCell>
 				<TableCell>Training Sessions</TableCell>
 			</TableHead>
 		);

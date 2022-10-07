@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import TrainingProgrammeSkills from "../../../../components/pages/equines/TrainingProgrammeSkills";
 
 const TrainingProgrammePage = () => {
 	const router = useRouter();
@@ -100,6 +101,8 @@ const TrainingProgrammePage = () => {
 				</FormControl>
 			</Box>
 			<hr style={{ margin: "16px 0" }} />
+			<Box>
+			</Box>
 		</>
 	);
 };

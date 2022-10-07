@@ -64,7 +64,7 @@ const EquineTrainingProgrammes = () => {
 			) : (
 				<Box mt={3}>
 					<Typography variant="h6" mb={2} color="gray">
-						Active Training Programmes
+						Active Training Programme
 					</Typography>
 					<TrainingProgrammesTable
 						trainingProgrammes={trainingProgrammes.filter((t) => !t.endDate)}

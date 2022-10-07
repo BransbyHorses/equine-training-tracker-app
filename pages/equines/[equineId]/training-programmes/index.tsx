@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import useTrainingProgrammes from "../../../../utils/hooks/useTrainingProgrammes";
+import { useTrainingProgrammes } from "../../../../utils/hooks/trainingProgrammes";
 
 import { Breadcrumbs, Link, Box, Alert, Typography } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";

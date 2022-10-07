@@ -38,8 +38,6 @@ const EquineTrainingProgrammes = () => {
 		);
 	}
 
-	console.log(trainingProgrammes);
-
 	return (
 		<>
 			<Breadcrumbs>
@@ -72,7 +70,6 @@ const EquineTrainingProgrammes = () => {
 						trainingProgrammes={trainingProgrammes.filter((t) => !t.endDate)}
 						data="active"
 					/>
-					<hr style={{ margin: "20px 0" }} />
 					<Typography variant="h6" mb={2} mt={5} color="gray">
 						Completed Training Programmes
 					</Typography>

@@ -87,18 +87,17 @@ const TrainingProgrammesTable = ({
 		return (
 			<>
 				<TableCell>Training Category</TableCell>
-				<TableCell>Start Date</TableCell>
+				<TableCell>Started On</TableCell>
 				{data === "active" ? (
 					<>
 						<TableCell>Last Date Trained</TableCell>
-						<TableCell>Skills in Training</TableCell>
 					</>
 				) : (
 					<>
-						<TableCell>End Date</TableCell>
-						<TableCell>Skills Trained</TableCell>
+						<TableCell>Ended On</TableCell>
 					</>
 				)}
+				<TableCell>Skills in Programme</TableCell>
 				<TableCell>Training Sessions</TableCell>
 			</>
 		);

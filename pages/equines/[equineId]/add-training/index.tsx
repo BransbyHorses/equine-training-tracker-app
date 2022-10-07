@@ -1,146 +1,178 @@
-import { Container, Box, Button, Link, Typography, Card, Grid } from '@mui/material';
+import {
+    Container,
+    Box,
+    Link,
+    Typography,
+    Card,
+    Grid,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, NextRouter } from 'next/router';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../../../components/LinkButton';
 import PageTitle from '../../../../components/PageTitle';
+import AutoCompleteBox from '../../../../components/AutoCompleteBox';
 
 interface WithRouterProps {
-    router: NextRouter
+    router: NextRouter;
 }
 
 interface MyComponentProps extends WithRouterProps {}
 
-const EquineId: React.FC<MyComponentProps> = (props) => {
+const AddTraining: React.FC<MyComponentProps> = props => {
     interface MyEquine {
         category: {
-          id: number,
-          name: string
-        },
-        id: number,
-        name: string,
+            id: number;
+            name: string;
+        };
+        id: number;
+        name: string;
         programme: {
-          id: number,
-          name: string
-        },
-        skills: Array<any>,
+            id: number;
+            name: string;
+        };
+        skills: Array<any>;
         yard: {
-          id: number,
-          name: string
-        }
+            id: number;
+            name: string;
+        };
     }
     interface Training {
-        id: number; name: string;
+        id: number;
+        name: string;
     }
-    
-    interface MyTraining extends Array<Training>{}
+    interface Skills {
+        id: number;
+        name: string;
+    }
+
+    interface EquineTraining extends Array<Training> {}
+
+    interface EquineSkills extends Array<Skills> {}
 
     const [equine, setEquine] = useState<MyEquine>({
         category: {
-          id: 0,
-          name: ""
+            id: 0,
+            name: ''
         },
         id: 0,
-        name: "",
+        name: '',
         programme: {
-          id: 0,
-          name: ""
+            id: 0,
+            name: ''
         },
         skills: [],
         yard: {
-          id: 0,
-          name: ""
+            id: 0,
+            name: ''
         }
-      });
+    });
 
-      const [training, setTraining] = useState<MyTraining>([
-          {
-              id: 0,
-              name: ''
-          }
-      ]);
+    const [trainingCategories, setTrainingCategories] = useState<
+        EquineTraining
+    >([
+        {
+            id: 0,
+            name: ''
+        }
+    ]);
+    const [skills, setSkills] = useState<EquineSkills>([
+        {
+            id: 0,
+            name: ''
+        }
+    ]);
 
     const router = useRouter();
 
     const getEquineFromId = async () => {
-        const equineId = await props.router.query.id;
-
-        await Promise.all([
-            fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`),
-            fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-categories`)
-        ])
-            .then(console.log)
-            .catch(errors => {
-                console.log();
-            });
-        
-        // await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`)
-        //     .then(response => response.json())
-        //     .then(data => setEquine(data))
-        //     .catch(rejected => {
-        //         console.log(rejected);
-        //     });
-    }
-
-    const deleteEquineForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {method: 'DELETE'} )
-        .then(() => {
-            props.router.push("/admin/equines");
-        })
-        .catch(rejected => {
-            console.log(rejected);
-        });
-    }
+      await router.isReady
+        const equineId = router.query.equineId;
+        const urls = [
+            `${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`,
+            `${process.env.NEXT_PUBLIC_URL}/data/training-categories`,
+            `${process.env.NEXT_PUBLIC_URL}/data/skills`
+        ];
+        try {
+            Promise.all(urls.map(u => fetch(u))).then(responses =>
+                Promise.all(responses.map(res => res.json())).then(data => {
+                    setEquine(data[0]);
+                    setTrainingCategories(data[1]);
+                    setSkills(data[2]);
+                })
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
-        getEquineFromId();
-    }, []);
-    
+      if(!router.isReady) return;
+      getEquineFromId();
+    }, [router.isReady]);
 
     return (
-			<Container>
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-around",
-						alignItems: "center",
-					}}
-				>
-					<PageTitle title={equine.name} sx={{ justifySelf: "start" }} />
-					<Card
-						sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}
-					></Card>
-					<Card sx={{ my: "1rem", cursor: "pointer", borderRadius: "20px" }}>
-						<Typography
-							variant="h5"
-							color="#616161"
-							gutterBottom
-							sx={{ my: "1rem", mx: "1rem" }}
-						>
-							Yard: {equine.yard.name}
-						</Typography>
-					</Card>
+        <Container>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-around',
+                    alignItems: 'center'
+                }}
+            >
+                <PageTitle
+                    title={`Which skill did you train ${equine.name} on?`}
+                    sx={{ justifySelf: 'start' }}
+                />
+                {skills ? (
+                    <AutoCompleteBox
+                        options={skills.map(skill => ({
+                            optionName: skill.name,
+                            optionId: skill.id
+                        }))}
+                        label="Search for a skill"
+                        linkName={'skills'}
+                    />
+                ) : null}
 
-					<Button
-						variant="outlined"
-						sx={{ my: "1rem" }}
-						onClick={deleteEquineForever}
-					>
-						<DeleteForeverIcon />
-					</Button>
+                <FormControl>
+                    <InputLabel id="skills_label" required>
+                        Skills
+                    </InputLabel>
+                    <Select
+                        labelId="skills_label"
+                        label="skills"
+                        name="skills"
+                        defaultValue=""
+                        sx={{ my: '1rem' }}
+                        // onChange={handleChange}
+                    >
+                        {skills.map(skill => {
+                            return (
+                                <MenuItem value={skill.name} key={skill.id}>
+                                    {skill.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
 
-					<LinkButton
-						buttonHref="/admin/equines"
-						variant="contained"
-						size="Large"
-						color="white"
-						action="Go back to equines"
-					/>
-				</Box>
-			</Container>
-		);
+                <LinkButton
+                    buttonHref="/admin/equines"
+                    variant="contained"
+                    size="Large"
+                    color="white"
+                    action="Go back to equines"
+                />
+            </Box>
+        </Container>
+    );
 };
 
-export default withRouter(EquineId);
+export default withRouter(AddTraining);

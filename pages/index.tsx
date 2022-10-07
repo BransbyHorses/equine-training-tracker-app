@@ -163,7 +163,7 @@ export default function Home() {
 				/>
 			</Box>
 			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 650 }}>
+				<Table sx={{ minWidth: 650 }} aria-label="equine table">
 					<TableHead>
 						<TableRow>
 							<TableCell>Name</TableCell>

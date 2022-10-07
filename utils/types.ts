@@ -80,7 +80,7 @@ export interface Yard {
     name: string
 }
 
-enum ProgressCode {
+export enum ProgressCode {
     "Not able",
     "Just started",
     "Ok with limits",

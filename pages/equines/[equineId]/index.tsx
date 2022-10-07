@@ -148,18 +148,25 @@ const EquineProfile = () => {
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<Paper>
-								<Box
-									px={2}
-									py={2}
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}
+								<Link
+									href={`/equines/${equineId}/training-programmes/${isInTraining.id}`}
 								>
-									<Typography variant="h6">View Training Programme</Typography>
-									<ArrowRightIcon fontSize="large" />
-								</Box>
+									<Box
+										px={2}
+										py={2}
+										sx={{
+											display: "flex",
+											justifyContent: "space-between",
+											alignItems: "center",
+											cursor: "pointer",
+										}}
+									>
+										<Typography variant="h6">
+											View Training Programme
+										</Typography>
+										<ArrowRightIcon fontSize="large" />
+									</Box>
+								</Link>
 							</Paper>
 						</Grid>
 					</>

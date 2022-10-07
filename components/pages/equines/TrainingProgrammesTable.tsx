@@ -28,7 +28,7 @@ const TrainingProgrammesTable = ({
 	const mapTableRows = (trainingProgrammes: TrainingProgramme[]) => {
 		if (data === "active") {
 			return trainingProgrammes.map((trainingProgramme) => {
-				const lastDateTrainedValue = findLastTrainingSession(
+				const lastDateTrained = findLastTrainingSession(
 					trainingProgramme.skillTrainingSessions
 				);
 
@@ -46,7 +46,7 @@ const TrainingProgrammesTable = ({
 							{!trainingProgramme.startDate ? (
 								<em>Not started</em>
 							) : (
-								convertDateToString(lastDateTrainedValue)
+								convertDateToString(lastDateTrained!.date)
 							)}
 						</TableCell>
 						<TableCell>
@@ -84,29 +84,24 @@ const TrainingProgrammesTable = ({
 	};
 
 	const mapTableHead = () => {
-		if (data === "active") {
-			return (
-				<>
-					<TableCell>Training Category</TableCell>
-					<TableCell>Start Date</TableCell>
-					<TableCell>Last Date Trained</TableCell>
-					<TableCell>Skills in Training</TableCell>
-					<TableCell>Training Sessions</TableCell>
-				</>
-			);
-		}
-
-		if (data === "inactive") {
-			return (
-				<>
-					<TableCell>Training Category</TableCell>
-					<TableCell>Start Date</TableCell>
-					<TableCell>End Date</TableCell>
-					<TableCell>Skills Trained</TableCell>
-					<TableCell>Training Sessions</TableCell>
-				</>
-			);
-		}
+		return (
+			<>
+				<TableCell>Training Category</TableCell>
+				<TableCell>Start Date</TableCell>
+				{data === "active" ? (
+					<>
+						<TableCell>Last Date Trained</TableCell>
+						<TableCell>Skills in Training</TableCell>
+					</>
+				) : (
+					<>
+						<TableCell>End Date</TableCell>
+						<TableCell>Skills Trained</TableCell>
+					</>
+				)}
+				<TableCell>Training Sessions</TableCell>
+			</>
+		);
 	};
 
 	return (

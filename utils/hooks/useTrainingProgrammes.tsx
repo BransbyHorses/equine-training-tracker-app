@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { TrainingProgramme } from "../types";
 
-const useTrainingProgrammes = (equineId: {
-	equineId: number;
-}): {
+const useTrainingProgrammes = (equineId: number): {
 	fetchingData: boolean;
 	trainingProgrammes: TrainingProgramme[] | [];
 	error: boolean;

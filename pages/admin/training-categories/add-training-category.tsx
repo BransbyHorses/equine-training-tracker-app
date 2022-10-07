@@ -27,7 +27,7 @@ const NewCategory: React.FC<MyComponentProps> = props => {
             id: 0,
             name: newCategory.name
         }
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-categories`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -37,7 +37,7 @@ const NewCategory: React.FC<MyComponentProps> = props => {
 					.then((response) => {
 						response.json();
 					})
-					.then((data) => props.router.push("/admin/categories"))
+					.then((data) => props.router.push("/admin/training-categories"))
 					.catch((rejected) => {
 						console.log(rejected);
 					});
@@ -73,7 +73,7 @@ const NewCategory: React.FC<MyComponentProps> = props => {
 				</div>
 				<div>
 					<Button variant="outlined" sx={{ my: "1rem" }}>
-						<Link href="/admin/categories">
+						<Link href="/admin/training-category">
 							<Typography>Go back to Categories</Typography>
 						</Link>
 					</Button>

@@ -25,7 +25,7 @@ const CategoryId: React.FC<MyComponentProps> = (props) => {
 
     const getCategoryFromId = async () => {
         const categoryId = await router.query.id;
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${categoryId}`)
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-categories/${categoryId}`)
             .then(response => response.json())
             .then(data => setCategory(data))
             .catch(rejected => {
@@ -34,9 +34,9 @@ const CategoryId: React.FC<MyComponentProps> = (props) => {
     }
 
     const deleteCategoryForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${category.id}`, {method: 'DELETE'} )
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-categories/${category.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push("/admin/categories");
+            props.router.push("/admin/training-categories");
         })
         .catch(rejected => {
             console.log(rejected);
@@ -80,7 +80,7 @@ const CategoryId: React.FC<MyComponentProps> = (props) => {
                 </Button>
 
                 <LinkButton
-                    buttonHref="/admin/categories"
+                    buttonHref="/admin/training-categories"
                     variant="contained"
                     size="Large"
                     color="white"

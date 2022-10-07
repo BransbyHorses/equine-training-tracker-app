@@ -26,66 +26,56 @@ const TrainingProgrammesTable = ({
 	data: "active" | "inactive";
 }) => {
 	const mapTableRows = (trainingProgrammes: TrainingProgramme[]) => {
-		if (data === "active") {
-			return trainingProgrammes.map((trainingProgramme) => {
-				const lastDateTrained = findLastTrainingSession(
-					trainingProgramme.skillTrainingSessions
-				);
-
-				return (
-					<TableRow key={trainingProgramme.id}>
-						<TableCell>{trainingProgramme.trainingCategory.name}</TableCell>
-						<TableCell>
-							{trainingProgramme.startDate ? (
-								convertDateToString(trainingProgramme.startDate)
-							) : (
-								<em>Not started</em>
-							)}
-						</TableCell>
-						<TableCell>
-							{!trainingProgramme.startDate ? (
-								<em>Not started</em>
-							) : (
-								convertDateToString(lastDateTrained!.date)
-							)}
-						</TableCell>
-						<TableCell>
-							{trainingProgramme.skillProgressRecords.length}
-						</TableCell>
-						<TableCell>
-							{trainingProgramme.skillTrainingSessions.length}
-						</TableCell>
-					</TableRow>
-				);
-			});
-		}
-
-		if (data === "inactive") {
-			return trainingProgrammes.map((trainingProgramme, index) => {
-				return (
-					<TableRow key={trainingProgramme.id}>
-						<TableCell>{trainingProgramme.trainingCategory.name}</TableCell>
-						<TableCell>
-							{convertDateToString(trainingProgramme.startDate)}
-						</TableCell>
-						<TableCell>
-							{convertDateToString(trainingProgramme.endDate)}
-						</TableCell>
-						<TableCell>
-							{trainingProgramme.skillProgressRecords.length}
-						</TableCell>
-						<TableCell>
-							{trainingProgramme.skillTrainingSessions.length}
-						</TableCell>
-					</TableRow>
-				);
-			});
-		}
+		return trainingProgrammes.map((trainingProgramme) => {
+			return (
+				<TableRow
+					key={trainingProgramme.id}
+					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+				>
+					<TableCell>{trainingProgramme.trainingCategory.name}</TableCell>
+					{data === "active" ? (
+						<>
+							<TableCell>
+								{trainingProgramme.startDate ? (
+									convertDateToString(trainingProgramme.startDate)
+								) : (
+									<em>Not started</em>
+								)}
+							</TableCell>
+							<TableCell>
+								{!trainingProgramme.startDate ? (
+									<em>Not started</em>
+								) : (
+									convertDateToString(
+										findLastTrainingSession(
+											trainingProgramme.skillTrainingSessions
+										)!.date
+									)
+								)}
+							</TableCell>
+						</>
+					) : (
+						<>
+							<TableCell>
+								{convertDateToString(trainingProgramme.startDate)}
+							</TableCell>
+							<TableCell>
+								{convertDateToString(trainingProgramme.endDate)}
+							</TableCell>
+						</>
+					)}
+					<TableCell>{trainingProgramme.skillProgressRecords.length}</TableCell>
+					<TableCell>
+						{trainingProgramme.skillTrainingSessions.length}
+					</TableCell>
+				</TableRow>
+			);
+		});
 	};
 
 	const mapTableHead = () => {
 		return (
-			<>
+			<TableHead>
 				<TableCell>Training Category</TableCell>
 				<TableCell>Started On</TableCell>
 				{data === "active" ? (
@@ -99,7 +89,7 @@ const TrainingProgrammesTable = ({
 				)}
 				<TableCell>Skills in Programme</TableCell>
 				<TableCell>Training Sessions</TableCell>
-			</>
+			</TableHead>
 		);
 	};
 
@@ -112,7 +102,7 @@ const TrainingProgrammesTable = ({
 			) : (
 				<TableContainer component={Paper}>
 					<Table>
-						<TableHead>{mapTableHead()}</TableHead>
+						{mapTableHead()}
 						<TableBody>{mapTableRows(trainingProgrammes)}</TableBody>
 					</Table>
 				</TableContainer>

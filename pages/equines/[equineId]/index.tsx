@@ -238,7 +238,9 @@ const EquineProfile = () => {
 							}}
 						>
 							<Typography variant="h6">Update Details</Typography>
-							<ArrowRightIcon fontSize="large" />
+							<Link href={`/update-details/${equine?.id}`}>
+								<ArrowRightIcon fontSize="large" />
+							</Link>
 						</Box>
 					</Paper>
 				</Grid>

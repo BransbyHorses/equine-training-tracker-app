@@ -29,7 +29,7 @@ export interface Skill {
 
 export interface SkillProgressRecord {
     id: number;
-    Skill: Skill;
+    skill: Skill;
 	trainingProgramme: TrainingProgramme;
 	progressCode: { string: ProgressCode };
 	startDate: string;

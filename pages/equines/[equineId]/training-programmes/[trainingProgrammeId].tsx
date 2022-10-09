@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { useTrainingProgramme } from "../../../../utils/hooks/trainingProgrammes";
-import { ProgressCode } from "../../../../utils/types";
+import { ProgressCode, SkillProgressRecord } from "../../../../utils/types";
 
 import {
 	Breadcrumbs,
@@ -29,12 +29,14 @@ const TrainingProgrammePage = () => {
 	const { fetchingData, trainingProgramme, error } =
 		useTrainingProgramme(trainingProgrammeId);
 	const [skillsFilter, setSkillsFilter] = useState("all");
-
-	console.log(trainingProgramme?.skillProgressRecords);
+	const [trainingProgrammeSkills, setTrainingProgrammeSkills] =
+		useState<SkillProgressRecord[]>();
 
 	useEffect(() => {
 		if (router.isReady) {
 			settrainingProgrammeId(router.query["trainingProgrammeId"]);
+			setTrainingProgrammeSkills(trainingProgramme?.skillProgressRecords);
+			console.log(trainingProgrammeSkills);
 		}
 	}, [router.isReady]);
 
@@ -48,6 +50,19 @@ const TrainingProgrammePage = () => {
 					</MenuItem>
 				);
 			});
+	};
+
+	const handleSkillsFilterChange = (event) => {
+		setSkillsFilter(event.target.value);
+
+		event.target.value === "all"
+			? setTrainingProgrammeSkills(trainingProgramme?.skillProgressRecords)
+			: setTrainingProgrammeSkills(
+					trainingProgramme?.skillProgressRecords.filter(
+						(skillProgressRecord) =>
+							skillProgressRecord.progressCode.string === event.target.value
+					)
+			  );
 	};
 
 	if (error) {
@@ -95,7 +110,7 @@ const TrainingProgrammePage = () => {
 					<Select
 						id="progressCode"
 						value={skillsFilter}
-						onChange={(e) => setSkillsFilter(e.target.value)}
+						onChange={handleSkillsFilterChange}
 					>
 						<MenuItem value="all">Show All</MenuItem>
 						{mapProgressCodeToOptions()}
@@ -104,10 +119,10 @@ const TrainingProgrammePage = () => {
 			</Box>
 			<hr style={{ margin: "16px 0" }} />
 			<Box>
-				{trainingProgramme?.skillProgressRecords.map(
-					(skillProgessRecord, i) => {
+				{trainingProgrammeSkills &&
+					trainingProgrammeSkills?.map((skillProgessRecord, i) => {
 						return (
-							<Paper>
+							<Paper key={skillProgessRecord.id}>
 								<Box
 									py={1}
 									px={2}
@@ -130,9 +145,19 @@ const TrainingProgrammePage = () => {
 								</Box>
 							</Paper>
 						);
-					}
+					})}
+				{trainingProgrammeSkills && trainingProgrammeSkills.length === 0 && (
+					<Typography>
+						<em>No skills marked as "{skillsFilter}"</em>
+					</Typography>
 				)}
 			</Box>
+			<Box mt={4}>
+				<Typography variant="h5" color="gray">
+					Training Log
+				</Typography>
+			</Box>
+			<hr style={{ margin: "16px 0" }} />
 		</>
 	);
 };

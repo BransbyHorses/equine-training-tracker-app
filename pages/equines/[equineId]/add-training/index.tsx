@@ -50,10 +50,17 @@ const AddTraining: React.FC<MyComponentProps> = props => {
         id: number;
         name: string;
     }
+    interface TrainingMethods {
+        description: string;
+        id: number;
+        name: string;
+    }
 
     interface EquineTraining extends Array<Training> {}
 
     interface EquineSkills extends Array<Skills> {}
+    
+    interface EquineTrainingMethods extends Array<TrainingMethods> {}
 
     const [equine, setEquine] = useState<MyEquine>({
         category: {
@@ -87,16 +94,24 @@ const AddTraining: React.FC<MyComponentProps> = props => {
             name: ''
         }
     ]);
+    const [trainingMethods, setTrainingMethods] = useState<EquineTrainingMethods>([
+      {
+        description: "",
+        id: 0,
+        name: ""
+      }
+    ])
 
     const router = useRouter();
 
     const getEquineFromId = async () => {
-      await router.isReady
+        await router.isReady;
         const equineId = router.query.equineId;
         const urls = [
             `${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`,
             `${process.env.NEXT_PUBLIC_URL}/data/training-categories`,
-            `${process.env.NEXT_PUBLIC_URL}/data/skills`
+            `${process.env.NEXT_PUBLIC_URL}/data/skills`,
+            `${process.env.NEXT_PUBLIC_URL}/data/training-methods`
         ];
         try {
             Promise.all(urls.map(u => fetch(u))).then(responses =>
@@ -104,6 +119,7 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                     setEquine(data[0]);
                     setTrainingCategories(data[1]);
                     setSkills(data[2]);
+                    setTrainingMethods(data[3]);
                 })
             );
         } catch (error) {
@@ -112,8 +128,8 @@ const AddTraining: React.FC<MyComponentProps> = props => {
     };
 
     useEffect(() => {
-      if(!router.isReady) return;
-      getEquineFromId();
+        if (!router.isReady) return;
+        getEquineFromId();
     }, [router.isReady]);
 
     return (
@@ -131,44 +147,64 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                     sx={{ justifySelf: 'start' }}
                 />
                 {skills ? (
-                    <AutoCompleteBox
-                        options={skills.map(skill => ({
-                            optionName: skill.name,
-                            optionId: skill.id
-                        }))}
-                        label="Search for a skill"
-                        linkName={'skills'}
-                    />
+                    <FormControl sx={{ width: '100%' }}>
+                        <InputLabel id="skills_label" required>
+                            Skills
+                        </InputLabel>
+                        <Select
+                            labelId="skills_label"
+                            label="skills"
+                            name="skills"
+                            defaultValue=""
+
+                            // onChange={handleChange}
+                        >
+                            {skills.map(skill => {
+                                return (
+                                    <MenuItem value={skill.name} key={skill.id}>
+                                        {skill.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
                 ) : null}
 
-                <FormControl>
-                    <InputLabel id="skills_label" required>
-                        Skills
-                    </InputLabel>
-                    <Select
-                        labelId="skills_label"
-                        label="skills"
-                        name="skills"
-                        defaultValue=""
-                        sx={{ my: '1rem' }}
-                        // onChange={handleChange}
-                    >
-                        {skills.map(skill => {
-                            return (
-                                <MenuItem value={skill.name} key={skill.id}>
-                                    {skill.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
+                <PageTitle
+                    title={`Which method did you use?`}
+                    sx={{ justifySelf: 'start' }}
+                />
+
+                {trainingMethods ? (
+                    <FormControl sx={{ width: '100%' }}>
+                        <InputLabel id="training_methods_label" required>
+                            Training Methods
+                        </InputLabel>
+                        <Select
+                            labelId="training_methods_label"
+                            label="training methods"
+                            name="training methods"
+                            defaultValue=""
+
+                            // onChange={handleChange}
+                        >
+                            {trainingMethods.map(trainingMethod => {
+                                return (
+                                    <MenuItem value={trainingMethod.name} key={trainingMethod.id}>
+                                        {trainingMethod.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                ) : null}
 
                 <LinkButton
                     buttonHref="/admin/equines"
                     variant="contained"
                     size="Large"
                     color="white"
-                    action="Go back to equines"
+                    action="Continue"
                 />
             </Box>
         </Container>

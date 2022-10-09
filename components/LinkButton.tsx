@@ -9,7 +9,10 @@ const LinkButton = (props: any) => {
                 variant={props.variant}
                 size={props.size}
                 sx={{
-                    margin: '5px 20px'
+                    margin: '5px 20px',
+                    backgroundColor: "#74ADDF",
+                    width: "100%",
+                    marginLeft: "0px"
                 }}
             >
                 <Typography color={props.color ? props.color : null}>

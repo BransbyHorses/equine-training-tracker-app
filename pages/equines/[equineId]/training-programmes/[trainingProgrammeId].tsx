@@ -28,15 +28,15 @@ const TrainingProgrammePage = () => {
 	>(undefined);
 	const { fetchingData, trainingProgramme, error } =
 		useTrainingProgramme(trainingProgrammeId);
+	const [trainingProgrammeSkills, setTrainingProgrammeSkills] = useState<
+		SkillProgressRecord[] | undefined
+	>(undefined);
 	const [skillsFilter, setSkillsFilter] = useState("all");
-	const [trainingProgrammeSkills, setTrainingProgrammeSkills] =
-		useState<SkillProgressRecord[]>();
 
 	useEffect(() => {
 		if (router.isReady) {
 			settrainingProgrammeId(router.query["trainingProgrammeId"]);
 			setTrainingProgrammeSkills(trainingProgramme?.skillProgressRecords);
-			console.log(trainingProgrammeSkills);
 		}
 	}, [router.isReady]);
 
@@ -63,6 +63,42 @@ const TrainingProgrammePage = () => {
 							skillProgressRecord.progressCode.string === event.target.value
 					)
 			  );
+	};
+
+	const mapSkillProgressRecords = () => {
+		const skillProgessRecords =
+			skillsFilter === "all"
+				? trainingProgramme?.skillProgressRecords
+				: trainingProgramme?.skillProgressRecords.filter(
+						(spr) => spr.progressCode.string === skillsFilter
+				  );
+
+		return skillProgessRecords?.map((skillProgessRecord, i) => {
+			return (
+				<Paper key={skillProgessRecord.id}>
+					<Box
+						py={1}
+						px={2}
+						mb={3}
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+						}}
+					>
+						<div>
+							<Typography fontWeight={600}>
+								{skillProgessRecord.skill.name}
+							</Typography>
+							<Typography mt={1}>
+								{skillProgessRecord.progressCode.string}
+							</Typography>
+						</div>
+						<KeyboardArrowRightIcon fontSize="large" />
+					</Box>
+				</Paper>
+			);
+		});
 	};
 
 	if (error) {
@@ -119,33 +155,7 @@ const TrainingProgrammePage = () => {
 			</Box>
 			<hr style={{ margin: "16px 0" }} />
 			<Box>
-				{trainingProgrammeSkills &&
-					trainingProgrammeSkills?.map((skillProgessRecord, i) => {
-						return (
-							<Paper key={skillProgessRecord.id}>
-								<Box
-									py={1}
-									px={2}
-									mb={3}
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}
-								>
-									<div>
-										<Typography fontWeight={600}>
-											{skillProgessRecord.skill.name}
-										</Typography>
-										<Typography mt={1}>
-											{skillProgessRecord.progressCode.string}
-										</Typography>
-									</div>
-									<KeyboardArrowRightIcon fontSize="large" />
-								</Box>
-							</Paper>
-						);
-					})}
+				{trainingProgramme && mapSkillProgressRecords()}
 				{trainingProgrammeSkills && trainingProgrammeSkills.length === 0 && (
 					<Typography>
 						<em>No skills marked as "{skillsFilter}"</em>

@@ -11,15 +11,14 @@ import {
 	Box,
 	Alert,
 	Paper,
-	Grid,
 	FormControl,
-	InputLabel,
 	Select,
 	MenuItem,
 } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import TrainingProgrammeLog from "../../../../components/pages/equines/TrainingProgrammeLog";
 
 const TrainingProgrammePage = () => {
 	const router = useRouter();
@@ -79,7 +78,7 @@ const TrainingProgrammePage = () => {
 					<Box
 						py={1}
 						px={2}
-						mb={3}
+						mb={2}
 						sx={{
 							display: "flex",
 							justifyContent: "space-between",
@@ -162,12 +161,9 @@ const TrainingProgrammePage = () => {
 					</Typography>
 				)}
 			</Box>
-			<Box mt={4}>
-				<Typography variant="h5" color="gray">
-					Training Log
-				</Typography>
-			</Box>
-			<hr style={{ margin: "16px 0" }} />
+			<TrainingProgrammeLog
+				skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
+			/>
 		</>
 	);
 };

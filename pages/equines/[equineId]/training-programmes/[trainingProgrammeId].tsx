@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import TrainingProgrammeSkills from "../../../../components/pages/equines/TrainingProgrammeSkills";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const TrainingProgrammePage = () => {
 	const router = useRouter();
@@ -29,6 +29,8 @@ const TrainingProgrammePage = () => {
 	const { fetchingData, trainingProgramme, error } =
 		useTrainingProgramme(trainingProgrammeId);
 	const [skillsFilter, setSkillsFilter] = useState("all");
+
+	console.log(trainingProgramme?.skillProgressRecords);
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -102,6 +104,34 @@ const TrainingProgrammePage = () => {
 			</Box>
 			<hr style={{ margin: "16px 0" }} />
 			<Box>
+				{trainingProgramme?.skillProgressRecords.map(
+					(skillProgessRecord, i) => {
+						return (
+							<Paper>
+								<Box
+									py={1}
+									px={2}
+									mb={3}
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}
+								>
+									<div>
+										<Typography fontWeight={600}>
+											{skillProgessRecord.skill.name}
+										</Typography>
+										<Typography mt={1}>
+											{skillProgessRecord.progressCode.string}
+										</Typography>
+									</div>
+									<KeyboardArrowRightIcon fontSize="large" />
+								</Box>
+							</Paper>
+						);
+					}
+				)}
 			</Box>
 		</>
 	);

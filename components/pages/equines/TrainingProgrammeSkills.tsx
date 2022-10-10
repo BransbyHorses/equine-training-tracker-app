@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { SkillProgressRecord, ProgressCode } from "../../../utils/types";
+import {
+	SkillProgressRecord,
+	ProgressCode,
+	SkillTrainingSession,
+} from "../../../utils/types";
 
 import {
 	Box,
@@ -8,8 +12,12 @@ import {
 	Select,
 	MenuItem,
 	Paper,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 } from "@mui/material";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SkillsTimeLine from "./SkillsTimeLine";
 
 const progressTagPalette = {
 	"Not able": "#f6d7d2",
@@ -20,8 +28,10 @@ const progressTagPalette = {
 
 const TrainingProgrammeSkills = ({
 	skillProgressRecords,
+	skillTrainingSessions,
 }: {
 	skillProgressRecords?: SkillProgressRecord[];
+	skillTrainingSessions?: SkillTrainingSession[];
 }) => {
 	const [skillsFilter, setSkillsFilter] = useState("all");
 	const [trainingProgrammeSkills, setTrainingProgrammeSkills] = useState<
@@ -57,47 +67,58 @@ const TrainingProgrammeSkills = ({
 		return trainingProgrammeSkills?.map((skillProgessRecord, i) => {
 			return (
 				<Paper key={skillProgessRecord.id}>
-					<Box
-						py={1}
-						px={2}
-						mb={2}
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "center",
-						}}
-					>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-							}}
-						>
-							<Typography fontWeight={600}>
-								{skillProgessRecord.skill.name}
-							</Typography>
-							<div
-								style={{
-									marginLeft: "24px",
-									padding: "2px 10px",
-									backgroundColor:
-										progressTagPalette[skillProgessRecord.progressCode.string],
-									color:
-										skillProgessRecord.progressCode.string ===
-											ProgressCode["Not able"] ||
-										skillProgessRecord.progressCode.string ===
-											ProgressCode["Just started"]
-											? "black"
-											: "white",
+					<Accordion>
+						<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="large" />}>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
 								}}
 							>
-								<Typography fontWeight={500}>
-									{skillProgessRecord.progressCode.string}
-								</Typography>
-							</div>
-						</Box>
-						<ArrowRightIcon fontSize="large" />
-					</Box>
+								<Box
+									sx={{
+										display: "flex",
+										alignItems: "center",
+									}}
+								>
+									<Typography fontWeight={600}>
+										{skillProgessRecord.skill.name}
+									</Typography>
+									<div
+										style={{
+											marginLeft: "24px",
+											padding: "2px 10px",
+											backgroundColor:
+												progressTagPalette[
+													skillProgessRecord.progressCode.string
+												],
+											color:
+												skillProgessRecord.progressCode.string ===
+													ProgressCode["Not able"] ||
+												skillProgessRecord.progressCode.string ===
+													ProgressCode["Just started"]
+													? "black"
+													: "white",
+										}}
+									>
+										<Typography fontWeight={500}>
+											{skillProgessRecord.progressCode.string}
+										</Typography>
+									</div>
+								</Box>
+							</Box>
+						</AccordionSummary>
+						<AccordionDetails>
+							<SkillsTimeLine
+								skillTrainingSessions={skillTrainingSessions?.filter(
+									(skillTrainingSession) =>
+										skillTrainingSession.skill.id ===
+										skillProgessRecord.skill.id
+								)}
+							/>
+						</AccordionDetails>
+					</Accordion>
 				</Paper>
 			);
 		});

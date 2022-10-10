@@ -104,6 +104,7 @@ const TrainingProgrammePage = () => {
 			<TabPanel value={tabView} index={0}>
 				<TrainingProgrammeSkills
 					skillProgressRecords={trainingProgramme?.skillProgressRecords}
+					skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
 				/>
 			</TabPanel>
 			<TabPanel value={tabView} index={1}>

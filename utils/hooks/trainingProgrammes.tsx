@@ -44,7 +44,7 @@ export const useTrainingProgrammes = (
 };
 
 export const useTrainingProgramme = (trainingProgrammeId: {
-	trainingProgrammeId?: string;
+	trainingProgrammeId?: string
 }): {
 	fetchingData: boolean;
 	trainingProgramme: TrainingProgramme | undefined;

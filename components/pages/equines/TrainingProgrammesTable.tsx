@@ -2,22 +2,10 @@ import React from "react";
 
 import { TrainingProgramme } from "../../../utils/types";
 
-import {
-	TableContainer,
-	TableHead,
-	Table,
-	TableCell,
-	TableRow,
-	TableBody,
-	Paper,
-	Typography,
-} from "@mui/material";
-import {
-	convertDateToString,
-	findCurrentTrainingProgramme,
-	findLastTrainingSession,
-} from "../../../utils/helpers";
+import { Paper, Typography, Box } from "@mui/material";
+import { convertDateToString } from "../../../utils/helpers";
 import Link from "next/link";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const TrainingProgrammesTable = ({
 	trainingProgrammes,
@@ -26,76 +14,72 @@ const TrainingProgrammesTable = ({
 	trainingProgrammes: TrainingProgramme[];
 	data: "active" | "inactive";
 }) => {
-	const mapTableRows = (trainingProgrammes: TrainingProgramme[]) => {
+	const mapTrainingProgrammeData = (
+		trainingProgrammes: TrainingProgramme[]
+	) => {
 		return trainingProgrammes.map((trainingProgramme) => {
+			const ActiveData = () => {
+				return (
+					<Box sx={{ cursor: "pointer" }}>
+						{trainingProgramme.startDate ? (
+							<Box>
+								<Typography>
+									Started on&nbsp;
+									{convertDateToString(trainingProgramme.startDate)}
+								</Typography>
+								<Typography>
+									{trainingProgramme.skillTrainingSessions.length} Completed
+									Training Sessions
+								</Typography>
+							</Box>
+						) : (
+							<Typography>
+								<em>Not started</em>
+							</Typography>
+						)}
+					</Box>
+				);
+			};
+
+			const InActiveData = () => {
+				return (
+					<Box>
+						<Typography>
+							Finished on
+							{convertDateToString(trainingProgramme.endDate)}
+						</Typography>
+						<Typography>
+							{trainingProgramme.skillTrainingSessions.length} Completed
+							Training Sessions
+						</Typography>
+					</Box>
+				);
+			};
+
 			return (
-				<TableRow
-					key={trainingProgramme.id}
-					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+				<Link
+					href={`/equines/${trainingProgramme.equine.id}/training-programmes/${trainingProgramme.id}`}
 				>
-					<TableCell>
-						<Link
-							href={`/equines/${trainingProgramme.equine.id}/training-programmes/${trainingProgramme.id}`}
-						>
-							{trainingProgramme.trainingCategory.name}
-						</Link>
-					</TableCell>
-					{data === "active" ? (
-						<>
-							<TableCell>
-								{trainingProgramme.startDate ? (
-									convertDateToString(trainingProgramme.startDate)
-								) : (
-									<em>Not started</em>
-								)}
-							</TableCell>
-							<TableCell>
-								{!trainingProgramme.startDate ? (
-									<em>Not started</em>
-								) : (
-									convertDateToString(
-										findLastTrainingSession(
-											trainingProgramme.skillTrainingSessions
-										)!.date
-									)
-								)}
-							</TableCell>
-						</>
-					) : (
-						<>
-							<TableCell>
-								{convertDateToString(trainingProgramme.startDate)}
-							</TableCell>
-							<TableCell>
-								{convertDateToString(trainingProgramme.endDate)}
-							</TableCell>
-						</>
-					)}
-					<TableCell>
-						{trainingProgramme.skillTrainingSessions.length}
-					</TableCell>
-				</TableRow>
+					<Box
+						key={trainingProgramme.id}
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+							cursor: "pointer",
+						}}
+					>
+						<div>
+							<Typography fontWeight={600}>
+								{trainingProgramme.trainingCategory.name}
+							</Typography>
+							{data === "active" ? <ActiveData /> : <InActiveData />}
+						</div>
+						<KeyboardArrowRightIcon fontSize="large" />
+					</Box>
+				</Link>
 			);
 		});
-	};
-
-	const mapTableHead = () => {
-		return (
-			<TableHead>
-				<TableCell>Training Category</TableCell>
-				<TableCell>Started On</TableCell>
-				{data === "active" ? (
-					<>
-						<TableCell>Last Date Trained</TableCell>
-					</>
-				) : (
-					<>
-						<TableCell>Ended On</TableCell>
-					</>
-				)}
-				<TableCell>Training Sessions</TableCell>
-			</TableHead>
-		);
 	};
 
 	return (
@@ -105,12 +89,7 @@ const TrainingProgrammesTable = ({
 					<em>No training programmes to display</em>
 				</Typography>
 			) : (
-				<TableContainer component={Paper}>
-					<Table sx={{ minWidth: 650 }} aria-label="equine table">
-						{mapTableHead()}
-						<TableBody>{mapTableRows(trainingProgrammes)}</TableBody>
-					</Table>
-				</TableContainer>
+				<>{mapTrainingProgrammeData(trainingProgrammes)}</>
 			)}
 		</>
 	);

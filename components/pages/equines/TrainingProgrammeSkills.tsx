@@ -11,23 +11,30 @@ import {
 } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
+const progressTagPalette = {
+	"Not able": "#f6d7d2",
+	"Just started": "#d2e2f1",
+	"Ok with limits": "#1d70b8",
+	Confident: "#005a30",
+};
+
 const TrainingProgrammeSkills = ({
-	skillsProgressRecords,
+	skillProgressRecords,
 }: {
 	skillProgressRecords?: SkillProgressRecord[];
 }) => {
 	const [skillsFilter, setSkillsFilter] = useState("all");
 	const [trainingProgrammeSkills, setTrainingProgrammeSkills] = useState<
 		SkillProgressRecord[] | undefined
-	>(skillsProgressRecords);
+	>(skillProgressRecords);
 
 	const handleSkillsFilterChange = (event) => {
 		setSkillsFilter(event.target.value);
 
 		event.target.value === "all"
-			? setTrainingProgrammeSkills(skillsProgressRecords)
+			? setTrainingProgrammeSkills(skillProgressRecords)
 			: setTrainingProgrammeSkills(
-					skillsProgressRecords.filter(
+					skillProgressRecords.filter(
 						(skillProgressRecord: SkillProgressRecord) =>
 							skillProgressRecord.progressCode.string === event.target.value
 					)
@@ -47,15 +54,7 @@ const TrainingProgrammeSkills = ({
 	};
 
 	const mapSkillProgressRecords = () => {
-		const skillProgessRecords =
-			skillsFilter === "all"
-				? trainingProgrammeSkills
-				: trainingProgrammeSkills?.filter(
-						(spr: SkillProgressRecord) =>
-							spr.progressCode.string === skillsFilter
-				  );
-
-		return skillProgessRecords?.map((skillProgessRecord, i) => {
+		return trainingProgrammeSkills?.map((skillProgessRecord, i) => {
 			return (
 				<Paper key={skillProgessRecord.id}>
 					<Box
@@ -68,12 +67,34 @@ const TrainingProgrammeSkills = ({
 							alignItems: "center",
 						}}
 					>
-						<Box>
+						<Box
+							sx={{
+								display: "flex",
+								alignItems: "center",
+							}}
+						>
 							<Typography fontWeight={600}>
 								{skillProgessRecord.skill.name}
 							</Typography>
-							<Typography>{skillProgessRecord.progressCode.string}</Typography>
-							<Typography>{skillProgessRecord.time} minutes</Typography>
+							<div
+								style={{
+									marginLeft: "24px",
+									padding: "2px 10px",
+									backgroundColor:
+										progressTagPalette[skillProgessRecord.progressCode.string],
+									color:
+										skillProgessRecord.progressCode.string ===
+											ProgressCode["Not able"] ||
+										skillProgessRecord.progressCode.string ===
+											ProgressCode["Just started"]
+											? "black"
+											: "white",
+								}}
+							>
+								<Typography fontWeight={500}>
+									{skillProgessRecord.progressCode.string}
+								</Typography>
+							</div>
 						</Box>
 						<ArrowRightIcon fontSize="large" />
 					</Box>
@@ -108,8 +129,8 @@ const TrainingProgrammeSkills = ({
 			</Box>
 			<hr style={{ margin: "16px 0" }} />
 			<Box>
-				{skillsProgressRecords && mapSkillProgressRecords()}
-				{skillsProgressRecords && skillsProgressRecords.length === 0 && (
+				{trainingProgrammeSkills && mapSkillProgressRecords()}
+				{trainingProgrammeSkills && trainingProgrammeSkills.length === 0 && (
 					<Typography>
 						<em>No skills marked as "{skillsFilter}"</em>
 					</Typography>

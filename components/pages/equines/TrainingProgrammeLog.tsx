@@ -34,7 +34,7 @@ const TrainingProgrammeLog = ({
 				}}
 			>
 				<Typography variant="h5" color="gray">
-					Training Log
+					Training Log ({skillTrainingSessions && skillTrainingSessions.length})
 				</Typography>
 				<FormControl size="small" variant="outlined" sx={{ minWidth: "150px" }}>
 					<Select
@@ -47,7 +47,7 @@ const TrainingProgrammeLog = ({
 					</Select>
 				</FormControl>
 			</Box>
-			<hr style={{ margin: "16px 0" }} />
+			<hr style={{ margin: "16px 0 0 0" }} />
 			{(!skillTrainingSessions || skillTrainingSessions.length === 0) && (
 				<Typography>
 					<em>No training log available</em>
@@ -63,9 +63,12 @@ const TrainingProgrammeLog = ({
 				})
 				.map((skillTrainingSession) => {
 					return (
-						<Box mb={2}>
-							<Accordion>
-								<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+						<Box sx={{ borderBottom: "1px solid gray" }}>
+							<Accordion elevation={0} sx={{ backgroundColor: "transparent" }}>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+									sx={{ padding: 0 }}
+								>
 									<Box
 										key={skillTrainingSession.id}
 										sx={{ display: "flex", alignItems: "center" }}
@@ -122,11 +125,7 @@ const TrainingProgrammeLog = ({
 										</Typography>
 									</Box>
 									{skillTrainingSession.notes.length > 0 ? (
-										<Box
-											sx={{ display: "flex", borderBottom: 1 }}
-											pb={1}
-											mt={1}
-										>
+										<Box sx={{ display: "flex" }} pb={1} mt={1}>
 											<Typography fontWeight={600} mr={1}>
 												Trainer Notes:
 											</Typography>

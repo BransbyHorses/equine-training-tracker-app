@@ -15,7 +15,7 @@ const progressTagPalette = {
 	"Not able": "#f6d7d2",
 	"Just started": "#d2e2f1",
 	"Ok with limits": "#1d70b8",
-	Confident: "#005a30",
+	"Confident": "#005a30",
 };
 
 const TrainingProgrammeSkills = ({

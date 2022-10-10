@@ -1,5 +1,5 @@
-import {Grid, Paper, Box, Typography} from "@mui/material";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import {Box, Grid, Link, Paper, Typography} from "@mui/material";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import React from "react";
 
 export default function SecondaryButton(props:any){
@@ -17,7 +17,9 @@ export default function SecondaryButton(props:any){
                     }}
                 >
                     <Typography variant="h6">{props.buttonText}</Typography>
-                    <ArrowRightIcon fontSize="large" />
+                    <Link color="inherit" href={props.link}>
+                         <KeyboardArrowRightIcon fontSize='large' />
+                    </Link>
                 </Box>
             </Paper>
     </Grid>

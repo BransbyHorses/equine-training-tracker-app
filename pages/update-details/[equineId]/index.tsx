@@ -6,27 +6,32 @@ import {
 import SecondaryButton from '../../../components/SecondaryButton';
 import PageTitle from '../../../components/PageTitle';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
+import PageContainer from "../../../components/PageContainer";
+import { useRouter } from "next/router";
+import { useEquine } from "../../../utils/hooks/equine";
 
 
 
-const UpdateDetails = () => {
+export default function UpdateDetails() {
+
+	const router = useRouter();
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	
+	useEffect(() => {
+		if (router.isReady) {
+			setEquineId(router.query.equineId);
+		}
+	}, [router.isReady]);
 
 	return (
 		<>
-			<BackBreadcrumb link="/" />
-			<Container
-			sx={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-			>
-				
+			<PageContainer>
+				<BackBreadcrumb link="/" />
 				<PageTitle title="Update details" />
 				<Grid container rowSpacing={3} columnSpacing={3}>
 					<SecondaryButton 
 						buttonText="Start training programme"
+						link={`/start-training-programme/${equineId}`}
 					/>
 					<SecondaryButton 
 						buttonText="Change type of learner"
@@ -38,9 +43,7 @@ const UpdateDetails = () => {
 						buttonText="End training"
 					/>
 				</Grid>
-			</Container>
+				</PageContainer>
 		</>
 	);
 };
-
-export default UpdateDetails;

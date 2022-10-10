@@ -14,6 +14,9 @@ import {
 	FormControl,
 	Select,
 	MenuItem,
+	Tab,
+	Tabs,
+	AppBar,
 } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -28,13 +31,13 @@ const TrainingProgrammePage = () => {
 	>(undefined);
 	const { fetchingData, trainingProgramme, error } =
 		useTrainingProgramme(trainingProgrammeId);
+	const [tabView, setTabView] = useState(0);
 
 	useEffect(() => {
 		if (router.isReady) {
 			settrainingProgrammeId(router.query["trainingProgrammeId"]);
 		}
 	}, [router.isReady]);
-
 
 	if (error) {
 		return (
@@ -54,6 +57,26 @@ const TrainingProgrammePage = () => {
 		);
 	}
 
+	const handleTabChange = () => {
+		setTabView(tabView === 0 ? 1 : 0);
+	};
+
+	function TabPanel(props) {
+		const { children, value, index, ...other } = props;
+
+		return (
+			<div
+				role="tabpanel"
+				hidden={value !== index}
+				id={`simple-tabpanel-${index}`}
+				aria-labelledby={`simple-tab-${index}`}
+				{...other}
+			>
+				{value === index && <>{children}</>}
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<Breadcrumbs>
@@ -66,12 +89,28 @@ const TrainingProgrammePage = () => {
 					<ArrowLeftIcon /> Back
 				</Link>
 			</Breadcrumbs>
-			<TrainingProgrammeSkills
-				skillProgressRecords={trainingProgramme?.skillProgressRecords}
-			/>
-			<TrainingProgrammeLog
-				skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
-			/>
+
+			<Tabs
+				value={tabView}
+				onChange={handleTabChange}
+				variant="fullWidth"
+				indicatorColor="secondary"
+				textColor="inherit"
+				sx={{ borderBottom: 1, borderColor: "divider", marginTop: "16px" }}
+			>
+				<Tab label={`Skills Record`} value={0}></Tab>
+				<Tab label={`Training Log`} value={1}></Tab>
+			</Tabs>
+			<TabPanel value={tabView} index={0}>
+				<TrainingProgrammeSkills
+					skillProgressRecords={trainingProgramme?.skillProgressRecords}
+				/>
+			</TabPanel>
+			<TabPanel value={tabView} index={1}>
+				<TrainingProgrammeLog
+					skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
+				/>
+			</TabPanel>
 		</>
 	);
 };

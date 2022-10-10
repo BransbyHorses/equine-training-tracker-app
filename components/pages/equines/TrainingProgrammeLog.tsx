@@ -29,14 +29,13 @@ const TrainingProgrammeLog = ({
 				mt={4}
 				sx={{
 					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "flex-end",
 				}}
 			>
-				<Typography variant="h5" color="gray">
-					Training Log ({skillTrainingSessions && skillTrainingSessions.length})
-				</Typography>
-				<FormControl size="small" variant="outlined" sx={{ minWidth: "150px" }}>
+				<FormControl
+					size="small"
+					variant="outlined"
+					sx={{ minWidth: "150px", marginLeft: "auto" }}
+				>
 					<Select
 						id="trainingLogFilter"
 						value={trainingLogFilter}

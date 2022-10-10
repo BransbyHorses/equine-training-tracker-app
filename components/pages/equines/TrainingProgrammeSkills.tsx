@@ -15,7 +15,7 @@ const progressTagPalette = {
 	"Not able": "#f6d7d2",
 	"Just started": "#d2e2f1",
 	"Ok with limits": "#1d70b8",
-	"Confident": "#005a30",
+	Confident: "#005a30",
 };
 
 const TrainingProgrammeSkills = ({
@@ -109,14 +109,13 @@ const TrainingProgrammeSkills = ({
 				mt={4}
 				sx={{
 					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "flex-end",
 				}}
 			>
-				<Typography variant="h5" color="gray">
-					Skill Records
-				</Typography>
-				<FormControl size="small" variant="outlined" sx={{ minWidth: "150px" }}>
+				<FormControl
+					size="small"
+					variant="outlined"
+					sx={{ minWidth: "150px", marginLeft: "auto" }}
+				>
 					<Select
 						id="progressCode"
 						value={skillsFilter}
@@ -127,8 +126,7 @@ const TrainingProgrammeSkills = ({
 					</Select>
 				</FormControl>
 			</Box>
-			<hr style={{ margin: "16px 0" }} />
-			<Box>
+			<Box mt={2}>
 				{trainingProgrammeSkills && mapSkillProgressRecords()}
 				{trainingProgrammeSkills && trainingProgrammeSkills.length === 0 && (
 					<Typography>

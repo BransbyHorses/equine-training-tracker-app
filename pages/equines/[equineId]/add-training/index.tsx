@@ -17,6 +17,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../../../components/LinkButton';
 import PageTitle from '../../../../components/PageTitle';
 import AutoCompleteBox from '../../../../components/AutoCompleteBox';
+import QuestionTitle from '../../../../components/QuestionTitle';
 
 interface WithRouterProps {
     router: NextRouter;
@@ -142,62 +143,70 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                     alignItems: 'center'
                 }}
             >
-                <PageTitle
-                    title={`Which skill did you train ${equine.name} on?`}
-                    sx={{ justifySelf: 'start' }}
-                />
-                {skills ? (
-                    <FormControl sx={{ width: '100%' }}>
-                        <InputLabel id="skills_label" required>
-                            Skills
-                        </InputLabel>
-                        <Select
-                            labelId="skills_label"
-                            label="skills"
-                            name="skills"
-                            defaultValue=""
+                <Box sx={{ marginBottom: "50px"}}>
+                    <QuestionTitle
+                        title={`Which skill did you train ${equine.name} on?`}
+                        sx={{ justifySelf: 'start' }}
+                    />
+                    {skills ? (
+                        <FormControl sx={{ width: '100%' }}>
+                            <InputLabel id="skills_label" required>
+                                Skills
+                            </InputLabel>
+                            <Select
+                                labelId="skills_label"
+                                label="skills"
+                                name="skills"
+                                defaultValue=""
+                                // onChange={handleChange}
+                            >
+                                {skills.map(skill => {
+                                    return (
+                                        <MenuItem
+                                            value={skill.name}
+                                            key={skill.id}
+                                        >
+                                            {skill.name}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                    ) : null}
+                </Box>
 
-                            // onChange={handleChange}
-                        >
-                            {skills.map(skill => {
-                                return (
-                                    <MenuItem value={skill.name} key={skill.id}>
-                                        {skill.name}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                ) : null}
+                <Box sx={{ marginBottom: "20px"}}>
+                    <QuestionTitle
+                        title={`Which method did you use?`}
+                        sx={{ justifySelf: 'start' }}
+                    />
 
-                <PageTitle
-                    title={`Which method did you use?`}
-                    sx={{ justifySelf: 'start' }}
-                />
-
-                {trainingMethods ? (
-                    <FormControl sx={{ width: '100%' }}>
-                        <InputLabel id="training_methods_label" required>
-                            Training Methods
-                        </InputLabel>
-                        <Select
-                            labelId="training_methods_label"
-                            label="training methods"
-                            name="training methods"
-                            defaultValue=""
-
-                            // onChange={handleChange}
-                        >
-                            {trainingMethods.map(trainingMethod => {
-                                return (
-                                    <MenuItem value={trainingMethod.name} key={trainingMethod.id}>
-                                        {trainingMethod.name}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                ) : null}
+                    {trainingMethods ? (
+                        <FormControl sx={{ width: '100%' }}>
+                            <InputLabel id="training_methods_label" required>
+                                Training Methods
+                            </InputLabel>
+                            <Select
+                                labelId="training_methods_label"
+                                label="training methods"
+                                name="training methods"
+                                defaultValue=""
+                                // onChange={handleChange}
+                            >
+                                {trainingMethods.map(trainingMethod => {
+                                    return (
+                                        <MenuItem
+                                            value={trainingMethod.name}
+                                            key={trainingMethod.id}
+                                        >
+                                            {trainingMethod.name}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                    ) : null}
+                </Box>
 
                 <LinkButton
                     buttonHref="/admin/equines"

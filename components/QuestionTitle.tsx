@@ -11,7 +11,6 @@ export default function PageTitle(props: any) {
                     fontSize: '24px',
                     fontWeight: '700',
                     color: 'common.black',
-                    marginBottom: "35px"
                 }}
             >
                 {props.title}

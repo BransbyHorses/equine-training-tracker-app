@@ -60,7 +60,7 @@ const AddTraining: React.FC<MyComponentProps> = props => {
     interface EquineTraining extends Array<Training> {}
 
     interface EquineSkills extends Array<Skills> {}
-    
+
     interface EquineTrainingMethods extends Array<TrainingMethods> {}
 
     const [equine, setEquine] = useState<MyEquine>({
@@ -95,13 +95,15 @@ const AddTraining: React.FC<MyComponentProps> = props => {
             name: ''
         }
     ]);
-    const [trainingMethods, setTrainingMethods] = useState<EquineTrainingMethods>([
-      {
-        description: "",
-        id: 0,
-        name: ""
-      }
-    ])
+    const [trainingMethods, setTrainingMethods] = useState<
+        EquineTrainingMethods
+    >([
+        {
+            description: '',
+            id: 0,
+            name: ''
+        }
+    ]);
 
     const router = useRouter();
 
@@ -134,88 +136,83 @@ const AddTraining: React.FC<MyComponentProps> = props => {
     }, [router.isReady]);
 
     return (
-        <Container>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                    alignItems: 'center'
-                }}
-            >
-                <Box sx={{ marginBottom: "50px"}}>
-                    <QuestionTitle
-                        title={`Which skill did you train ${equine.name} on?`}
-                        sx={{ justifySelf: 'start' }}
-                    />
-                    {skills ? (
-                        <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="skills_label" required>
-                                Skills
-                            </InputLabel>
-                            <Select
-                                labelId="skills_label"
-                                label="skills"
-                                name="skills"
-                                defaultValue=""
-                                // onChange={handleChange}
-                            >
-                                {skills.map(skill => {
-                                    return (
-                                        <MenuItem
-                                            value={skill.name}
-                                            key={skill.id}
-                                        >
-                                            {skill.name}
-                                        </MenuItem>
-                                    );
-                                })}
-                            </Select>
-                        </FormControl>
-                    ) : null}
-                </Box>
-
-                <Box sx={{ marginBottom: "20px"}}>
-                    <QuestionTitle
-                        title={`Which method did you use?`}
-                        sx={{ justifySelf: 'start' }}
-                    />
-
-                    {trainingMethods ? (
-                        <FormControl sx={{ width: '100%' }}>
-                            <InputLabel id="training_methods_label" required>
-                                Training Methods
-                            </InputLabel>
-                            <Select
-                                labelId="training_methods_label"
-                                label="training methods"
-                                name="training methods"
-                                defaultValue=""
-                                // onChange={handleChange}
-                            >
-                                {trainingMethods.map(trainingMethod => {
-                                    return (
-                                        <MenuItem
-                                            value={trainingMethod.name}
-                                            key={trainingMethod.id}
-                                        >
-                                            {trainingMethod.name}
-                                        </MenuItem>
-                                    );
-                                })}
-                            </Select>
-                        </FormControl>
-                    ) : null}
-                </Box>
-
-                <LinkButton
-                    buttonHref="/admin/equines"
-                    variant="contained"
-                    size="Large"
-                    color="white"
-                    action="Continue"
+        <Container
+            sx={{
+                display: 'flex',
+                height: '100vh',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                alignItems: 'center'
+            }}
+        >
+            <Box>
+                <QuestionTitle
+                    title={`Which skill did you train ${equine.name} on?`}
+                    sx={{ justifySelf: 'start' }}
                 />
+                {skills ? (
+                    <FormControl sx={{ width: '100%' }}>
+                        <InputLabel id="skills_label" required>
+                            Skills
+                        </InputLabel>
+                        <Select
+                            labelId="skills_label"
+                            label="skills"
+                            name="skills"
+                            defaultValue=""
+                            // onChange={handleChange}
+                        >
+                            {skills.map(skill => {
+                                return (
+                                    <MenuItem value={skill.name} key={skill.id}>
+                                        {skill.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                ) : null}
             </Box>
+            <Box>
+                <QuestionTitle
+                    title={`Which method did you use?`}
+                    sx={{ justifySelf: 'start' }}
+                />
+
+                {trainingMethods ? (
+                    <FormControl sx={{ width: '100%' }}>
+                        <InputLabel id="training_methods_label" required>
+                            Training Methods
+                        </InputLabel>
+                        <Select
+                            labelId="training_methods_label"
+                            label="training methods"
+                            name="training methods"
+                            defaultValue=""
+                            // onChange={handleChange}
+                        >
+                            {trainingMethods.map(trainingMethod => {
+                                return (
+                                    <MenuItem
+                                        value={trainingMethod.name}
+                                        key={trainingMethod.id}
+                                    >
+                                        {trainingMethod.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                ) : null}
+            </Box>
+
+            <LinkButton
+                buttonHref="/admin/equines"
+                variant="contained"
+                size="Large"
+                color="white"
+                action="Continue"
+            />
         </Container>
     );
 };

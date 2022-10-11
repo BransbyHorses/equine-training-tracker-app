@@ -130,6 +130,7 @@ export default function Home() {
 			<Box
 				sx={{
 					marginBottom: "20px",
+					marginTop: "20px",
 					[theme.breakpoints.between("sm", "xl")]: {
 						display: "flex",
 					},

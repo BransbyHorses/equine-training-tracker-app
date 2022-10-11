@@ -4,20 +4,7 @@ import { useRouter } from "next/router";
 import { useTrainingProgramme } from "../../../../utils/hooks/trainingProgrammes";
 import { ProgressCode, SkillProgressRecord } from "../../../../utils/types";
 
-import {
-	Breadcrumbs,
-	Link,
-	Typography,
-	Box,
-	Alert,
-	Paper,
-	FormControl,
-	Select,
-	MenuItem,
-	Tab,
-	Tabs,
-	AppBar,
-} from "@mui/material";
+import { Breadcrumbs, Link, Box, Alert, Tab, Tabs } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
@@ -99,7 +86,10 @@ const TrainingProgrammePage = () => {
 				sx={{ borderBottom: 1, borderColor: "divider", marginTop: "16px" }}
 			>
 				<Tab label={`Skills Record`} value={0}></Tab>
-				<Tab label={`Training Log`} value={1}></Tab>
+				<Tab
+					label={`Training Log (${trainingProgramme?.skillTrainingSessions.length})`}
+					value={1}
+				></Tab>
 			</Tabs>
 			<TabPanel value={tabView} index={0}>
 				<TrainingProgrammeSkills

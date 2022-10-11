@@ -100,7 +100,14 @@ const TrainingProgrammeSkills = ({
 								alignItems: "center",
 							}}
 						>
-							<Box>
+							<Box
+								sx={{
+									[theme.breakpoints.between("md", "xl")]: {
+										display: "flex",
+										flexDirection: "row",
+									},
+								}}
+							>
 								<Box
 									sx={{
 										display: "flex",
@@ -118,7 +125,7 @@ const TrainingProgrammeSkills = ({
 												margin: "8px 0",
 											},
 											[theme.breakpoints.between("sm", "xl")]: {
-												margin: "0 0 0 16px",
+												margin: "0 16px",
 											},
 										}}
 									>

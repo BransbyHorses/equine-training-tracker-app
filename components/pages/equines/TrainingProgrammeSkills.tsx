@@ -18,6 +18,7 @@ import {
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { convertDateToString } from "../../../utils/helpers";
+import Link from "next/link";
 
 const progressTagPalette = {
 	"Not able": "#f6d7d2",
@@ -29,9 +30,11 @@ const progressTagPalette = {
 const TrainingProgrammeSkills = ({
 	skillProgressRecords,
 	skillTrainingSessions,
+	setSkillsFocus,
 }: {
 	skillProgressRecords: SkillProgressRecord[];
 	skillTrainingSessions: SkillTrainingSession[];
+	setSkillsFocus: (id: number) => void;
 }) => {
 	const theme = useTheme();
 	const [skillsFilter, setSkillsFilter] = useState("all");
@@ -90,76 +93,78 @@ const TrainingProgrammeSkills = ({
 					);
 
 				return (
-					<Paper key={skillProgessRecord.id}>
-						<Box
-							p={2}
-							mt={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
+					<Box onClick={() => setSkillsFocus(skillProgessRecord.skill.id)}>
+						<Paper key={skillProgessRecord.id}>
 							<Box
+								p={2}
+								mt={2}
 								sx={{
-									[theme.breakpoints.between("md", "xl")]: {
-										display: "flex",
-										flexDirection: "row",
-									},
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
 								}}
 							>
 								<Box
 									sx={{
-										display: "flex",
-										[theme.breakpoints.between("xs", "sm")]: {
-											flexDirection: "column",
+										[theme.breakpoints.between("md", "xl")]: {
+											display: "flex",
+											flexDirection: "row",
 										},
 									}}
 								>
-									<Typography fontWeight={600}>
-										{skillProgessRecord.skill.name}
-									</Typography>
 									<Box
 										sx={{
+											display: "flex",
 											[theme.breakpoints.between("xs", "sm")]: {
-												margin: "8px 0",
-											},
-											[theme.breakpoints.between("sm", "xl")]: {
-												margin: "0 16px",
+												flexDirection: "column",
 											},
 										}}
 									>
-										<div
-											style={{
-												width: "fit-content",
-												padding: "2px 10px",
-												textAlign: "center",
-												backgroundColor:
-													progressTagPalette[
-														skillProgessRecord.progressCode.string
-													],
-												color:
-													skillProgessRecord.progressCode.string ===
-														ProgressCode["Not able"] ||
-													skillProgessRecord.progressCode.string ===
-														ProgressCode["Just started"]
-														? "black"
-														: "white",
+										<Typography fontWeight={600}>
+											{skillProgessRecord.skill.name}
+										</Typography>
+										<Box
+											sx={{
+												[theme.breakpoints.between("xs", "sm")]: {
+													margin: "8px 0",
+												},
+												[theme.breakpoints.between("sm", "xl")]: {
+													margin: "0 16px",
+												},
 											}}
 										>
-											<Typography fontWeight={500}>
-												{skillProgessRecord.progressCode.string}
-											</Typography>
-										</div>
+											<div
+												style={{
+													width: "fit-content",
+													padding: "2px 10px",
+													textAlign: "center",
+													backgroundColor:
+														progressTagPalette[
+															skillProgessRecord.progressCode.string
+														],
+													color:
+														skillProgessRecord.progressCode.string ===
+															ProgressCode["Not able"] ||
+														skillProgessRecord.progressCode.string ===
+															ProgressCode["Just started"]
+															? "black"
+															: "white",
+												}}
+											>
+												<Typography fontWeight={500}>
+													{skillProgessRecord.progressCode.string}
+												</Typography>
+											</div>
+										</Box>
 									</Box>
+									<Typography color="gray">
+										<small>{lastTrainingSession}</small>
+									</Typography>
 								</Box>
-								<Typography color="gray">
-									<small>{lastTrainingSession}</small>
-								</Typography>
+								<KeyboardArrowRightIcon fontSize="large" />
 							</Box>
-							<KeyboardArrowRightIcon fontSize="large" />
-						</Box>
-					</Paper>
+						</Paper>
+					</Box>
 				);
 			});
 	};

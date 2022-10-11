@@ -11,6 +11,22 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import TrainingProgrammeLog from "../../../../components/pages/equines/TrainingProgrammeLog";
 import TrainingProgrammeSkills from "../../../../components/pages/equines/TrainingProgrammeSkills";
 
+function TabPanel(props: any) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
+			{value === index && <>{children}</>}
+		</div>
+	);
+}
+
 const TrainingProgrammePage = () => {
 	const router = useRouter();
 	const [trainingProgrammeId, settrainingProgrammeId] = useState<
@@ -19,12 +35,29 @@ const TrainingProgrammePage = () => {
 	const { fetchingData, trainingProgramme, error } =
 		useTrainingProgramme(trainingProgrammeId);
 	const [tabView, setTabView] = useState(0);
+	const [skillFocus, setSkillFocus] = useState<number>(0);
+
+	console.log(skillFocus);
 
 	useEffect(() => {
 		if (router.isReady) {
 			settrainingProgrammeId(router.query["trainingProgrammeId"]);
 		}
 	}, [router.isReady]);
+
+	useEffect(() => {
+		if (router.query["skill"]) {
+			setSkillFocus(router.query["skill"]);
+		}
+	}, [router]);
+
+	const directToSkillLog = (id: number) => {
+		router.push(
+			`/equines/${trainingProgramme?.equine.id}/training-programmes/${trainingProgramme?.id}?skill=${id}`,
+			undefined,
+			{ shallow: true }
+		);
+	};
 
 	if (error) {
 		return (
@@ -41,22 +74,6 @@ const TrainingProgrammePage = () => {
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<LoadingSpinner />
 			</Box>
-		);
-	}
-
-	function TabPanel(props) {
-		const { children, value, index, ...other } = props;
-
-		return (
-			<div
-				role="tabpanel"
-				hidden={value !== index}
-				id={`simple-tabpanel-${index}`}
-				aria-labelledby={`simple-tab-${index}`}
-				{...other}
-			>
-				{value === index && <>{children}</>}
-			</div>
 		);
 	}
 
@@ -89,8 +106,9 @@ const TrainingProgrammePage = () => {
 			</Tabs>
 			<TabPanel value={tabView} index={0}>
 				<TrainingProgrammeSkills
-					skillProgressRecords={trainingProgramme?.skillProgressRecords}
-					skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
+					skillProgressRecords={trainingProgramme?.skillProgressRecords!}
+					skillTrainingSessions={trainingProgramme?.skillTrainingSessions!}
+					setSkillsFocus={directToSkillLog}
 				/>
 			</TabPanel>
 			<TabPanel value={tabView} index={1}>

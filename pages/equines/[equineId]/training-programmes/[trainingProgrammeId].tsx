@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
 import { useTrainingProgramme } from "../../../../utils/hooks/trainingProgrammes";
-import { ProgressCode, SkillProgressRecord } from "../../../../utils/types";
+
+import TrainingProgrammeLog from "../../../../components/pages/equines/TrainingProgrammeLog";
+import TrainingProgrammeSkills from "../../../../components/pages/equines/TrainingProgrammeSkills";
+import SkillLog from "../../../../components/pages/equines/SkillLog";
 
 import { Breadcrumbs, Link, Box, Alert, Tab, Tabs } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import TrainingProgrammeLog from "../../../../components/pages/equines/TrainingProgrammeLog";
-import TrainingProgrammeSkills from "../../../../components/pages/equines/TrainingProgrammeSkills";
 
 function TabPanel(props: any) {
 	const { children, value, index, ...other } = props;
@@ -37,8 +36,6 @@ const TrainingProgrammePage = () => {
 	const [tabView, setTabView] = useState(0);
 	const [skillFocus, setSkillFocus] = useState<number>(0);
 
-	console.log(skillFocus);
-
 	useEffect(() => {
 		if (router.isReady) {
 			settrainingProgrammeId(router.query["trainingProgrammeId"]);
@@ -48,6 +45,8 @@ const TrainingProgrammePage = () => {
 	useEffect(() => {
 		if (router.query["skill"]) {
 			setSkillFocus(router.query["skill"]);
+		} else {
+			setSkillFocus(0);
 		}
 	}, [router]);
 
@@ -89,33 +88,46 @@ const TrainingProgrammePage = () => {
 					<ArrowLeftIcon /> Back
 				</Link>
 			</Breadcrumbs>
-
-			<Tabs
-				value={tabView}
-				onChange={() => setTabView(tabView === 0 ? 1 : 0)}
-				variant="fullWidth"
-				indicatorColor="secondary"
-				textColor="inherit"
-				sx={{ borderBottom: 1, borderColor: "divider", marginTop: "16px" }}
-			>
-				<Tab label={`Skills Record`} value={0}></Tab>
-				<Tab
-					label={`Training Log (${trainingProgramme?.skillTrainingSessions.length})`}
-					value={1}
-				></Tab>
-			</Tabs>
-			<TabPanel value={tabView} index={0}>
-				<TrainingProgrammeSkills
-					skillProgressRecords={trainingProgramme?.skillProgressRecords!}
-					skillTrainingSessions={trainingProgramme?.skillTrainingSessions!}
-					setSkillsFocus={directToSkillLog}
+			{skillFocus > 0 ? (
+				<SkillLog
+					skillProgressRecord={trainingProgramme?.skillProgressRecords.filter(
+						(skillProgressRecord) => skillProgressRecord.skill.id == skillFocus
+					)[0]}
+					skillTrainingSessions={trainingProgramme?.skillTrainingSessions.filter(
+						(skillTrainingSession) =>
+							skillTrainingSession.skill.id == skillFocus
+					)}
 				/>
-			</TabPanel>
-			<TabPanel value={tabView} index={1}>
-				<TrainingProgrammeLog
-					skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
-				/>
-			</TabPanel>
+			) : (
+				<>
+					<Tabs
+						value={tabView}
+						onChange={() => setTabView(tabView === 0 ? 1 : 0)}
+						variant="fullWidth"
+						indicatorColor="secondary"
+						textColor="inherit"
+						sx={{ borderBottom: 1, borderColor: "divider", marginTop: "16px" }}
+					>
+						<Tab label={`Skills Record`} value={0}></Tab>
+						<Tab
+							label={`Training Log (${trainingProgramme?.skillTrainingSessions.length})`}
+							value={1}
+						></Tab>
+					</Tabs>
+					<TabPanel value={tabView} index={0}>
+						<TrainingProgrammeSkills
+							skillProgressRecords={trainingProgramme?.skillProgressRecords!}
+							skillTrainingSessions={trainingProgramme?.skillTrainingSessions!}
+							setSkillsFocus={directToSkillLog}
+						/>
+					</TabPanel>
+					<TabPanel value={tabView} index={1}>
+						<TrainingProgrammeLog
+							skillTrainingSessions={trainingProgramme?.skillTrainingSessions}
+						/>
+					</TabPanel>
+				</>
+			)}
 		</>
 	);
 };

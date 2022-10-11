@@ -173,7 +173,7 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                     </FormControl>
                 ) : null}
             </Box>
-            <Box>
+            <Box sx={{ width: "100%", justifyContent: "start"}}>
                 <QuestionTitle
                     title={`Which method did you use?`}
                     sx={{ justifySelf: 'start' }}

@@ -90,9 +90,12 @@ const TrainingProgrammePage = () => {
 			</Breadcrumbs>
 			{skillFocus > 0 ? (
 				<SkillLog
-					skillProgressRecord={trainingProgramme?.skillProgressRecords.filter(
-						(skillProgressRecord) => skillProgressRecord.skill.id == skillFocus
-					)[0]}
+					skillProgressRecord={
+						trainingProgramme?.skillProgressRecords.filter(
+							(skillProgressRecord) =>
+								skillProgressRecord.skill.id == skillFocus
+						)[0]
+					}
 					skillTrainingSessions={trainingProgramme?.skillTrainingSessions.filter(
 						(skillTrainingSession) =>
 							skillTrainingSession.skill.id == skillFocus

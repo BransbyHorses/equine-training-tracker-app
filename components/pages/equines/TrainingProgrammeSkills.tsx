@@ -24,7 +24,7 @@ const progressTagPalette = {
 	"Not able": "#f6d7d2",
 	"Just started": "#d2e2f1",
 	"Ok with limits": "#1d70b8",
-	Confident: "#005a30",
+	"Confident": "#005a30",
 };
 
 const TrainingProgrammeSkills = ({
@@ -73,11 +73,11 @@ const TrainingProgrammeSkills = ({
 				if (a.skill.name > b.skill.name) return 1;
 				return 0;
 			})
-			.map((skillProgessRecord, i) => {
+			.map((skillProgressRecord, i) => {
 				const sortedSkillTrainingSessions = skillTrainingSessions
 					.filter(
 						(skillTrainingSession) =>
-							skillTrainingSession.skill.id === skillProgessRecord.skill.id
+							skillTrainingSession.skill.id === skillProgressRecord.skill.id
 					)
 					.sort((a, b) => {
 						new Date(b.date) - new Date(a.date);
@@ -93,8 +93,8 @@ const TrainingProgrammeSkills = ({
 					);
 
 				return (
-					<Box onClick={() => setSkillsFocus(skillProgessRecord.skill.id)}>
-						<Paper key={skillProgessRecord.id}>
+					<Box onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}>
+						<Paper key={skillProgressRecord.id}>
 							<Box
 								p={2}
 								mt={2}
@@ -121,7 +121,7 @@ const TrainingProgrammeSkills = ({
 										}}
 									>
 										<Typography fontWeight={600}>
-											{skillProgessRecord.skill.name}
+											{skillProgressRecord.skill.name}
 										</Typography>
 										<Box
 											sx={{
@@ -140,19 +140,19 @@ const TrainingProgrammeSkills = ({
 													textAlign: "center",
 													backgroundColor:
 														progressTagPalette[
-															skillProgessRecord.progressCode.string
+															skillProgressRecord.progressCode.string
 														],
 													color:
-														skillProgessRecord.progressCode.string ===
+														skillProgressRecord.progressCode.string ===
 															ProgressCode["Not able"] ||
-														skillProgessRecord.progressCode.string ===
+														skillProgressRecord.progressCode.string ===
 															ProgressCode["Just started"]
 															? "black"
 															: "white",
 												}}
 											>
 												<Typography fontWeight={500}>
-													{skillProgessRecord.progressCode.string}
+													{skillProgressRecord.progressCode.string}
 												</Typography>
 											</div>
 										</Box>

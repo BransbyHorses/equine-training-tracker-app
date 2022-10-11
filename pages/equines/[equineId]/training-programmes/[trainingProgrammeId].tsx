@@ -48,22 +48,6 @@ const TrainingProgrammePage = () => {
 		setTabView(tabView === 0 ? 1 : 0);
 	};
 
-	function TabPanel(props) {
-		const { children, value, index, ...other } = props;
-
-		return (
-			<div
-				role="tabpanel"
-				hidden={value !== index}
-				id={`simple-tabpanel-${index}`}
-				aria-labelledby={`simple-tab-${index}`}
-				{...other}
-			>
-				{value === index && <>{children}</>}
-			</div>
-		);
-	}
-
 	return (
 		<>
 			<Breadcrumbs>
@@ -79,7 +63,7 @@ const TrainingProgrammePage = () => {
 
 			<Tabs
 				value={tabView}
-				onChange={handleTabChange}
+				onChange={() => setTabView(tabView === 0 ? 1 : 0)}
 				variant="fullWidth"
 				indicatorColor="secondary"
 				textColor="inherit"

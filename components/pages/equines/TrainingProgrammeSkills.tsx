@@ -13,8 +13,10 @@ import {
 	MenuItem,
 	Paper,
 	useTheme,
+	Button,
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { convertDateToString } from "../../../utils/helpers";
 
 const progressTagPalette = {
@@ -163,13 +165,34 @@ const TrainingProgrammeSkills = ({
 					display: "flex",
 				}}
 			>
+				<Button
+					color="primary"
+					variant="contained"
+					sx={{
+						[theme.breakpoints.between("xs", "md")]: {
+							width: "50%",
+							marginRight: "8px",
+						},
+						[theme.breakpoints.between("md", "xl")]: {
+							width: "200px",
+							marginLeft: "auto",
+							marginRight: "16px",
+						},
+					}}
+				>
+					Log training &nbsp;
+					<AddCircleIcon fontSize="medium" />
+				</Button>
 				<FormControl
 					size="small"
 					variant="outlined"
 					sx={{
-						minWidth: "150px",
-						marginLeft: "auto",
-						color: "primary.main",
+						[theme.breakpoints.between("xs", "md")]: {
+							width: "50%",
+						},
+						[theme.breakpoints.between("md", "xl")]: {
+							width: "200px",
+						},
 					}}
 				>
 					<Select

@@ -12,12 +12,10 @@ import {
 	Select,
 	MenuItem,
 	Paper,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
+	useTheme,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import SkillsTimeLine from "./SkillsTimeLine";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { convertDateToString } from "../../../utils/helpers";
 
 const progressTagPalette = {
 	"Not able": "#f6d7d2",
@@ -30,9 +28,10 @@ const TrainingProgrammeSkills = ({
 	skillProgressRecords,
 	skillTrainingSessions,
 }: {
-	skillProgressRecords?: SkillProgressRecord[];
-	skillTrainingSessions?: SkillTrainingSession[];
+	skillProgressRecords: SkillProgressRecord[];
+	skillTrainingSessions: SkillTrainingSession[];
 }) => {
+	const theme = useTheme();
 	const [skillsFilter, setSkillsFilter] = useState("all");
 	const [trainingProgrammeSkills, setTrainingProgrammeSkills] = useState<
 		SkillProgressRecord[] | undefined
@@ -40,7 +39,6 @@ const TrainingProgrammeSkills = ({
 
 	const handleSkillsFilterChange = (event) => {
 		setSkillsFilter(event.target.value);
-
 		event.target.value === "all"
 			? setTrainingProgrammeSkills(skillProgressRecords)
 			: setTrainingProgrammeSkills(
@@ -65,30 +63,62 @@ const TrainingProgrammeSkills = ({
 
 	const mapSkillProgressRecords = () => {
 		return trainingProgrammeSkills?.map((skillProgessRecord, i) => {
+			const sortedSkillTrainingSessions = skillTrainingSessions
+				.filter(
+					(skillTrainingSession) =>
+						skillTrainingSession.skill.id === skillProgessRecord.skill.id
+				)
+				.sort((a, b) => {
+					new Date(b.date) - new Date(a.date);
+				});
+
+			const lastTrainingSession =
+				sortedSkillTrainingSessions.length === 0 ? (
+					<span>No training sessions</span>
+				) : (
+					`Last trained on ${convertDateToString(
+						sortedSkillTrainingSessions[0].date
+					)}`
+				);
+
 			return (
 				<Paper key={skillProgessRecord.id}>
-					<Accordion>
-						<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="large" />}>
+					<Box
+						p={2}
+						mt={2}
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+						}}
+					>
+						<Box>
 							<Box
 								sx={{
 									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
+									[theme.breakpoints.between("xs", "sm")]: {
+										flexDirection: "column",
+									},
 								}}
 							>
+								<Typography fontWeight={600}>
+									{skillProgessRecord.skill.name}
+								</Typography>
 								<Box
 									sx={{
-										display: "flex",
-										alignItems: "center",
+										[theme.breakpoints.between("xs", "sm")]: {
+											margin: "8px 0",
+										},
+										[theme.breakpoints.between("sm", "xl")]: {
+											margin: "0 0 0 16px",
+										},
 									}}
 								>
-									<Typography fontWeight={600}>
-										{skillProgessRecord.skill.name}
-									</Typography>
 									<div
 										style={{
-											marginLeft: "24px",
+											width: "fit-content",
 											padding: "2px 10px",
+											textAlign: "center",
 											backgroundColor:
 												progressTagPalette[
 													skillProgessRecord.progressCode.string
@@ -108,17 +138,12 @@ const TrainingProgrammeSkills = ({
 									</div>
 								</Box>
 							</Box>
-						</AccordionSummary>
-						<AccordionDetails>
-							<SkillsTimeLine
-								skillTrainingSessions={skillTrainingSessions?.filter(
-									(skillTrainingSession) =>
-										skillTrainingSession.skill.id ===
-										skillProgessRecord.skill.id
-								)}
-							/>
-						</AccordionDetails>
-					</Accordion>
+							<Typography color="gray">
+								<small>{lastTrainingSession}</small>
+							</Typography>
+						</Box>
+						<KeyboardArrowRightIcon fontSize="large" />
+					</Box>
 				</Paper>
 			);
 		});
@@ -135,7 +160,11 @@ const TrainingProgrammeSkills = ({
 				<FormControl
 					size="small"
 					variant="outlined"
-					sx={{ minWidth: "150px", marginLeft: "auto" }}
+					sx={{
+						minWidth: "150px",
+						marginLeft: "auto",
+						color: "primary.main",
+					}}
 				>
 					<Select
 						id="progressCode"
@@ -151,7 +180,7 @@ const TrainingProgrammeSkills = ({
 				{trainingProgrammeSkills && mapSkillProgressRecords()}
 				{trainingProgrammeSkills && trainingProgrammeSkills.length === 0 && (
 					<Typography>
-						<em>No skills marked as "{skillsFilter}"</em>
+						<em>No skills are marked as "{skillsFilter}"</em>
 					</Typography>
 				)}
 			</Box>

@@ -97,7 +97,7 @@ const TrainingProgrammePage = () => {
 					<ArrowLeftIcon /> Back
 				</Link>
 			</Breadcrumbs>
-			<Box pb={2} mt={3} sx={{ borderBottom: "0.55px solid gray" }}>
+			<Box pb={2} my={3} sx={{ borderBottom: "0.55px solid gray" }}>
 				<Typography variant="h5" color="gray">
 					{trainingProgramme?.equine.name}
 				</Typography>

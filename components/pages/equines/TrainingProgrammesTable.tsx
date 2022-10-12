@@ -29,7 +29,10 @@ const TrainingProgrammesTable = ({
 								</Typography>
 								<Typography>
 									{trainingProgramme.skillTrainingSessions.length} Completed
-									Training Sessions
+									Training
+									{trainingProgramme.skillTrainingSessions.length > 1
+										? " Sessions"
+										: " Session"}
 								</Typography>
 							</Box>
 						) : (
@@ -50,7 +53,10 @@ const TrainingProgrammesTable = ({
 						</Typography>
 						<Typography>
 							{trainingProgramme.skillTrainingSessions.length} Completed
-							Training Sessions
+							Training
+							{trainingProgramme.skillTrainingSessions.length > 1
+								? " Sessions"
+								: " Session"}
 						</Typography>
 					</Box>
 				);

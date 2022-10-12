@@ -19,21 +19,12 @@ import {
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-const progressTagPalette = {
-	"Not able": "#f6d7d2",
-	"Just started": "#d2e2f1",
-	"Ok with limits": "#1d70b8",
-	Confident: "#005a30",
-};
-
 const TrainingProgrammeSkills = ({
 	skillProgressRecords,
-	skillTrainingSessions,
 	setSkillsFocus,
 	trainingProgrammeInProgress,
 }: {
 	skillProgressRecords: SkillProgressRecord[];
-	skillTrainingSessions: SkillTrainingSession[];
 	setSkillsFocus: (id: number) => void;
 	trainingProgrammeInProgress: boolean;
 }) => {
@@ -43,7 +34,7 @@ const TrainingProgrammeSkills = ({
 		SkillProgressRecord[] | undefined
 	>(skillProgressRecords);
 
-	const handleSkillsFilterChange = (event) => {
+	const handleSkillsFilterChange = (event: any) => {
 		setSkillsFilter(event.target.value);
 		event.target.value === "all"
 			? setTrainingProgrammeSkills(skillProgressRecords)
@@ -75,15 +66,6 @@ const TrainingProgrammeSkills = ({
 				return 0;
 			})
 			.map((skillProgressRecord, i) => {
-				const sortedSkillTrainingSessions = skillTrainingSessions
-					.filter(
-						(skillTrainingSession) =>
-							skillTrainingSession.skill.id === skillProgressRecord.skill.id
-					)
-					.sort((a, b) => {
-						new Date(b.date) - new Date(a.date);
-					});
-
 				return (
 					<Box onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}>
 						<Paper key={skillProgressRecord.id}>
@@ -98,7 +80,7 @@ const TrainingProgrammeSkills = ({
 							>
 								<Grid container>
 									<Grid item xs={7} md={4} lg={3}>
-										<Typography fontWeight={600}>
+										<Typography fontWeight={500} color="primary.light">
 											{skillProgressRecord.skill.name}
 										</Typography>
 									</Grid>
@@ -109,29 +91,9 @@ const TrainingProgrammeSkills = ({
 										lg={3}
 										sx={{ display: "flex", alignItems: "center" }}
 									>
-										<div
-											style={{
-												width: "fit-content",
-												marginLeft: "16px",
-												padding: "2px 10px",
-												textAlign: "center",
-												backgroundColor:
-													progressTagPalette[
-														skillProgressRecord.progressCode.string
-													],
-												color:
-													skillProgressRecord.progressCode.string ===
-														ProgressCode["Not able"] ||
-													skillProgressRecord.progressCode.string ===
-														ProgressCode["Just started"]
-														? "black"
-														: "white",
-											}}
-										>
-											<Typography fontWeight={500}>
-												{skillProgressRecord.progressCode.string}
-											</Typography>
-										</div>
+										<Typography fontWeight={400}>
+											{skillProgressRecord.progressCode.string}
+										</Typography>
 									</Grid>
 								</Grid>
 

@@ -84,15 +84,6 @@ const TrainingProgrammeSkills = ({
 						new Date(b.date) - new Date(a.date);
 					});
 
-				const lastTrainingSession =
-					sortedSkillTrainingSessions.length === 0 ? (
-						<span>No training sessions</span>
-					) : (
-						`Last trained on ${convertDateToString(
-							sortedSkillTrainingSessions[0].date
-						)}`
-					);
-
 				return (
 					<Box onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}>
 						<Paper key={skillProgressRecord.id}>
@@ -106,14 +97,14 @@ const TrainingProgrammeSkills = ({
 								}}
 							>
 								<Grid container>
-									<Grid item xs={5} md={4} lg={3}>
+									<Grid item xs={7} md={4} lg={3}>
 										<Typography fontWeight={600}>
 											{skillProgressRecord.skill.name}
 										</Typography>
 									</Grid>
 									<Grid
 										item
-										xs={7}
+										xs={5}
 										md={4}
 										lg={3}
 										sx={{ display: "flex", alignItems: "center" }}

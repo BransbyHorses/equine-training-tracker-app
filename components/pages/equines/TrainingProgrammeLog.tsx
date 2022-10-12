@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 import {
 	Box,
@@ -26,9 +27,11 @@ const TrainingProgrammeLog = ({
 	return (
 		<>
 			{(!skillTrainingSessions || skillTrainingSessions.length === 0) && (
-				<Typography>
-					<em>No training log available</em>
-				</Typography>
+				<Box mt={2}>
+					<Typography display="inline">
+						<em>No training log available</em>
+					</Typography>
+				</Box>
 			)}
 			{skillTrainingSessions
 				?.sort((a, b) => {

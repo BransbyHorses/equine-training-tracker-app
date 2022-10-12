@@ -14,6 +14,7 @@ import {
 	Paper,
 	useTheme,
 	Button,
+	Grid,
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -24,7 +25,7 @@ const progressTagPalette = {
 	"Not able": "#f6d7d2",
 	"Just started": "#d2e2f1",
 	"Ok with limits": "#1d70b8",
-	"Confident": "#005a30",
+	Confident: "#005a30",
 };
 
 const TrainingProgrammeSkills = ({
@@ -104,63 +105,45 @@ const TrainingProgrammeSkills = ({
 									alignItems: "center",
 								}}
 							>
-								<Box
-									sx={{
-										[theme.breakpoints.between("md", "xl")]: {
-											display: "flex",
-											flexDirection: "row",
-										},
-									}}
-								>
-									<Box
-										sx={{
-											display: "flex",
-											[theme.breakpoints.between("xs", "sm")]: {
-												flexDirection: "column",
-											},
-										}}
-									>
+								<Grid container>
+									<Grid item xs={5} md={4} lg={3}>
 										<Typography fontWeight={600}>
 											{skillProgressRecord.skill.name}
 										</Typography>
-										<Box
-											sx={{
-												[theme.breakpoints.between("xs", "sm")]: {
-													margin: "8px 0",
-												},
-												[theme.breakpoints.between("sm", "xl")]: {
-													margin: "0 16px",
-												},
+									</Grid>
+									<Grid
+										item
+										xs={7}
+										md={4}
+										lg={3}
+										sx={{ display: "flex", alignItems: "center" }}
+									>
+										<div
+											style={{
+												width: "fit-content",
+												marginLeft: "16px",
+												padding: "2px 10px",
+												textAlign: "center",
+												backgroundColor:
+													progressTagPalette[
+														skillProgressRecord.progressCode.string
+													],
+												color:
+													skillProgressRecord.progressCode.string ===
+														ProgressCode["Not able"] ||
+													skillProgressRecord.progressCode.string ===
+														ProgressCode["Just started"]
+														? "black"
+														: "white",
 											}}
 										>
-											<div
-												style={{
-													width: "fit-content",
-													padding: "2px 10px",
-													textAlign: "center",
-													backgroundColor:
-														progressTagPalette[
-															skillProgressRecord.progressCode.string
-														],
-													color:
-														skillProgressRecord.progressCode.string ===
-															ProgressCode["Not able"] ||
-														skillProgressRecord.progressCode.string ===
-															ProgressCode["Just started"]
-															? "black"
-															: "white",
-												}}
-											>
-												<Typography fontWeight={500}>
-													{skillProgressRecord.progressCode.string}
-												</Typography>
-											</div>
-										</Box>
-									</Box>
-									<Typography color="gray">
-										<small>{lastTrainingSession}</small>
-									</Typography>
-								</Box>
+											<Typography fontWeight={500}>
+												{skillProgressRecord.progressCode.string}
+											</Typography>
+										</div>
+									</Grid>
+								</Grid>
+
 								<KeyboardArrowRightIcon fontSize="large" />
 							</Box>
 						</Paper>

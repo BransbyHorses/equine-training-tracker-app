@@ -24,10 +24,17 @@ const SkillLog = ({
 }) => {
 	return (
 		<>
-			<Box mt={4}>
+			<Box
+				mt={4}
+				p={2}
+				sx={{ backgroundColor: "white", borderBottom: "2px solid gray" }}
+			>
 				<Typography variant="h4">{skillProgressRecord.skill.name}</Typography>
-				<Typography variant="h6">
-					Current level: {skillProgressRecord.progressCode.string}
+				<Typography variant="h6" display="inline" fontWeight={400}>
+					Current level:&nbsp;
+				</Typography>
+				<Typography variant="h6" display="inline" fontWeight={400}>
+					{skillProgressRecord.progressCode.string}
 				</Typography>
 				<Typography color="gray">
 					{skillTrainingSessions.length === 0 ? (
@@ -44,7 +51,6 @@ const SkillLog = ({
 					)}
 				</Typography>
 			</Box>
-			<hr style={{ margin: "16px 0" }} />
 			<TrainingProgrammeLog skillTrainingSessions={skillTrainingSessions} />
 		</>
 	);

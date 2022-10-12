@@ -6,9 +6,18 @@ import TrainingProgrammeLog from "../../../../components/pages/equines/TrainingP
 import TrainingProgrammeSkills from "../../../../components/pages/equines/TrainingProgrammeSkills";
 import SkillLog from "../../../../components/pages/equines/SkillLog";
 
-import { Breadcrumbs, Link, Box, Alert, Tab, Tabs } from "@mui/material";
+import {
+	Breadcrumbs,
+	Link,
+	Box,
+	Alert,
+	Tab,
+	Tabs,
+	Typography,
+} from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import { convertDateToString } from "../../../../utils/helpers";
 
 function TabPanel(props: any) {
 	const { children, value, index, ...other } = props;
@@ -88,6 +97,19 @@ const TrainingProgrammePage = () => {
 					<ArrowLeftIcon /> Back
 				</Link>
 			</Breadcrumbs>
+			<Box pb={2} mt={3} sx={{ borderBottom: "0.55px solid gray" }}>
+				<Typography variant="h5" color="gray">
+					{trainingProgramme?.equine.name}
+				</Typography>
+				<Typography>
+					<small>
+						{trainingProgramme?.trainingCategory.name} |&nbsp;
+						{trainingProgramme?.endDate
+							? `Ended on ${convertDateToString(trainingProgramme.endDate)}`
+							: "In Progress"}
+					</small>
+				</Typography>
+			</Box>
 			{skillFocus > 0 ? (
 				<SkillLog
 					skillProgressRecord={

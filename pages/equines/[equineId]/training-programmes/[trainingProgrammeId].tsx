@@ -144,6 +144,9 @@ const TrainingProgrammePage = () => {
 							skillProgressRecords={trainingProgramme?.skillProgressRecords!}
 							skillTrainingSessions={trainingProgramme?.skillTrainingSessions!}
 							setSkillsFocus={directToSkillLog}
+							trainingProgrammeInProgress={
+								trainingProgramme?.endDate ? false : true
+							}
 						/>
 					</TabPanel>
 					<TabPanel value={tabView} index={1}>

@@ -18,8 +18,6 @@ import {
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { convertDateToString } from "../../../utils/helpers";
-import Link from "next/link";
 
 const progressTagPalette = {
 	"Not able": "#f6d7d2",
@@ -32,10 +30,12 @@ const TrainingProgrammeSkills = ({
 	skillProgressRecords,
 	skillTrainingSessions,
 	setSkillsFocus,
+	trainingProgrammeInProgress,
 }: {
 	skillProgressRecords: SkillProgressRecord[];
 	skillTrainingSessions: SkillTrainingSession[];
 	setSkillsFocus: (id: number) => void;
+	trainingProgrammeInProgress: boolean;
 }) => {
 	const theme = useTheme();
 	const [skillsFilter, setSkillsFilter] = useState("all");
@@ -149,18 +149,21 @@ const TrainingProgrammeSkills = ({
 				mt={4}
 				sx={{
 					display: "flex",
+					justifyContent: "flex-end",
 				}}
 			>
 				<Button
 					color="primary"
 					variant="contained"
 					sx={{
+						display: trainingProgrammeInProgress ? "flex" : "none",
+						justifyContent: "space-between",
 						[theme.breakpoints.between("xs", "md")]: {
 							width: "50%",
 							marginRight: "8px",
 						},
 						[theme.breakpoints.between("md", "xl")]: {
-							width: "200px",
+							width: "175px",
 							marginLeft: "auto",
 							marginRight: "16px",
 						},
@@ -178,6 +181,7 @@ const TrainingProgrammeSkills = ({
 						},
 						[theme.breakpoints.between("md", "xl")]: {
 							width: "200px",
+							marginLeft: trainingProgrammeInProgress ? "" : "auto",
 						},
 					}}
 				>

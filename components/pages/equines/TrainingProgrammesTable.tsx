@@ -48,7 +48,7 @@ const TrainingProgrammesTable = ({
 				return (
 					<Box>
 						<Typography>
-							Finished on
+							Ended on&nbsp;
 							{convertDateToString(trainingProgramme.endDate)}
 						</Typography>
 						<Typography>

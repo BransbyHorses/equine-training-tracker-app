@@ -87,7 +87,7 @@ const EquineTrainingProgrammes = () => {
 					<Paper>
 						<Box mt={3} p={2}>
 							<Typography variant="h6" mb={2} color="gray">
-								Completed Training Programmes (
+								Ended Training Programmes (
 								{trainingProgrammes.filter((t) => t.endDate).length})
 							</Typography>
 							<hr style={{ margin: "16px 0" }} />

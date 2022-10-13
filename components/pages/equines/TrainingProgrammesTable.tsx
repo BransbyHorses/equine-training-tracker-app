@@ -2,7 +2,7 @@ import React from "react";
 
 import { TrainingProgramme } from "../../../utils/types";
 
-import { Paper, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { convertDateToString } from "../../../utils/helpers";
 import Link from "next/link";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -63,27 +63,28 @@ const TrainingProgrammesTable = ({
 			};
 
 			return (
-				<Link
-					href={`/equines/${trainingProgramme.equine.id}/training-programmes/${trainingProgramme.id}`}
-				>
-					<Box
-						key={trainingProgramme.id}
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "center",
-							cursor: "pointer",
-						}}
+				<div key={trainingProgramme.id}>
+					<Link
+						href={`/equines/${trainingProgramme.equine.id}/training-programmes/${trainingProgramme.id}`}
 					>
-						<div>
-							<Typography fontWeight={600}>
-								{trainingProgramme.trainingCategory.name}
-							</Typography>
-							{data === "active" ? <ActiveData /> : <InActiveData />}
-						</div>
-						<KeyboardArrowRightIcon fontSize="large" />
-					</Box>
-				</Link>
+						<Box
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+								cursor: "pointer",
+							}}
+						>
+							<div>
+								<Typography fontWeight={600}>
+									{trainingProgramme.trainingCategory.name}
+								</Typography>
+								{data === "active" ? <ActiveData /> : <InActiveData />}
+							</div>
+							<KeyboardArrowRightIcon fontSize="large" />
+						</Box>
+					</Link>
+				</div>
 			);
 		});
 	};
@@ -95,7 +96,7 @@ const TrainingProgrammesTable = ({
 					<em>No training programmes to display</em>
 				</Typography>
 			) : (
-				<>{mapTrainingProgrammeData(trainingProgrammes)}</>
+				mapTrainingProgrammeData(trainingProgrammes)
 			)}
 		</>
 	);

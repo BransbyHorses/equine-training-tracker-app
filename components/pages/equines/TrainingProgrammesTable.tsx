@@ -2,7 +2,7 @@ import React from "react";
 
 import { TrainingProgramme } from "../../../utils/types";
 
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Grid } from "@mui/material";
 import { convertDateToString } from "../../../utils/helpers";
 import Link from "next/link";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -20,45 +20,55 @@ const TrainingProgrammesTable = ({
 		return trainingProgrammes.map((trainingProgramme) => {
 			const ActiveData = () => {
 				return (
-					<Box sx={{ cursor: "pointer" }}>
+					<Grid container>
 						{trainingProgramme.startDate ? (
-							<Box>
-								<Typography>
-									Started on&nbsp;
-									{convertDateToString(trainingProgramme.startDate)}
-								</Typography>
-								<Typography>
-									{trainingProgramme.skillTrainingSessions.length} Completed
-									Training
-									{trainingProgramme.skillTrainingSessions.length > 1
-										? " Sessions"
-										: " Session"}
-								</Typography>
-							</Box>
+							<>
+								<Grid item xs={12} md={5}>
+									<Typography>
+										Started on&nbsp;
+										{convertDateToString(trainingProgramme.startDate)}
+									</Typography>
+								</Grid>
+								<Grid item xs={12} md={7}>
+									<Typography>
+										{trainingProgramme.skillTrainingSessions.length} Completed
+										Training
+										{trainingProgramme.skillTrainingSessions.length > 1
+											? " Sessions"
+											: " Session"}
+									</Typography>
+								</Grid>
+							</>
 						) : (
-							<Typography>
-								<em>Not started</em>
-							</Typography>
+							<Grid item xs={12}>
+								<Typography>
+									<em>Not started</em>
+								</Typography>
+							</Grid>
 						)}
-					</Box>
+					</Grid>
 				);
 			};
 
 			const InActiveData = () => {
 				return (
-					<Box>
-						<Typography>
-							Ended on&nbsp;
-							{convertDateToString(trainingProgramme.endDate)}
-						</Typography>
-						<Typography>
-							{trainingProgramme.skillTrainingSessions.length} Completed
-							Training
-							{trainingProgramme.skillTrainingSessions.length > 1
-								? " Sessions"
-								: " Session"}
-						</Typography>
-					</Box>
+					<Grid container>
+						<Grid item xs={12} md={5}>
+							<Typography>
+								Ended on&nbsp;
+								{convertDateToString(trainingProgramme.endDate)}
+							</Typography>
+						</Grid>
+						<Grid item xs={12} md={7}>
+							<Typography>
+								{trainingProgramme.skillTrainingSessions.length} Completed
+								Training
+								{trainingProgramme.skillTrainingSessions.length > 1
+									? " Sessions"
+									: " Session"}
+							</Typography>
+						</Grid>
+					</Grid>
 				);
 			};
 
@@ -68,6 +78,7 @@ const TrainingProgrammesTable = ({
 						href={`/equines/${trainingProgramme.equine.id}/training-programmes/${trainingProgramme.id}`}
 					>
 						<Box
+							mt={3}
 							sx={{
 								display: "flex",
 								justifyContent: "space-between",
@@ -75,12 +86,16 @@ const TrainingProgrammesTable = ({
 								cursor: "pointer",
 							}}
 						>
-							<div>
-								<Typography fontWeight={600}>
-									{trainingProgramme.trainingCategory.name}
-								</Typography>
-								{data === "active" ? <ActiveData /> : <InActiveData />}
-							</div>
+							<Grid container>
+								<Grid item xs={12} sm={5} md={3}>
+									<Typography fontWeight={600}>
+										{trainingProgramme.trainingCategory.name}
+									</Typography>
+								</Grid>
+								<Grid item xs={12} sm={7} md={9}>
+									{data === "active" ? <ActiveData /> : <InActiveData />}
+								</Grid>
+							</Grid>
 							<KeyboardArrowRightIcon fontSize="large" />
 						</Box>
 					</Link>

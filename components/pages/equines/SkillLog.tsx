@@ -1,19 +1,13 @@
-import { Box, Typography } from "@mui/material";
 import React from "react";
 import { convertDateToString } from "../../../utils/helpers";
 import {
 	SkillProgressRecord,
-	ProgressCode,
 	SkillTrainingSession,
 } from "../../../utils/types";
+
 import TrainingProgrammeLog from "./TrainingProgrammeLog";
 
-const progressTagPalette = {
-	"Not able": "#f6d7d2",
-	"Just started": "#d2e2f1",
-	"Ok with limits": "#1d70b8",
-	Confident: "#005a30",
-};
+import { Box, Typography } from "@mui/material";
 
 const SkillLog = ({
 	skillTrainingSessions,

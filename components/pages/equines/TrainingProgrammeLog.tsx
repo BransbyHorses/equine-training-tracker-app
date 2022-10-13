@@ -115,13 +115,7 @@ const TrainingProgrammeLog = ({
 	};
 
 	if (!skillTrainingSessions || skillTrainingSessions.length === 0) {
-		return (
-			<Box mt={2}>
-				<Typography display="inline">
-					<em>No training log available</em>
-				</Typography>
-			</Box>
-		);
+		return <></>;
 	}
 
 	return (

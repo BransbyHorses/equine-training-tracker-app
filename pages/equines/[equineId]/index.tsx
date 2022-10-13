@@ -51,13 +51,13 @@ const EquineProfile = () => {
 		);
 	}
 
-	if ((error || notFound) && !equine) {
+	if (error && !equine) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<Alert severity="error">
 					{notFound
-						? "No equine information found to display."
-						: "An unexpected error occurred."}
+						? "No equine information available"
+						: "An unexpected error occurred"}
 				</Alert>
 			</Box>
 		);

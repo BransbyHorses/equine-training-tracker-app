@@ -10,6 +10,7 @@ export interface Equine {
 	equineStatus: EquineStatus;
 	trainingProgrammes: TrainingProgramme[];
 	learnerType: LearnerType;
+	healthAndSafetyFlags: HealthAndSafetyFlag[];
 }
 
 export interface EquineStatus {

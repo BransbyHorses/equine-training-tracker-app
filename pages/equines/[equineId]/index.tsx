@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import { useEquine } from "../../../utils/hooks/equine";
 
@@ -7,7 +8,6 @@ import { Box } from "@mui/system";
 import {
 	Alert,
 	Breadcrumbs,
-	Link,
 	Typography,
 	Paper,
 	Grid,
@@ -65,7 +65,7 @@ const EquineProfile = () => {
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">
-				<Link underline="hover" color="inherit" href="/">
+				<Link href="/">
 					Equines
 				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
@@ -200,31 +200,33 @@ const EquineProfile = () => {
 					</Paper>
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
+					<Link href={`/equines/${equineId}/health-and-safety`}>
+						<Paper>
 							<Box
+								px={2}
+								py={2}
 								sx={{
 									display: "flex",
 									justifyContent: "space-between",
 									alignItems: "center",
 								}}
 							>
-								<ReportProblemIcon fontSize="medium" />
-								<Typography sx={{ ml: 1 }} variant="h6">
-									Health & Safety
-								</Typography>
+								<Box
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+									}}
+								>
+									<ReportProblemIcon fontSize="medium" />
+									<Typography sx={{ ml: 1 }} variant="h6">
+										Health & Safety
+									</Typography>
+								</Box>
+								<ArrowRightIcon fontSize="large" />
 							</Box>
-							<ArrowRightIcon fontSize="large" />
-						</Box>
-					</Paper>
+						</Paper>
+					</Link>
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Paper>

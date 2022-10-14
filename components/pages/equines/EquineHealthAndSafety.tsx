@@ -4,6 +4,8 @@ import { HealthAndSafetyFlag } from "../../../utils/types";
 import { Button, Box, Typography, TextField } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { convertDateToString } from "../../../utils/helpers";
 
 const HealthAndSafetyFlagForm = ({
 	saveFunction,
@@ -19,11 +21,31 @@ const HealthAndSafetyFlagForm = ({
 	const [newHandSFlag, setNewHandSFlag] = useState("");
 	return (
 		<>
-			<CancelIcon
-				fontSize="medium"
-				onClick={closeForm}
-				sx={{ cursor: "pointer" }}
-			/>
+			<Box
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "space-between",
+				}}
+			>
+				<CancelIcon
+					fontSize="medium"
+					onClick={closeForm}
+					sx={{ cursor: "pointer" }}
+				/>
+				{error && (
+					<Box sx={{ display: "flex", alignItems: "center" }}>
+						<ErrorOutlineIcon
+							fontSize="small"
+							color="error"
+							sx={{ marginRight: "5px" }}
+						/>
+						<Typography color="error">
+							<small>An error occurred. Try again.</small>
+						</Typography>
+					</Box>
+				)}
+			</Box>
 			<Box mt={2} sx={{ display: "flex", flexDirection: "column" }}>
 				<TextField
 					sx={{ marginBottom: "16px" }}
@@ -32,13 +54,13 @@ const HealthAndSafetyFlagForm = ({
 					multiline
 					rows={7}
 					placeholder="Add new health and safety flag here..."
-					onChange={() => setNewHandSFlag(event?.target.value)}
+					onChange={() => setNewHandSFlag(event.target.value)}
 				/>
 				<Button
 					color="primary"
 					variant="contained"
 					onClick={() => saveFunction(newHandSFlag)}
-					disabled={newHandSFlag === ""}
+					disabled={newHandSFlag === "" || waiting}
 				>
 					Save
 				</Button>
@@ -85,7 +107,9 @@ const HealthAndSafetyFlags = ({
 							<Typography>{healthAndSafetyFlag.content}</Typography>
 							<Typography color="gray">
 								{" "}
-								<small>Added {healthAndSafetyFlag.dateCreated}</small>
+								<small>
+									Added {convertDateToString(healthAndSafetyFlag.dateCreated)}
+								</small>
 							</Typography>
 						</Box>
 					);
@@ -113,6 +137,7 @@ const EquineHealthAndSafety = ({
 	};
 	const openFlags = () => {
 		setShowFlags(true);
+		setApiError(false);
 	};
 
 	const saveNewFlag = (content: string) => {
@@ -132,7 +157,7 @@ const EquineHealthAndSafety = ({
 				setApiError(true);
 			})
 			.finally(() => {
-				setSendingRequest(true);
+				setSendingRequest(false);
 			});
 	};
 

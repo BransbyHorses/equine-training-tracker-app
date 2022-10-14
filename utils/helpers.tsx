@@ -14,3 +14,14 @@ export const findCurrentTrainingProgramme = (
 		? null
 		: filteredTrainingProgrammes[0];
 };
+
+export const convertDateToString = (dateString?: string) => {
+	if (!dateString) return "";
+
+	const date = new Date(dateString);
+	return date.toLocaleString("en-GB", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+};

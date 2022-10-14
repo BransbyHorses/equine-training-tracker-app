@@ -8,6 +8,7 @@ import {
 	} from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
+import LinkButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { useRouter } from "next/router";
 import { useTrainingCategories } from "../../../utils/hooks/training-category";
@@ -49,6 +50,9 @@ export default function StartTrainingProgramme() {
 					}
 					</RadioGroup>
 				</FormControl>
+
+				<LinkButton buttonText="Save"/>
+
 			</PageContainer>
 		</>
 	);

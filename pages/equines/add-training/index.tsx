@@ -10,14 +10,15 @@ import {
     Select,
     MenuItem
 } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LinkButton from '../../../../components/LinkButton';
-import PageTitle from '../../../../components/PageTitle';
-import AutoCompleteBox from '../../../../components/AutoCompleteBox';
-import QuestionTitle from '../../../../components/QuestionTitle';
+import LinkButton from '../../../components/LinkButton';
+import PageTitle from '../../../components/PageTitle';
+import AutoCompleteBox from '../../../components/AutoCompleteBox';
+import QuestionTitle from '../../../components/QuestionTitle';
 
 interface WithRouterProps {
     router: NextRouter;
@@ -136,6 +137,17 @@ const AddTraining: React.FC<MyComponentProps> = props => {
     }, [router.isReady]);
 
     return (
+        <>
+            <div style={{
+                    display: 'inline-flex',
+                    textAlign: 'center',
+                }}
+            >
+            <ArrowBackIosIcon />
+        <Link href="pages/equines/add-training/index#" color="inherit">
+            Back
+        </Link>
+            </div>
         <Container
             sx={{
                 display: 'flex',
@@ -153,7 +165,7 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                 {skills ? (
                     <FormControl sx={{ width: '100%' }}>
                         <InputLabel id="skills_label" required>
-                            Skills
+                            Skill
                         </InputLabel>
                         <Select
                             labelId="skills_label"
@@ -182,7 +194,7 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                 {trainingMethods ? (
                     <FormControl sx={{ width: '100%' }}>
                         <InputLabel id="training_methods_label" required>
-                            Training Methods
+                            Method
                         </InputLabel>
                         <Select
                             labelId="training_methods_label"
@@ -214,6 +226,7 @@ const AddTraining: React.FC<MyComponentProps> = props => {
                 action="Continue"
             />
         </Container>
+        </>
     );
 };
 

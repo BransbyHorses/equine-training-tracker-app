@@ -60,10 +60,12 @@ export const useEquine = (
 				})
 				.catch((err) => {
 					setFetchingData(false);
-					const { status } = err.response;
-					setError(true);
-					if (status === 404) {
-						setNotFound(true);
+					if (err.response) {
+						const {status} = err.response;
+						setError(true);
+						if (status === 404) {
+							setNotFound(true);
+						}
 					}
 					console.error(
 						`Failed to fetch equine data. Failed with error message: ${err}.`

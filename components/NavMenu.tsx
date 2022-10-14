@@ -1,5 +1,5 @@
 import * as React from "react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import Drawer from "@mui/material/Drawer";
@@ -29,9 +29,10 @@ interface NavMenuProps {
 	drawerWidth: number;
 	open: boolean;
 	collapse: () => void;
+	signOut: () => void;
 }
 
-const NavMenu = ({ drawerWidth, open, collapse }: NavMenuProps) => {
+const NavMenu = ({ drawerWidth, open, collapse, signOut }: NavMenuProps) => {
 	const theme = useTheme();
 	const router = useRouter();
 	const session = useSession();

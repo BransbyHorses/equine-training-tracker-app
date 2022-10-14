@@ -8,9 +8,13 @@ import CancelIcon from "@mui/icons-material/Cancel";
 const HealthAndSafetyFlagForm = ({
 	saveFunction,
 	closeForm,
+	error,
+	waiting,
 }: {
 	saveFunction: (c: string) => void;
 	closeForm: () => void;
+	error: boolean;
+	waiting: boolean;
 }) => {
 	const [newHandSFlag, setNewHandSFlag] = useState("");
 	return (
@@ -101,6 +105,8 @@ const EquineHealthAndSafety = ({
 	const [showFlags, setShowFlags] = useState(true);
 	const [updatedhealthAndSafetyFlags, setUpdatedhealthAndSafetyFlags] =
 		useState<HealthAndSafetyFlag[]>(healthAndSafetyFlags || []);
+	const [apiError, setApiError] = useState(false);
+	const [sendingRequest, setSendingRequest] = useState(false);
 
 	const openForm = () => {
 		setShowFlags(false);
@@ -109,7 +115,9 @@ const EquineHealthAndSafety = ({
 		setShowFlags(true);
 	};
 
-	const saveFlag = (content: string) => {
+	const saveNewFlag = (content: string) => {
+		setApiError(false);
+		setSendingRequest(true);
 		axios
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/health-and-safety-flags`,
@@ -120,9 +128,12 @@ const EquineHealthAndSafety = ({
 			.then(({ data }) => {
 				setUpdatedhealthAndSafetyFlags([...updatedhealthAndSafetyFlags, data]);
 			})
-            .catch((err) => {
-                
-            });
+			.catch((err) => {
+				setApiError(true);
+			})
+			.finally(() => {
+				setSendingRequest(true);
+			});
 	};
 
 	if (showFlags) {
@@ -134,7 +145,12 @@ const EquineHealthAndSafety = ({
 		);
 	} else {
 		return (
-			<HealthAndSafetyFlagForm closeForm={openFlags} saveFunction={saveFlag} />
+			<HealthAndSafetyFlagForm
+				closeForm={openFlags}
+				saveFunction={saveNewFlag}
+				waiting={sendingRequest}
+				error={apiError}
+			/>
 		);
 	}
 };

@@ -51,7 +51,7 @@ export default function StartTrainingProgramme() {
 					</RadioGroup>
 				</FormControl>
 
-				<LinkButton buttonText="Save"/>
+				<LinkButton buttonText="Save" link="/"/>
 
 			</PageContainer>
 		</>

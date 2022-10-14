@@ -3,7 +3,6 @@ import CognitoProvider from "next-auth/providers/cognito"
 import jwt_decode from 'jwt-decode'
 
 export default NextAuth({
-  // Configure one or more authentication providers
   providers: [
     CognitoProvider({
       clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
@@ -19,9 +18,6 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
-        // console.log(token);
-        // console.log(account);
-        
         token.accessToken = account.access_token;
         let decodedToken: any = jwt_decode(account.access_token!);
         token.role = decodedToken["cognito:groups"] ? decodedToken["cognito:groups"][0] : null;
@@ -31,10 +27,8 @@ export default NextAuth({
     },
 
     async session({ session, token }){
-      
       session.role = token.role;
       session.userId = token.sub;
-      // console.log(session);
       return session;
     }
   }

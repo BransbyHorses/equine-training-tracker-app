@@ -10,6 +10,7 @@ import {
 	Breadcrumbs,
 	Typography,
 	Paper,
+	Link as MuiLink,
 	Grid,
 	styled,
 	Accordion,
@@ -70,7 +71,9 @@ const EquineProfile = () => {
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">
-				<Link href="/">Equines</Link>
+				<MuiLink href="/" color="inherit" underline="hover">
+					Equines
+				</MuiLink>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
 

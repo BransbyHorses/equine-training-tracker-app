@@ -10,6 +10,7 @@ export interface Equine {
 	equineStatus: EquineStatus;
 	trainingProgrammes: TrainingProgramme[];
 	learnerType: LearnerType;
+	healthAndSafetyFlags: HealthAndSafetyFlag[];
 }
 
 export interface EquineStatus {
@@ -79,6 +80,12 @@ export interface TrainingProgramme {
 export interface Yard {
 	id: number;
 	name: string;
+}
+
+export interface HealthAndSafetyFlag {
+	id: number;
+	content: string;
+	dateCreated: string;
 }
 
 export enum ProgressCode {

@@ -99,31 +99,28 @@ export const HealthAndSafetyFlags = ({
 	closeFlags: () => void;
 	healthAndSafetyFlags?: HealthAndSafetyFlag[];
 }) => {
-	if (!healthAndSafetyFlags || healthAndSafetyFlags.length === 0) {
-		return (
-			<Box pt={2}>
+	return (
+		<>
+			<Box mb={2} sx={{ display: "flex", justifyContent: "space-between" }}>
+				<AddCircleIcon
+					fontSize="medium"
+					onClick={closeFlags}
+					sx={{ curser: "pointer" }}
+				/>
 				<Typography>
-					<em>Not Health & Safety Flags</em>
+					<em>
+						{healthAndSafetyFlags!.length}{" "}
+						{healthAndSafetyFlags!.length === 1 ? `Flag` : `Flags`}
+					</em>
 				</Typography>
 			</Box>
-		);
-	}
-	{
-		return (
-			<>
-				<Box mb={2} sx={{ display: "flex", justifyContent: "space-between" }}>
-					<AddCircleIcon
-						fontSize="medium"
-						onClick={closeFlags}
-						sx={{ curser: "pointer" }}
-					/>
+			{!healthAndSafetyFlags || healthAndSafetyFlags.length === 0 ? (
+				<Box pt={2}>
 					<Typography>
-						<em>
-							{healthAndSafetyFlags.length}{" "}
-							{healthAndSafetyFlags.length === 1 ? `Flag` : `Flags`}
-						</em>
+						<em>No Health & Safety Flags</em>
 					</Typography>
 				</Box>
+			) : (
 				<Box sx={{ maxHeight: "400px", overflowY: "auto" }}>
 					{healthAndSafetyFlags.map((healthAndSafetyFlag) => {
 						return (
@@ -139,9 +136,9 @@ export const HealthAndSafetyFlags = ({
 						);
 					})}
 				</Box>
-			</>
-		);
-	}
+			)}
+		</>
+	);
 };
 
 const EquineHealthAndSafety = ({

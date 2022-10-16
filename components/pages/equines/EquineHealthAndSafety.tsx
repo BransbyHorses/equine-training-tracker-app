@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { convertDateToString } from "../../../utils/helpers";
 import { HealthAndSafetyFlag } from "../../../utils/types";
+
 import { Button, Box, Typography, TextField } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { convertDateToString } from "../../../utils/helpers";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-const HealthAndSafetyFlagForm = ({
+export const HealthAndSafetyFlagForm = ({
 	saveFunction,
 	closeForm,
 	error,
+	success,
 	waiting,
 }: {
 	saveFunction: (c: string) => void;
 	closeForm: () => void;
 	error: boolean;
+	success: boolean;
 	waiting: boolean;
 }) => {
 	const [newHandSFlag, setNewHandSFlag] = useState("");
+
+	useEffect(() => {
+		if (success) {
+			setNewHandSFlag("");
+		}
+	}, [success]);
+
 	return (
 		<>
 			<Box
@@ -33,6 +44,18 @@ const HealthAndSafetyFlagForm = ({
 					onClick={closeForm}
 					sx={{ cursor: "pointer" }}
 				/>
+				{success && (
+					<Box sx={{ display: "flex", alignItems: "center" }}>
+						<CheckCircleOutlineIcon
+							fontSize="small"
+							color="success"
+							sx={{ marginRight: "5px" }}
+						/>
+						<Typography>
+							<small>New health & safety flag added.</small>
+						</Typography>
+					</Box>
+				)}
 				{error && (
 					<Box sx={{ display: "flex", alignItems: "center" }}>
 						<ErrorOutlineIcon
@@ -40,7 +63,7 @@ const HealthAndSafetyFlagForm = ({
 							color="error"
 							sx={{ marginRight: "5px" }}
 						/>
-						<Typography color="error">
+						<Typography>
 							<small>An error occurred. Try again.</small>
 						</Typography>
 					</Box>
@@ -69,7 +92,7 @@ const HealthAndSafetyFlagForm = ({
 	);
 };
 
-const HealthAndSafetyFlags = ({
+export const HealthAndSafetyFlags = ({
 	closeFlags,
 	healthAndSafetyFlags,
 }: {
@@ -101,19 +124,21 @@ const HealthAndSafetyFlags = ({
 						</em>
 					</Typography>
 				</Box>
-				{healthAndSafetyFlags.map((healthAndSafetyFlag) => {
-					return (
-						<Box borderBottom={0.5} pb={2} pt={2}>
-							<Typography>{healthAndSafetyFlag.content}</Typography>
-							<Typography color="gray">
-								{" "}
-								<small>
-									Added {convertDateToString(healthAndSafetyFlag.dateCreated)}
-								</small>
-							</Typography>
-						</Box>
-					);
-				})}
+				<Box sx={{ maxHeight: "400px", overflowY: "auto" }}>
+					{healthAndSafetyFlags.map((healthAndSafetyFlag) => {
+						return (
+							<Box borderBottom={0.5} pb={2} pt={2}>
+								<Typography>{healthAndSafetyFlag.content}</Typography>
+								<Typography color="gray">
+									{" "}
+									<small>
+										Added {convertDateToString(healthAndSafetyFlag.dateCreated)}
+									</small>
+								</Typography>
+							</Box>
+						);
+					})}
+				</Box>
 			</>
 		);
 	}
@@ -130,6 +155,7 @@ const EquineHealthAndSafety = ({
 	const [updatedhealthAndSafetyFlags, setUpdatedhealthAndSafetyFlags] =
 		useState<HealthAndSafetyFlag[]>(healthAndSafetyFlags || []);
 	const [apiError, setApiError] = useState(false);
+	const [apiSuccess, setApiSuccess] = useState(false);
 	const [sendingRequest, setSendingRequest] = useState(false);
 
 	const openForm = () => {
@@ -151,6 +177,7 @@ const EquineHealthAndSafety = ({
 				}
 			)
 			.then(({ data }) => {
+				setApiSuccess(true);
 				setUpdatedhealthAndSafetyFlags([...updatedhealthAndSafetyFlags, data]);
 			})
 			.catch((err) => {
@@ -158,6 +185,9 @@ const EquineHealthAndSafety = ({
 			})
 			.finally(() => {
 				setSendingRequest(false);
+				setTimeout(() => {
+					setApiSuccess(false);
+				}, 3000);
 			});
 	};
 
@@ -165,7 +195,9 @@ const EquineHealthAndSafety = ({
 		return (
 			<HealthAndSafetyFlags
 				closeFlags={openForm}
-				healthAndSafetyFlags={updatedhealthAndSafetyFlags}
+				healthAndSafetyFlags={updatedhealthAndSafetyFlags.sort(
+					(a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+				)}
 			/>
 		);
 	} else {
@@ -174,6 +206,7 @@ const EquineHealthAndSafety = ({
 				closeForm={openFlags}
 				saveFunction={saveNewFlag}
 				waiting={sendingRequest}
+				success={apiSuccess}
 				error={apiError}
 			/>
 		);

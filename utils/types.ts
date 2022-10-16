@@ -30,6 +30,7 @@ export interface Skill {
 
 export interface SkillProgressRecord {
 	id: number;
+	skill: Skill;
 	trainingProgramme: TrainingProgramme;
 	progressCode: { string: ProgressCode };
 	startDate: string;
@@ -44,6 +45,7 @@ export interface SkillTrainingSession {
 	skill: Skill;
 	environment: TrainingEnvironment;
 	progressCode: { string: ProgressCode };
+	trainingMethod: TrainingMethod;
 	trainingTime: number;
 	notes: string;
 }
@@ -86,7 +88,7 @@ export interface HealthAndSafetyFlag {
 	dateCreated: string;
 }
 
-enum ProgressCode {
+export enum ProgressCode {
 	"Not able",
 	"Just started",
 	"Ok with limits",

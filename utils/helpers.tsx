@@ -1,4 +1,4 @@
-import { TrainingProgramme } from "./types";
+import { TrainingProgramme, SkillTrainingSession } from "./types";
 
 export const findCurrentTrainingProgramme = (
 	trainingProgrammes?: TrainingProgramme[]
@@ -24,4 +24,4 @@ export const convertDateToString = (dateString?: string) => {
 		month: "long",
 		day: "numeric",
 	});
-};
+}

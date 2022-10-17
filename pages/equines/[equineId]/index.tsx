@@ -38,7 +38,7 @@ const EquineProfile = () => {
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEquineId(router.query.equineId);
+			setEquineId(router.query.equineId as string);
 		}
 	}, [router.isReady]);
 
@@ -152,7 +152,7 @@ const EquineProfile = () => {
 						<AccordionDetails>
 							<EquineHealthAndSafety
 								healthAndSafetyFlags={equine?.healthAndSafetyFlags}
-								equineId={equineId}
+								equineId={equineId || ""}
 							/>
 						</AccordionDetails>
 					</Accordion>

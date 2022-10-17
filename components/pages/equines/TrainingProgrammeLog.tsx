@@ -58,13 +58,20 @@ const TrainingProgrammeLog = ({
 									</Box>
 								</AccordionSummary>
 								<AccordionDetails>
-									<Box sx={{ display: "flex", borderBottom: 1 }} pb={1}>
+									<Box
+										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+										pb={1}
+									>
 										<Typography fontWeight={600} mr={1}>
 											Skill:
 										</Typography>
 										<Typography>{skillTrainingSession.skill.name}</Typography>
 									</Box>
-									<Box sx={{ display: "flex", borderBottom: 1 }} pb={1} mt={1}>
+									<Box
+										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+										pb={1}
+										mt={1}
+									>
 										<Typography fontWeight={600} mr={1}>
 											Time:
 										</Typography>
@@ -72,7 +79,11 @@ const TrainingProgrammeLog = ({
 											{skillTrainingSession.trainingTime} minutes
 										</Typography>
 									</Box>
-									<Box sx={{ display: "flex", borderBottom: 1 }} pb={1} mt={1}>
+									<Box
+										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+										pb={1}
+										mt={1}
+									>
 										<Typography fontWeight={600} mr={1}>
 											Progress Marked:
 										</Typography>
@@ -80,7 +91,11 @@ const TrainingProgrammeLog = ({
 											{skillTrainingSession.progressCode.string}
 										</Typography>
 									</Box>
-									<Box sx={{ display: "flex", borderBottom: 1 }} pb={1} mt={1}>
+									<Box
+										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+										pb={1}
+										mt={1}
+									>
 										<Typography fontWeight={600} mr={1}>
 											Method Used:
 										</Typography>
@@ -88,7 +103,11 @@ const TrainingProgrammeLog = ({
 											{skillTrainingSession.trainingMethod.name}
 										</Typography>
 									</Box>
-									<Box sx={{ display: "flex", borderBottom: 1 }} pb={1} mt={1}>
+									<Box
+										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+										pb={1}
+										mt={1}
+									>
 										<Typography fontWeight={600} mr={1}>
 											Environment:
 										</Typography>
@@ -96,16 +115,19 @@ const TrainingProgrammeLog = ({
 											{skillTrainingSession.environment.name}
 										</Typography>
 									</Box>
-									{skillTrainingSession.notes.length > 0 ? (
-										<Box sx={{ display: "flex" }} pb={1} mt={1}>
-											<Typography fontWeight={600} mr={1}>
-												Trainer Notes:
-											</Typography>
-											<Typography>{skillTrainingSession.notes}</Typography>
-										</Box>
-									) : (
-										<></>
-									)}
+									<Box sx={{ display: "flex" }} pb={1} mt={1}>
+										<Typography fontWeight={600} mr={1}>
+											Trainer Notes:
+										</Typography>
+										<Typography>
+											{" "}
+											{skillTrainingSession.notes.length > 0 ? (
+												<span>{skillTrainingSession.notes}</span>
+											) : (
+												<em>No trainer notes provided</em>
+											)}
+										</Typography>
+									</Box>
 								</AccordionDetails>
 							</Accordion>
 						</Box>

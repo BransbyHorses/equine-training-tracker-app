@@ -145,7 +145,7 @@ const EquineHealthAndSafety = ({
 	equineId,
 	healthAndSafetyFlags,
 }: {
-	equineId: number;
+	equineId: string;
 	healthAndSafetyFlags?: HealthAndSafetyFlag[];
 }) => {
 	const [showFlags, setShowFlags] = useState(true);

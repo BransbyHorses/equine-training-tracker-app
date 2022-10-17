@@ -103,10 +103,7 @@ const TrainingProgrammePage = () => {
 				</Typography>
 				<Typography>
 					<small>
-						{trainingProgramme?.trainingCategory.name} |&nbsp;
-						{trainingProgramme?.endDate
-							? `Ended on ${convertDateToString(trainingProgramme.endDate)}`
-							: "In Progress"}
+						{trainingProgramme?.trainingCategory.name} Programme
 					</small>
 				</Typography>
 			</Box>

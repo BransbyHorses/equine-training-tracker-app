@@ -1,4 +1,5 @@
 import {Box,  Link, Paper, Typography} from "@mui/material";
+import { positions } from '@mui/system';
 import React from "react";
 
 export default function PrimaryButton(props:any){
@@ -15,7 +16,8 @@ export default function PrimaryButton(props:any){
                         color: "common.white",	
                         height: 10,
                         justifyContent: "center",
-                        alignItems: "center"		
+                        alignItems: "center",
+                        positions: "bottom"		
                     }}
 				>
 					<Typography variant="h6" align="center">{props.buttonText}</Typography>

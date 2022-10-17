@@ -58,7 +58,7 @@ Running
 npm run test:e2e
 ```
 
-will run the e2e tests. 
+will run the e2e tests. Please note, that the project needs to be running ( `npm run dev` ) before running the e2e tests. 
 
 It is reccomended that you run both these tests before pushing any code to the main branch. If you run into any errors either amend your code or, where appropriate, amend the test. Alternatively, if you are writing a new path/journey within the app, or adding a new component or utility, please add a test in order to maintain a robust codebase. 
   

@@ -1,4 +1,5 @@
 import { AppProps } from "next/app";
+import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
@@ -55,7 +56,9 @@ const Theme = createTheme({
 	},
 });
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps<{
+	session: Session;
+  }>) {
 	return (
 		<ThemeProvider theme={Theme}>
 			<SessionProvider session={pageProps.session}>

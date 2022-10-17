@@ -40,5 +40,25 @@ Then run the script without any arguments to upload 100 equines:
 node devtools/upload-equines.js
 ``` 
 
+### Testing
 
+We are running two test frameworks. Playwright runs our e2e tests, while unit tests are run using Jest. As you will see in the package.json file, there are two commands which will run tests. 
+
+Executing the follwing command
+
+```
+npm run test
+```
+
+will run the unit tests, or anything in the `__tests__` folder. 
+
+Running 
+
+```
+npm run test:e2e
+```
+
+will run the e2e tests. 
+
+It is reccomended that you run both these tests before pushing any code to the main branch. If you run into any errors either amend your code or, where appropriate, amend the test. Alternatively, if you are writing a new path/journey within the app, or adding a new component or utility, please add a test in order to maintain a robust codebase. 
   

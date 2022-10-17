@@ -23,7 +23,7 @@ import CurrentTrainingProgramme from "../../../components/pages/equines/equineId
 import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 
 const EquineProfile = () => {
-	const router = useRouter();
+	const router: any = useRouter();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const { fetchingData, equine, error, notFound } = useEquine(
 		router.isReady,

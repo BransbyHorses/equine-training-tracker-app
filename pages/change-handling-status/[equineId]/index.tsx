@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Select} from "@mui/material";
+import {FormControl, InputLabel, Select} from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
@@ -29,10 +29,12 @@ export default function ChangeHandlingStatus() {
 			<PageContainer>
 				<BackBreadcrumb link="/" />
 				<PageTitle title="Change handling status" />
+				<FormControl>
+				<InputLabel>Type of learner</InputLabel>
+					<Select>
 
-				<Select>
-
-				</Select>
+					</Select>
+				</FormControl>
     
 				
 

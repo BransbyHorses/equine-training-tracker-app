@@ -9,8 +9,8 @@ export default function PageContainer({ children, ...pageProps }) {
         sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "left",
-            alignItems: "left",
+            justifyContent: "center",
+            alignItems: "stretch",
         }}
         >
            {children} 

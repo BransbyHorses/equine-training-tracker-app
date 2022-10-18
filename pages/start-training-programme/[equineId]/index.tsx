@@ -13,21 +13,21 @@ import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
-import { useTrainingCategories } from "../../../utils/hooks/useCollection";
+import getCollection from "../../../utils/hooks/getCollection";
 import { TrainingCategory } from "../../../utils/types";
 
 
 export default function StartTrainingProgramme() {
 
 	const router = useRouter();
-	const [categories, setCategories] = useState<TrainingCategory[]>([]);
-	const { fetchingData, trainingCategories, error, notFound } = useTrainingCategories(
-		router.isReady
+	const [trainingCategories, setTrainingCategories] = useState<TrainingCategory[]>([]);
+	const { fetchingData, collection, error, notFound } = getCollection(
+		'training-categories'
 	);
 
 	useEffect(() => {
 		if (router.isReady) {
-			setCategories(trainingCategories);
+			setTrainingCategories(collection);
 		}
 	}, [router.isReady]);
 
@@ -42,7 +42,7 @@ export default function StartTrainingProgramme() {
     
 				<Typography>This will end the current training programme</Typography>
 				<RadioButtonsForm
-					items={categories} 
+					items={trainingCategories} 
 				/>
 	
 

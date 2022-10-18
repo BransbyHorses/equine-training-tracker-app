@@ -5,7 +5,7 @@ import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { useRouter } from "next/router";
-import { useLearnerTypes } from "../../../utils/hooks/useLearnerTypes";
+import getCollection from "../../../utils/hooks/getCollection";
 import { LearnerType } from "../../../utils/types";
 
 
@@ -13,16 +13,16 @@ import { LearnerType } from "../../../utils/types";
 export default function ChangeHandlingStatus() {
 
 	const router = useRouter();
-	const [types, setTypes] = useState<LearnerType[]>([]);
-	const { fetchingData, learnerTypes, error, notFound } = useLearnerTypes(
-		router.isReady
+	const [learnerTypes, setLearnerTypes] = useState<LearnerType[]>([]);
+	const { fetchingData, collection, error, notFound } = getCollection(
+		'learner-types'
 	);
 
 	useEffect(() => {
 		if (router.isReady) {
-			setTypes(learnerTypes);
-			console.log("Learners!")
-			console.log(learnerTypes);
+			setLearnerTypes(collection);
+			console.log("TYPES")
+			console.log(learnerTypes)
 		}
 	}, [router.isReady]);
 
@@ -34,7 +34,7 @@ export default function ChangeHandlingStatus() {
 				<FormControl>
 				<InputLabel>Handling status</InputLabel>
 					<Select>
-					{types.map(({id, name}) => {
+					{learnerTypes.map(({id, name}) => {
 						return (
 							<MenuItem key={id} value={name}>
 								{name}
@@ -45,8 +45,6 @@ export default function ChangeHandlingStatus() {
 					}
 					</Select>
 				</FormControl>
-    
-				
 
 				<PrimaryButton buttonText="Save" link="/"/>
 

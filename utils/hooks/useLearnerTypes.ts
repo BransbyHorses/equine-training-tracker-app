@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { TrainingCategory } from "../types";
+import { LearnerType } from "../types";
 
-export const useTrainingCategories = (): {
+export const useLearnerTypes = (): {
 	fetchingData: boolean;
-	trainingCategories: TrainingCategory[];
+	learnerTypes: LearnerType[];
 	error: boolean;
 } => {
-	const [trainingCategories, setTrainingCategories] = useState([]);
+	const [learnerTypes, setLearnerTypes] = useState([]);
 	const [fetchingData, setFetchingData] = useState(false);
 	const [error, setError] = useState(false);
 	const [notFound, setNotFound] = useState(false);
@@ -17,14 +17,13 @@ export const useTrainingCategories = (): {
 	useEffect(() => {
 		setFetchingData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}/data/training-categories`)
+			.get(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`)
 			.then(({ data }) => {
-				setTrainingCategories(data);
-				console.log(trainingCategories);
+				setLearnerTypes(data);
 			})
 			.catch((err) => {
 				console.error(
-					`Failed to fetch equines data. Failed with error message: ${err}.`
+					`Failed to fetch learner types data. Failed with error message: ${err}.`
 				);
 				setError(true);
 			})
@@ -33,7 +32,7 @@ export const useTrainingCategories = (): {
 
 	return {
 		fetchingData,
-		trainingCategories,
+		learnerTypes,
 		error,
 	};
 };

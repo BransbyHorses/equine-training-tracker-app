@@ -20,11 +20,10 @@ export const useTrainingCategories = (): {
 			.get(`${process.env.NEXT_PUBLIC_URL}/data/training-categories`)
 			.then(({ data }) => {
 				setTrainingCategories(data);
-				console.log(trainingCategories);
 			})
 			.catch((err) => {
 				console.error(
-					`Failed to fetch equines data. Failed with error message: ${err}.`
+					`Failed to fetch training category data. Failed with error message: ${err}.`
 				);
 				setError(true);
 			})

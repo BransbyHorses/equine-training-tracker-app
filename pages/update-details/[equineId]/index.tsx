@@ -44,6 +44,8 @@ export default function UpdateDetails() {
 					/>
 					<SecondaryButton 
 						buttonText="End training"
+						link={`/end-training/${equineId}`}
+
 					/>
 				</Grid>
 				</PageContainer>

@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-	FormControl,
-	FormControlLabel,
-	Grid,
-	Radio,
-	RadioGroup,
-    Typography
-	} from "@mui/material";
+import { Grid } from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
@@ -17,17 +10,17 @@ import getCollection from "../../../utils/hooks/getCollection";
 import { Disruption } from "../../../utils/types";
 
 
-export default function AddDisruption() {
+export default function EndTraining() {
 
 	const router = useRouter();
-	const [disruptions, setDisruptions] = useState<Disruption[]>([]);
+	const [endConditions, setEndConditions] = useState<Disruption[]>([]);
 	const { fetchingData, collection, error, notFound } = getCollection(
 		'disruptions'
 	);
 
 	useEffect(() => {
 		if (router.isReady) {
-			setDisruptions(collection);
+			setEndConditions(collection);
 		}
 	}, [router.isReady]);
 
@@ -38,10 +31,10 @@ export default function AddDisruption() {
 			>
 			<PageContainer>
 				<BackBreadcrumb link="/" />
-				<PageTitle title="Add disruption" />
+				<PageTitle title="Reason for ending training" />
     
 				<RadioButtonsForm
-					items={disruptions} 
+					items={endConditions} 
 				/>
 	
 

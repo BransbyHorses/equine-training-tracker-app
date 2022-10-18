@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
-import {FormControl, InputLabel, Select} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { useRouter } from "next/router";
-import { useTrainingCategories } from "../../../utils/hooks/training-category";
-import { TrainingCategory } from "../../../utils/types";
+import { useLearnerTypes } from "../../../utils/hooks/useLearnerTypes";
+import { LearnerType } from "../../../utils/types";
 
 
 
 export default function ChangeHandlingStatus() {
 
 	const router = useRouter();
-	const [categories, setCategories] = useState<TrainingCategory[]>([]);
-	const { fetchingData, trainingCategories, error, notFound } = useTrainingCategories(
+	const [types, setTypes] = useState<LearnerType[]>([]);
+	const { fetchingData, learnerTypes, error, notFound } = useLearnerTypes(
 		router.isReady
 	);
 
 	useEffect(() => {
 		if (router.isReady) {
-			setCategories(trainingCategories);
+			setTypes(learnerTypes);
+			console.log("Learners!")
+			console.log(learnerTypes);
 		}
 	}, [router.isReady]);
 
@@ -30,9 +32,17 @@ export default function ChangeHandlingStatus() {
 				<BackBreadcrumb link="/" />
 				<PageTitle title="Change handling status" />
 				<FormControl>
-				<InputLabel>Type of learner</InputLabel>
+				<InputLabel>Handling status</InputLabel>
 					<Select>
-
+					{types.map(({id, name}) => {
+						return (
+							<MenuItem key={id} value={name}>
+								{name}
+							</MenuItem>
+							)
+						}
+						)
+					}
 					</Select>
 				</FormControl>
     

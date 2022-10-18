@@ -11,8 +11,9 @@ import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
+import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
-import { useTrainingCategories } from "../../../utils/hooks/training-category";
+import { useTrainingCategories } from "../../../utils/hooks/useCollection";
 import { TrainingCategory } from "../../../utils/types";
 
 
@@ -40,20 +41,10 @@ export default function StartTrainingProgramme() {
 				<PageTitle title="Start a new training programme" />
     
 				<Typography>This will end the current training programme</Typography>
-				<FormControl>
-					<RadioGroup
-						defaultValue="Training"
-						name="radio-buttons-group"
-					>
-						{categories.map(({id, name}) => {
-							return (
-						<FormControlLabel key={id} value={name} control={<Radio />} label={name} />
-							)
-						}
-						)
-					}
-					</RadioGroup>
-				</FormControl>
+				<RadioButtonsForm
+					items={categories} 
+				/>
+	
 
 				<PrimaryButton 
 					buttonText="Save" 

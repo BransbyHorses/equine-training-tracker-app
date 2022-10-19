@@ -127,25 +127,27 @@ const EquineProfile = () => {
 			</Paper>
 			<hr style={{ margin: "20px 0" }} />
 			<Grid container rowSpacing={3} columnSpacing={2}>
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Link href={`/equines/${equineId}/add-training`}>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-									cursor: "pointer",
-								}}
-							>
-								<Typography variant="h6">Add Training</Typography>
-								<AddCircleIcon fontSize="large" color="success" />
-							</Box>
-						</Link>
-					</Paper>
-				</Grid>
+				{isInTraining && (
+					<Grid item xs={12} sm={6}>
+						<Paper>
+							<Link href={`/equines/${equineId}/add-training`}>
+								<Box
+									px={2}
+									py={2}
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+										cursor: "pointer",
+									}}
+								>
+									<Typography variant="h6">Add Training</Typography>
+									<AddCircleIcon fontSize="large" color="success" />
+								</Box>
+							</Link>
+						</Paper>
+					</Grid>
+				)}
 				<Grid item xs={12} sm={6}>
 					<Paper>
 						<Link href={`/equines/${equineId}/training-history`}>

@@ -17,13 +17,18 @@ import {
 	Grid,
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import {
+	convertDateToString,
+	findLastTrainingSession,
+} from "../../../utils/helpers";
 
 const TrainingProgrammeSkills = ({
 	skillProgressRecords,
+	skillTrainingSessions,
 	setSkillsFocus,
 }: {
 	skillProgressRecords: SkillProgressRecord[];
+	skillTrainingSessions: SkillTrainingSession[];
 	setSkillsFocus: (id: number) => void;
 }) => {
 	const theme = useTheme();
@@ -64,6 +69,12 @@ const TrainingProgrammeSkills = ({
 				return 0;
 			})
 			.map((skillProgressRecord, i) => {
+				const lastTrainingSession = findLastTrainingSession(
+					skillTrainingSessions.filter(
+						(sts) => sts.skill.id === skillProgressRecord.skill.id
+					)
+				);
+
 				return (
 					<Box onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}>
 						<Paper key={skillProgressRecord.id}>
@@ -78,7 +89,7 @@ const TrainingProgrammeSkills = ({
 								}}
 							>
 								<Grid container>
-									<Grid item xs={7} md={4} lg={3}>
+									<Grid item xs={7} sm={7} md={5} lg={3}>
 										<Typography fontWeight={500} color="primary.light">
 											{skillProgressRecord.skill.name}
 										</Typography>
@@ -86,12 +97,28 @@ const TrainingProgrammeSkills = ({
 									<Grid
 										item
 										xs={5}
-										md={4}
+										sm={5}
+										md={3}
 										lg={3}
 										sx={{ display: "flex", alignItems: "center" }}
 									>
 										<Typography fontWeight={400}>
 											{skillProgressRecord.progressCode.string}
+										</Typography>
+									</Grid>
+									<Grid item xs={12} md={4} color="gray" sx={{
+										[theme.breakpoints.between("xs", "sm")]: {
+											marginTop: "8px"
+										}
+									}}>
+										<Typography>
+											<small>
+												{lastTrainingSession
+													? `Last trained on ${convertDateToString(
+															lastTrainingSession.date
+													  )}`
+													: "No training sessions"}
+											</small>
 										</Typography>
 									</Grid>
 								</Grid>

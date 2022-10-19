@@ -143,6 +143,7 @@ const TrainingHistoryPage = () => {
 								skillProgressRecords={
 									trainingHistory.trainingProgramme.skillProgressRecords
 								}
+								skillTrainingSessions={trainingHistory.skillTrainingSessions}
 								setSkillsFocus={directToSkillLog}
 							/>
 						)}

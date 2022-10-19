@@ -138,7 +138,7 @@ const TrainingProgrammeLog = ({
 	return (
 		<>
 			<Box
-				mt={4}
+				mt={3}
 				sx={{
 					display: "flex",
 				}}

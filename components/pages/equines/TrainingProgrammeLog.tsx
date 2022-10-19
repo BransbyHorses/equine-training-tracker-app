@@ -24,9 +24,7 @@ const TrainingProgrammeLog = ({
 	skillTrainingSessions?: SkillTrainingSession[];
 }) => {
 	const theme = useTheme();
-	const [trainingLogFilter, setTrainingLogFilter] = useState<
-		"Most recent" | "Oldest"
-	>("Most recent");
+	const [trainingLogFilter, setTrainingLogFilter] = useState("Most recent");
 
 	const mapTrainingSessions = () => {
 		return skillTrainingSessions
@@ -148,10 +146,7 @@ const TrainingProgrammeLog = ({
 				mt={3}
 				sx={{
 					display: "flex",
-					gap: "8px",
-					[theme.breakpoints.between("xs", "xl")]: {
-						justifyContent: "flex-end",
-					},
+					justifyContent: "flex-end",
 				}}
 			>
 				<FormControl
@@ -169,7 +164,7 @@ const TrainingProgrammeLog = ({
 					<Select
 						id="trainingLogFilter"
 						value={trainingLogFilter}
-						onChange={(event) => setTrainingLogFilter(event?.target.value)}
+						onChange={(event) => setTrainingLogFilter(event.target.value)}
 					>
 						<MenuItem value="Most recent">Most recent</MenuItem>
 						<MenuItem value="Oldest">Oldest</MenuItem>

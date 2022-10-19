@@ -134,7 +134,7 @@ const TrainingProgrammeSkills = ({
 	return (
 		<>
 			<Box
-				mt={4}
+				mt={3}
 				sx={{
 					display: "flex",
 					justifyContent: "flex-end",
@@ -145,10 +145,10 @@ const TrainingProgrammeSkills = ({
 					variant="outlined"
 					sx={{
 						[theme.breakpoints.between("xs", "md")]: {
-							width: "50%",
+							width: "100%",
 						},
 						[theme.breakpoints.between("md", "xl")]: {
-							width: "200px",
+							width: "150px",
 						},
 					}}
 				>

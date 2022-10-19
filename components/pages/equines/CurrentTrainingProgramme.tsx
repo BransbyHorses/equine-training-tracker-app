@@ -18,4 +18,4 @@ const CurrentTrainingProgramme = ({
 	return <span>{currentTrainingProgramme.trainingCategory.name}</span>;
 };
 
-export default React.memo(CurrentTrainingProgramme);
+export default CurrentTrainingProgramme;

@@ -29,7 +29,7 @@ const TrainingProgrammeLog = ({
 	const mapTrainingSessions = () => {
 		return skillTrainingSessions
 			?.sort((a, b) => {
-				if (new Date(a.date) > new Date(b.date)) {
+				if (new Date(a.date).getTime() > new Date(b.date).getTime()) {
 					return trainingLogFilter === "Most recent" ? -1 : 1;
 				} else {
 					return trainingLogFilter === "Most recent" ? 1 : -1;

@@ -119,7 +119,7 @@ export default function Home() {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<Alert severity="error">
-					An unexpected error occurred. Please refresh the page.
+					An unexpected error occurred
 				</Alert>
 			</Box>
 		);

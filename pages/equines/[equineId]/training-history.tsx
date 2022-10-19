@@ -17,7 +17,6 @@ import {
 } from "@mui/material";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import { convertDateToString } from "../../../utils/helpers";
 import useTrainingHistoryPage from "../../../utils/hooks/useTrainingHistoryPage";
 
 function TabPanel(props: any) {
@@ -52,7 +51,7 @@ const TrainingHistoryPage = () => {
 
 	useEffect(() => {
 		if (router.query["skill"]) {
-			setSkillFocus(router.query["skill"]);
+			setSkillFocus(parseInt(router.query["skill"] as string));
 		} else {
 			setSkillFocus(0);
 		}

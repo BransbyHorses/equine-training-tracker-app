@@ -22,11 +22,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 const TrainingProgrammeSkills = ({
 	skillProgressRecords,
 	setSkillsFocus,
-	trainingProgrammeInProgress,
 }: {
 	skillProgressRecords: SkillProgressRecord[];
 	setSkillsFocus: (id: number) => void;
-	trainingProgrammeInProgress: boolean;
 }) => {
 	const theme = useTheme();
 	const [skillsFilter, setSkillsFilter] = useState("all");
@@ -115,26 +113,6 @@ const TrainingProgrammeSkills = ({
 					justifyContent: "flex-end",
 				}}
 			>
-				<Button
-					color="primary"
-					variant="contained"
-					sx={{
-						display: trainingProgrammeInProgress ? "flex" : "none",
-						justifyContent: "space-between",
-						[theme.breakpoints.between("xs", "md")]: {
-							width: "50%",
-							marginRight: "8px",
-						},
-						[theme.breakpoints.between("md", "xl")]: {
-							width: "175px",
-							marginLeft: "auto",
-							marginRight: "16px",
-						},
-					}}
-				>
-					Log training &nbsp;
-					<AddCircleIcon fontSize="medium" />
-				</Button>
 				<FormControl
 					size="small"
 					variant="outlined"
@@ -144,7 +122,6 @@ const TrainingProgrammeSkills = ({
 						},
 						[theme.breakpoints.between("md", "xl")]: {
 							width: "200px",
-							marginLeft: trainingProgrammeInProgress ? "" : "auto",
 						},
 					}}
 				>

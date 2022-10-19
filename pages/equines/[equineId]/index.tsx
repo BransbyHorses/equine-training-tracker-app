@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from "react";
+
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { useEquine } from "../../../utils/hooks/equine";
+import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 
-import { Box } from "@mui/system";
+import EquineHealthAndSafety from "../../../components/pages/equines/EquineHealthAndSafety";
+import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+
 import {
 	Alert,
+	Box,
 	Breadcrumbs,
 	Typography,
 	Paper,
 	Link as MuiLink,
 	Grid,
 	styled,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-
-import LoadingSpinner from "../../../components/LoadingSpinner";
-import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
-import { findCurrentTrainingProgramme } from "../../../utils/helpers";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FlagIcon from "@mui/icons-material/Flag";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -125,6 +132,32 @@ const EquineProfile = () => {
 				</Box>
 			</Paper>
 			<hr style={{ margin: "20px 0" }} />
+			<Box mb={2}>
+				<Paper>
+					<Accordion>
+						<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="medium" />}>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<FlagIcon fontSize="medium" color="error" />
+								<Typography sx={{ ml: 1 }} variant="h6">
+									Health & Safety Flags
+								</Typography>
+							</Box>
+						</AccordionSummary>
+						<AccordionDetails>
+							<EquineHealthAndSafety
+								healthAndSafetyFlags={equine?.healthAndSafetyFlags || []}
+								equineId={equineId!}
+							/>
+						</AccordionDetails>
+					</Accordion>
+				</Paper>
+			</Box>
 			<Grid container rowSpacing={3} columnSpacing={2}>
 				{isInTraining && (
 					<Grid item xs={12} sm={6}>

@@ -8,16 +8,15 @@ import { Box } from "@mui/system";
 import {
 	Alert,
 	Breadcrumbs,
-	Link as MuiLink,
 	Typography,
 	Paper,
+	Link as MuiLink,
 	Grid,
 	styled,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
@@ -33,7 +32,7 @@ const EquineProfile = () => {
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEquineId(router.query.equineId);
+			setEquineId(router.query.equineId as string);
 		}
 	}, [router.isReady]);
 
@@ -66,7 +65,7 @@ const EquineProfile = () => {
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">
-				<MuiLink underline="hover" color="inherit" href="/">
+				<MuiLink href="/" color="inherit" underline="hover">
 					Equines
 				</MuiLink>
 				<Typography color="text.primary">{equine?.name}</Typography>
@@ -165,33 +164,6 @@ const EquineProfile = () => {
 								<ArrowRightIcon fontSize="large" />
 							</Box>
 						</Link>
-					</Paper>
-				</Grid>
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Box
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<ReportProblemIcon fontSize="medium" />
-								<Typography sx={{ ml: 1 }} variant="h6">
-									Health & Safety
-								</Typography>
-							</Box>
-							<ArrowRightIcon fontSize="large" />
-						</Box>
 					</Paper>
 				</Grid>
 				<Grid item xs={12} sm={6}>

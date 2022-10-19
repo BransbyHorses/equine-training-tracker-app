@@ -68,7 +68,7 @@ const TrainingProgrammeSkills = ({
 				if (a.skill.name > b.skill.name) return 1;
 				return 0;
 			})
-			.map((skillProgressRecord, i) => {
+			.map((skillProgressRecord, i) => {			
 				const lastTrainingSession = findLastTrainingSession(
 					skillTrainingSessions.filter(
 						(sts) => sts.skill.id === skillProgressRecord.skill.id

@@ -32,7 +32,7 @@ export const findLastTrainingSession = (
 	if (!skillTrainingSessions || skillTrainingSessions.length === 0) return null;
 
 	const sortedRecordsByDate = skillTrainingSessions.sort((a, b) => {
-		return new Date(b.date) - new Date(a.date);
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
 	});
 
 	return sortedRecordsByDate[0];

@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { Container } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../public/css/main.css";
@@ -66,6 +67,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 						<Component {...pageProps} />
 					</main>
 				</Container>
+				<Footer />
 			</SessionProvider>
 		</ThemeProvider>
 	);

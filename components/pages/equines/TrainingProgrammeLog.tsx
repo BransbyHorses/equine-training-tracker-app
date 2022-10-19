@@ -118,16 +118,19 @@ const TrainingProgrammeLog = ({
 											{skillTrainingSession.environment.name}
 										</Typography>
 									</Box>
-									{skillTrainingSession.notes.length > 0 ? (
-										<Box sx={{ display: "flex" }} pb={1} mt={1}>
-											<Typography fontWeight={600} mr={1}>
-												Trainer Notes:
-											</Typography>
-											<Typography>{skillTrainingSession.notes}</Typography>
-										</Box>
-									) : (
-										<></>
-									)}
+									<Box sx={{ display: "flex" }} pb={1} mt={1}>
+										<Typography fontWeight={600} mr={1}>
+											Trainer Notes:
+										</Typography>
+										<Typography>
+											{" "}
+											{skillTrainingSession.notes.length > 0 ? (
+												<span>{skillTrainingSession.notes}</span>
+											) : (
+												<em>No trainer notes provided</em>
+											)}
+										</Typography>
+									</Box>
 								</AccordionDetails>
 							</Accordion>
 						</Box>

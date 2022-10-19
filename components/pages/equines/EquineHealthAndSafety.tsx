@@ -51,7 +51,7 @@ export const HealthAndSafetyFlagForm = ({
 							color="success"
 							sx={{ marginRight: "5px" }}
 						/>
-						<Typography>
+						<Typography color="success">
 							<small>New health & safety flag added.</small>
 						</Typography>
 					</Box>
@@ -63,8 +63,8 @@ export const HealthAndSafetyFlagForm = ({
 							color="error"
 							sx={{ marginRight: "5px" }}
 						/>
-						<Typography>
-							<small>An error occurred. Try again.</small>
+						<Typography color="error">
+							<small>An error occurred. Please try again.</small>
 						</Typography>
 					</Box>
 				)}
@@ -77,10 +77,10 @@ export const HealthAndSafetyFlagForm = ({
 					multiline
 					rows={7}
 					placeholder="Add new health and safety flag here..."
-					onChange={() => setNewHandSFlag(event.target.value)}
+					onChange={(event) => setNewHandSFlag(event.target.value)}
 				/>
 				<Button
-					color="primary"
+					sx={{ backgroundColor: "primary.light" }}
 					variant="contained"
 					onClick={() => saveFunction(newHandSFlag)}
 					disabled={newHandSFlag === "" || waiting}
@@ -97,7 +97,7 @@ export const HealthAndSafetyFlags = ({
 	healthAndSafetyFlags,
 }: {
 	closeFlags: () => void;
-	healthAndSafetyFlags?: HealthAndSafetyFlag[];
+	healthAndSafetyFlags: HealthAndSafetyFlag[];
 }) => {
 	return (
 		<>
@@ -114,13 +114,7 @@ export const HealthAndSafetyFlags = ({
 					</em>
 				</Typography>
 			</Box>
-			{!healthAndSafetyFlags || healthAndSafetyFlags.length === 0 ? (
-				<Box pt={2}>
-					<Typography>
-						<em>No Health & Safety Flags</em>
-					</Typography>
-				</Box>
-			) : (
+			{healthAndSafetyFlags.length > 0 && (
 				<Box sx={{ maxHeight: "400px", overflowY: "auto" }}>
 					{healthAndSafetyFlags.map((healthAndSafetyFlag) => {
 						return (
@@ -193,7 +187,9 @@ const EquineHealthAndSafety = ({
 			<HealthAndSafetyFlags
 				closeFlags={openForm}
 				healthAndSafetyFlags={updatedhealthAndSafetyFlags.sort(
-					(a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+					(a, b) =>
+						new Date(b.dateCreated).getTime() -
+						new Date(a.dateCreated).getTime()
 				)}
 			/>
 		);

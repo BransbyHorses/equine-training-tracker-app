@@ -9,6 +9,8 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
+	Button,
+	useTheme,
 } from "@mui/material";
 import { SkillTrainingSession } from "../../../utils/types";
 import { convertDateToString } from "../../../utils/helpers";
@@ -21,7 +23,10 @@ const TrainingProgrammeLog = ({
 }: {
 	skillTrainingSessions?: SkillTrainingSession[];
 }) => {
-	const [trainingLogFilter, setTrainingLogFilter] = useState("Most recent");
+	const theme = useTheme();
+	const [trainingLogFilter, setTrainingLogFilter] = useState<
+		"Most recent" | "Oldest"
+	>("Most recent");
 
 	const mapTrainingSessions = () => {
 		return skillTrainingSessions
@@ -58,7 +63,9 @@ const TrainingProgrammeLog = ({
 											)}
 										</Box>
 										<Box mt={1}>
-											<Typography display="inline" fontWeight={600}>Skill: </Typography>
+											<Typography display="inline" fontWeight={600}>
+												Skill:{" "}
+											</Typography>
 											<Typography display="inline">
 												{skillTrainingSession.skill.name}
 											</Typography>
@@ -141,12 +148,23 @@ const TrainingProgrammeLog = ({
 				mt={3}
 				sx={{
 					display: "flex",
+					gap: "8px",
+					[theme.breakpoints.between("xs", "xl")]: {
+						justifyContent: "flex-end",
+					},
 				}}
 			>
 				<FormControl
 					size="small"
 					variant="outlined"
-					sx={{ minWidth: "150px", marginLeft: "auto" }}
+					sx={{
+						[theme.breakpoints.between("xs", "sm")]: {
+							width: "100%",
+						},
+						[theme.breakpoints.between("sm", "xl")]: {
+							width: "150px",
+						},
+					}}
 				>
 					<Select
 						id="trainingLogFilter"

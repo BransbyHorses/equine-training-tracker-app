@@ -16,7 +16,6 @@ const useYards = (): {
 		axios
 			.get(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
 			.then(({ data }) => {
-				console.log(data);
 				setYards(data);
 			})
 			.catch((err) => {

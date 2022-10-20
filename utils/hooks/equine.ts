@@ -15,7 +15,7 @@ export const useEquines = (): {
 	useEffect(() => {
 		setFetchingData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}/data/equines`)
+			.get(`${process.env.NEXT_PUBLIC_URL}data/equines`)
 			.then(({ data }) => {
 				setError(false);
 				setFetchingData(false);

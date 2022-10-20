@@ -11,6 +11,9 @@ import {
 	AccordionDetails,
 	Button,
 	useTheme,
+	FormControlLabel,
+	Checkbox,
+	FormGroup,
 } from "@mui/material";
 import { SkillTrainingSession } from "../../../utils/types";
 import { convertDateToString } from "../../../utils/helpers";
@@ -21,14 +24,15 @@ import CommentIcon from "@mui/icons-material/Comment";
 const TrainingProgrammeLog = ({
 	skillTrainingSessions,
 }: {
-	skillTrainingSessions?: SkillTrainingSession[];
+	skillTrainingSessions: SkillTrainingSession[] | [];
 }) => {
 	const theme = useTheme();
 	const [trainingLogFilter, setTrainingLogFilter] = useState("Most recent");
+	const [showNotes, setShowNotes] = useState(false);
 
 	const mapTrainingSessions = () => {
 		return skillTrainingSessions
-			?.sort((a, b) => {
+			.sort((a, b) => {
 				if (new Date(a.date).getTime() > new Date(b.date).getTime()) {
 					return trainingLogFilter === "Most recent" ? -1 : 1;
 				} else {
@@ -37,104 +41,128 @@ const TrainingProgrammeLog = ({
 			})
 			.map((skillTrainingSession) => {
 				return (
-					<>
-						<Box sx={{ borderBottom: "0.5px solid gray" }}>
-							<Accordion elevation={0} sx={{ backgroundColor: "transparent" }}>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-									sx={{ padding: 0 }}
+					<Box sx={{ borderBottom: "0.5px solid gray" }}>
+						<Accordion elevation={0} sx={{ backgroundColor: "transparent" }}>
+							<AccordionSummary
+								expandIcon={<ExpandMoreIcon />}
+								sx={{ padding: 0 }}
+							>
+								<Box sx={{ display: "flex", flexDirection: "column" }}>
+									<Box
+										key={skillTrainingSession.id}
+										sx={{ display: "flex", alignItems: "center" }}
+									>
+										<Typography fontWeight={500}>
+											{convertDateToString(skillTrainingSession.date)}
+										</Typography>
+										{skillTrainingSession.notes.length > 0 ? (
+											<span style={{ marginLeft: "16px" }}>
+												<CommentIcon fontSize="small" />
+											</span>
+										) : (
+											<></>
+										)}
+									</Box>
+									<Box mt={1}>
+										<Typography display="inline" fontWeight={500}>
+											Skill:{" "}
+										</Typography>
+										<Typography display="inline">
+											{skillTrainingSession.skill.name}
+										</Typography>
+									</Box>
+								</Box>
+							</AccordionSummary>
+							<AccordionDetails>
+								<Box
+									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									pb={1}
 								>
-									<Box sx={{ display: "flex", flexDirection: "column" }}>
-										<Box
-											key={skillTrainingSession.id}
-											sx={{ display: "flex", alignItems: "center" }}
-										>
-											<Typography fontWeight={600}>
-												{convertDateToString(skillTrainingSession.date)}
-											</Typography>
-											{skillTrainingSession.notes.length > 0 ? (
-												<span style={{ marginLeft: "16px" }}>
-													<CommentIcon fontSize="small" />
-												</span>
-											) : (
-												<></>
-											)}
-										</Box>
-										<Box mt={1}>
-											<Typography display="inline" fontWeight={600}>
-												Skill:{" "}
-											</Typography>
-											<Typography display="inline">
-												{skillTrainingSession.skill.name}
-											</Typography>
-										</Box>
-									</Box>
-								</AccordionSummary>
-								<AccordionDetails>
-									<Box
-										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
-										pb={1}
-									>
-										<Typography fontWeight={600} mr={1}>
-											Time:
-										</Typography>
-										<Typography>
-											{skillTrainingSession.trainingTime} minutes
-										</Typography>
-									</Box>
-									<Box
-										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
-										pb={1}
-										mt={1}
-									>
-										<Typography fontWeight={600} mr={1}>
-											Progress Marked:
-										</Typography>
-										<Typography>
-											{skillTrainingSession.progressCode.string}
-										</Typography>
-									</Box>
-									<Box
-										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
-										pb={1}
-										mt={1}
-									>
-										<Typography fontWeight={600} mr={1}>
-											Method Used:
-										</Typography>
-										<Typography>
-											{skillTrainingSession.trainingMethod.name}
-										</Typography>
-									</Box>
-									<Box
-										sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
-										pb={1}
-										mt={1}
-									>
-										<Typography fontWeight={600} mr={1}>
-											Environment:
-										</Typography>
-										<Typography>
-											{skillTrainingSession.environment.name}
-										</Typography>
-									</Box>
-									<Box sx={{ display: "flex" }} pb={1} mt={1}>
-										<Typography fontWeight={600} mr={1}>
-											Trainer Notes:
-										</Typography>
-										<Typography>
-											{" "}
-											{skillTrainingSession.notes.length > 0 ? (
-												<span>{skillTrainingSession.notes}</span>
-											) : (
-												<em>No trainer notes provided</em>
-											)}
-										</Typography>
-									</Box>
-								</AccordionDetails>
-							</Accordion>
-						</Box>
-					</>
+									<Typography fontWeight={600} mr={1}>
+										Time:
+									</Typography>
+									<Typography>
+										{skillTrainingSession.trainingTime} minutes
+									</Typography>
+								</Box>
+								<Box
+									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									pb={1}
+									mt={1}
+								>
+									<Typography fontWeight={600} mr={1}>
+										Progress Marked:
+									</Typography>
+									<Typography>
+										{skillTrainingSession.progressCode.string}
+									</Typography>
+								</Box>
+								<Box
+									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									pb={1}
+									mt={1}
+								>
+									<Typography fontWeight={600} mr={1}>
+										Method Used:
+									</Typography>
+									<Typography>
+										{skillTrainingSession.trainingMethod.name}
+									</Typography>
+								</Box>
+								<Box
+									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									pb={1}
+									mt={1}
+								>
+									<Typography fontWeight={600} mr={1}>
+										Environment:
+									</Typography>
+									<Typography>
+										{skillTrainingSession.environment.name}
+									</Typography>
+								</Box>
+								<Box sx={{ display: "flex" }} pb={1} mt={1}>
+									<Typography fontWeight={600} mr={1}>
+										Trainer Notes:
+									</Typography>
+									<Typography>
+										{" "}
+										{skillTrainingSession.notes.length > 0 ? (
+											<span>{skillTrainingSession.notes}</span>
+										) : (
+											<em>No trainer notes provided</em>
+										)}
+									</Typography>
+								</Box>
+							</AccordionDetails>
+						</Accordion>
+					</Box>
+				);
+			});
+	};
+
+	const mapTrainerNotes = () => {
+		return skillTrainingSessions
+			.filter((sts) => sts.notes)
+			.sort((a, b) => {
+				if (new Date(a.date).getTime() > new Date(b.date).getTime()) {
+					return trainingLogFilter === "Most recent" ? -1 : 1;
+				} else {
+					return trainingLogFilter === "Most recent" ? 1 : -1;
+				}
+			})
+			.map((skillTrainingSession) => {
+				return (
+					<Box
+						py={3}
+						key={skillTrainingSession.id}
+						sx={{ borderBottom: "0.5px solid black" }}
+					>
+						<Typography>{skillTrainingSession.notes}</Typography>
+						<Typography color="gray" fontWeight={500}>
+							<small>{convertDateToString(skillTrainingSession.date)}</small>
+						</Typography>
+					</Box>
 				);
 			});
 	};
@@ -148,10 +176,24 @@ const TrainingProgrammeLog = ({
 			<Box
 				mt={3}
 				sx={{
-					display: "flex",
-					justifyContent: "flex-end",
+					[theme.breakpoints.between("sm", "md")]: {
+						display: "flex",
+						justifyContent: "space-between",
+					},
+					[theme.breakpoints.between("md", "xl")]: {
+						display: "flex",
+						justifyContent: "flex-end",
+						gap: "16px",
+					},
 				}}
 			>
+				<FormGroup>
+					<FormControlLabel
+						control={<Checkbox checked={showNotes} />}
+						onChange={() => setShowNotes(!showNotes)}
+						label="Show Trainer Notes"
+					/>
+				</FormGroup>
 				<FormControl
 					size="small"
 					variant="outlined"
@@ -175,7 +217,7 @@ const TrainingProgrammeLog = ({
 				</FormControl>
 			</Box>
 			<hr style={{ margin: "16px 0 0 0" }} />
-			{mapTrainingSessions()}
+			{showNotes ? mapTrainerNotes() : mapTrainingSessions()}
 		</>
 	);
 };

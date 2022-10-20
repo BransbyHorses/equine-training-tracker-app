@@ -14,7 +14,7 @@ const useYards = (): {
 	useEffect(() => {
 		setFetchingYardData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+			.get(`${process.env.NEXT_PUBLIC_URL}data/yards`)
 			.then(({ data }) => {
 				setYards(data);
 			})

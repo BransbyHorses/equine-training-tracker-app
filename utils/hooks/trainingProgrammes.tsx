@@ -18,7 +18,7 @@ export const useTrainingProgrammes = (
 		if (equineId) {
 			axios
 				.get(
-					`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/training-programmes`
+					`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/training-programmes`
 				)
 				.then(({ data }) => {
 					setTrainingProgrammes(data);

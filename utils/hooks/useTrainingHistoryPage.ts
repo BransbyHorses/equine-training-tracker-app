@@ -27,10 +27,10 @@ const useTrainingHistoryPage = (
 		if (equineId) {
 			Promise.all([
 				axios.get(
-					`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/training-programmes/latest`
+					`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/training-programmes/latest`
 				),
 				axios.get(
-					`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/skill-training-sessions`
+					`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/skill-training-sessions`
 				),
 			])
 				.then((data) => {

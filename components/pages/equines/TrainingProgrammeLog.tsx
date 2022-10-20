@@ -41,7 +41,7 @@ const TrainingProgrammeLog = ({
 			})
 			.map((skillTrainingSession) => {
 				return (
-					<Box sx={{ borderBottom: "0.5px solid gray" }}>
+					<Box sx={{ borderBottom: "0.5px solid lightGray" }}>
 						<Accordion elevation={0} sx={{ backgroundColor: "transparent" }}>
 							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
@@ -75,7 +75,10 @@ const TrainingProgrammeLog = ({
 							</AccordionSummary>
 							<AccordionDetails>
 								<Box
-									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									sx={{
+										display: "flex",
+										borderBottom: "1px solid lightGray",
+									}}
 									pb={1}
 								>
 									<Typography fontWeight={600} mr={1}>
@@ -86,7 +89,10 @@ const TrainingProgrammeLog = ({
 									</Typography>
 								</Box>
 								<Box
-									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									sx={{
+										display: "flex",
+										borderBottom: "1px solid lightGray",
+									}}
 									pb={1}
 									mt={1}
 								>
@@ -98,7 +104,10 @@ const TrainingProgrammeLog = ({
 									</Typography>
 								</Box>
 								<Box
-									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									sx={{
+										display: "flex",
+										borderBottom: "1px solid lightGray",
+									}}
 									pb={1}
 									mt={1}
 								>
@@ -110,7 +119,10 @@ const TrainingProgrammeLog = ({
 									</Typography>
 								</Box>
 								<Box
-									sx={{ display: "flex", borderBottom: "0.5px solid gray" }}
+									sx={{
+										display: "flex",
+										borderBottom: "1px solid lightGray",
+									}}
 									pb={1}
 									mt={1}
 								>
@@ -156,7 +168,7 @@ const TrainingProgrammeLog = ({
 					<Box
 						py={3}
 						key={skillTrainingSession.id}
-						sx={{ borderBottom: "0.5px solid black" }}
+						sx={{ borderBottom: "0.5px solid lightGray" }}
 					>
 						<Typography>{skillTrainingSession.notes}</Typography>
 						<Typography color="gray" fontWeight={500}>

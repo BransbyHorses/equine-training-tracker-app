@@ -46,7 +46,8 @@ export default function Home() {
 								display: "flex",
 								justifyContent: "space-between",
 								alignItems: "center",
-								borderBottom: i === arr.length - 1 ? "0" : "0.5px solid gray",
+								borderBottom:
+									i === arr.length - 1 ? "0" : "0.5px solid lightGray",
 								cursor: "pointer",
 							}}
 						>

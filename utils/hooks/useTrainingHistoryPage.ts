@@ -7,14 +7,14 @@ const useTrainingHistoryPage = (
 ): {
 	fetchingData: boolean;
 	trainingHistory: {
-		trainingProgramme?: TrainingProgramme | undefined;
+		trainingProgramme: TrainingProgramme | undefined;
 		skillTrainingSessions: SkillTrainingSession[] | [];
 	};
 	error: boolean;
 } => {
 	const [trainingHistory, setTrainingHistory] = useState<{
 		trainingProgramme: TrainingProgramme | undefined;
-		skillTrainingSessions: SkillTrainingSession[] | undefined;
+		skillTrainingSessions: SkillTrainingSession[] | [];
 	}>({
 		trainingProgramme: undefined,
 		skillTrainingSessions: [],

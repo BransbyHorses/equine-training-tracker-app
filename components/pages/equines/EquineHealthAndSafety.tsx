@@ -254,7 +254,7 @@ const EquineHealthAndSafety = ({
 	const deleteHealhAndSafetyFlag = (healthAndSafetyFlagId: number) => {
 		axios
 			.delete(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/health-and-safety-flags/${healthAndSafetyFlagId}`
+				`${process.env.NEXT_PUBLIC_URL}data/health-and-safety-flags/${healthAndSafetyFlagId}`
 			)
 			.then(() => {
 				setUpdatedhealthAndSafetyFlags(

@@ -163,7 +163,7 @@ export default function Home() {
 					alignItems: "center",
 				}}
 			>
-				<Typography variant="h6" fontWeight={600}>
+				<Typography variant="h6" fontWeight={500}>
 					Equines
 				</Typography>
 				<Typography color="gray" fontWeight={500}>

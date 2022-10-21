@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import { useEquine } from "../../../utils/hooks/equine";
 import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 
-import EquineHealthAndSafety from "../../../components/pages/equines/EquineHealthAndSafety";
+const EquineHealthAndSafety = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/health-and-safety/EquineHealthAndSafety"
+		),
+	{ suspense: true }
+);
 import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
-import {
-	Alert,
-	Box,
-	Breadcrumbs,
-	Typography,
-	Paper,
-	Link as MuiLink,
-	Grid,
-	styled,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
-} from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -44,10 +48,6 @@ const EquineProfile = () => {
 	}, [router.isReady]);
 
 	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
-
-	const Item = styled(Box)(({ theme }) => ({
-		padding: theme.spacing(1.5),
-	}));
 
 	if (fetchingData) {
 		return (
@@ -71,18 +71,18 @@ const EquineProfile = () => {
 
 	return (
 		<>
-			<Breadcrumbs aria-label="breadcrumb">
-				<MuiLink href="/" color="inherit" underline="hover">
-					Equines
-				</MuiLink>
+			<Breadcrumbs aria-label="breadcrumb" sx={{ color: "gray" }}>
+				<Link href="/">Equines</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
 			<Paper>
 				<Box
 					p={2}
 					mt={2}
-					color="common.white"
-					sx={{ backgroundColor: "primary.light" }}
+					sx={{
+						backgroundColor: "primary.light",
+						color: "common.white",
+					}}
 				>
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
@@ -142,10 +142,12 @@ const EquineProfile = () => {
 							</Box>
 						</AccordionSummary>
 						<AccordionDetails>
-							<EquineHealthAndSafety
-								healthAndSafetyFlags={equine?.healthAndSafetyFlags || []}
-								equineId={equineId!}
-							/>
+							<Suspense fallback={<LoadingSpinner />}>
+								<EquineHealthAndSafety
+									healthAndSafetyFlags={equine?.healthAndSafetyFlags || []}
+									equineId={equineId!}
+								/>
+							</Suspense>
 						</AccordionDetails>
 					</Accordion>
 				</Paper>

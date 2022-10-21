@@ -55,6 +55,11 @@ const Theme = createTheme({
 	},
 });
 
+const styles = {
+	width: "100%",
+	height: "100%"
+}
+
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={Theme}>
@@ -62,7 +67,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<Header />
 				<Navbar />
 				<Container>
-					<main>
+					<main style={styles}>
 						<Component {...pageProps} />
 					</main>
 				</Container>

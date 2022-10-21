@@ -2,37 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import type {} from '@mui/x-date-pickers/themeAugmentation';
-import {LocalizationProvider} from "@mui/x-date-pickers";
-import {createTheme} from "@mui/material/styles";
-import {Button, Container, Grid, Link, Stack, TextField} from "@mui/material";
+import {LocalizationProvider, DatePicker} from "@mui/x-date-pickers";
+import { Container, Grid, Link, Stack, TextField} from "@mui/material";
 import Typography from '@mui/material/Typography';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Box from "@mui/material/Box";
 import LinkButton from "../../../../components/LinkButton";
-import  { makeStyles } from '@mui/styles';
+
 
 
 const AddDate = ({}) => {
     const router = useRouter();
-    const [date, setDate] = useState<string | undefined>(undefined);
+    const [val, setVal] = useState(new Date());
 
-
-    // const useStyles = makeStyles((theme: any) => ({
-    //     footer: {
-    //         position: 'fixed',
-    //         bottom: 0,
-    //         width: '100%',
-    //         height: 60,
-    //         textAlign: 'center'
-    //     }
-    // }));
-    //
-    // const classes = useStyles();
 
     useEffect(() => {
     }, []);
 
-
+    const handleChange = (e: any) => {
+        setVal(e.target.value)
+        console.log(val);
+    }
 
     return (
             <>
@@ -47,9 +37,9 @@ const AddDate = ({}) => {
             </Box>
     <Container sx={{display: "flex", justifyContent: "space-around", flexDirection: "column"}} >
         <Box >
-            <Box sx={{ m: 2 }} />
-            <Typography color="text.primary">What date did you do this training?</Typography>
-            <Box sx={{ m: 2 }} />
+            <Box sx={{ m: 4 }} />
+            <Typography >What date did you do this training?</Typography>
+            <Box sx={{ m: 4 }} />
             <Grid
                 container
                 justifyContent="space-evenly"
@@ -61,11 +51,13 @@ const AddDate = ({}) => {
                         id="date"
                         label="Birthday"
                         type="date"
-                        defaultValue="2017-05-24"
+                        defaultValue="2022-10-20"
+                        //value={value}
                         sx={{ width: 220 }}
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        onChange={handleChange}
                     />
                 </Stack>
             </LocalizationProvider>

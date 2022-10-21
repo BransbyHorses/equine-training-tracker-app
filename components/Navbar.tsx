@@ -34,14 +34,17 @@ export default function ButtonAppBar() {
 					<IconButton size="small" color="inherit" aria-label="home">
 						<HomeIcon />
 					</IconButton>
-					<IconButton color="inherit" aria-label="open navigation menu">
+					<IconButton
+						color="inherit"
+						aria-label="open navigation menu"
+						onClick={openNavMenu}
+					>
 						<MenuIcon
 							sx={{
 								height: "2.1rem",
 								width: "2.1rem",
 								...(navMenuOpen && { display: "none" }),
 							}}
-							onClick={openNavMenu}
 						/>
 					</IconButton>
 				</Toolbar>

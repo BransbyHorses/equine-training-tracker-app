@@ -38,9 +38,8 @@ export default function Home() {
 			})
 			.map((equine, i, arr) => {
 				return (
-					<Link href={`/equines/${equine.id}`}>
+					<Link href={`/equines/${equine.id}`} key={equine.id}>
 						<Box
-							key={equine.id}
 							py={2}
 							sx={{
 								display: "flex",

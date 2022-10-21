@@ -3,11 +3,20 @@ import axios from "axios";
 import { convertDateToString } from "../../../utils/helpers";
 import { HealthAndSafetyFlag } from "../../../utils/types";
 
-import { Button, Box, Typography, TextField } from "@mui/material";
+import {
+	Button,
+	Box,
+	Typography,
+	TextField,
+	Menu,
+	MenuItem,
+	IconButton,
+} from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 export const HealthAndSafetyFlagForm = ({
 	saveFunction,
@@ -21,13 +30,12 @@ export const HealthAndSafetyFlagForm = ({
 	error: boolean;
 	success: boolean;
 	waiting: boolean;
+	edit?: HealthAndSafetyFlag;
 }) => {
-	const [newHandSFlag, setNewHandSFlag] = useState("");
+	const [formContent, setFormContent] = useState("");
 
 	useEffect(() => {
-		if (success) {
-			setNewHandSFlag("");
-		}
+		if (success) setFormContent("");
 	}, [success]);
 
 	return (
@@ -73,22 +81,67 @@ export const HealthAndSafetyFlagForm = ({
 				<TextField
 					sx={{ marginBottom: "16px" }}
 					variant="outlined"
-					value={newHandSFlag}
+					value={formContent}
 					multiline
 					rows={7}
 					placeholder="Add new health and safety flag here..."
-					onChange={(event) => setNewHandSFlag(event.target.value)}
+					onChange={(event) => setFormContent(event.target.value)}
 				/>
 				<Button
 					sx={{ backgroundColor: "primary.light" }}
 					variant="contained"
-					onClick={() => saveFunction(newHandSFlag)}
-					disabled={newHandSFlag === "" || waiting}
+					onClick={() => saveFunction(formContent)}
+					disabled={formContent === "" || waiting}
 				>
 					Save
 				</Button>
 			</Box>
 		</>
+	);
+};
+
+export const OptionsMenu = () => {
+	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const open = Boolean(anchorEl);
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const ITEM_HEIGHT = 48;
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	return (
+		<div>
+			<IconButton
+				aria-label="more"
+				id="long-button"
+				aria-controls={open ? "long-menu" : undefined}
+				aria-expanded={open ? "true" : undefined}
+				aria-haspopup="true"
+				onClick={handleClick}
+			>
+				<MoreHorizIcon fontSize="small" />
+			</IconButton>
+			<Menu
+				id="long-menu"
+				MenuListProps={{
+					"aria-labelledby": "long-button",
+				}}
+				anchorEl={anchorEl}
+				open={open}
+				onClose={handleClose}
+				PaperProps={{
+					style: {
+						maxHeight: ITEM_HEIGHT * 4.5,
+						width: "20ch",
+					},
+				}}
+			>
+				<MenuItem value="edit">Edit</MenuItem>
+				<MenuItem value="delete">Delete</MenuItem>
+			</Menu>
+		</div>
 	);
 };
 
@@ -105,7 +158,7 @@ export const HealthAndSafetyFlags = ({
 				<AddCircleIcon
 					fontSize="medium"
 					onClick={closeFlags}
-					sx={{ curser: "pointer" }}
+					sx={{ cursor: "pointer" }}
 				/>
 				<Typography>
 					<em>
@@ -116,16 +169,27 @@ export const HealthAndSafetyFlags = ({
 			</Box>
 			{healthAndSafetyFlags.length > 0 && (
 				<Box sx={{ maxHeight: "400px", overflowY: "auto" }}>
-					{healthAndSafetyFlags.map((healthAndSafetyFlag) => {
+					{healthAndSafetyFlags.map((healthAndSafetyFlag, i, arr) => {
 						return (
-							<Box borderBottom={0.5} pb={2} pt={2}>
-								<Typography>{healthAndSafetyFlag.content}</Typography>
-								<Typography color="gray">
-									{" "}
-									<small>
-										Added {convertDateToString(healthAndSafetyFlag.dateCreated)}
-									</small>
-								</Typography>
+							<Box
+								key={healthAndSafetyFlag.id}
+								borderBottom={
+									i < arr.length - 1 ? "0.5px solid lightGray" : "0"
+								}
+								pb={2}
+								pt={2}
+								sx={{ display: "flex", justifyContent: "space-between" }}
+							>
+								<Box mr={1}>
+									<Typography>{healthAndSafetyFlag.content}</Typography>
+									<Typography color="gray">
+										<small>
+											Added{" "}
+											{convertDateToString(healthAndSafetyFlag.dateCreated)}
+										</small>
+									</Typography>
+								</Box>
+								<OptionsMenu />
 							</Box>
 						);
 					})}

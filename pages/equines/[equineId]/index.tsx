@@ -57,7 +57,7 @@ const EquineProfile = () => {
 		);
 	}
 
-	if (error && !equine) {
+	if (error) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<Alert severity="error">
@@ -87,46 +87,38 @@ const EquineProfile = () => {
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
-					<Grid container>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Training Programme</Typography>
-								<Typography>
-									<CurrentTrainingProgramme
-										trainingProgrammes={equine?.trainingProgrammes}
-									/>
-								</Typography>
-							</Item>
+					<Grid container rowSpacing={3} columnSpacing={2}>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Training Programme</Typography>
+							<Typography>
+								<CurrentTrainingProgramme
+									trainingProgrammes={equine?.trainingProgrammes}
+								/>
+							</Typography>
 						</Grid>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Yard</Typography>
-								{equine && equine.yard ? (
-									<Typography>{equine.yard.name}</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
-							</Item>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Yard</Typography>
+							{equine && equine.yard ? (
+								<Typography>{equine.yard.name}</Typography>
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
 						</Grid>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Status</Typography>
-								{equine && equine.equineStatus ? (
-									<Typography>{equine.equineStatus.name}</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
-							</Item>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Status</Typography>
+							{equine && equine.equineStatus ? (
+								<Typography>{equine.equineStatus.name}</Typography>
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
 						</Grid>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Type of learner</Typography>
-								{equine && equine.learnerType ? (
-									<Typography>{equine.learnerType.name}</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
-							</Item>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Type of learner</Typography>
+							{equine && equine.learnerType ? (
+								<Typography>{equine.learnerType.name}</Typography>
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
 						</Grid>
 					</Grid>
 				</Box>

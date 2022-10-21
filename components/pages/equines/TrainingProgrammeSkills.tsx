@@ -76,8 +76,11 @@ const TrainingProgrammeSkills = ({
 				);
 
 				return (
-					<Box onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}>
-						<Paper key={skillProgressRecord.id}>
+					<Box
+						key={skillProgressRecord.id}
+						onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}
+					>
+						<Paper>
 							<Box
 								p={2}
 								mt={2}
@@ -106,11 +109,17 @@ const TrainingProgrammeSkills = ({
 											{skillProgressRecord.progressCode.string}
 										</Typography>
 									</Grid>
-									<Grid item xs={12} md={4} color="gray" sx={{
-										[theme.breakpoints.between("xs", "sm")]: {
-											marginTop: "8px"
-										}
-									}}>
+									<Grid
+										item
+										xs={12}
+										md={4}
+										color="gray"
+										sx={{
+											[theme.breakpoints.between("xs", "sm")]: {
+												marginTop: "8px",
+											},
+										}}
+									>
 										<Typography>
 											<small>
 												{lastTrainingSession

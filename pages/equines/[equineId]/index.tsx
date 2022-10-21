@@ -206,7 +206,7 @@ const EquineProfile = () => {
 								alignItems: "center",
 							}}
 						>
-							<Typography variant="h6">Update Details</Typography>
+							<Typography variant="h6">Update Profile</Typography>
 							<ArrowRightIcon fontSize="large" />
 						</Box>
 					</Paper>

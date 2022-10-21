@@ -100,7 +100,7 @@ export const HealthAndSafetyFlagForm = ({
 	);
 };
 
-export const OptionsMenu = () => {
+export const OptionsMenu = ({ deleteFlag }: { deleteFlag: () => void }) => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -138,8 +138,9 @@ export const OptionsMenu = () => {
 					},
 				}}
 			>
-				<MenuItem value="edit">Edit</MenuItem>
-				<MenuItem value="delete">Delete</MenuItem>
+				<MenuItem value="delete" onClick={deleteFlag}>
+					Delete
+				</MenuItem>
 			</Menu>
 		</div>
 	);
@@ -148,9 +149,11 @@ export const OptionsMenu = () => {
 export const HealthAndSafetyFlags = ({
 	closeFlags,
 	healthAndSafetyFlags,
+	deleteFlag,
 }: {
 	closeFlags: () => void;
 	healthAndSafetyFlags: HealthAndSafetyFlag[];
+	deleteFlag: (id: number) => void;
 }) => {
 	return (
 		<>
@@ -189,7 +192,9 @@ export const HealthAndSafetyFlags = ({
 										</small>
 									</Typography>
 								</Box>
-								<OptionsMenu />
+								<OptionsMenu
+									deleteFlag={() => deleteFlag(healthAndSafetyFlag.id)}
+								/>
 							</Box>
 						);
 					})}
@@ -221,7 +226,7 @@ const EquineHealthAndSafety = ({
 		setApiError(false);
 	};
 
-	const saveNewFlag = (content: string) => {
+	const saveHealhAndSafetyFlag = (content: string) => {
 		setApiError(false);
 		setSendingRequest(true);
 		axios
@@ -246,10 +251,27 @@ const EquineHealthAndSafety = ({
 			});
 	};
 
+	const deleteHealhAndSafetyFlag = (healthAndSafetyFlagId: number) => {
+		axios
+			.delete(
+				`${process.env.NEXT_PUBLIC_URL}data/equines/health-and-safety-flags/${healthAndSafetyFlagId}`
+			)
+			.then(() => {
+				setUpdatedhealthAndSafetyFlags(
+					updatedhealthAndSafetyFlags.filter(
+						(healthAndSafetyFlag) =>
+							healthAndSafetyFlag.id !== healthAndSafetyFlagId
+					)
+				);
+			})
+			.catch((err) => {});
+	};
+
 	if (showFlags) {
 		return (
 			<HealthAndSafetyFlags
 				closeFlags={openForm}
+				deleteFlag={deleteHealhAndSafetyFlag}
 				healthAndSafetyFlags={updatedhealthAndSafetyFlags.sort(
 					(a, b) =>
 						new Date(b.dateCreated).getTime() -
@@ -261,7 +283,7 @@ const EquineHealthAndSafety = ({
 		return (
 			<HealthAndSafetyFlagForm
 				closeForm={openFlags}
-				saveFunction={saveNewFlag}
+				saveFunction={saveHealhAndSafetyFlag}
 				waiting={sendingRequest}
 				success={apiSuccess}
 				error={apiError}

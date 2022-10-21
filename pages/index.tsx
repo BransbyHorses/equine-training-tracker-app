@@ -1,35 +1,25 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useEquines } from "../utils/hooks/equine";
 import { Equine, Yard } from "../utils/types";
 import useYards from "../utils/hooks/useYards";
 
-import Table from "@mui/material/Table";
 import Box from "@mui/material/Box";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import { Grid, IconButton, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import CurrentTrainingProgramme from "../components/pages/equines/equineId/CurrentTrainingProgramme";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
-	const {
-		fetchingData: fetchingYardData,
-		yards,
-		error: yardDataError,
-	} = useYards();
+	const { fetchingYardData, yards, error: yardDataError } = useYards();
 	const theme = useTheme();
 
 	const [tableData, setTableData] = useState<Equine[]>([]);
@@ -40,38 +30,43 @@ export default function Home() {
 	}, [equines]);
 
 	const mapEquineRows = (equineArray: Equine[]) => {
-		return equineArray.map((equine) => {
-
-			return (
-				<TableRow
-					key={equine.id}
-					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-				>
-					<TableCell component="th" scope="row">
-						<Link href={`/equines/${equine.id}`}>{equine.name}</Link>
-					</TableCell>
-					<TableCell component="th" scope="row">
-						{equine.equineStatus ? (
-							equine.equineStatus.name
-						) : (
-							<MoreHorizIcon sx={{ color: "gray" }} />
-						)}
-					</TableCell>
-					<TableCell component="th" scope="row">
-						{equine.yard ? (
-							equine.yard.name
-						) : (
-							<MoreHorizIcon sx={{ color: "gray" }} />
-						)}
-					</TableCell>
-					<TableCell component="th" scope="row">
-						<CurrentTrainingProgramme
-							trainingProgrammes={equine.trainingProgrammes}
-						/>
-					</TableCell>
-				</TableRow>
-			);
-		});
+		return equineArray
+			.sort((equineA, equineB) => {
+				if (equineA.name < equineB.name) return -1;
+				if (equineA.name > equineB.name) return 1;
+				return 0;
+			})
+			.map((equine, i, arr) => {
+				return (
+					<Link href={`/equines/${equine.id}`} key={equine.id}>
+						<Box
+							py={2}
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+								borderBottom:
+									i === arr.length - 1 ? "0" : "0.5px solid lightGray",
+								cursor: "pointer",
+							}}
+						>
+							<Grid container>
+								<Grid item xs={6} md={4} lg={3}>
+									<Typography fontWeight={500} color="primary.light">
+										{equine.name}
+									</Typography>
+								</Grid>
+								<Grid item xs={5} md={4} lg={3}>
+									<Typography color="gray">{equine.yard.name}</Typography>
+								</Grid>
+							</Grid>
+							<IconButton>
+								<KeyboardArrowRightIcon fontSize="large" />
+							</IconButton>
+						</Box>
+					</Link>
+				);
+			});
 	};
 
 	const mapYardOptions = (yardsArray: Yard[]) => {
@@ -118,9 +113,7 @@ export default function Home() {
 	if (error) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<Alert severity="error">
-					An unexpected error occurred. Please refresh the page.
-				</Alert>
+				<Alert severity="error">An unexpected error occurred</Alert>
 			</Box>
 		);
 	}
@@ -162,40 +155,30 @@ export default function Home() {
 					onChange={filterEquinesByName}
 				/>
 			</Box>
-			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 650 }} aria-label="simple table">
-					<TableHead>
-						<TableRow>
-							<TableCell>Name</TableCell>
-							<TableCell>Status</TableCell>
-							<TableCell>Yard</TableCell>
-							<TableCell>Current Training Programme</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{fetchingData && (
-							<Box
-								sx={{
-									display: "flex",
-									flexDirection: "row",
-									justifyContent: "space-between",
-								}}
-							>
-								<LoadingSpinner />
-							</Box>
-						)}
-						{tableData.length === 0 && !fetchingData ? (
-							<TableRow>
-								<TableCell component="th">
-									<em>No equines found</em>
-								</TableCell>
-							</TableRow>
-						) : (
-							mapEquineRows(tableData)
-						)}
-					</TableBody>
-				</Table>
-			</TableContainer>
+			<Box
+				mb={2}
+				sx={{
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
+				}}
+			>
+				<Typography variant="h6" fontWeight={500}>
+					Equines
+				</Typography>
+				<Typography color="gray" fontWeight={500}>
+					<small>
+						{equines.length > 0
+							? `Showing ${tableData.length} of ${equines.length}`
+							: ``}
+					</small>
+				</Typography>
+			</Box>
+			<Paper>
+				<Box pl={2} pr={1} sx={{ backgroundColor: "white" }}>
+					{mapEquineRows(tableData)}
+				</Box>
+			</Paper>
 		</>
 	);
 }

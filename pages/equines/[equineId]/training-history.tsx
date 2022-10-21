@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useTrainingProgramme } from "../../../utils/hooks/trainingProgrammes";
 
-import TrainingProgrammeLog from "../../../components/pages/equines/TrainingProgrammeLog";
-import TrainingProgrammeSkills from "../../../components/pages/equines/TrainingProgrammeSkills";
-import SkillLog from "../../../components/pages/equines/SkillLog";
+const TrainingProgrammeLog = dynamic(
+	() => import("../../../components/pages/equines/TrainingProgrammeLog")
+);
+const TrainingProgrammeSkills = dynamic(
+	() => import("../../../components/pages/equines/TrainingProgrammeSkills")
+);
+const SkillLog = dynamic(
+	() => import("../../../components/pages/equines/SkillLog")
+);
 
-import {
-	Breadcrumbs,
-	Link,
-	Box,
-	Alert,
-	Tab,
-	Tabs,
-	Typography,
-} from "@mui/material";
+
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import useTrainingHistoryPage from "../../../utils/hooks/useTrainingHistoryPage";

@@ -71,8 +71,10 @@ const EquineProfile = () => {
 
 	return (
 		<>
-			<Breadcrumbs aria-label="breadcrumb" sx={{ color: "gray" }}>
-				<Link href="/">Equines</Link>
+			<Breadcrumbs aria-label="breadcrumb">
+				<Link href="/">
+					<span style={{ color: "gray", cursor: "pointer" }}>Equines</span>
+				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
 			<Paper>

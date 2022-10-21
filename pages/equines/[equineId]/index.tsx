@@ -115,7 +115,7 @@ const EquineProfile = () => {
 							)}
 						</Grid>
 						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Type of learner</Typography>
+							<Typography variant="h6">Handling Status</Typography>
 							{equine && equine.learnerType ? (
 								<Typography>{equine.learnerType.name}</Typography>
 							) : (

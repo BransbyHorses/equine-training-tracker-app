@@ -1,5 +1,4 @@
 import React from "react";
-import { convertDateToString } from "../../../utils/helpers";
 import {
 	SkillProgressRecord,
 	SkillTrainingSession,
@@ -7,7 +6,8 @@ import {
 
 import TrainingProgrammeLog from "./TrainingProgrammeLog";
 
-import { Typography, Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const SkillLog = ({
 	skillTrainingSessions,

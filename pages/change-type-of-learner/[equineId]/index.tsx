@@ -15,17 +15,15 @@ export default function ChangeTypeOfLearner() {
 
 	const router = useRouter();
 	const [learnerTypes, setLearnerTypes] = useState<LearnerType[]>([]);
-	const [learnerType, setLearnerType] = useState<LearnerType>();
 	const [equine, setEquine] = useState<Equine>();
 	const { fetchingData, collection, error, notFound } = getCollection(
 		'learner-types'
 	);
+	const [learnerType, setLearnerType] = useState<LearnerType>();
 
 	useEffect(() => {
 		if (router.isReady) {
-			console.log("In useEffect");
 			getEquineFromId(router.query.equineId);
-			console.log("equine is " + equine?.id);
 			setLearnerTypes(collection);
 			setLearnerType(equine?.learnerType);
 		}
@@ -38,12 +36,12 @@ export default function ChangeTypeOfLearner() {
             .catch(rejected => {
                 console.log(rejected);
             });
+		console.log("equine set to")
+		console.log(equine);
     }
 
 	const updateEquine = async () => {
-		console.log("Changing  " + learnerType)
 		equine!.learnerType = learnerType!;
-		console.log(JSON.stringify(equine));
 		await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine?.id}`, {
 			method: "PUT",
 			headers: {
@@ -60,21 +58,20 @@ export default function ChangeTypeOfLearner() {
 
 
 	const handleChange = (event:any) => {
-		console.log(event);
-		var updatedLearnerType = learnerTypes.find(type => event.target.value == type.id);
+		let updatedLearnerType = learnerTypes.find(type => event.target.value == type.id);
 		setLearnerType(updatedLearnerType);
-		console.log(learnerType);	
-
 	}
 
 	return (
-		<>
 			<PageContainer>
 				<BackBreadcrumb link="/" />
 				<PageTitle title="Change handling status" />
 				<FormControl>
-				<InputLabel>Handling status</InputLabel>
-					<Select onChange={handleChange}>
+				<InputLabel id="learner-type-selection">Learner type</InputLabel>
+					<Select
+						value={learnerType?.name}
+						label="Learner type"
+						onChange={handleChange}>
 					{learnerTypes.map(({id, name}) => {
 						return (
 							<MenuItem 
@@ -95,6 +92,5 @@ export default function ChangeTypeOfLearner() {
 					handleChange={updateEquine}
 				/>
 			</PageContainer>
-		</>
 	);
 };

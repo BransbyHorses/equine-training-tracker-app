@@ -4,7 +4,11 @@ import React from "react";
 export default function PrimaryButton(props:any){
 
     return (
-        <Link color="inherit" href={props.link} style={{ textDecoration: 'none' }}>
+        <Link 
+            onClick={props.handleChange}
+            color="inherit" 
+           // href={props.link} 
+            style={{ textDecoration: 'none' }}>
                 <Box
                    className="fixed-button-bottom"
 

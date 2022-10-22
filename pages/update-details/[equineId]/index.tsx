@@ -34,8 +34,8 @@ export default function UpdateDetails() {
 						link={`/start-training-programme/${equineId}`}
 					/>
 					<SecondaryButton 
-						buttonText="Change handling status"
-						link={`/change-handling-status/${equineId}`}
+						buttonText="Change type of learner"
+						link={`/change-type-of-learner/${equineId}`}
 						/>
 					<SecondaryButton 
 						buttonText="Add disruption"

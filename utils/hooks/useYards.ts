@@ -3,20 +3,19 @@ import axios from "axios";
 import { Yard } from "../types";
 
 const useYards = (): {
-	fetchingData: boolean;
+	fetchingYardData: boolean;
 	yards: Yard[];
 	error: boolean;
 } => {
 	const [yards, setYards] = useState<Yard[]>([]);
-	const [fetchingData, setFetchingData] = useState(false);
+	const [fetchingYardData, setFetchingYardData] = useState(false);
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
-		setFetchingData(true);
+		setFetchingYardData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+			.get(`${process.env.NEXT_PUBLIC_URL}data/yards`)
 			.then(({ data }) => {
-				console.log(data);
 				setYards(data);
 			})
 			.catch((err) => {
@@ -25,11 +24,11 @@ const useYards = (): {
 				);
 				setError(true);
 			})
-			.finally(() => setFetchingData(false));
+			.finally(() => setFetchingYardData(false));
 	}, []);
 
 	return {
-		fetchingData,
+		fetchingYardData,
 		yards,
 		error,
 	};

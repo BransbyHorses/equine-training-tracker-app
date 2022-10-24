@@ -90,7 +90,7 @@ export interface HealthAndSafetyFlag {
 
 export enum ProgressCode {
 	"Not able",
-	"Just started",
-	"Ok with limits",
+	"Limited",
+	"Ok",
 	"Confident",
 }

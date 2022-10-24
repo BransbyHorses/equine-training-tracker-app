@@ -17,16 +17,19 @@ import {
 	Grid,
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import {
+	convertDateToString,
+	findLastTrainingSession,
+} from "../../../utils/helpers";
 
 const TrainingProgrammeSkills = ({
 	skillProgressRecords,
+	skillTrainingSessions,
 	setSkillsFocus,
-	trainingProgrammeInProgress,
 }: {
 	skillProgressRecords: SkillProgressRecord[];
+	skillTrainingSessions: SkillTrainingSession[];
 	setSkillsFocus: (id: number) => void;
-	trainingProgrammeInProgress: boolean;
 }) => {
 	const theme = useTheme();
 	const [skillsFilter, setSkillsFilter] = useState("all");
@@ -65,10 +68,19 @@ const TrainingProgrammeSkills = ({
 				if (a.skill.name > b.skill.name) return 1;
 				return 0;
 			})
-			.map((skillProgressRecord, i) => {
+			.map((skillProgressRecord, i) => {			
+				const lastTrainingSession = findLastTrainingSession(
+					skillTrainingSessions.filter(
+						(sts) => sts.skill.id === skillProgressRecord.skill.id
+					)
+				);
+
 				return (
-					<Box onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}>
-						<Paper key={skillProgressRecord.id}>
+					<Box
+						key={skillProgressRecord.id}
+						onClick={() => setSkillsFocus(skillProgressRecord.skill.id)}
+					>
+						<Paper>
 							<Box
 								p={2}
 								mt={2}
@@ -80,7 +92,7 @@ const TrainingProgrammeSkills = ({
 								}}
 							>
 								<Grid container>
-									<Grid item xs={7} md={4} lg={3}>
+									<Grid item xs={7} sm={7} md={5} lg={3}>
 										<Typography fontWeight={500} color="primary.light">
 											{skillProgressRecord.skill.name}
 										</Typography>
@@ -88,12 +100,34 @@ const TrainingProgrammeSkills = ({
 									<Grid
 										item
 										xs={5}
-										md={4}
+										sm={5}
+										md={3}
 										lg={3}
 										sx={{ display: "flex", alignItems: "center" }}
 									>
 										<Typography fontWeight={400}>
 											{skillProgressRecord.progressCode.string}
+										</Typography>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										md={4}
+										color="gray"
+										sx={{
+											[theme.breakpoints.between("xs", "sm")]: {
+												marginTop: "8px",
+											},
+										}}
+									>
+										<Typography>
+											<small>
+												{lastTrainingSession
+													? `Last trained on ${convertDateToString(
+															lastTrainingSession.date
+													  )}`
+													: "No training sessions"}
+											</small>
 										</Typography>
 									</Grid>
 								</Grid>
@@ -109,42 +143,21 @@ const TrainingProgrammeSkills = ({
 	return (
 		<>
 			<Box
-				mt={4}
+				mt={3}
 				sx={{
 					display: "flex",
 					justifyContent: "flex-end",
 				}}
 			>
-				<Button
-					color="primary"
-					variant="contained"
-					sx={{
-						display: trainingProgrammeInProgress ? "flex" : "none",
-						justifyContent: "space-between",
-						[theme.breakpoints.between("xs", "md")]: {
-							width: "50%",
-							marginRight: "8px",
-						},
-						[theme.breakpoints.between("md", "xl")]: {
-							width: "175px",
-							marginLeft: "auto",
-							marginRight: "16px",
-						},
-					}}
-				>
-					Log training &nbsp;
-					<AddCircleIcon fontSize="medium" />
-				</Button>
 				<FormControl
 					size="small"
 					variant="outlined"
 					sx={{
 						[theme.breakpoints.between("xs", "md")]: {
-							width: "50%",
+							width: "100%",
 						},
 						[theme.breakpoints.between("md", "xl")]: {
-							width: "200px",
-							marginLeft: trainingProgrammeInProgress ? "" : "auto",
+							width: "150px",
 						},
 					}}
 				>

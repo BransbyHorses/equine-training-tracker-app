@@ -14,11 +14,11 @@ export const useTrainingProgrammes = (
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
+		setFetchingData(true);
 		if (equineId) {
-			setFetchingData(true);
 			axios
 				.get(
-					`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/training-programmes`
+					`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/training-programmes`
 				)
 				.then(({ data }) => {
 					setTrainingProgrammes(data);
@@ -31,8 +31,6 @@ export const useTrainingProgrammes = (
 					setFetchingData(false);
 					setError(true);
 				});
-		} else {
-			setFetchingData(true);
 		}
 	}, [equineId]);
 

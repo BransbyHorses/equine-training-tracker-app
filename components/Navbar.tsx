@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { signOut } from "next-auth/react";
+import dynamic from "next/dynamic";
+
+const NavMenu = dynamic(() => import("./NavMenu"));
+import HomeIcon from "./HomeIcon";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { signOut } from "next-auth/react";
-import HomeIcon from "./HomeIcon";
-import NavMenu from "./NavMenu";
 
 export default function ButtonAppBar() {
 	const [navMenuOpen, setNavMenuOpen] = useState(false);
@@ -34,14 +37,17 @@ export default function ButtonAppBar() {
 					<IconButton size="small" color="inherit" aria-label="home">
 						<HomeIcon />
 					</IconButton>
-					<IconButton color="inherit" aria-label="open navigation menu">
+					<IconButton
+						color="inherit"
+						aria-label="open navigation menu"
+						onClick={openNavMenu}
+					>
 						<MenuIcon
 							sx={{
 								height: "2.1rem",
 								width: "2.1rem",
 								...(navMenuOpen && { display: "none" }),
 							}}
-							onClick={openNavMenu}
 						/>
 					</IconButton>
 				</Toolbar>

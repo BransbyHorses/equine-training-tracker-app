@@ -24,4 +24,16 @@ export const convertDateToString = (dateString?: string) => {
 		month: "long",
 		day: "numeric",
 	});
-}
+};
+
+export const findLastTrainingSession = (
+	skillTrainingSessions?: SkillTrainingSession[]
+) => {
+	if (!skillTrainingSessions || skillTrainingSessions.length === 0) return null;
+
+	const sortedRecordsByDate = skillTrainingSessions.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+
+	return sortedRecordsByDate[0];
+};

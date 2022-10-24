@@ -13,8 +13,8 @@ import {
 	Box,
 	useTheme,
 } from "@mui/material";
-import { EquineStatus, LearnerType, Yard } from "../../utils/types";
-import BackBreadcrumb from "../BackBreadcrumb";
+import { EquineStatus, LearnerType, Yard } from "../../../utils/types";
+import BackBreadcrumb from "../../BackBreadcrumb";
 
 const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	const theme = useTheme();

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import NewEquineForm from "../../../components/admin/newEquineForm";
+import NewEquineForm from "../../../components/pages/admin/NewEquineForm";
 
 const NewEquineHealthAndSafetyFlags = dynamic(
-	() => import("../../../components/admin/NewEquineHealthAndSafetyFlags")
+	() => import("../../../components/pages/admin/NewEquineHealthAndSafetyFlags")
 );
 
-import NewEquineTrainingProgramme from "../../../components/admin/NewEquineTrainingProgramme";
+const NewEquineTrainingProgramme = dynamic(
+	() => import("../../../components/pages/admin/NewEquineTrainingProgramme")
+);
 
 import { Equine } from "../../../utils/types";
 
@@ -35,7 +37,6 @@ const NewEquine = () => {
 			return (
 				<NewEquineHealthAndSafetyFlags
 					equine={newEquine!}
-					nextStep={() => null}
 				/>
 			);
 		}

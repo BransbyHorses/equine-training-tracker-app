@@ -13,8 +13,8 @@ import {
 	IconButton,
 	useTheme,
 } from "@mui/material";
-import { Equine } from "../../utils/types";
-import useTrainingCategories from "../../utils/hooks/useTrainingCategories";
+import { Equine } from "../../../utils/types";
+import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
 import axios from "axios";
 
 const NewEquineTrainingProgramme = ({

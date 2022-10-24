@@ -1,15 +1,13 @@
 import React from "react";
-import { Equine } from "../../utils/types";
+import { Equine } from "../../../utils/types";
 import { Button, Container, Typography, useTheme, Box } from "@mui/material";
-import EquineHealthAndSafety from "../pages/equines/EquineHealthAndSafety";
+import EquineHealthAndSafety from "../equines/health-and-safety/EquineHealthAndSafety";
 import { useRouter } from "next/router";
 
 const NewEquineHealthAndSafetyFlags = ({
 	equine,
-	nextStep,
 }: {
 	equine: Equine;
-	nextStep: () => void;
 }) => {
 	const router = useRouter();
 	const theme = useTheme();

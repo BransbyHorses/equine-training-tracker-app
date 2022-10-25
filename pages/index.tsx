@@ -174,7 +174,7 @@ export default function Home() {
 					<small>
 						{equines.length > 0
 							? `Showing ${tableData.length} of ${equines.length}`
-							: ``}
+							: `Showing 0 of 0`}
 					</small>
 				</Typography>
 			</Box>

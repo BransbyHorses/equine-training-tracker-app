@@ -186,7 +186,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 					type="submit"
 					disabled={formSubmitting}
 				>
-					Save & Contiue
+					Save & Continue
 				</Button>
 			</form>
 		</Container>

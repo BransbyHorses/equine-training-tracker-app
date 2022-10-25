@@ -1,26 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
+
 import { useRouter } from "next/router";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import { useEquine } from "../../../utils/hooks/equine";
+import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 
-import { Box } from "@mui/system";
-import {
-	Alert,
-	Breadcrumbs,
-	Link,
-	Typography,
-	Paper,
-	Grid,
-	styled,
-} from "@mui/material";
+const EquineHealthAndSafety = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/health-and-safety/EquineHealthAndSafety"
+		),
+	{ suspense: true }
+);
+import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
-
-import LoadingSpinner from "../../../components/LoadingSpinner";
-import CurrentTrainingProgramme from "../../../components/pages/equines/equineId/CurrentTrainingProgramme";
-import { findCurrentTrainingProgramme } from "../../../utils/helpers";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FlagIcon from "@mui/icons-material/Flag";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -32,15 +43,11 @@ const EquineProfile = () => {
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEquineId(router.query.equineId);
+			setEquineId(router.query.equineId as string);
 		}
 	}, [router.isReady]);
 
 	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
-
-	const Item = styled(Box)(({ theme }) => ({
-		padding: theme.spacing(1.5),
-	}));
 
 	if (fetchingData) {
 		return (
@@ -50,13 +57,13 @@ const EquineProfile = () => {
 		);
 	}
 
-	if ((error || notFound) && !equine) {
+	if (error) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<Alert severity="error">
 					{notFound
-						? "No equine information found to display."
-						: "An unexpected error occurred."}
+						? "No equine information available"
+						: "An unexpected error occurred"}
 				</Alert>
 			</Box>
 		);
@@ -65,151 +72,64 @@ const EquineProfile = () => {
 	return (
 		<>
 			<Breadcrumbs aria-label="breadcrumb">
-				<Link underline="hover" color="inherit" href="/">
-					Equines
+				<Link href="/">
+					<span style={{ color: "gray", cursor: "pointer" }}>Equines</span>
 				</Link>
 				<Typography color="text.primary">{equine?.name}</Typography>
 			</Breadcrumbs>
-
 			<Paper>
 				<Box
 					p={2}
 					mt={2}
-					color="common.white"
-					sx={{ backgroundColor: "primary.light" }}
+					sx={{
+						backgroundColor: "primary.light",
+						color: "common.white",
+					}}
 				>
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
-					<Grid container>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Training Programme</Typography>
-								<Typography>
-									<CurrentTrainingProgramme
-										trainingProgrammes={equine?.trainingProgrammes}
-									/>
-								</Typography>
-							</Item>
+					<Grid container rowSpacing={3} columnSpacing={2}>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Training Programme</Typography>
+							<Typography>
+								<CurrentTrainingProgramme
+									trainingProgrammes={equine?.trainingProgrammes}
+								/>
+							</Typography>
 						</Grid>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Yard</Typography>
-								{equine && equine.yard ? (
-									<Typography>{equine.yard.name}</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
-							</Item>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Yard</Typography>
+							{equine && equine.yard ? (
+								<Typography>{equine.yard.name}</Typography>
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
 						</Grid>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Status</Typography>
-								{equine && equine.equineStatus ? (
-									<Typography>{equine.equineStatus.name}</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
-							</Item>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Status</Typography>
+							{equine && equine.equineStatus ? (
+								<Typography>{equine.equineStatus.name}</Typography>
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
 						</Grid>
-						<Grid xs={12} md={6}>
-							<Item>
-								<Typography variant="h6">Type of learner</Typography>
-								{equine && equine.learnerType ? (
-									<Typography>{equine.learnerType.name}</Typography>
-								) : (
-									<MoreHorizIcon sx={{ color: "gray" }} />
-								)}
-							</Item>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Handling Status</Typography>
+							{equine && equine.learnerType ? (
+								<Typography>{equine.learnerType.name}</Typography>
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
 						</Grid>
 					</Grid>
 				</Box>
 			</Paper>
 			<hr style={{ margin: "20px 0" }} />
-			<Grid container rowSpacing={3} columnSpacing={2}>
-				{isInTraining ? (
-					<>
-						<Grid item xs={12} sm={6}>
-							<Paper>
-								<Box
-									px={2}
-									py={2}
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}
-								>
-									<Typography variant="h6">Log Training</Typography>
-									<AddCircleIcon fontSize="large" />
-								</Box>
-							</Paper>
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<Paper>
-								<Box
-									px={2}
-									py={2}
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}
-								>
-									<Typography variant="h6">View Training Programme</Typography>
-									<ArrowRightIcon fontSize="large" />
-								</Box>
-							</Paper>
-						</Grid>
-					</>
-				) : (
-					<>
-						<Grid item xs={12} sm={6}>
-							<Paper>
-								<Box
-									px={2}
-									py={2}
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}
-								>
-									<Typography variant="h6">New Training Programme</Typography>
-									<ArrowRightIcon fontSize="large" />
-								</Box>
-							</Paper>
-						</Grid>
-					</>
-				)}
-
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Typography variant="h6">Training History</Typography>
-							<ArrowRightIcon fontSize="large" />
-						</Box>
-					</Paper>
-				</Grid>
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
+			<Box mb={2}>
+				<Paper>
+					<Accordion>
+						<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="medium" />}>
 							<Box
 								sx={{
 									display: "flex",
@@ -217,13 +137,62 @@ const EquineProfile = () => {
 									alignItems: "center",
 								}}
 							>
-								<ReportProblemIcon fontSize="medium" />
+								<FlagIcon fontSize="medium" color="error" />
 								<Typography sx={{ ml: 1 }} variant="h6">
-									Health & Safety
+									Health & Safety Flags
 								</Typography>
 							</Box>
-							<ArrowRightIcon fontSize="large" />
-						</Box>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Suspense fallback={<LoadingSpinner />}>
+								<EquineHealthAndSafety
+									healthAndSafetyFlags={equine?.healthAndSafetyFlags || []}
+									equineId={equineId!}
+								/>
+							</Suspense>
+						</AccordionDetails>
+					</Accordion>
+				</Paper>
+			</Box>
+			<Grid container rowSpacing={3} columnSpacing={2}>
+				{isInTraining && (
+					<Grid item xs={12} sm={6}>
+						<Paper>
+							<Link href={`/equines/${equineId}/add-training`}>
+								<Box
+									px={2}
+									py={2}
+									sx={{
+										display: "flex",
+										justifyContent: "space-between",
+										alignItems: "center",
+										cursor: "pointer",
+									}}
+								>
+									<Typography variant="h6">Add Training</Typography>
+									<AddCircleIcon fontSize="large" color="success" />
+								</Box>
+							</Link>
+						</Paper>
+					</Grid>
+				)}
+				<Grid item xs={12} sm={6}>
+					<Paper>
+						<Link href={`/equines/${equineId}/training-history`}>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+									cursor: "pointer",
+								}}
+							>
+								<Typography variant="h6">Training History</Typography>
+								<ArrowRightIcon fontSize="large" />
+							</Box>
+						</Link>
 					</Paper>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -237,7 +206,7 @@ const EquineProfile = () => {
 								alignItems: "center",
 							}}
 						>
-							<Typography variant="h6">Update Details</Typography>
+							<Typography variant="h6">Update Profile</Typography>
 							<ArrowRightIcon fontSize="large" />
 						</Box>
 					</Paper>

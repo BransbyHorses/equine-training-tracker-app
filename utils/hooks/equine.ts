@@ -15,8 +15,10 @@ export const useEquines = (): {
 	useEffect(() => {
 		setFetchingData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}/data/equines`)
+			.get(`${process.env.NEXT_PUBLIC_URL}data/equines`)
 			.then(({ data }) => {
+				setError(false);
+				setFetchingData(false);
 				setEquines(data);
 			})
 			.catch((err) => {
@@ -24,8 +26,8 @@ export const useEquines = (): {
 					`Failed to fetch equines data. Failed with error message: ${err}.`
 				);
 				setError(true);
-			})
-			.finally(() => setFetchingData(false));
+				setFetchingData(false);
+			});
 	}, []);
 
 	return {
@@ -55,13 +57,14 @@ export const useEquine = (
 			axios
 				.get(`${process.env.NEXT_PUBLIC_URL}data/equines/${id}`)
 				.then(({ data }) => {
-					setEquine(data);
 					setFetchingData(false);
+					setError(false);
+					setEquine(data);
 				})
 				.catch((err) => {
 					setFetchingData(false);
-					const { status } = err.response;
 					setError(true);
+					const { status } = err.response;
 					if (status === 404) {
 						setNotFound(true);
 					}

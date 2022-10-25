@@ -133,10 +133,10 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 						</Select>
 					</FormControl>
 					<FormControl>
-						<InputLabel id="equine-status">Equine Status</InputLabel>
+						<InputLabel id="equine-status">Training Status</InputLabel>
 						<Select
 							id="equine-status"
-							label="Equine Status"
+							label="Training Status"
 							name="equineStatus"
 							value={newEquine.equineStatus}
 							onChange={handleChange}

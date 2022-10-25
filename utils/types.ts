@@ -53,7 +53,6 @@ export interface SkillTrainingSession {
 export interface TrainingCategory {
 	id: number;
 	name: string;
-	description: string;
 }
 
 export interface TrainingEnvironment {

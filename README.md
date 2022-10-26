@@ -16,7 +16,7 @@ and then run
 
 Use upload-equines.js in devtools to populate the database with a given number of equines, alongside the fields that are required to make an equine (skill, category, programme and yard). 
 
-## Instructions
+#### Instructions
 
 - Ensure the api and postgres DB are running on the back-end
 
@@ -26,7 +26,7 @@ Use upload-equines.js in devtools to populate the database with a given number o
 
     - `fields`: Determines if the script populates the DB with skill, category, programme and yard entries. This has to be passed the first time.
 
-## Usage examples
+#### Usage examples
 
 On first instance, pass "fields" to the script to add the required data. (Note: The API might throw an error if the DB contains duplicate fields - just ignore it).
 

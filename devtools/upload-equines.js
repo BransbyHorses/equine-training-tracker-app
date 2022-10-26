@@ -3,11 +3,12 @@ const axios = require('axios');
 
 const yard = {"name": "Lunar House"}
 
-const skill =  {"name": "Basic Java"}
 
-const category = {"name": "Software Engineering"}
+const learnerType = {"name": "Self-led"}
 
-const programme = {"name": "Digital Development"}
+const trainingProgramme = {"name": "Digital Development"}
+
+const equineStatus = {"name": "Okay"}
 
 const equine = {
     "name": "Claude",
@@ -15,20 +16,20 @@ const equine = {
         "id": 1,
         "name": "Lunar House"
     },
-    "category": {
+    "learnerType": {
         "id": 1,
-        "name": "Software Engineering"
+        "name": "Self-led"
     },
-    "programme": {
+    "trainingProgrammes": [
+        {
         "id": 1,
         "name": "Digital Development"
-    },
-    "skills": [
-        {
+    }
+    ],
+    "equineStatus":  {
             "id": 1,
-            "name": "Basic Java"
+            "name": "Okay"
         }
-    ]
 }
 
 
@@ -45,7 +46,7 @@ function uploadData(endPoint, jsonModel) {
             //console.log(res);
         })
         .catch(error => {
-            return console.error(error);
+            return console.log(error.status + " " + endPoint);
         });
 };
 
@@ -59,10 +60,10 @@ function uploadEquines()
 
 function uploadFields() 
 {
-    uploadData("skills", skill);
     uploadData("yards", yard);
-    uploadData("categories", category);
-    uploadData("programmes", programme);
+    uploadData("learner-types", learnerType);
+    uploadData("training-programmes", trainingProgramme);
+    uploadData("equine-statuses", equineStatus);
     
 }
 

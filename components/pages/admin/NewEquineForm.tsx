@@ -13,7 +13,7 @@ import {
 	Box,
 	useTheme,
 } from "@mui/material";
-import { EquineStatus, LearnerType, Yard } from "../../../utils/types";
+import { EquineStatus, LearnerType, Yard, Equine } from "../../../utils/types";
 import BackBreadcrumb from "../../BackBreadcrumb";
 
 const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
@@ -90,7 +90,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 			});
 	};
 
-	const handleChange = (e) => {
+	const handleChange = (e: any) => {
 		setNewEquine({ ...newEquine, [e.target.name]: e.target.value });
 	};
 

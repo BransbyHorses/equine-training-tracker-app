@@ -55,7 +55,7 @@ export const useEquine = (
 		if (routerReady) {
 			setFetchingData(true);
 			axios
-				.get(`${process.env.NEXT_PUBLIC_URL}data/equines/${id}`)
+				.get(`${process.env.NEXT_PUBLIC_URL}/data/equines/${id}`)
 				.then(({ data }) => {
 					setFetchingData(false);
 					setError(false);

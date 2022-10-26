@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button, Typography, Box } from "@mui/material";
+import { TextField, Button, Typography, Box, useTheme } from "@mui/material";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
@@ -15,6 +15,7 @@ const AdminAddPage = ({
 	success?: boolean;
 	error?: boolean;
 }) => {
+	const theme = useTheme();
 	const [inputValue, setInputValue] = useState("");
 
 	useEffect(() => {
@@ -31,33 +32,38 @@ const AdminAddPage = ({
 	return (
 		<>
 			<BackBreadcrumb />
-			<Typography sx={{ mt: 2 }} variant="h6">
-				Add New {entity}
-			</Typography>
-			{success && (
-				<Box sx={{ display: "flex", alignItems: "center" }}>
-					<CheckCircleOutlineIcon
-						fontSize="small"
-						color="success"
-						sx={{ marginRight: "5px" }}
-					/>
-					<Typography color="success">
-						<small>New {entity.toLowerCase()} saved</small>
-					</Typography>
-				</Box>
-			)}
-			{error && (
-				<Box sx={{ display: "flex", alignItems: "center" }}>
-					<ErrorOutlineIcon
-						fontSize="small"
-						color="error"
-						sx={{ marginRight: "5px" }}
-					/>
-					<Typography color="error">
-						<small>Unable to save training category</small>
-					</Typography>
-				</Box>
-			)}
+			<Box
+				mt={2}
+				sx={{
+					[theme.breakpoints.between("sm", "xl")]: {
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+					},
+				}}
+			>
+				<Typography variant="h6">Add New {entity}</Typography>
+				{success && (
+					<Box sx={{ display: "flex", alignItems: "center" }}>
+						<CheckCircleOutlineIcon
+							fontSize="small"
+							color="success"
+							sx={{ mr: 1 }}
+						/>
+						<Typography color="success">
+							<small>New {entity.toLowerCase()} saved</small>
+						</Typography>
+					</Box>
+				)}
+				{error && (
+					<Box sx={{ display: "flex", alignItems: "center" }}>
+						<ErrorOutlineIcon fontSize="small" color="error" sx={{ mr: 1 }} />
+						<Typography color="error">
+							<small>Unable to save training category</small>
+						</Typography>
+					</Box>
+				)}
+			</Box>
 			<form onSubmit={handleSubmit}>
 				<TextField
 					fullWidth

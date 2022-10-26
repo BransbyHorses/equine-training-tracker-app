@@ -130,6 +130,7 @@ const TrainingCategoriesAdminPage = () => {
 			<AdminPageTitle
 				title="Manage Training Categories"
 				buttonLink="/admin/training-categories/add"
+				contentLength={updatedTrainingCategories.length}
 			/>
 			{updatedTrainingCategories.map((trainingCategory: TrainingCategory) => {
 				return (

@@ -1,32 +1,44 @@
 import React from "react";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
 
 const AdminPageTitle = ({
 	title,
 	buttonLink,
+	contentLength,
 }: {
 	title: string;
 	buttonLink: string;
+	contentLength: number;
 }) => {
+	const theme = useTheme();
+
 	return (
 		<>
 			<BackBreadcrumb />
 			<Box
 				my={3}
 				sx={{
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center",
+					[theme.breakpoints.between("sm", "xl")]: {
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+					},
 				}}
 			>
 				<Typography variant="h6">
-					{title}
+					{title} ({contentLength})
 				</Typography>
 				<Link href={buttonLink}>
-					<Button>
+					<Button
+						sx={{
+							[theme.breakpoints.between("xs", "sm")]: {
+								marginTop: "8px",
+							},
+						}}
+					>
 						<AddIcon fontSize="small" />
 						Add New
 					</Button>

@@ -25,22 +25,27 @@ const CategoryId: React.FC<MyComponentProps> = (props) => {
 
     const getCategoryFromId = async () => {
         const categoryId = await router.query.id;
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${categoryId}`)
-            .then(response => response.json())
-            .then(data => setCategory(data))
-            .catch(rejected => {
-                console.log(rejected);
-            });
+        await fetch(
+					`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses/${categoryId}`
+				)
+					.then((response) => response.json())
+					.then((data) => setCategory(data))
+					.catch((rejected) => {
+						console.log(rejected);
+					});
     }
 
     const deleteCategoryForever = async () => {
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories/${category.id}`, {method: 'DELETE'} )
-        .then(() => {
-            props.router.push("/admin/categories");
-        })
-        .catch(rejected => {
-            console.log(rejected);
-        });
+        await fetch(
+					`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses/${category.id}`,
+					{ method: "DELETE" }
+				)
+					.then(() => {
+						props.router.push("/admin/equine-statuses");
+					})
+					.catch((rejected) => {
+						console.log(rejected);
+					});
     }
 
     useEffect(() => {

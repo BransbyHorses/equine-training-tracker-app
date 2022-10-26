@@ -81,7 +81,7 @@ const options = {
 		{
 			title: "Training Methods",
 			buttonTitle: "Training Method",
-			link: "/training-methods",
+			link: "/admin/training-methods",
 			newLink: "/admin/training-methods/add-training-method",
 			editLink: "/admin/training-methods/edit-training-method",
 			deleteLink: "/admin/training-methods/delete-training-method",

@@ -33,9 +33,11 @@ const AdminPageTitle = ({
 				</Typography>
 				<Link href={buttonLink}>
 					<Button
+						variant="contained"
 						sx={{
 							[theme.breakpoints.between("xs", "sm")]: {
-								marginTop: "8px",
+								width: "100%",
+								mt: 3,
 							},
 						}}
 					>

@@ -130,7 +130,7 @@ const options = {
 			title: "Handling Statuses",
 			buttonTitle: "Handling Statuses",
 			link: "/admin/handling-statuses",
-			newLink: "/admin/learner-types/add",
+			newLink: "/admin/handling-statuses/add",
 			newVariant: "contained",
 			editVariant: "outlined",
 			deleteVariant: "outlined",

@@ -3,6 +3,7 @@ import axios from "axios";
 import { TrainingCategory } from "../../../utils/types";
 import AdminPageTitle from "../../../components/pages/admin/AdminPageTitle";
 import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
+import AdminEdit from "../../../components/pages/admin/AdminEdit";
 
 import {
 	Paper,
@@ -13,8 +14,6 @@ import {
 	IconButton,
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { useRouter } from "next/router";
-import TrainingCategoriesEdit from "./edit";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
 export const OptionsMenu = (props: any) => {
@@ -147,12 +146,10 @@ const TrainingCategoriesAdminPage = () => {
 							}}
 						>
 							{editValue && editValue.id === trainingCategory.id ? (
-								<>
-									<TrainingCategoriesEdit
-										trainingCategory={editValue}
-										saveFunction={saveEditedTrainingCategory}
-									/>
-								</>
+								<AdminEdit
+									editValue={editValue}
+									saveFunction={saveEditedTrainingCategory}
+								/>
 							) : (
 								<>
 									<Typography fontWeight={300}>

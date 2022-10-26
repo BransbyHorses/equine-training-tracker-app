@@ -28,7 +28,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/equines",
+			seeAllLink: "/admin/equines",
 		},
 		{
 			title: "Skills",
@@ -44,7 +44,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/skills",
+			seeAllLink: "/admin/skills",
 		},
 		{
 			title: "Yards",
@@ -60,7 +60,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/yards",
+			seeAllLink: "/admin/yards",
 		},
 		{
 			title: "Disruptions",
@@ -76,7 +76,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/disruptions",
+			seeAllLink: "/admin/disruptions",
 		},
 		{
 			title: "Training Methods",
@@ -92,7 +92,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/training-methods",
+			seeAllLink: "/admin/training-methods",
 		},
 		{
 			title: "Categories",
@@ -108,7 +108,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/categories",
+			seeAllLink: "/admincategories",
 		},
 		{
 			title: "Environments",
@@ -124,7 +124,7 @@ const options = {
 			newSize: "large",
 			editSize: "large",
 			deleteSize: "small",
-			seeAllLink: "/environments",
+			seeAllLink: "/admin/environments",
 		},
 		{
 			title: "Handling Statuses",

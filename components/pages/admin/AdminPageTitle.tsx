@@ -26,7 +26,7 @@ const AdminPageTitle = ({
 					{title}
 				</Typography>
 				<Link href={buttonLink}>
-					<Button variant="contained">
+					<Button>
 						<AddIcon fontSize="small" />
 						Add New
 					</Button>

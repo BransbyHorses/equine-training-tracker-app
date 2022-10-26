@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box, useTheme } from "@mui/material";
 
 const AdminEdit = ({
 	editValue,
@@ -8,10 +8,22 @@ const AdminEdit = ({
 	editValue: any;
 	saveFunction: (n: string) => void;
 }) => {
+	const theme = useTheme();
 	const [inputValue, setInputValue] = useState(editValue.name || "");
 
 	return (
-		<>
+		<Box
+			sx={{
+				width: "100%",
+				display: "flex",
+				[theme.breakpoints.between("xs", "sm")]: {
+					flexDirection: "column",
+				},
+				[theme.breakpoints.between("sm", "xl")]: {
+					flexDirection: "row",
+				},
+			}}
+		>
 			<TextField
 				fullWidth
 				size="small"
@@ -20,10 +32,18 @@ const AdminEdit = ({
 				focused
 				sx={{ mr: 2 }}
 			/>
-			<Button variant="contained" onClick={() => saveFunction(inputValue)}>
+			<Button
+				variant="contained"
+				onClick={() => saveFunction(inputValue)}
+				sx={{
+					[theme.breakpoints.between("xs", "sm")]: {
+						mt: 2,
+					},
+				}}
+			>
 				Save
 			</Button>
-		</>
+		</Box>
 	);
 };
 

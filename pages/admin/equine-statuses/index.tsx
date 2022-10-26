@@ -27,7 +27,7 @@ const Categories: React.FC<MyComponentProps> = props => {
     const [categories, setCategories] = useState<MyCategories[]>([]);
 
     function getCategories() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/categories`)
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses`)
             .then(response => response.json())
             .then(data => setCategories(data))
             .catch(rejected => {

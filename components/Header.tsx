@@ -25,14 +25,14 @@ export default function Header() {
                 sizes="32x32"
             />
             <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-            <link
+            {/* <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             />
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            />
+            /> */}
             <meta name="theme-color" content="#317EFB" />
         </Head>
     );

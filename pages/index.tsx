@@ -7,6 +7,7 @@ import useYards from "../utils/hooks/useYards";
 
 import Table from "@mui/material/Table";
 import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -21,7 +22,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import CurrentTrainingProgramme from "../components/pages/equines/equineId/CurrentTrainingProgramme";
+import CurrentTrainingProgramme from "../components/pages/equines/CurrentTrainingProgramme";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
@@ -41,35 +42,40 @@ export default function Home() {
 
 	const mapEquineRows = (equineArray: Equine[]) => {
 		return equineArray.map((equine) => {
-
 			return (
-				<TableRow
-					key={equine.id}
-					sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-				>
-					<TableCell component="th" scope="row">
-						<Link href={`/equines/${equine.id}`}>{equine.name}</Link>
-					</TableCell>
-					<TableCell component="th" scope="row">
-						{equine.equineStatus ? (
-							equine.equineStatus.name
-						) : (
-							<MoreHorizIcon sx={{ color: "gray" }} />
-						)}
-					</TableCell>
-					<TableCell component="th" scope="row">
-						{equine.yard ? (
-							equine.yard.name
-						) : (
-							<MoreHorizIcon sx={{ color: "gray" }} />
-						)}
-					</TableCell>
-					<TableCell component="th" scope="row">
-						<CurrentTrainingProgramme
-							trainingProgrammes={equine.trainingProgrammes}
-						/>
-					</TableCell>
-				</TableRow>
+				<Link href={`/equines/${equine.id}`}>
+					<TableRow
+						key={equine.id}
+						sx={{
+							"&:last-child td, &:last-child th": { border: 0 },
+						}}
+					>
+						<TableCell component="th" scope="row">
+							<Typography fontWeight={500} color="primary.light">
+								{equine.name}
+							</Typography>
+						</TableCell>
+						<TableCell component="th" scope="row">
+							{equine.equineStatus ? (
+								equine.equineStatus.name
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
+						</TableCell>
+						<TableCell component="th" scope="row">
+							{equine.yard ? (
+								equine.yard.name
+							) : (
+								<MoreHorizIcon sx={{ color: "gray" }} />
+							)}
+						</TableCell>
+						<TableCell component="th" scope="row">
+							<CurrentTrainingProgramme
+								trainingProgrammes={equine.trainingProgrammes}
+							/>
+						</TableCell>
+					</TableRow>
+				</Link>
 			);
 		});
 	};
@@ -163,7 +169,7 @@ export default function Home() {
 				/>
 			</Box>
 			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 650 }} aria-label="simple table">
+				<Table sx={{ minWidth: 650 }} aria-label="equine table">
 					<TableHead>
 						<TableRow>
 							<TableCell>Name</TableCell>

@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { Container } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "../public/css/main.css";
@@ -31,7 +32,7 @@ const Theme = createTheme({
 	breakpoints: {
 		values: {
 			xs: 0,
-			sm: 600,
+			sm: 500,
 			md: 900,
 			lg: 1200,
 			xl: 3000,
@@ -66,6 +67,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 						<Component {...pageProps} />
 					</main>
 				</Container>
+				<Footer />
 			</SessionProvider>
 		</ThemeProvider>
 	);

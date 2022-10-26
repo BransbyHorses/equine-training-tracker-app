@@ -60,7 +60,9 @@ const TrainingCategoriesAdminPage = () => {
 					updatedTrainingCategories.filter((tc) => tc.id != id)
 				);
 			})
-			.catch((err) => {});
+			.catch((err) => {
+				console.error(err);
+			});
 	};
 
 	if (fetchingData) {

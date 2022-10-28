@@ -56,9 +56,13 @@ export default function Home() {
 										{equine.name}
 									</Typography>
 								</Grid>
-								<Grid item xs={5} md={4} lg={3}>
-									<Typography color="gray">{equine.yard.name}</Typography>
-								</Grid>
+								{equine.yard ? (
+									<Grid item xs={5} md={4} lg={3}>
+										<Typography color="gray">{equine.yard.name}</Typography>
+									</Grid>
+								) : (
+									<></>
+								)}
 							</Grid>
 							<IconButton>
 								<KeyboardArrowRightIcon fontSize="large" />
@@ -170,7 +174,7 @@ export default function Home() {
 					<small>
 						{equines.length > 0
 							? `Showing ${tableData.length} of ${equines.length}`
-							: ``}
+							: `Showing 0 of 0`}
 					</small>
 				</Typography>
 			</Box>

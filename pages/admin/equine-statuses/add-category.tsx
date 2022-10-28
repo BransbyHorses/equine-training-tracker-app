@@ -15,45 +15,45 @@ interface WithRouterProps {
 
 interface MyComponentProps extends WithRouterProps {}
 
-const NewProgramme: React.FC<MyComponentProps> = props => {
+const NewCategory: React.FC<MyComponentProps> = props => {
 
-    const [newProgramme, setNewProgramme] = useState({
+    const [newCategory, setNewCategory] = useState({
         name: '',
     });
 
-    const submitProgramme = (e: any) => {
+    const submitCategory = (e: any) => {
         e.preventDefault();
-        const programmeToPost = {
+        const categoryToPost = {
             id: 0,
-            name: newProgramme.name
+            name: newCategory.name
         }
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/programmes`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify(programmeToPost),
+					body: JSON.stringify(categoryToPost),
 				})
 					.then((response) => {
 						response.json();
 					})
-					.then((data) => props.router.push("/admin/training-programmes"))
+					.then((data) => props.router.push("/admin/equine-statuses"))
 					.catch((rejected) => {
 						console.log(rejected);
 					});
     };
 
     const handleChange = (e: any) => {
-        setNewProgramme({...newProgramme, [e.target.name] : e.target.value})
+        setNewCategory({...newCategory, [e.target.name] : e.target.value})
     }
 
     return (
 			<Container>
 				<Typography variant="h5" color="textSecondary" gutterBottom>
-					Add a Programme
+					Add a Category
 				</Typography>
 				<div>
-					<form onSubmit={submitProgramme}>
+					<form onSubmit={submitCategory}>
 						<Grid container direction="column">
 							<TextField
 								id="name"
@@ -73,12 +73,12 @@ const NewProgramme: React.FC<MyComponentProps> = props => {
 				</div>
 				<div>
 					<Button variant="outlined" sx={{ my: "1rem" }}>
-						<Link href="/admin/training-programmes">
-							<Typography>Go back to Programmes</Typography>
+						<Link href="/admin/categories">
+							<Typography>Go back to Categories</Typography>
 						</Link>
 					</Button>
 				</div>
 			</Container>
 		);
 };
-export default withRouter(NewProgramme);
+export default withRouter(NewCategory);

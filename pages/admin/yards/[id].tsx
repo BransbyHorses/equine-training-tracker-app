@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { withRouter, NextRouter } from 'next/router'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LinkButton from '../../../components/LinkButton';
+import PageTitle from '../../../components/PageTitle';
 
 interface WithRouterProps {
     router: NextRouter
@@ -36,7 +37,7 @@ const YardId: React.FC<MyComponentProps> = (props) => {
     const deleteYardForever = async () => {
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards/${yard.id}`, {method: 'DELETE'} )
         .then(() => {
-            props.router.push('/yards')
+            props.router.push('/admin/yards')
         })
         .catch(rejected => {
             console.log(rejected);
@@ -65,7 +66,7 @@ const YardId: React.FC<MyComponentProps> = (props) => {
 							gutterBottom
 							sx={{ my: "1rem", mx: "1rem" }}
 						>
-							Name: {yard.name}
+							<PageTitle title={yard.name} />
 						</Typography>
 					</Card>
 

@@ -1,17 +1,25 @@
 
-
-import {Breadcrumbs, Link} from "@mui/material";
 import React from "react";
 
-export default function BackBreadcrumb(props:any) {
+import { useRouter } from "next/router";
 
-    return (
-    <>
-        <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href={props.link}>
-                &lt; Back
-            </Link>
-        </Breadcrumbs>
-    </>
-    )
-}
+import { Breadcrumbs, Link } from "@mui/material";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+
+const BackBreadcrumb = () => {
+	const router = useRouter();
+	return (
+		<Breadcrumbs>
+			<Link
+				underline="hover"
+				color="inherit"
+				sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+				onClick={() => router.back()}
+			>
+				<ArrowLeftIcon /> Back
+			</Link>
+		</Breadcrumbs>
+	);
+};
+
+export default BackBreadcrumb;

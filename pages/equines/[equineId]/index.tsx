@@ -120,12 +120,42 @@ const EquineProfile = () => {
 				>
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
-				{activeDisruption && (
-					<EquineDisruption
-						disruption={activeDisruption}
-						endFunction={endDisruption}
-					/>
-				)}
+			</Paper>
+			<Box my={2}>
+				<Paper>
+					<Accordion sx={{ border: "2px solid #c62828" }}>
+						<AccordionSummary
+							expandIcon={
+								<IconButton>
+									<ExpandMoreIcon fontSize="medium" />
+								</IconButton>
+							}
+						>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<FlagIcon fontSize="medium" color="error" />
+								<Typography sx={{ ml: 1 }} variant="h6">
+									Health & Safety Flags
+								</Typography>
+							</Box>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Suspense fallback={<LoadingSpinner />}>
+								<EquineHealthAndSafety
+									healthAndSafetyFlags={equine?.healthAndSafetyFlags || []}
+									equineId={equineId!}
+								/>
+							</Suspense>
+						</AccordionDetails>
+					</Accordion>
+				</Paper>
+			</Box>
+			<Paper>
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
 					<Grid container rowSpacing={3} columnSpacing={2}>
 						<Grid item xs={12} md={6}>
@@ -175,42 +205,13 @@ const EquineProfile = () => {
 					</Grid>
 				</Box>
 			</Paper>
-
 			<hr style={{ margin: "20px 0" }} />
-			<Box mb={2}>
-				<Paper>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={
-								<IconButton>
-									<ExpandMoreIcon fontSize="medium" />
-								</IconButton>
-							}
-						>
-							<Box
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<FlagIcon fontSize="medium" color="error" />
-								<Typography sx={{ ml: 1 }} variant="h6">
-									Health & Safety Flags
-								</Typography>
-							</Box>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Suspense fallback={<LoadingSpinner />}>
-								<EquineHealthAndSafety
-									healthAndSafetyFlags={equine?.healthAndSafetyFlags || []}
-									equineId={equineId!}
-								/>
-							</Suspense>
-						</AccordionDetails>
-					</Accordion>
-				</Paper>
-			</Box>
+			{activeDisruption && (
+				<EquineDisruption
+					disruption={activeDisruption}
+					endFunction={endDisruption}
+				/>
+			)}
 			<Grid container rowSpacing={3} columnSpacing={2}>
 				{isInTraining && !activeDisruption && (
 					<Grid item xs={12} sm={6}>

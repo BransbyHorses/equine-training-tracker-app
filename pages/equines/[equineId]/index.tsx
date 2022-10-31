@@ -3,9 +3,13 @@ import React, { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 import { useEquine } from "../../../utils/hooks/equine";
-import { findCurrentTrainingProgramme } from "../../../utils/helpers";
+import {
+	findCurrentTrainingProgramme,
+	findActiveDisruption,
+} from "../../../utils/helpers";
 
 const EquineHealthAndSafety = dynamic(
 	() =>
@@ -14,6 +18,11 @@ const EquineHealthAndSafety = dynamic(
 		),
 	{ suspense: true }
 );
+const EquineDisruption = dynamic(
+	() => import("../../../components/pages/equines/EquineDisruption"),
+	{ suspense: true }
+);
+
 import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
@@ -32,6 +41,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
+import { IconButton } from "@mui/material";
+import { Disruption } from "../../../utils/types";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -40,6 +51,9 @@ const EquineProfile = () => {
 		router.isReady,
 		equineId
 	);
+	const [activeDisruption, setActiveDisruption] = useState<Disruption | null>(
+		null
+	);
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -47,7 +61,24 @@ const EquineProfile = () => {
 		}
 	}, [router.isReady]);
 
+	useEffect(() => {
+		setActiveDisruption(findActiveDisruption(equine?.disruptions || []));
+	}, [equine]);
+
 	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
+
+	const endDisruption = () => {
+		axios
+			.post(
+				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/disruptions/${activeDisruption!.id}/end`
+			)
+			.then(({ data }) => {
+				setActiveDisruption(null);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
 
 	if (fetchingData) {
 		return (
@@ -88,6 +119,12 @@ const EquineProfile = () => {
 				>
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
+				{activeDisruption && (
+					<EquineDisruption
+						disruption={activeDisruption}
+						endFunction={endDisruption}
+					/>
+				)}
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
 					<Grid container rowSpacing={3} columnSpacing={2}>
 						<Grid item xs={12} md={6}>
@@ -125,11 +162,18 @@ const EquineProfile = () => {
 					</Grid>
 				</Box>
 			</Paper>
+
 			<hr style={{ margin: "20px 0" }} />
 			<Box mb={2}>
 				<Paper>
 					<Accordion>
-						<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="medium" />}>
+						<AccordionSummary
+							expandIcon={
+								<IconButton>
+									<ExpandMoreIcon fontSize="medium" />
+								</IconButton>
+							}
+						>
 							<Box
 								sx={{
 									display: "flex",
@@ -155,7 +199,7 @@ const EquineProfile = () => {
 				</Paper>
 			</Box>
 			<Grid container rowSpacing={3} columnSpacing={2}>
-				{isInTraining && (
+				{isInTraining && !activeDisruption && (
 					<Grid item xs={12} sm={6}>
 						<Paper>
 							<Link href={`/equines/${equineId}/add-training`}>
@@ -170,7 +214,9 @@ const EquineProfile = () => {
 									}}
 								>
 									<Typography variant="h6">Add Training</Typography>
-									<AddCircleIcon fontSize="large" color="success" />
+									<IconButton>
+										<AddCircleIcon fontSize="large" color="success" />
+									</IconButton>
 								</Box>
 							</Link>
 						</Paper>
@@ -190,7 +236,9 @@ const EquineProfile = () => {
 								}}
 							>
 								<Typography variant="h6">Training History</Typography>
-								<ArrowRightIcon fontSize="large" />
+								<IconButton>
+									<ArrowRightIcon fontSize="large" />
+								</IconButton>
 							</Box>
 						</Link>
 					</Paper>
@@ -207,7 +255,9 @@ const EquineProfile = () => {
 							}}
 						>
 							<Typography variant="h6">Update Profile</Typography>
-							<ArrowRightIcon fontSize="large" />
+							<IconButton>
+								<ArrowRightIcon fontSize="large" />
+							</IconButton>
 						</Box>
 					</Paper>
 				</Grid>

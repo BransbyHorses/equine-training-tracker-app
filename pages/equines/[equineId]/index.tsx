@@ -70,7 +70,9 @@ const EquineProfile = () => {
 	const endDisruption = () => {
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/disruptions/${activeDisruption!.id}/end`
+				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/disruptions/${
+					activeDisruption!.id
+				}/end`
 			)
 			.then(({ data }) => {
 				setActiveDisruption(null);
@@ -128,6 +130,18 @@ const EquineProfile = () => {
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
 					<Grid container rowSpacing={3} columnSpacing={2}>
 						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Training Status</Typography>
+							{equine && equine.equineStatus ? (
+								<Typography>{equine.equineStatus.name}</Typography>
+							) : (
+								<Typography>
+									<small>
+										<em>No Training Status</em>
+									</small>
+								</Typography>
+							)}
+						</Grid>
+						<Grid item xs={12} md={6}>
 							<Typography variant="h6">Training Programme</Typography>
 							<Typography>
 								<CurrentTrainingProgramme
@@ -140,15 +154,11 @@ const EquineProfile = () => {
 							{equine && equine.yard ? (
 								<Typography>{equine.yard.name}</Typography>
 							) : (
-								<MoreHorizIcon sx={{ color: "gray" }} />
-							)}
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Status</Typography>
-							{equine && equine.equineStatus ? (
-								<Typography>{equine.equineStatus.name}</Typography>
-							) : (
-								<MoreHorizIcon sx={{ color: "gray" }} />
+								<Typography>
+									<small>
+										<em>No Yard</em>
+									</small>
+								</Typography>
 							)}
 						</Grid>
 						<Grid item xs={12} md={6}>
@@ -156,7 +166,11 @@ const EquineProfile = () => {
 							{equine && equine.learnerType ? (
 								<Typography>{equine.learnerType.name}</Typography>
 							) : (
-								<MoreHorizIcon sx={{ color: "gray" }} />
+								<Typography>
+									<small>
+										<em>No Handling Status</em>
+									</small>
+								</Typography>
 							)}
 						</Grid>
 					</Grid>

@@ -46,7 +46,7 @@ import { Disruption } from "../../../utils/types";
 
 const EquineProfile = () => {
 	const router = useRouter();
-	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	const [equineId, setEquineId] = useState<string>();
 	const { fetchingData, equine, error, notFound } = useEquine(
 		router.isReady,
 		equineId

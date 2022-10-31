@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 
 import { useEquine } from "../../../utils/hooks/equine";
+import { Disruption } from "../../../utils/types";
 import {
 	findCurrentTrainingProgramme,
 	findActiveDisruption,
@@ -35,14 +36,12 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import IconButton from "@mui/material/IconButton";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
-import { IconButton } from "@mui/material";
-import { Disruption } from "../../../utils/types";
 
 const EquineProfile = () => {
 	const router = useRouter();

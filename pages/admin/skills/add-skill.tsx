@@ -16,7 +16,7 @@ const AddNewSkillPage: React.FC = (props) => {
 			.then((response) => {
 				response.json();
 			})
-			.then((data) => {
+			.then(() => {
 				setSuccessMessage(true);
 				setTimeout(() => {
 					setSuccessMessage(false);

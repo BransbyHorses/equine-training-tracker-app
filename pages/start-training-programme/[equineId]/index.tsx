@@ -45,27 +45,22 @@ export default function StartTrainingProgramme() {
 	}
 
 
-	const startTrainingProgramme = () => {
+	// const startTrainingProgramme = () => {
+	// 	saveData("", `training-programmes/${trainingCategory.id}/equine/${equine.id}`, 'POST');
+	// }
+
+	// const endCurrentTrainingProgramme = (currentTrainingProgramme:TrainingProgramme) =>
+	// {
+	// 	console.log("Ending " + currentTrainingProgramme);
+	// 	currentTrainingProgramme.endDate = generateTodaysDate();
+	// 	saveData(currentTrainingProgramme, `training-programmes/${currentTrainingProgramme.id}`, 'PUT');
+	// }
+
+
+
+	const updateTrainingProgramme = async () => {
 		saveData("", `training-programmes/${trainingCategory.id}/equine/${equine.id}`, 'POST');
-	}
-
-	const endCurrentTrainingProgramme = (currentTrainingProgramme:TrainingProgramme) =>
-	{
-		console.log("Ending " + currentTrainingProgramme);
-		currentTrainingProgramme.endDate = generateTodaysDate();
-		saveData(currentTrainingProgramme, `training-programmes/${currentTrainingProgramme.id}`, 'PUT');
-	}
-
-
-
-	const updateEquine = async () => {
-		var currentTrainingProgramme = findCurrentTrainingProgramme(equine?.trainingProgrammes); 
-		if (currentTrainingProgramme != null) 
-		{
-			endCurrentTrainingProgramme(currentTrainingProgramme);
-		} 
-			startTrainingProgramme();
-			router.push('/');
+		router.push('/');
     }
 	
 	return (
@@ -88,7 +83,7 @@ export default function StartTrainingProgramme() {
 				<PrimaryButton 
 					buttonText="Save" 
 					link="/"
-					handleChange={updateEquine}
+					handleChange={updateTrainingProgramme}
 				/>
 
 			</PageContainer>

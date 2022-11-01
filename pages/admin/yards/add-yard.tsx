@@ -14,7 +14,7 @@ const AddNewYardPage: React.FC = (props) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(newYard),
+			body: JSON.stringify({ name: newYard }),
 		})
 			.then((response) => {
 				response.json();

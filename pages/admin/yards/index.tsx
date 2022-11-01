@@ -77,15 +77,6 @@ export default function YardsAdminPage() {
 				buttonLink="/admin/yards/add-yard"
 				contentLength={yards.length}
 			/>
-			<AutoCompleteBox
-				options={yards.map((yard) => ({
-					optionName: yard.name,
-					optionId: yard.id,
-				}))}
-				label="Search for a yard"
-				linkName={"yards"}
-			/>
-			<hr style={{ margin: "20px 0" }} />
 			{yards.map((yard) => {
 				return (
 					<AdminContentBlock

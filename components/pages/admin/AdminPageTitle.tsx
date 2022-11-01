@@ -47,6 +47,7 @@ const AdminPageTitle = ({
 					</Button>
 				</Link>
 			</Box>
+			<hr style={{ margin: "20px 0" }} />
 		</>
 	);
 };

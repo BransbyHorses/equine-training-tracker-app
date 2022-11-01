@@ -29,6 +29,7 @@ export default NextAuth({
       if (account) {
         token.accessToken = account.access_token;
         let decodedToken: any = jwt_decode(account.access_token!);
+        console.log(decodedToken);
         let wids = decodedToken["wids"] ? decodedToken["wids"][0] : null;
         token.role = wids === '62e90394-69f5-4237-9190-012177145e10' ? 'ADMIN' : null;
         token.sub = decodedToken['sub'];

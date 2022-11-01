@@ -7,6 +7,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
 import { Equine, LearnerType } from "../../../utils/types";
+import { saveData } from "../../../utils/helpers";
 
 
 
@@ -42,19 +43,9 @@ export default function ChangeTypeOfLearner() {
 
 	const updateEquine = async () => {
 		equine!.learnerType = learnerType!;
-		await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine?.id}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(equine),
-		})
-			.then((response) => response.json())
-			.then((data) => router.push(`/`))
-			.catch((rejected: any) => {
-				console.log(rejected);
-			});
-		}
+		saveData(equine!, `equines/${equine!.id}`, 'PUT');
+		router.push('/');
+	}
 
 
 	const handleChange = (event:any) => {

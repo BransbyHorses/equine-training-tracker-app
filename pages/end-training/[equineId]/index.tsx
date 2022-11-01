@@ -31,7 +31,7 @@ export default function EndTraining() {
 			>
 			<PageContainer>
 				<BackBreadcrumb link="/" />
-				<PageTitle title="Reason for ending training" />
+				<PageTitle title="End training permanently" />
     
 				<RadioButtonsForm
 					items={endConditions} 

@@ -10,8 +10,10 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
-import { TrainingCategory } from "../../../utils/types";
+import { TrainingCategory, TrainingProgramme } from "../../../utils/types";
 import { useEquine } from "../../../utils/hooks/equine";
+import { findCurrentTrainingProgramme, generateTodaysDate, saveData, saveUpdatedData } from "../../../utils/helpers";
+
 
 
 
@@ -38,29 +40,32 @@ export default function StartTrainingProgramme() {
 	}, [router.isReady]);
 
 	const handleChange = (event:any) => {
-		setTrainingProgramme(event.target.value);
-		console.log(trainingCategory);	
-
+		let updatedTrainingCategory = trainingCategories.find(category => event.target.value == category.name);
+		setTrainingCategory(updatedTrainingCategory);
 	}
+
+
+	const startTrainingProgramme = () => {
+		saveData("", `training-programmes/${trainingCategory.id}/equine/${equine.id}`, 'POST');
+	}
+
+	const endCurrentTrainingProgramme = (currentTrainingProgramme:TrainingProgramme) =>
+	{
+		console.log("Ending " + currentTrainingProgramme);
+		currentTrainingProgramme.endDate = generateTodaysDate();
+		saveData(currentTrainingProgramme, `training-programmes/${currentTrainingProgramme.id}`, 'PUT');
+	}
+
+
 
 	const updateEquine = async () => {
-	console.log("Adding  " + trainingCategory)
-	if (trainingCategory !== undefined) {
-	equine?.trainingProgrammes.push(trainingCategory);
-	}
-	console.log(equine?.trainingProgrammes);
-	await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}`, {
-		method: "PUT",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(equine),
-	})
-		.then((response) => response.json())
-		.then((data) => router.push(`/`))
-		.catch((rejected: any) => {
-			console.log(rejected);
-		});
+		var currentTrainingProgramme = findCurrentTrainingProgramme(equine?.trainingProgrammes); 
+		if (currentTrainingProgramme != null) 
+		{
+			endCurrentTrainingProgramme(currentTrainingProgramme);
+		} 
+			startTrainingProgramme();
+			router.push('/');
     }
 	
 	return (

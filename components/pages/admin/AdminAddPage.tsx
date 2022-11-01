@@ -72,9 +72,21 @@ const AdminAddPage = ({
 					value={inputValue}
 					focused
 					required
-					sx={{ my: 2 }}
+					sx={{ my: 3 }}
 				/>
-				<Button type="submit" variant="contained">
+				<Button
+					type="submit"
+					variant="contained"
+					sx={{
+						[theme.breakpoints.between("xs", "sm")]: {
+							width: "100%",
+						},
+						[theme.breakpoints.between("sm", "xl")]: {
+							width: "25%",
+						},
+						backgroundColor: "primary.light",
+					}}
+				>
 					Save
 				</Button>
 			</form>

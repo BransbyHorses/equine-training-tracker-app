@@ -44,7 +44,7 @@ const TrainingCategoriesAdminPage = () => {
 				.then(({ data }) => {
 					setEditValue(undefined);
 					const trainingCategories = updatedTrainingCategories.map((tc) => {
-						if (tc.id === data.id) return data;
+						return tc.id === data.id ? data : tc;
 					});
 					setUpdatedTrainingCategories(trainingCategories);
 				})
@@ -68,6 +68,8 @@ const TrainingCategoriesAdminPage = () => {
 	if (fetchingData) {
 		return <LoadingSpinner />;
 	}
+
+	console.log(updatedTrainingCategories);
 
 	return (
 		<>

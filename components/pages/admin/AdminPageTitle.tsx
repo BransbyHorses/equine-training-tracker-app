@@ -3,6 +3,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
+import AutoCompleteBox from "../../AutoCompleteBox";
 
 const AdminPageTitle = ({
 	title,

@@ -3,6 +3,7 @@ import { findCurrentTrainingProgramme } from "../../../utils/helpers";
 import { TrainingProgramme } from "../../../utils/types";
 
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { Typography } from "@mui/material";
 
 const CurrentTrainingProgramme = ({
 	trainingProgrammes,
@@ -13,7 +14,13 @@ const CurrentTrainingProgramme = ({
 		findCurrentTrainingProgramme(trainingProgrammes);
 
 	if (!currentTrainingProgramme)
-		return <MoreHorizIcon sx={{ color: "gray" }} />;
+		return (
+			<Typography>
+				<small>
+					<em>No Training Programme</em>
+				</small>
+			</Typography>
+		);
 
 	return <span>{currentTrainingProgramme.trainingCategory.name}</span>;
 };

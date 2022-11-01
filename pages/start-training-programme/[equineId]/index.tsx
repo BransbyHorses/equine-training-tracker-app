@@ -44,20 +44,6 @@ export default function StartTrainingProgramme() {
 		setTrainingCategory(updatedTrainingCategory);
 	}
 
-
-	// const startTrainingProgramme = () => {
-	// 	saveData("", `training-programmes/${trainingCategory.id}/equine/${equine.id}`, 'POST');
-	// }
-
-	// const endCurrentTrainingProgramme = (currentTrainingProgramme:TrainingProgramme) =>
-	// {
-	// 	console.log("Ending " + currentTrainingProgramme);
-	// 	currentTrainingProgramme.endDate = generateTodaysDate();
-	// 	saveData(currentTrainingProgramme, `training-programmes/${currentTrainingProgramme.id}`, 'PUT');
-	// }
-
-
-
 	const updateTrainingProgramme = async () => {
 		saveData("", `training-programmes/${trainingCategory.id}/equine/${equine.id}`, 'POST');
 		router.push('/');

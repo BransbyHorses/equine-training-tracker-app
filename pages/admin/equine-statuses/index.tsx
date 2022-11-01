@@ -1,121 +1,93 @@
-import { withRouter, NextRouter } from 'next/router';
-import {
-    Typography,
-    Container,
-    Grid,
-    TextField,
-    Autocomplete
-} from '@mui/material';
-import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
-import LinkButton from '../../../components/LinkButton';
-import EntityCard from '../../../components/EntityCard';
-import AutoCompleteBox from '../../../components/AutoCompleteBox'
-import PageTitle from '../../../components/PageTitle';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-interface WithRouterProps {
-    router: NextRouter;
-}
+import { EquineStatus } from "../../../utils/types";
+import AdminPageTitle from "../../../components/pages/admin/AdminPageTitle";
+import AdminContentBlock from "../../../components/pages/admin/AdminContentBlock";
 
-interface MyComponentProps extends WithRouterProps {}
+const EquineStatusAdminPage: React.FC = (props) => {
+	const [equineStatuses, setEquineStatuses] = useState<EquineStatus[]>([]);
+	const [editValue, setEditValue] = useState<EquineStatus>();
 
-const Categories: React.FC<MyComponentProps> = props => {
-    interface MyCategories {
-        id: number;
-        name: string;
-    }
-    const [categories, setCategories] = useState<MyCategories[]>([]);
+	function getCategories() {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses`)
+			.then((response) => response.json())
+			.then((data) => setEquineStatuses(data))
+			.catch((rejected) => {
+				console.log(rejected);
+			});
+	}
 
-    function getCategories() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses`)
-            .then(response => response.json())
-            .then(data => setCategories(data))
-            .catch(rejected => {
-                console.log(rejected);
-            });
-    }
+	useEffect(() => {
+		getCategories();
+	}, []);
 
-    useEffect(() => {
-        getCategories();
-    }, []);
+	const editEquineStatus = (id: any) => {
+		console.log(id);
+		setEditValue(equineStatuses.find((equineStatus) => equineStatus.id === id));
+		console.log(editValue);
+	};
 
-    return (
-			<Container
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-			>
-				<PageTitle title={"Categories"} />
+	const saveEditedEquineStatus = (newEquineStatus: string) => {
+		if (newEquineStatus === editValue!.name) {
+			setEditValue(undefined);
+			return;
+		}
 
-				<AutoCompleteBox
-					options={categories.map((category) => ({
-						optionName: category.name,
-						optionId: category.id,
-					}))}
-					label="Search for a category"
-					linkName={"categories"}
-				/>
+		const editedEquineStatus = { id: editValue!.id, name: newEquineStatus };
 
-				{categories.length > 0 ? (
-					<Grid
-						container
-						rowSpacing={4}
-						columnSpacing={{ xs: 2, sm: 2, md: 3 }}
-						spacing={{ xs: 4, md: 3 }}
-						columns={{ xs: 4, sm: 8, md: 12 }}
-						direction="row"
-						justifyContent="space-evenly"
-						alignItems="stretch"
-						paddingBottom="20px"
-					>
-						{categories.map((category) => {
-							return (
-								<Grid item xs={2} sm={4} md={4} key={category.id}>
-									<EntityCard
-										link={`categories/${category.id}`}
-										title={category.name}
-									/>
-								</Grid>
-							);
-						})}
-					</Grid>
-				) : (
-					<Typography
-						variant="h5"
-						color="#616161"
-						gutterBottom
-						sx={{ my: "1rem", mx: "1rem" }}
-					>
-						No categories here...☹️...yet!
-					</Typography>
-				)}
+		axios
+			.put(
+				`${process.env.NEXT_PUBLIC_URL}data/skills/${editValue!.id}`,
+				editedEquineStatus
+			)
+			.then(({ data }) => {
+				setEditValue(undefined);
+				const updatedEquineStatuses = equineStatuses.map((equineStatus) => {
+					return equineStatus.id === data.id ? data : equineStatus;
+				});
+				setEquineStatuses(updatedEquineStatuses);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
 
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-around",
-					}}
-				>
-					<LinkButton
-						color="lightBlue[50]"
-						variant="contained"
-						buttonHref="/admin/categories/add-category"
-						buttonTitle="Create new category"
-					></LinkButton>
+	const deleteEquineStatus = (id: any) => {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses/${id}`, {
+			method: "DELETE",
+		})
+			.then(() => {
+				setEquineStatuses(
+					equineStatuses.filter((equineStatus) => equineStatus.id != id)
+				);
+			})
+			.catch((rejected) => {
+				console.error(rejected);
+			});
+	};
 
-					<LinkButton
-						color="lightBlue[50]"
-						variant="contained"
-						buttonHref="/admin"
-						buttonTitle="Back to Dashboard"
-					></LinkButton>
-				</Box>
-			</Container>
-		);
+	return (
+		<>
+			<AdminPageTitle
+				title="Manage Equine Statuses"
+				buttonLink="/admin/equine-statuses/add"
+				contentLength={equineStatuses.length}
+			/>
+			{equineStatuses.map((equineStatus) => {
+				return (
+					<AdminContentBlock
+						key={equineStatus.id}
+						editValue={editValue}
+						content={equineStatus}
+						saveFunction={saveEditedEquineStatus}
+						editAction={editEquineStatus}
+						deleteFunction={deleteEquineStatus}
+					/>
+				);
+			})}
+		</>
+	);
 };
 
-export default withRouter(Categories);
+export default EquineStatusAdminPage;

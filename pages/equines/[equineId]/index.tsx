@@ -3,9 +3,14 @@ import React, { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 import { useEquine } from "../../../utils/hooks/equine";
-import { findCurrentTrainingProgramme } from "../../../utils/helpers";
+import { Disruption } from "../../../utils/types";
+import {
+	findCurrentTrainingProgramme,
+	findActiveDisruption,
+} from "../../../utils/helpers";
 
 const EquineHealthAndSafety = dynamic(
 	() =>
@@ -14,6 +19,11 @@ const EquineHealthAndSafety = dynamic(
 		),
 	{ suspense: true }
 );
+const EquineDisruption = dynamic(
+	() => import("../../../components/pages/equines/EquineDisruption"),
+	{ suspense: true }
+);
+
 import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
@@ -26,19 +36,22 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import IconButton from "@mui/material/IconButton";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
 
 const EquineProfile = () => {
 	const router = useRouter();
-	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	const [equineId, setEquineId] = useState<string>();
 	const { fetchingData, equine, error, notFound } = useEquine(
 		router.isReady,
 		equineId
+	);
+	const [activeDisruption, setActiveDisruption] = useState<Disruption | null>(
+		null
 	);
 
 	useEffect(() => {
@@ -47,7 +60,26 @@ const EquineProfile = () => {
 		}
 	}, [router.isReady]);
 
+	useEffect(() => {
+		setActiveDisruption(findActiveDisruption(equine?.disruptions || []));
+	}, [equine]);
+
 	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
+
+	const endDisruption = () => {
+		axios
+			.post(
+				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/disruptions/${
+					activeDisruption!.id
+				}/end`
+			)
+			.then(({ data }) => {
+				setActiveDisruption(null);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
 
 	if (fetchingData) {
 		return (
@@ -88,48 +120,17 @@ const EquineProfile = () => {
 				>
 					<Typography variant="h4">{equine?.name}</Typography>
 				</Box>
-				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
-					<Grid container rowSpacing={3} columnSpacing={2}>
-						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Training Programme</Typography>
-							<Typography>
-								<CurrentTrainingProgramme
-									trainingProgrammes={equine?.trainingProgrammes}
-								/>
-							</Typography>
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Yard</Typography>
-							{equine && equine.yard ? (
-								<Typography>{equine.yard.name}</Typography>
-							) : (
-								<MoreHorizIcon sx={{ color: "gray" }} />
-							)}
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Status</Typography>
-							{equine && equine.equineStatus ? (
-								<Typography>{equine.equineStatus.name}</Typography>
-							) : (
-								<MoreHorizIcon sx={{ color: "gray" }} />
-							)}
-						</Grid>
-						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Handling Status</Typography>
-							{equine && equine.learnerType ? (
-								<Typography>{equine.learnerType.name}</Typography>
-							) : (
-								<MoreHorizIcon sx={{ color: "gray" }} />
-							)}
-						</Grid>
-					</Grid>
-				</Box>
 			</Paper>
-			<hr style={{ margin: "20px 0" }} />
-			<Box mb={2}>
+			<Box my={2}>
 				<Paper>
-					<Accordion>
-						<AccordionSummary expandIcon={<ExpandMoreIcon fontSize="medium" />}>
+					<Accordion sx={{ border: "2px solid #c62828" }}>
+						<AccordionSummary
+							expandIcon={
+								<IconButton>
+									<ExpandMoreIcon fontSize="medium" />
+								</IconButton>
+							}
+						>
 							<Box
 								sx={{
 									display: "flex",
@@ -154,8 +155,65 @@ const EquineProfile = () => {
 					</Accordion>
 				</Paper>
 			</Box>
+			<Paper>
+				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
+					<Grid container rowSpacing={3} columnSpacing={2}>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Training Status</Typography>
+							{equine && equine.equineStatus ? (
+								<Typography>{equine.equineStatus.name}</Typography>
+							) : (
+								<Typography>
+									<small>
+										<em>No Training Status</em>
+									</small>
+								</Typography>
+							)}
+						</Grid>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Training Programme</Typography>
+							<Typography>
+								<CurrentTrainingProgramme
+									trainingProgrammes={equine?.trainingProgrammes}
+								/>
+							</Typography>
+						</Grid>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Yard</Typography>
+							{equine && equine.yard ? (
+								<Typography>{equine.yard.name}</Typography>
+							) : (
+								<Typography>
+									<small>
+										<em>No Yard</em>
+									</small>
+								</Typography>
+							)}
+						</Grid>
+						<Grid item xs={12} md={6}>
+							<Typography variant="h6">Handling Status</Typography>
+							{equine && equine.learnerType ? (
+								<Typography>{equine.learnerType.name}</Typography>
+							) : (
+								<Typography>
+									<small>
+										<em>No Handling Status</em>
+									</small>
+								</Typography>
+							)}
+						</Grid>
+					</Grid>
+				</Box>
+			</Paper>
+			<hr style={{ margin: "20px 0" }} />
+			{activeDisruption && (
+				<EquineDisruption
+					disruption={activeDisruption}
+					endFunction={endDisruption}
+				/>
+			)}
 			<Grid container rowSpacing={3} columnSpacing={2}>
-				{isInTraining && (
+				{isInTraining && !activeDisruption && (
 					<Grid item xs={12} sm={6}>
 						<Paper>
 							<Link href={`/equines/${equineId}/add-training`}>
@@ -170,7 +228,9 @@ const EquineProfile = () => {
 									}}
 								>
 									<Typography variant="h6">Add Training</Typography>
-									<AddCircleIcon fontSize="large" color="success" />
+									<IconButton>
+										<AddCircleIcon fontSize="large" color="success" />
+									</IconButton>
 								</Box>
 							</Link>
 						</Paper>
@@ -190,7 +250,9 @@ const EquineProfile = () => {
 								}}
 							>
 								<Typography variant="h6">Training History</Typography>
-								<ArrowRightIcon fontSize="large" />
+								<IconButton>
+									<ArrowRightIcon fontSize="large" />
+								</IconButton>
 							</Box>
 						</Link>
 					</Paper>
@@ -207,7 +269,9 @@ const EquineProfile = () => {
 							}}
 						>
 							<Typography variant="h6">Update Profile</Typography>
-							<ArrowRightIcon fontSize="large" />
+							<IconButton>
+								<ArrowRightIcon fontSize="large" />
+							</IconButton>
 						</Box>
 					</Paper>
 				</Grid>

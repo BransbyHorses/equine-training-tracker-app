@@ -1,4 +1,4 @@
-import { TrainingProgramme, SkillTrainingSession } from "./types";
+import { TrainingProgramme, SkillTrainingSession, Disruption } from "./types";
 
 export const findCurrentTrainingProgramme = (
 	trainingProgrammes?: TrainingProgramme[]
@@ -36,4 +36,16 @@ export const findLastTrainingSession = (
 	});
 
 	return sortedRecordsByDate[0];
+};
+
+export const findActiveDisruption = (disruptions: Disruption[] | []) => {
+	if (disruptions.length === 0) {
+		return null;
+	}
+
+	const activeDisruptions = disruptions.filter(
+		(disruption) => !disruption.endDate
+	);
+
+	return activeDisruptions.length === 0 ? null : activeDisruptions[0];
 };

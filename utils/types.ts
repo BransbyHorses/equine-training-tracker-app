@@ -1,6 +1,8 @@
 export interface Disruption {
 	id: number;
-	name: string;
+	reason: { string: DisruptionCode; id: number };
+	startDate: string;
+	endDate?: string;
 }
 
 export interface Equine {
@@ -11,6 +13,7 @@ export interface Equine {
 	trainingProgrammes: TrainingProgramme[];
 	learnerType: LearnerType;
 	healthAndSafetyFlags: HealthAndSafetyFlag[];
+	disruptions: Disruption[];
 }
 
 export interface EquineStatus {
@@ -91,4 +94,13 @@ export enum ProgressCode {
 	"Limited",
 	"Ok",
 	"Confident",
+}
+
+export enum DisruptionCode {
+	"Vetinary Review",
+	"Team Low",
+	"Weather",
+	"Yard Busy",
+	"Equine Wellbeing",
+	"Other",
 }

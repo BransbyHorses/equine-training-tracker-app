@@ -56,6 +56,11 @@ const Theme = createTheme({
 		info: {
 			main: "#5B5B5B",
 		},
+		warning: {
+			main: "#ffa726",
+			dark: "#f57c00",
+			light: "rgba(255, 183, 77, 0.5)",
+		},
 	},
 });
 

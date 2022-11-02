@@ -12,7 +12,7 @@ import { useEquine } from "../../../utils/hooks/equine";
 
 
 
-export default function UpdateDetails() {
+export default function UpdateProfile() {
 
 	const router = useRouter();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
@@ -27,14 +27,14 @@ export default function UpdateDetails() {
 		<>
 			<PageContainer>
 				<BackBreadcrumb link="/" />
-				<PageTitle title="Update details" />
+				<PageTitle title="Update profile" />
 				<Grid container rowSpacing={3} columnSpacing={3}>
 					<SecondaryButton 
 						buttonText="Start training programme"
 						link={`/start-training-programme/${equineId}`}
 					/>
 					<SecondaryButton 
-						buttonText="Change type of learner"
+						buttonText="Change handling status"
 						link={`/change-type-of-learner/${equineId}`}
 						/>
 					<SecondaryButton 
@@ -43,7 +43,7 @@ export default function UpdateDetails() {
 
 					/>
 					<SecondaryButton 
-						buttonText="End training"
+						buttonText="End training permanently"
 						link={`/end-training/${equineId}`}
 
 					/>

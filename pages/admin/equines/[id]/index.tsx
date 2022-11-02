@@ -21,10 +21,10 @@ import {
 	IconButton,
 	MenuItem,
 	Menu,
+	Icon,
 } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -98,11 +98,11 @@ const EquineAdminPage: React.FC = (props) => {
 	}, [router.isReady]);
 
 	const deleteEquine = () => {
-		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine.id}`, {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine!.id}`, {
 			method: "DELETE",
 		})
 			.then(() => {
-				props.router.push("/admin/equines");
+				router.push("/admin/equines");
 			})
 			.catch((rejected) => {
 				console.log(rejected);
@@ -144,7 +144,11 @@ const EquineAdminPage: React.FC = (props) => {
 						color: "common.white",
 					}}
 				>
-					<Typography variant="h4">{equine?.name}</Typography>
+					<Box>
+						<Typography variant="h4" display="inline">
+							{equine?.name}
+						</Typography>
+					</Box>
 					<OptionsMenu deleteEquine={deleteEquine} />
 				</Box>
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>

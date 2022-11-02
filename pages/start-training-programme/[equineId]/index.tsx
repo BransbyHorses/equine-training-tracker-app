@@ -51,7 +51,7 @@ export default function StartTrainingProgramme() {
 		router.push('/');
     }
 
-	if (equine == undefined || collection == undefined) {
+	if (fetchingData) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<LoadingSpinner />

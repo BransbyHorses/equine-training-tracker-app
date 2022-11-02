@@ -50,7 +50,7 @@ export default function AddDisruption() {
 		router.push('/');
     }
 
-	if (equine == undefined || collection == undefined) {
+	if (fetchingData) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<LoadingSpinner />

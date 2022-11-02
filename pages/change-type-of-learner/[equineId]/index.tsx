@@ -54,7 +54,7 @@ export default function ChangeTypeOfLearner() {
 		setLearnerType(updatedLearnerType);
 	}
 
-	if (equine == undefined || collection == undefined) {
+	if (fetchingData) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<LoadingSpinner />

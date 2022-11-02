@@ -19,14 +19,14 @@ export default function UpdateProfile() {
 	
 	useEffect(() => {
 		if (router.isReady) {
-			setEquineId(router.query.equineId);
+			setEquineId(router.query.equineId as string);
 		}
 	}, [router.isReady]);
 
 	return (
 		<>
 			<PageContainer>
-				<BackBreadcrumb link="/" />
+				<BackBreadcrumb />
 				<PageTitle title="Update profile" />
 				<Grid container rowSpacing={3} columnSpacing={3}>
 					<SecondaryButton 

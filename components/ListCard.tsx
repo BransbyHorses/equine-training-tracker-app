@@ -5,7 +5,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 export default function ListCard(props: any) {
     return (
-        <Grid item xs={6}>
+        <Grid item xs={12}>
             <Card
                 sx={{
                     display: 'flex',

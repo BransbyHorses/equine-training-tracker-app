@@ -7,22 +7,34 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
-import { Disruption } from "../../../utils/types";
 
 
 export default function EndTraining() {
+	const Status = [
+		{"id": "1", "name":"Training"},
+		{"id": "2", "name":"In Training"},
+		{"id": "3", "name":"Returned to Owner"},
+		{"id": "4", "name":"Rehomed"},
+		{"id": "5", "name":"Euthanised"},
+		{"id": "6", "name":"Other"},
+	]
 
 	const router = useRouter();
-	const [endConditions, setEndConditions] = useState<Disruption[]>([]);
-	const { fetchingData, collection, error } = getCollection(
-		'disruptions'
-	);
+	const [statuses, setStatuses] = useState<[]>(Status);
+	const [status, setStatus] = useState<{}>({})
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEndConditions(collection);
+			console.log(Status);
+			//setEndConditions(collection);
 		}
 	}, [router.isReady]);
+
+	const handleChange = (event:any) => {
+		let updatedStatus = statuses.find(status => event.target.value == status.name);
+		console.log(updatedStatus);
+		setStatus(updatedStatus);
+	}
 
 	return (
 		<Grid 
@@ -34,7 +46,8 @@ export default function EndTraining() {
 				<PageTitle title="End training permanently" />
     
 				<RadioButtonsForm
-					items={endConditions} 
+					handleChange={handleChange}
+					items={statuses} 
 				/>
 	
 

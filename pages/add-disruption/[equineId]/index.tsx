@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {Box, Grid} from "@mui/material";
+import {Box, Grid, Radio, FormControl, FormControlLabel, RadioGroup} from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
@@ -25,7 +24,7 @@ export default function AddDisruption() {
 	useEffect(() => {
 		if (router.isReady) {
 			getEquineFromId(router.query.equineId as string);
-			setDisruptions(convertEnumsToDisruptions(collection));
+			setDisruptions(collection);
 		}
 	}, [router.isReady]);
 
@@ -40,7 +39,8 @@ export default function AddDisruption() {
     }
 
 	const handleChange = (event:any) => {
-		let updatedDisruption = disruptions.find(disruption => event.target.value == disruption.name);
+		console.log(event.target.value);
+		let updatedDisruption = disruptions.find(disruption => event.target.value == disruption.id);
 		setDisruption(updatedDisruption);
 		console.log(disruption);
 	}
@@ -49,17 +49,6 @@ export default function AddDisruption() {
 		saveData("", `/equines/${equine?.id}/disruptions/${disruption?.id}/start`, 'POST');
 		router.push('/');
     }
-
-	const convertEnumsToDisruptions = (collection:any) => {
-		let disruptionCollection: Disruption[] = [];
-		collection.forEach((disruptionEnum:any) => {
-			const disruption = {} as Disruption;
-			disruption.name = disruptionEnum.string;
-			disruption.id = disruptionEnum.id; 
-			disruptionCollection.push(disruption);	
-		});
-		return disruptionCollection;
-	}
 
 	if (equine == undefined || collection == undefined) {
 		return (
@@ -78,12 +67,26 @@ export default function AddDisruption() {
 				<BackBreadcrumb/>
 				<PageTitle title="Add disruption" />
     
-				<RadioButtonsForm
-					handleChange={handleChange}
-					items={disruptions} 
-				/>
+				<FormControl>
+				<RadioGroup
+					defaultValue="radioform"
+					name="radio-buttons-group"
+					onChange={handleChange}>
+					{disruptions.map(({id, string}:any) => {
+						return (
+					<FormControlLabel 
+						key={id} 
+						value={id} 
+						control={<Radio/>} 
+						label={string}
+						/>
+						)
+					}
+					)
+				}
+				</RadioGroup>
+   			 </FormControl>
 	
-
 				<PrimaryButton 
 					buttonText="Save" 
 					link="/"

@@ -27,9 +27,20 @@ export default function AddDisruption() {
 
 	useEffect(() => {
 		if (router.isReady) {
-			setDisruptions(collection);
+			setDisruptions(convertEnumsToDisruptions(collection));
 		}
 	}, [router.isReady]);
+
+	const convertEnumsToDisruptions = (collection:any) => {
+		let disruptionCollection = [];
+		collection.forEach(disruptionEnum => {
+			const disruption = {} as Disruption;
+			disruption.name = disruptionEnum.string;
+			disruption.id = disruptionEnum.id; 
+			disruptionCollection.push(disruption);	
+		});
+		return disruptionCollection;
+	}
 
 	return (
 		<Grid 

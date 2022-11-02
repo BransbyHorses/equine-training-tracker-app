@@ -140,7 +140,7 @@ const TrainingProgrammeSkills = ({
 			});
 	};
 
-	if (trainingProgrammeSkills!.length === 0) {
+	if (skillProgressRecords!.length === 0) {
 		return (
 			<Box mt={2}>
 				<Typography>

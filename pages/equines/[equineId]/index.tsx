@@ -259,6 +259,7 @@ const EquineProfile = () => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Paper>
+          <Link href={`/update-profile/${equine?.id}`}>
 						<Box
 							px={2}
 							py={2}
@@ -273,6 +274,7 @@ const EquineProfile = () => {
 								<ArrowRightIcon fontSize="large" />
 							</IconButton>
 						</Box>
+            </Link>
 					</Paper>
 				</Grid>
 			</Grid>

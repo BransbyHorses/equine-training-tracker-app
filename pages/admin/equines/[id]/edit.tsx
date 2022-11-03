@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import BackBreadcrumb from "../../../../components/BackBreadcrumb";
 import ChangeTrainingProgramme from "../../../../components/pages/admin/ChangeTrainingProgramme";
-import EditEquineYard from "../../../../components/pages/admin/editEquineYard";
+import EditEquineYard from "../../../../components/pages/admin/EditEquineYard";
 import EditHandlingStatus from "../../../../components/pages/admin/EditHandlingStatus";
 import { useEquine } from "../../../../utils/hooks/equine";
 import { findCurrentTrainingProgramme } from "../../../../utils/helpers";
+import EditEquineStatus from "../../../../components/pages/admin/EditEquineStatus";
 
 const EditWrapper = (props: any) => {
 	return (
@@ -76,6 +77,14 @@ const EditEquinePage = () => {
 					/>
 				</EditWrapper>
 			);
+		case "equineStatus":
+			return (
+				<EditWrapper>
+					<EditEquineStatus />
+				</EditWrapper>
+			);
+		default:
+			return <EditWrapper></EditWrapper>;
 	}
 };
 

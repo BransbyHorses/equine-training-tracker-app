@@ -172,6 +172,7 @@ const EquineAdminPage: React.FC = (props) => {
 									<Typography>{equine.equineStatus.string}</Typography>
 								)}
 							</Box>
+							<ChangeLink role="equineStatus" />
 						</Grid>
 						<Grid
 							item

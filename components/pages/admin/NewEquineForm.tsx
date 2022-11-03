@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { EquineStatus, LearnerType, Yard, Equine } from "../../../utils/types";
 import BackBreadcrumb from "../../BackBreadcrumb";
+import ResponsiveButton from "../../ResponsiveButton";
 
 const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	const theme = useTheme();
@@ -86,7 +87,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	};
 
 	return (
-		<Container>
+		<>
 			<Box mb={3}>
 				<BackBreadcrumb />
 			</Box>
@@ -148,20 +149,17 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 						<Alert severity="error">{formError}</Alert>
 					</Box>
 				)}
-				<Button
-					sx={{
-						[theme.breakpoints.between("xs", "md")]: {
-							width: "100%",
-						},
+				<ResponsiveButton
+					desktopStyles={{
+						width: "20%",
 					}}
-					variant="contained"
 					type="submit"
 					disabled={formSubmitting}
 				>
 					Save & Continue
-				</Button>
+				</ResponsiveButton>
 			</form>
-		</Container>
+		</>
 	);
 };
 

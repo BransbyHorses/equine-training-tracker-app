@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Box, useTheme } from "@mui/material";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ResponsiveButton from "../../ResponsiveButton";
 
 const AdminAddPage = ({
 	entity,
@@ -74,21 +75,14 @@ const AdminAddPage = ({
 					required
 					sx={{ my: 3 }}
 				/>
-				<Button
-					type="submit"
-					variant="contained"
-					sx={{
-						[theme.breakpoints.between("xs", "sm")]: {
-							width: "100%",
-						},
-						[theme.breakpoints.between("sm", "xl")]: {
-							width: "25%",
-						},
-						backgroundColor: "primary.light",
+				<ResponsiveButton
+					desktopStyles={{
+						width: "20%",
 					}}
+					type="submit"
 				>
-					Save
-				</Button>
+					save
+				</ResponsiveButton>
 			</form>
 		</>
 	);

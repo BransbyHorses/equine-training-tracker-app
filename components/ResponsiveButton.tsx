@@ -16,7 +16,7 @@ const ResponsiveButton = (props: any) => {
 					transform: "translate(-50%, -50%)",
 				},
 				[theme.breakpoints.between("lg", "xl")]: {
-					...props.desktopStyles,
+					...props.desktopstyles,
 				},
 			}}
 			{...props}

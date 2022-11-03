@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useYards from "../../../utils/hooks/useYards";
 import LoadingSpinner from "../../LoadingSpinner";
 import {
@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Yard } from "../../../utils/types";
+import ResponsiveButton from "../../ResponsiveButton";
 
 const EditEquineYard = ({
 	equineId,
@@ -77,26 +78,12 @@ const EditEquineYard = ({
 						})}
 				</Select>
 			</FormControl>
-			<Button
-				variant="contained"
-				sx={{
-					backgroundColor: "primary.light",
-					[theme.breakpoints.between("xs", "lg")]: {
-						width: "92%",
-						position: "absolute",
-						bottom: "24px",
-						left: "50%",
-						transform: "translate(-50%, -50%)",
-					},
-					[theme.breakpoints.between("lg", "xl")]: {
-						width: "20%",
-						mt: 3,
-					},
-				}}
+			<ResponsiveButton
+				desktopstyles={{ width: "20%", mt: 2 }}
 				onClick={assignEquineToYard}
 			>
 				Save
-			</Button>
+			</ResponsiveButton>
 		</>
 	);
 };

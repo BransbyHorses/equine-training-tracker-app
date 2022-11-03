@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { LearnerType, Yard } from "../../../utils/types";
 import useLearnerTypes from "../../../utils/hooks/useLearnerTypes";
+import ResponsiveButton from "../../ResponsiveButton";
 
 const EditHandlingStatus = ({
 	equineId,
@@ -80,26 +81,12 @@ const EditHandlingStatus = ({
 						})}
 				</Select>
 			</FormControl>
-			<Button
-				variant="contained"
-				sx={{
-					backgroundColor: "primary.light",
-					[theme.breakpoints.between("xs", "lg")]: {
-						width: "92%",
-						position: "absolute",
-						bottom: 25,
-						left: "50%",
-						transform: "translate(-50%, -50%)",
-					},
-					[theme.breakpoints.between("lg", "xl")]: {
-						width: "20%",
-						mt: 3,
-					},
-				}}
+			<ResponsiveButton
+				desktopstyles={{ width: "20%", mt: 3 }}
 				onClick={assignEquineANewHandlingStatus}
 			>
 				Save
-			</Button>
+			</ResponsiveButton>
 		</>
 	);
 };

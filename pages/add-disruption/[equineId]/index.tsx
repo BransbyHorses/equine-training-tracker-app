@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import {Box, Grid, Radio, FormControl, FormControlLabel, RadioGroup} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
+import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
-import { Disruption, Equine } from "../../../utils/types";
-import { saveData } from "../../../utils/helpers";
+import { DisruptionSimplified, Equine } from "../../../utils/types";
+import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 
 
 export default function AddDisruption() {
 
 	const router = useRouter();
-	const [disruptions, setDisruptions] = useState<Disruption[]>([]);
-	const [disruption, setDisruption] = useState<Disruption>();
+	const [disruptions, setDisruptions] = useState<DisruptionSimplified[]>([]);
+	const [disruptionId, setDisruptionId] = useState<string>();
 	const [equine, setEquine] = useState<Equine | undefined>(undefined);
 	const { fetchingData, collection, error } = getCollection(
 		'disruptions'
@@ -24,6 +25,8 @@ export default function AddDisruption() {
 	useEffect(() => {
 		if (router.isReady) {
 			getEquineFromId(router.query.equineId as string);
+			collection.forEach(convertEnumStringKeyToName)
+			console.log(collection);
 			setDisruptions(collection);
 		}
 	}, [router.isReady]);
@@ -40,13 +43,13 @@ export default function AddDisruption() {
 
 	const handleChange = (event:any) => {
 		console.log(event.target.value);
-		let updatedDisruption = disruptions.find(disruption => event.target.value == disruption.id);
-		setDisruption(updatedDisruption);
-		console.log(disruption);
+		console.log(event.target);
+		setDisruptionId(event.target.value);
+		console.log(disruptionId);
 	}
 
 	const updateDisruption = async () => {
-		saveData("", `/equines/${equine?.id}/disruptions/${disruption?.id}/start`, 'POST');
+		saveData("", `/equines/${equine?.id}/disruptions/${disruptionId}/start`, 'POST');
 		router.push('/');
     }
 
@@ -67,25 +70,10 @@ export default function AddDisruption() {
 				<BackBreadcrumb/>
 				<PageTitle title="Add disruption" />
     
-				<FormControl>
-				<RadioGroup
-					defaultValue="radioform"
-					name="radio-buttons-group"
-					onChange={handleChange}>
-					{disruptions.map(({id, string}:any) => {
-						return (
-					<FormControlLabel 
-						key={id} 
-						value={id} 
-						control={<Radio/>} 
-						label={string}
-						/>
-						)
-					}
-					)
-				}
-				</RadioGroup>
-   			 </FormControl>
+				<RadioButtonsForm
+					items={disruptions} 
+					handleChange={handleChange}
+				/>
 	
 				<PrimaryButton 
 					buttonText="Save" 

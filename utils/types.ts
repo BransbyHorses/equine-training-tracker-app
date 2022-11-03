@@ -1,8 +1,20 @@
 export interface Disruption {
 	id: number;
-	reason: { string: DisruptionCode; id: number };
+	reason: { name: DisruptionCode; id: number };
 	startDate: string;
 	endDate?: string;
+}
+
+export interface DisruptionSimplified {
+	id: number;
+	name: string;
+}
+
+
+export interface Status {
+	id: number,
+	name: string;
+	categorisedAsTraining: boolean
 }
 
 export interface Equine {

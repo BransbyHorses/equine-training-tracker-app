@@ -23,7 +23,7 @@ const AdminDashboard: FC<MyComponentProps> = (props) => {
 				alignItems: "center",
 			}}
 		>
-			<PageTitle title={"Admin Dashboard"} />
+			<PageTitle title="Manage"/>
 			<InfoGrid listItems={adminActions} />
 		</Container>
 	);

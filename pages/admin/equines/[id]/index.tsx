@@ -29,14 +29,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-const ChangeLink = () => {
-	return (
-		<Typography color="#42a5f5" sx={{ cursor: "pointer" }}>
-			<small>Change</small>
-		</Typography>
-	);
-};
-
 export const OptionsMenu = ({ deleteEquine }: { deleteEquine: () => void }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -109,6 +101,16 @@ const EquineAdminPage: React.FC = (props) => {
 			});
 	};
 
+	const ChangeLink = ({ role }: { role: string }) => {
+		return (
+			<Link href={`/admin/equines/${equineId}/edit?value=${role}`}>
+				<Typography color="#42a5f5" sx={{ cursor: "pointer" }}>
+					<small>Change</small>
+				</Typography>
+			</Link>
+		);
+	};
+
 	if (fetchingData) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -160,14 +162,25 @@ const EquineAdminPage: React.FC = (props) => {
 							sx={{ display: "flex", justifyContent: "space-between" }}
 						>
 							<Box>
-								<Typography variant="h6">Training Programme</Typography>
-								<Typography>
-									<CurrentTrainingProgramme
-										trainingProgrammes={equine?.trainingProgrammes}
-									/>
-								</Typography>
+								<Typography variant="h6">Status</Typography>
+								{equine && equine.equineStatus && (
+									<Typography>{equine.equineStatus.string}</Typography>
+								)}
 							</Box>
-							<ChangeLink />
+						</Grid>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							sx={{ display: "flex", justifyContent: "space-between" }}
+						>
+							<Box>
+								<Typography variant="h6">Training Programme</Typography>
+								<CurrentTrainingProgramme
+									trainingProgrammes={equine?.trainingProgrammes}
+								/>
+							</Box>
+							<ChangeLink role="trainingProgramme" />
 						</Grid>
 						<Grid
 							item
@@ -187,27 +200,7 @@ const EquineAdminPage: React.FC = (props) => {
 									</Typography>
 								)}
 							</Box>
-							<ChangeLink />
-						</Grid>
-						<Grid
-							item
-							xs={12}
-							md={6}
-							sx={{ display: "flex", justifyContent: "space-between" }}
-						>
-							<Box>
-								<Typography variant="h6">Training Status</Typography>
-								{equine && equine.equineStatus ? (
-									<Typography>{equine.equineStatus.name}</Typography>
-								) : (
-									<Typography>
-										<em>
-											<small>No Training Status</small>
-										</em>
-									</Typography>
-								)}
-							</Box>
-							<ChangeLink />
+							<ChangeLink role="yard" />
 						</Grid>
 						<Grid
 							item
@@ -227,7 +220,7 @@ const EquineAdminPage: React.FC = (props) => {
 									</Typography>
 								)}
 							</Box>
-							<ChangeLink />
+							<ChangeLink role="handlingStatus" />
 						</Grid>
 					</Grid>
 				</Box>

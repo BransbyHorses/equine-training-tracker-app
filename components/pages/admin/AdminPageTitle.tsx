@@ -18,7 +18,7 @@ const AdminPageTitle = ({
 
 	return (
 		<>
-			<BackBreadcrumb />
+			<BackBreadcrumb link="/admin" />
 			<Box
 				my={3}
 				sx={{

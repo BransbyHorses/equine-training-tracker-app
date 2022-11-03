@@ -6,7 +6,7 @@ const InfoGrid = (props: any) => {
 	return (
 		<Grid
 			container
-			rowSpacing={4}
+			rowSpacing={3}
 			columnSpacing={{ sm: 1, md: 2 }}
 			alignContent="stretch"
 			alignItems="stretch"

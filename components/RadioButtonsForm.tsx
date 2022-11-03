@@ -8,11 +8,6 @@ import React, { useEffect } from "react";
 
 export default function RadioButtonsForm (props: any) {
 
-    useEffect(() => {
-        console.log("RADIO");
-        console.log(props.items);
-    }, [])
-
     return (
         <FormControl>
         <RadioGroup

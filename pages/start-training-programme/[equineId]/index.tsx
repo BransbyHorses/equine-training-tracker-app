@@ -25,6 +25,7 @@ export default function StartTrainingProgramme() {
 	const [trainingCategories, setTrainingCategories] = useState<TrainingCategory[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [trainingCategory, setTrainingCategory] = useState<TrainingCategory | undefined>(undefined);
+
 	const {fetchingData, collection } = getCollection(
 		'training-categories'
 	);

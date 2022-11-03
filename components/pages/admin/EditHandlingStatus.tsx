@@ -12,21 +12,22 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Yard } from "../../../utils/types";
+import { LearnerType, Yard } from "../../../utils/types";
+import useLearnerTypes from "../../../utils/hooks/useLearnerTypes";
 
-const EditEquineYard = ({
+const EditHandlingStatus = ({
 	equineId,
-	currentYard,
+	currentStatus,
 }: {
 	equineId: string;
-	currentYard?: Yard;
+	currentStatus?: LearnerType;
 }) => {
 	const router = useRouter();
 	const theme = useTheme();
-	const [yardId, setYardId] = useState("");
-	const { yards, fetchingYardData, error } = useYards();
+	const [newLearnerTypeId, setNewLearnerTypeId] = useState("");
+	const { learnerTypes, fetchingData, error } = useLearnerTypes();
 
-	if (fetchingYardData) {
+	if (fetchingData) {
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
 				<LoadingSpinner />
@@ -34,10 +35,10 @@ const EditEquineYard = ({
 		);
 	}
 
-	const assignEquineToYard = () => {
+	const assignEquineANewHandlingStatus = () => {
 		axios
 			.patch(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/yards/${yardId}`
+				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/learner-types/${newLearnerTypeId}`
 			)
 			.then(() => {
 				router.push(`/admin/equines/${equineId}`);
@@ -50,28 +51,30 @@ const EditEquineYard = ({
 	return (
 		<>
 			<FormControl fullWidth>
-				<InputLabel id="edit-yard-select-label">Change Yard</InputLabel>
+				<InputLabel id="edit-handling-status-select-label">
+					Change Handling Status
+				</InputLabel>
 				<Select
-					labelId="edit-yard-select-label"
-					id="edit-yard-select"
-					value={yardId}
-					label="Change Yard"
-					onChange={(e) => setYardId(e.target.value)}
+					labelId="edit-handling-status-select-label"
+					id="edit-handling-status-select"
+					value={newLearnerTypeId}
+					label="Change Handling Status"
+					onChange={(e) => setNewLearnerTypeId(e.target.value)}
 				>
-					{yards
+					{learnerTypes
 						.sort((a, b) => {
 							if (a.name < b.name) return -1;
 							if (a.name > b.name) return 1;
 							return 0;
 						})
-						.map((yard) => {
-							return currentYard && yard.id === currentYard.id ? (
-								<MenuItem disabled key={yard.id}>
-									{yard.name}
+						.map((learnerType) => {
+							return currentStatus && learnerType.id === currentStatus.id ? (
+								<MenuItem disabled key={learnerType.name}>
+									{learnerType.name}
 								</MenuItem>
 							) : (
-								<MenuItem key={yard.id} value={yard.id}>
-									{yard.name}
+								<MenuItem value={learnerType.id} key={learnerType.id}>
+									{learnerType.name}
 								</MenuItem>
 							);
 						})}
@@ -88,7 +91,7 @@ const EditEquineYard = ({
 						width: "20%",
 					},
 				}}
-				onClick={assignEquineToYard}
+				onClick={assignEquineANewHandlingStatus}
 			>
 				Save
 			</Button>
@@ -96,4 +99,4 @@ const EditEquineYard = ({
 	);
 };
 
-export default EditEquineYard;
+export default EditHandlingStatus;

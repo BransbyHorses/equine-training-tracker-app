@@ -22,7 +22,9 @@ const CurrentTrainingProgramme = ({
 			</Typography>
 		);
 
-	return <span>{currentTrainingProgramme.trainingCategory.name}</span>;
+	return (
+		<Typography>{currentTrainingProgramme.trainingCategory.name}</Typography>
+	);
 };
 
 export default CurrentTrainingProgramme;

@@ -32,7 +32,7 @@ export default function EndTraining() {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
 			collection.forEach(convertEnumStringKeyToName)
-			setEquineStatuses(collection.filter(item => !item.inTraining));
+			setEquineStatuses(collection);
 		}
 	}, [router.isReady]);
 

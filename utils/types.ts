@@ -1,6 +1,6 @@
 export interface Disruption {
 	id: number;
-	reason: { name: DisruptionCode; id: number };
+	reason: { string: DisruptionCode; id: number };
 	startDate: string;
 	endDate?: string;
 }

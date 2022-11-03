@@ -199,7 +199,7 @@ const EquineAdminPage: React.FC = (props) => {
 								{equine && equine.yard ? (
 									<Typography>{equine.yard.name}</Typography>
 								) : (
-									<Typography>
+									<Typography color="gray">
 										<em>
 											<small>No Yard</small>
 										</em>
@@ -219,7 +219,7 @@ const EquineAdminPage: React.FC = (props) => {
 								{equine && equine.learnerType ? (
 									<Typography>{equine.learnerType.name}</Typography>
 								) : (
-									<Typography>
+									<Typography color="gray">
 										<em>
 											<small>No Handling Status</small>
 										</em>

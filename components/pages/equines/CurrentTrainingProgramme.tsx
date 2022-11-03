@@ -15,7 +15,7 @@ const CurrentTrainingProgramme = ({
 
 	if (!currentTrainingProgramme)
 		return (
-			<Typography>
+			<Typography color="gray">
 				<small>
 					<em>No Training Programme</em>
 				</small>

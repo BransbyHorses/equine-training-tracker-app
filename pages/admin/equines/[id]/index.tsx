@@ -6,7 +6,7 @@ import { Equine } from "../../../../utils/types";
 import { useEquine } from "../../../../utils/hooks/equine";
 
 import EquineHealthAndSafety from "../../../../components/pages/equines/health-and-safety/EquineHealthAndSafety";
-import BackBreadcrumb from "../../../../components/BackBreadcrumb";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 import CurrentTrainingProgramme from "../../../../components/pages/equines/CurrentTrainingProgramme";
 
 import {
@@ -133,7 +133,12 @@ const EquineAdminPage: React.FC = (props) => {
 
 	return (
 		<>
-			<BackBreadcrumb />
+			<Breadcrumbs>
+				<Link href="/admin/equines">
+					<span style={{ color: "gray", cursor: "pointer" }}>Equines</span>
+				</Link>
+				<Typography color="text.primary">{equine?.name}</Typography>
+			</Breadcrumbs>
 			<Paper>
 				<Box
 					p={2}

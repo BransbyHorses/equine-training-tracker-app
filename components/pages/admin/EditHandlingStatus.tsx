@@ -83,12 +83,17 @@ const EditHandlingStatus = ({
 			<Button
 				variant="contained"
 				sx={{
-					mt: 3,
-					[theme.breakpoints.between("xs", "sm")]: {
-						width: "100%",
+					backgroundColor: "primary.light",
+					[theme.breakpoints.between("xs", "lg")]: {
+						width: "92%",
+						position: "absolute",
+						bottom: 25,
+						left: "50%",
+						transform: "translate(-50%, -50%)",
 					},
-					[theme.breakpoints.between("sm", "xl")]: {
+					[theme.breakpoints.between("lg", "xl")]: {
 						width: "20%",
+						mt: 3,
 					},
 				}}
 				onClick={assignEquineANewHandlingStatus}

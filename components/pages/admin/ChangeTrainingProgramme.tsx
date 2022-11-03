@@ -37,6 +37,7 @@ const ChangeTrainingProgramme = ({
 	}
 
 	const changeEquineTrainingProgramme = () => {
+		if (newTrainingCategory === "") return;
 		axios
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${newTrainingCategory}/equine/${equineId}`
@@ -61,6 +62,7 @@ const ChangeTrainingProgramme = ({
 					value={newTrainingCategory}
 					label="Change Training Programme"
 					onChange={(e) => setNewTrainingCategory(e.target.value)}
+					required
 				>
 					{trainingCategories
 						.sort((a, b) => {
@@ -85,12 +87,17 @@ const ChangeTrainingProgramme = ({
 			<Button
 				variant="contained"
 				sx={{
-					mt: 3,
-					[theme.breakpoints.between("xs", "sm")]: {
-						width: "100%",
+					backgroundColor: "primary.light",
+					[theme.breakpoints.between("xs", "lg")]: {
+						width: "92%",
+						position: "absolute",
+						bottom: 25,
+						left: "50%",
+						transform: "translate(-50%, -50%)",
 					},
-					[theme.breakpoints.between("sm", "xl")]: {
+					[theme.breakpoints.between("lg", "xl")]: {
 						width: "20%",
+						mt: 3,
 					},
 				}}
 				onClick={changeEquineTrainingProgramme}

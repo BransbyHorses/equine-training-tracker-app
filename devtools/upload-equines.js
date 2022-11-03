@@ -40,7 +40,7 @@ const equine = {
 
 function uploadData(endPoint, jsonModel) {
    return axios
-         .post(`http://localhost:8080/data/${endPoint}`, jsonModel)
+         .post(`https://bransby-api.azurewebsites.net/data/${endPoint}`, jsonModel)
          .then(res => {
            console.log(`${endPoint} upload successful: ${res.status}`);
             //console.log(res);

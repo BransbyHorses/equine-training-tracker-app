@@ -13,7 +13,7 @@ import {
 	Box,
 	useTheme,
 } from "@mui/material";
-import { EquineStatus, LearnerType, Yard, Equine } from "../../../utils/types";
+import { LearnerType, Yard, Equine } from "../../../utils/types";
 import BackBreadcrumb from "../../BackBreadcrumb";
 import ResponsiveButton from "../../ResponsiveButton";
 

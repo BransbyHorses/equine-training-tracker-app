@@ -17,8 +17,15 @@ export interface Equine {
 }
 
 export interface EquineStatus {
-	id: number;
-	name: string;
+	string:
+		| "Awaiting Training"
+		| "In Training"
+		| "Returned To Owner"
+		| "Rehomed"
+		| "Euthanised"
+		| "Other";
+	id: 1 | 2 | 3 | 4 | 5 | 6;
+	categorisedAsTraining: boolean;
 }
 
 export interface LearnerType {

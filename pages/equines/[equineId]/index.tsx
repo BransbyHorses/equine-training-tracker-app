@@ -159,14 +159,14 @@ const EquineProfile = () => {
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
 					<Grid container rowSpacing={3} columnSpacing={2}>
 						<Grid item xs={12} md={6}>
-							<Typography variant="h6">Training Status</Typography>
-							{equine && equine.equineStatus ? (
-								<Typography>{equine.equineStatus.name}</Typography>
-							) : (
+							<Typography variant="h6">
+								Status
+							</Typography>
+							{equine && equine.equineStatus && (
 								<Typography>
-									<small>
-										<em>No Training Status</em>
-									</small>
+									{equine.equineStatus.categorisedAsTraining
+										? `${equine.equineStatus.string}`
+										: `Training Ended - ${equine.equineStatus.string}`}
 								</Typography>
 							)}
 						</Grid>
@@ -183,7 +183,7 @@ const EquineProfile = () => {
 							{equine && equine.yard ? (
 								<Typography>{equine.yard.name}</Typography>
 							) : (
-								<Typography>
+								<Typography color="gray">
 									<small>
 										<em>No Yard</em>
 									</small>
@@ -195,7 +195,7 @@ const EquineProfile = () => {
 							{equine && equine.learnerType ? (
 								<Typography>{equine.learnerType.name}</Typography>
 							) : (
-								<Typography>
+								<Typography color="gray">
 									<small>
 										<em>No Handling Status</em>
 									</small>
@@ -259,22 +259,22 @@ const EquineProfile = () => {
 				</Grid>
 				<Grid item xs={12} sm={6}>
 					<Paper>
-          <Link href={`/update-profile/${equine?.id}`}>
-						<Box
-							px={2}
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Typography variant="h6">Update Profile</Typography>
-							<IconButton>
-								<ArrowRightIcon fontSize="large" />
-							</IconButton>
-						</Box>
-            </Link>
+						<Link href={`/update-profile/${equine?.id}`}>
+							<Box
+								px={2}
+								py={2}
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Typography variant="h6">Update Profile</Typography>
+								<IconButton>
+									<ArrowRightIcon fontSize="large" />
+								</IconButton>
+							</Box>
+						</Link>
 					</Paper>
 				</Grid>
 			</Grid>

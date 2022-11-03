@@ -80,7 +80,10 @@ const EditEquinePage = () => {
 		case "equineStatus":
 			return (
 				<EditWrapper>
-					<EditEquineStatus />
+					<EditEquineStatus
+						equineId={equineId!}
+						currentStatus={equine ? equine!.equineStatus : undefined}
+					/>
 				</EditWrapper>
 			);
 		default:

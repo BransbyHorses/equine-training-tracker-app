@@ -59,7 +59,7 @@ const padZero = (num: number, pad: number) => num.toString().padStart(pad, '0');
 
 export const saveData = async (data:any, path:string, method:string) => {
 	console.log(data);
-	await fetch(`${process.env.NEXT_PUBLIC_URL}data/${path}`, {
+	await fetch(`${process.env.NEXT_PUBLIC_URL}/data/${path}`, {
 		method: method,
 		headers: {
 			"Content-Type": "application/json",

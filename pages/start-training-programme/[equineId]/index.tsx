@@ -22,7 +22,7 @@ export default function StartTrainingProgramme() {
 	const router = useRouter();
 	const [trainingCategories, setTrainingCategories] = useState<TrainingCategory[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	const [trainingCategory, setTrainingCategory] = useState<TrainingCategory>(trainingCategories[0]);
+	const [trainingCategory, setTrainingCategory] = useState<TrainingCategory | undefined>(undefined);
 	const { fetchingData, collection, error, notFound } = getCollection(
 		'training-categories'
 	);
@@ -34,7 +34,7 @@ export default function StartTrainingProgramme() {
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEquineId(router.query.equineId);
+			setEquineId(router.query.equineId as string);
 			setTrainingCategories(collection);
 		}
 	}, [router.isReady]);
@@ -45,7 +45,7 @@ export default function StartTrainingProgramme() {
 	}
 
 	const updateTrainingProgramme = async () => {
-		saveData("", `training-programmes/${trainingCategory.id}/equine/${equine.id}`, 'POST');
+		saveData("", `training-programmes/${trainingCategory?.id}/equine/${equine?.id}`, 'POST');
 		router.push('/');
     }
 	

@@ -3,11 +3,15 @@ import {
 	FormControlLabel,
 	Radio,
 	RadioGroup,
-    Typography
 	} from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function PrimaryButton(props:any){
+export default function RadioButtonsForm (props: any) {
+
+    useEffect(() => {
+        console.log("RADIO");
+        console.log(props.items);
+    }, [])
 
     return (
         <FormControl>
@@ -15,7 +19,7 @@ export default function PrimaryButton(props:any){
             defaultValue="radioform"
             name="radio-buttons-group"
             onChange={props.handleChange}>
-            {props.items.map(({id, name}) => {
+            {props.items.map(({id, name}:any) => {
                 return (
             <FormControlLabel 
                 key={id} 

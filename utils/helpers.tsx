@@ -1,4 +1,4 @@
-import { Equine, TrainingProgramme, SkillTrainingSession } from "./types";
+import { Equine, TrainingProgramme, SkillTrainingSession, Disruption } from "./types";
 
 export const findCurrentTrainingProgramme = (
 	trainingProgrammes?: TrainingProgramme[]

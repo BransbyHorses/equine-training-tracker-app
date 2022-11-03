@@ -14,7 +14,7 @@ export default function EndTraining() {
 
 	const router = useRouter();
 	const [endConditions, setEndConditions] = useState<Disruption[]>([]);
-	const { fetchingData, collection, error, notFound } = getCollection(
+	const { fetchingData, collection, error } = getCollection(
 		'disruptions'
 	);
 
@@ -30,7 +30,7 @@ export default function EndTraining() {
 			sm={6} 
 			>
 			<PageContainer>
-				<BackBreadcrumb link="/" />
+				<BackBreadcrumb />
 				<PageTitle title="End training permanently" />
     
 				<RadioButtonsForm

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, Box} from "@mui/material";
 import PageTitle from '../../../components/PageTitle';
 import PageContainer from '../../../components/PageContainer';
 import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
 import { Equine, LearnerType } from "../../../utils/types";
@@ -16,8 +17,8 @@ export default function ChangeTypeOfLearner() {
 
 	const router = useRouter();
 	const [learnerTypes, setLearnerTypes] = useState<LearnerType[]>([]);
-	const [equine, setEquine] = useState<Equine>();
-	const { fetchingData, collection, error, notFound } = getCollection(
+	const [equine, setEquine] = useState<Equine | undefined>(undefined);
+	const { fetchingData, collection, error } = getCollection(
 		'learner-types'
 	);
 	const [learnerType, setLearnerType] = useState<LearnerType>();
@@ -30,7 +31,7 @@ export default function ChangeTypeOfLearner() {
 		}
 	}, [router.isReady]);
 
-	const getEquineFromId = async (id) => {        
+	const getEquineFromId = async (id:any) => {        
         await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${id}`)
             .then(response => response.json())
             .then(data => setEquine(data))
@@ -53,12 +54,20 @@ export default function ChangeTypeOfLearner() {
 		setLearnerType(updatedLearnerType);
 	}
 
+	if (fetchingData) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<LoadingSpinner />
+			</Box>
+		);
+	} 
+
 	return (
 			<PageContainer>
-				<BackBreadcrumb link="/" />
+				<BackBreadcrumb />
 				<PageTitle title="Change handling status" />
 				<FormControl>
-				<InputLabel id="learner-type-selection">Learner type</InputLabel>
+				<InputLabel id="learner-type-selection">Handling status</InputLabel>
 					<Select
 						value={learnerType?.name}
 						label="Learner type"

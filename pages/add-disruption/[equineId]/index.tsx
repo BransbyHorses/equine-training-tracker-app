@@ -42,10 +42,7 @@ export default function AddDisruption() {
     }
 
 	const handleChange = (event:any) => {
-		console.log(event.target.value);
-		console.log(event.target);
 		setDisruptionId(event.target.value);
-		console.log(disruptionId);
 	}
 
 	const updateDisruption = async () => {

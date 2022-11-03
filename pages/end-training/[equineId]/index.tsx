@@ -16,32 +16,35 @@ import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 export default function EndTraining() {
 
 	const router = useRouter();
+
 	const [equineStatuses, setEquineStatuses] = useState<Status[]>([]);
-	const [equineStatus, setEquineStatus] = useState<Status | undefined>(undefined);
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	const [equineStatusId, setEquineStatusId] = useState<Status | undefined>(undefined);
 	const { fetchingData, collection, error } = getCollection(
 		'equine-statuses'
 	);
 	console.log("State is");
-	console.log(equineStatuses);
+	console.log(equineStatusId);
+
 
 
 	useEffect(() => {
 		if (router.isReady) {
-			console.log("Collection is");
-			console.log(collection);
+			setEquineId(router.query.equineId as string);
 			collection.forEach(convertEnumStringKeyToName)
-			setEquineStatuses(collection);
+			setEquineStatuses(collection.filter(item => !item.inTraining));
 		}
 	}, [router.isReady]);
 
-	
-
 	const handleChange = (event:any) => {
-		console.log(event.target.value);
-		let updatedStatus = equineStatuses.find(status => event.target.value == status.id);
-		setEquineStatus(updatedStatus);
-		console.log(equineStatus);
+		setEquineStatusId(event.target.value);
 	}
+
+	const updateStatus = async () => {
+		saveData("", `equines/${equineId}/equine-status/${equineStatusId}`, 'PATCH');
+		router.push('/');
+    }
+
 
 	if (fetchingData) {
 		return (
@@ -61,12 +64,13 @@ export default function EndTraining() {
 				<PageTitle title="End training permanently" />
     
 				<RadioButtonsForm
-					items={equineStatuses} 
+					items={equineStatuses.filter(status => !status.categorisedAsTraining)} 
 					handleChange={handleChange}
 				/>
 	
 
 				<PrimaryButton 
+					handleChange={updateStatus}
 					buttonText="Save" 
 					link="/"
 				/>

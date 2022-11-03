@@ -11,11 +11,9 @@ import getCollection from "../../../utils/hooks/getCollection";
 
 export default function EndTraining() {
 	const Status = [
-		{"id": "1", "name":"Training"},
-		{"id": "2", "name":"In Training"},
+		{"id": "1", "name":"Presented to rehoming scheme"},
+		{"id": "2", "name":"Euthanasia"},
 		{"id": "3", "name":"Returned to Owner"},
-		{"id": "4", "name":"Rehomed"},
-		{"id": "5", "name":"Euthanised"},
 		{"id": "6", "name":"Other"},
 	]
 

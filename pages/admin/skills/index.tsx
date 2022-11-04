@@ -1,79 +1,86 @@
-import Link from 'next/link';
-import { Typography, Container, Grid } from '@mui/material';
-import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
-import LinkButton from '../../../components/LinkButton';
-import EntityCard from '../../../components/EntityCard';
-import AutoCompleteBox from '../../../components/AutoCompleteBox';
-import PageTitle from '../../../components/PageTitle';
-import ListGrid from '../../../components/ListGrid';
+import { useEffect, useState } from "react";
+import AdminPageTitle from "../../../components/pages/admin/AdminPageTitle";
+import AdminContentBlock from "../../../components/pages/admin/AdminContentBlock";
+import { Skill } from "../../../utils/types";
+import axios from "axios";
 
-export default function Skills() {
-    interface MySkills {
-        id: number;
-        name: string;
-    }
-    const [skills, setSkills] = useState<MySkills[]>([]);
+export default function SkillsAdminPage() {
+	const [skills, setSkills] = useState<Skill[]>([]);
+	const [editValue, setEditValue] = useState<Skill>();
 
-    function getSkills() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills`)
-            .then(response => response.json())
-            .then(data => setSkills(data))
-            .catch(rejected => {
-                console.log(rejected);
-            });
-    }
+	function getSkills() {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills`)
+			.then((response) => response.json())
+			.then((data) => setSkills(data))
+			.catch((rejected) => {
+				console.log(rejected);
+			});
+	}
 
-    useEffect(() => {
-        getSkills();
-    }, []);
+	useEffect(() => {
+		getSkills();
+	}, []);
 
-    return (
-			<Container>
-				<PageTitle title={"Skills"} />
-				<AutoCompleteBox
-					options={skills.map((skill) => ({
-						optionName: skill.name,
-						optionId: skill.id,
-					}))}
-					label="Search for a skill"
-					linkName={"skills"}
-				/>
+	const editSkill = (id: any) => {
+		setEditValue(skills.find((skill) => skill.id === id));
+	};
 
-				{skills.length > 0 ? (
-					<ListGrid listItems={skills} listUrl={"skills"} />
-				) : (
-					<Typography
-						variant="h5"
-						color="#616161"
-						gutterBottom
-						sx={{ my: "1rem", mx: "1rem" }}
-					>
-						No skills here...☹️...yet!
-					</Typography>
-				)}
+	const saveEditedSkill = (newSkillName: string) => {
+		if (newSkillName === editValue!.name) {
+			setEditValue(undefined);
+			return;
+		}
 
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-around",
-					}}
-				>
-					<LinkButton
-						color="lightBlue[50]"
-						variant="contained"
-						buttonHref="/admin/skills/add-skill"
-						buttonTitle="Create new skill"
-					></LinkButton>
+		const editedSkill = { id: editValue!.id, name: newSkillName };
 
-					<LinkButton
-						color="lightBlue[50]"
-						variant="contained"
-						buttonHref="/admin"
-						buttonTitle="Back to Dashboard"
-					></LinkButton>
-				</Box>
-			</Container>
-		);
+		axios
+			.put(
+				`${process.env.NEXT_PUBLIC_URL}data/skills/${editValue!.id}`,
+				editedSkill
+			)
+			.then(({ data }) => {
+				setEditValue(undefined);
+				const updatedSkills = skills.map((skill) => {
+					return skill.id === data.id ? data : skill;
+				});
+				setSkills(updatedSkills);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
+
+	const deleteSkill = (id: any) => {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills/${id}`, {
+			method: "DELETE",
+		})
+			.then(() => {
+				setSkills(skills.filter((skill) => skill.id != id));
+			})
+			.catch((rejected) => {
+				console.error(rejected);
+			});
+	};
+
+	return (
+		<>
+			<AdminPageTitle
+				title="Manage Skills"
+				buttonLink="/admin/skills/add-skill"
+				contentLength={skills.length}
+			/>
+			{skills.map((skill) => {
+				return (
+					<AdminContentBlock
+						key={skill.id}
+						content={skill}
+						editValue={editValue}
+						saveFunction={saveEditedSkill}
+						editAction={editSkill}
+						deleteFunction={deleteSkill}
+					/>
+				);
+			})}
+		</>
+	);
 }

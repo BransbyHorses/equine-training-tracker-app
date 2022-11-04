@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Breadcrumbs, Link } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 
-const BackBreadcrumb = () => {
+const BackBreadcrumb = ({ link }: { link?: string }) => {
 	const router = useRouter();
 	return (
 		<Breadcrumbs>
@@ -13,7 +13,7 @@ const BackBreadcrumb = () => {
 				underline="hover"
 				color="inherit"
 				sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
-				onClick={() => router.back()}
+				onClick={link ? () => router.push(link) : () => router.back()}
 			>
 				<ArrowLeftIcon /> Back
 			</Link>

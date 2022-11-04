@@ -1,24 +1,19 @@
 import React, { useState } from "react";
-import { withRouter, NextRouter } from "next/router";
-import Link from "next/link";
-import { Button, Typography, Container, TextField, Grid } from "@mui/material";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddNewTrainingMethodPage: React.FC = (props) => {
+const AddTrainingEnvironment: React.FC = (props) => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
-	const submitTrainingMethod = (newTrainingMethod: any) => {
-		fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods`, {
+	const saveNewTrainingEnvironment = (newTrainingEnvironment: string) => {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/environments`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ name: newTrainingMethod }),
+			body: JSON.stringify({ name: newTrainingEnvironment }),
 		})
-			.then((response) => {
-				response.json();
-			})
+			.then((response) => response.json())
 			.then((data) => {
 				setSuccessMessage(true);
 				setTimeout(() => {
@@ -36,12 +31,11 @@ const AddNewTrainingMethodPage: React.FC = (props) => {
 
 	return (
 		<AdminAddPage
-			entity="Training Method"
+			entity="Training Environment"
 			success={successMessage}
 			error={errorMessage}
-			saveFunction={submitTrainingMethod}
+			saveFunction={saveNewTrainingEnvironment}
 		/>
 	);
 };
-
-export default AddNewTrainingMethodPage;
+export default AddTrainingEnvironment;

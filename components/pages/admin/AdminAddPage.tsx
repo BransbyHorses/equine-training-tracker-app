@@ -76,7 +76,7 @@ const AdminAddPage = ({
 					sx={{ my: 3 }}
 				/>
 				<ResponsiveButton
-					desktopStyles={{
+					desktopstyles={{
 						width: "20%",
 					}}
 					type="submit"

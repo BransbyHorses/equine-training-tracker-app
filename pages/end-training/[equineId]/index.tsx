@@ -10,18 +10,16 @@ import { useRouter } from "next/router";
 import { getCollection } from "../../../utils/hooks/getCollection";
 import { Status } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
+import ResponsiveButton from "../../../components/ResponsiveButton";
 
 export default function EndTraining() {
 	const router = useRouter();
-
 	const [equineStatuses, setEquineStatuses] = useState<Status[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [equineStatusId, setEquineStatusId] = useState<Status | undefined>(
 		undefined
 	);
 	const { fetchingData, collection, error } = getCollection("equine-statuses");
-	console.log("State is");
-	console.log(equineStatusId);
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -54,7 +52,6 @@ export default function EndTraining() {
 
 	return (
 		<>
-		<PageContainer>
 			<BackBreadcrumb />
 			<PageTitle title="End training permanently" />
 
@@ -62,9 +59,14 @@ export default function EndTraining() {
 				items={equineStatuses.filter((status) => !status.categorisedAsTraining)}
 				handleChange={handleChange}
 			/>
-
-			<PrimaryButton handleChange={updateStatus} buttonText="Save" link="/" />
-		</PageContainer>
+			<Box>
+				<ResponsiveButton
+					desktopstyles={{ width: "20%", mt: 3 }}
+					onClick={updateStatus}
+				>
+					Save
+				</ResponsiveButton>
+			</Box>
 		</>
 	);
 }

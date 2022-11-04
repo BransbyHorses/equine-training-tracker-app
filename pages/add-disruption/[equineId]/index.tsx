@@ -12,15 +12,25 @@ import { DisruptionSimplified, Equine } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 
 export default function AddDisruption() {
+
+	
 	const router = useRouter();
 	const [disruptions, setDisruptions] = useState<DisruptionSimplified[]>([]);
 	const [disruptionId, setDisruptionId] = useState<string>();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const { fetchingData, collection, error } = getCollection("disruptions");
 
+
+	console.log("STATE")
+	console.log(disruptions)
+	
 	useEffect(() => {
 		if (router.isReady) {
+			console.log(collection);
 			setEquineId(router.query.equineId as string);
+			console.log("COllection")
+			convertEnumStringKeyToName(collection)
+			console.log(collection);
 			setDisruptions(collection);
 		}
 	}, [router.isReady]);

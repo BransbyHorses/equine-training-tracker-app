@@ -37,7 +37,7 @@ export default function EndTraining() {
 			`equines/${equineId}/equine-status/${equineStatusId}`,
 			"PATCH"
 		);
-		router.push("/");
+		router.push(`/equines/${equineId}`);
 	};
 
 	if (fetchingData) {

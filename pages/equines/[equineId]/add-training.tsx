@@ -1,21 +1,21 @@
+import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useReducer, useState } from "react";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
+import NewTrainingSessionDate from "../../../components/pages/equines/NewTrainingSessionDate";
 import {
+	NewTrainingSessionProvider,
 	newTrainingSessionState,
 	skillTrainingSessionReducer,
 } from "../../../utils/reducers/trainingSessionReducer";
 
 const AddTrainingSessionPage = () => {
 	const router = useRouter();
-
 	const [newTrainingSession, dispatch] = useReducer(
 		skillTrainingSessionReducer,
 		newTrainingSessionState
 	);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-
-	console.log(newTrainingSession);
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -23,7 +23,11 @@ const AddTrainingSessionPage = () => {
 		}
 	}, [router.isReady]);
 
-	return <BackBreadcrumb link={`/equines/${equineId}`} />;
+	return (
+		<NewTrainingSessionProvider>
+			<NewTrainingSessionDate />
+		</NewTrainingSessionProvider>
+	);
 };
 
 export default AddTrainingSessionPage;

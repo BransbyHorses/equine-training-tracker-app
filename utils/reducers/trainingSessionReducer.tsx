@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { Children, createContext, Dispatch, useReducer } from "react";
 import {
 	Skill,
 	SkillTrainingSession,
@@ -6,7 +6,7 @@ import {
 	TrainingMethod,
 } from "../types";
 
-enum NewSkillTrainingSessionType {
+export enum NewSkillTrainingSessionType {
 	NEXT,
 	BACK,
 	SET_DATE,
@@ -23,7 +23,7 @@ interface NewSkillTrainingSessionAction {
 	payload: any;
 }
 
-const formStages = ["date", "skill_method", "progress", "summary"];
+export const formStages = ["date", "skillMethod", "progress", "summary"];
 
 interface NewTrainingSession {
 	date: string;
@@ -45,10 +45,12 @@ const newTrainingSession: NewTrainingSession = {
 	notes: "",
 };
 
-export const newTrainingSessionState: {
+interface NewTrainingSessionState {
 	formStage: string;
 	newTrainingSession: NewTrainingSession;
-} = {
+}
+
+export const newTrainingSessionState: NewTrainingSessionState = {
 	formStage: formStages[0],
 	newTrainingSession,
 };
@@ -122,3 +124,25 @@ export function skillTrainingSessionReducer(
 			return state;
 	}
 }
+
+interface NewTrainingSessionContextProps {
+	state: NewTrainingSessionState;
+	dispatch: Dispatch<NewSkillTrainingSessionAction>;
+}
+
+export const NewTrainingSessionContext = React.createContext({
+	state: newTrainingSessionState,
+	dispatch: () => null,
+} as NewTrainingSessionContextProps);
+
+export const NewTrainingSessionProvider = (props: any) => {
+	const [state, dispatch] = useReducer(
+		skillTrainingSessionReducer,
+		newTrainingSessionState
+	);
+	return (
+		<NewTrainingSessionContext.Provider value={{ state, dispatch }}>
+			{props.children}
+		</NewTrainingSessionContext.Provider>
+	);
+};

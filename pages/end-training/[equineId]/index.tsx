@@ -14,7 +14,6 @@ import ResponsiveButton from "../../../components/ResponsiveButton";
 
 export default function EndTraining() {
 	const router = useRouter();
-
 	const [equineStatuses, setEquineStatuses] = useState<Status[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [equineStatusId, setEquineStatusId] = useState<Status | undefined>(
@@ -60,13 +59,14 @@ export default function EndTraining() {
 				items={equineStatuses.filter((status) => !status.categorisedAsTraining)}
 				handleChange={handleChange}
 			/>
-
-			<ResponsiveButton
-				desktopstyles={{ width: "20%", mt: 3 }}
-				onClick={updateStatus}
-			>
-				Save
-			</ResponsiveButton>
+			<Box>
+				<ResponsiveButton
+					desktopstyles={{ width: "20%", mt: 3 }}
+					onClick={updateStatus}
+				>
+					Save
+				</ResponsiveButton>
+			</Box>
 		</>
 	);
 }

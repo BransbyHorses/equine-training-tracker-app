@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
 import { DisruptionSimplified, Equine } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
+import ResponsiveButton from "../../../components/ResponsiveButton";
+
 export default function AddDisruption() {
 	const router = useRouter();
 	const [disruptions, setDisruptions] = useState<DisruptionSimplified[]>([]);
@@ -66,11 +68,12 @@ export default function AddDisruption() {
 
 			<RadioButtonsForm items={disruptions} handleChange={handleChange} />
 
-			<PrimaryButton
-				buttonText="Save"
-				link="/"
-				handleChange={updateDisruption}
-			/>
+			<ResponsiveButton
+				desktopstyles={{ width: "20%", mt: 3 }}
+				onClick={updateDisruption}
+			>
+				Save
+			</ResponsiveButton>
 		</>
 	);
 }

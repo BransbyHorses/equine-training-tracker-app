@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
 import { Status } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
+import ResponsiveButton from "../../../components/ResponsiveButton";
 
 export default function EndTraining() {
 	const router = useRouter();
@@ -60,7 +61,12 @@ export default function EndTraining() {
 				handleChange={handleChange}
 			/>
 
-			<PrimaryButton handleChange={updateStatus} buttonText="Save" link="/" />
+			<ResponsiveButton
+				desktopstyles={{ width: "20%", mt: 3 }}
+				onClick={updateStatus}
+			>
+				Save
+			</ResponsiveButton>
 		</>
 	);
 }

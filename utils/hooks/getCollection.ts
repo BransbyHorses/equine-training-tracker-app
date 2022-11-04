@@ -7,7 +7,7 @@ export default function getCollection(endpoint : string) {
 	const [fetchingData, setFetchingData] = useState(false);
 	const [error, setError] = useState(false);
 
-	fetch(`${process.env.NEXT_PUBLIC_URL}/data/${endpoint}`)
+	fetch(`${process.env.NEXT_PUBLIC_URL}data/${endpoint}`)
 		.then((response) => response.json())
 		.then((data) => setCollection(data))
 		.catch((rejected) => {

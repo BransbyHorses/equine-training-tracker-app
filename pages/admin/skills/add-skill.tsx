@@ -6,7 +6,7 @@ const AddNewSkillPage: React.FC = (props) => {
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
 	const submitSkill = (newSkill: any) => {
-		fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`, {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/skills`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

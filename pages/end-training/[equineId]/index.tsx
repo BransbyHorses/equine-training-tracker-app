@@ -52,6 +52,7 @@ export default function EndTraining() {
 
 	return (
 		<>
+		<PageContainer>
 			<BackBreadcrumb />
 			<PageTitle title="End training permanently" />
 
@@ -61,6 +62,7 @@ export default function EndTraining() {
 			/>
 
 			<PrimaryButton handleChange={updateStatus} buttonText="Save" link="/" />
+		</PageContainer>
 		</>
 	);
 }

@@ -5,15 +5,13 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import {getCollection} from "../../../utils/hooks/getCollection";
+import getCollection from "../../../utils/hooks/getCollection";
 import { DisruptionSimplified, Equine } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";
 
 export default function AddDisruption() {
-
 	const router = useRouter();
-	const [disruptions, setDisruptions] = useState<DisruptionSimplified[]>([]);
 	const [disruptionId, setDisruptionId] = useState<string>();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const { fetchingData, collection, error } = getCollection("disruptions");
@@ -21,13 +19,12 @@ export default function AddDisruption() {
 	useEffect(() => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
-			collection.forEach(convertEnumStringKeyToName)
-			setDisruptions(collection);
+			collection.forEach(convertEnumStringKeyToName);
 		}
 	}, [router.isReady]);
 
 	const handleChange = (event: any) => {
-		event.preventDefault
+		event.preventDefault;
 		setDisruptionId(event.target.value);
 	};
 
@@ -37,7 +34,7 @@ export default function AddDisruption() {
 			`/equines/${equineId}/disruptions/${disruptionId}/start`,
 			"POST"
 		);
-		router.push("/");
+		router.push(`/equines/${equineId}`);
 	};
 
 	if (fetchingData) {
@@ -50,17 +47,19 @@ export default function AddDisruption() {
 
 	return (
 		<>
-			<BackBreadcrumb/>
+			<BackBreadcrumb />
 			<PageTitle title="Add disruption" />
 
-			<RadioButtonsForm items={disruptions} handleChange={handleChange} />
+			<RadioButtonsForm items={collection} handleChange={handleChange} />
 
-			<ResponsiveButton
-				desktopstyles={{ width: "20%", mt: 3 }}
-				onClick={updateDisruption}
-			>
-				Save
-			</ResponsiveButton>
+			<Box>
+				<ResponsiveButton
+					desktopstyles={{ width: "20%", mt: 3 }}
+					onClick={updateDisruption}
+				>
+					Save
+				</ResponsiveButton>
+			</Box>
 		</>
 	);
 }

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-
-export const getCollection = (
+const getCollection = (
 	endpoint?: string
 ): {
 	fetchingData: boolean;
@@ -17,9 +16,7 @@ export const getCollection = (
 		setFetchingData(true);
 		if (endpoint) {
 			axios
-				.get(
-					`${process.env.NEXT_PUBLIC_URL}data/${endpoint}`
-				)
+				.get(`${process.env.NEXT_PUBLIC_URL}data/${endpoint}`)
 				.then(({ data }) => {
 					setCollection(data);
 					setFetchingData(false);
@@ -40,3 +37,5 @@ export const getCollection = (
 		error,
 	};
 };
+
+export default getCollection;

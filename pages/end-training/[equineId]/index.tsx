@@ -5,7 +5,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
-import { getCollection } from "../../../utils/hooks/getCollection";
+import getCollection from "../../../utils/hooks/getCollection";
 import { Status } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";
@@ -54,7 +54,7 @@ export default function EndTraining() {
 			<PageTitle title="End training permanently" />
 
 			<RadioButtonsForm
-				items={equineStatuses.filter((status) => !status.categorisedAsTraining)}
+				items={collection.filter((status) => !status.categorisedAsTraining)}
 				handleChange={handleChange}
 			/>
 			<Box>

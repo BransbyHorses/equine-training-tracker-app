@@ -54,7 +54,7 @@ export default function EndTraining() {
 			<PageTitle title="End training permanently" />
 
 			<RadioButtonsForm
-				items={collection.filter((status) => !status.categorisedAsTraining)}
+				items={equineStatuses.filter((status) => !status.categorisedAsTraining)}
 				handleChange={handleChange}
 			/>
 			<Box>

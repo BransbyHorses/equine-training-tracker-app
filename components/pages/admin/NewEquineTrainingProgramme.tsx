@@ -16,6 +16,7 @@ import {
 import { Equine } from "../../../utils/types";
 import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
 import axios from "axios";
+import ResponsiveButton from "../../ResponsiveButton";
 
 const NewEquineTrainingProgramme = ({
 	equine,
@@ -50,9 +51,9 @@ const NewEquineTrainingProgramme = ({
 	};
 
 	return (
-		<Container>
-			<Typography variant="h5" color="textSecondary" sx={{ mb: "1.5rem" }}>
-				Select A Training Programme For {equine.name}
+		<>
+			<Typography variant="h5" color="textSecondary" sx={{ mb: 4 }}>
+				Select a training programme for {equine.name}
 			</Typography>
 			<FormControl fullWidth>
 				<InputLabel id="trainingProgramme">Training Programme</InputLabel>
@@ -78,21 +79,17 @@ const NewEquineTrainingProgramme = ({
 					<Alert severity="error">{formError}</Alert>
 				</Box>
 			)}
-			<Box mt={4}>
-				<Button
-					sx={{
-						[theme.breakpoints.between("xs", "md")]: {
-							width: "100%",
-						},
-					}}
-					variant="contained"
-					onClick={saveEquineTrainingProgramme}
-					disabled={formSubmitting}
-				>
-					Save & Continue
-				</Button>
-			</Box>
-		</Container>
+			<ResponsiveButton
+				desktopStyles={{
+					mt: 3,
+					width: "20%",
+				}}
+				onClick={saveEquineTrainingProgramme}
+				disabled={formSubmitting}
+			>
+				Save & Continue
+			</ResponsiveButton>
+		</>
 	);
 };
 

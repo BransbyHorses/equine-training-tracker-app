@@ -159,24 +159,16 @@ const EquineProfile = () => {
 				<Box p={2} sx={{ flexGrow: 1, backgroundColor: "common.white" }}>
 					<Grid container rowSpacing={3} columnSpacing={2}>
 						<Grid item xs={12} md={6}>
-							<Typography variant="h6">
-								Status
-							</Typography>
+							<Typography variant="h6">Status</Typography>
 							{equine && equine.equineStatus && (
-								<Typography>
-									{equine.equineStatus.categorisedAsTraining
-										? `${equine.equineStatus.string}`
-										: `Training Ended - ${equine.equineStatus.string}`}
-								</Typography>
+								<Typography>{equine.equineStatus.string}</Typography>
 							)}
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Typography variant="h6">Training Programme</Typography>
-							<Typography>
-								<CurrentTrainingProgramme
-									trainingProgrammes={equine?.trainingProgrammes}
-								/>
-							</Typography>
+							<CurrentTrainingProgramme
+								trainingProgrammes={equine?.trainingProgrammes}
+							/>
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Typography variant="h6">Yard</Typography>

@@ -85,7 +85,6 @@ export interface TrainingEnvironment {
 export interface TrainingMethod {
 	id: number;
 	name: string;
-	description: string;
 }
 
 export interface TrainingProgramme {

@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import { withRouter, NextRouter } from "next/router";
-import Link from "next/link";
-import { Button, Typography, Container, TextField, Grid } from "@mui/material";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddNewTrainingMethodPage: React.FC = (props) => {
+const AddNewEquineStatusPage: React.FC = (props) => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
-	const submitTrainingMethod = (newTrainingMethod: any) => {
-		fetch(`${process.env.NEXT_PUBLIC_URL}/data/training-methods`, {
+	const saveEquineStatus = (newEquineStatus: any) => {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ name: newTrainingMethod }),
+			body: JSON.stringify({ name: newEquineStatus }),
 		})
 			.then((response) => {
 				response.json();
@@ -36,12 +33,11 @@ const AddNewTrainingMethodPage: React.FC = (props) => {
 
 	return (
 		<AdminAddPage
-			entity="Training Method"
+			entity="Equine Status"
 			success={successMessage}
 			error={errorMessage}
-			saveFunction={submitTrainingMethod}
+			saveFunction={saveEquineStatus}
 		/>
 	);
 };
-
-export default AddNewTrainingMethodPage;
+export default AddNewEquineStatusPage;

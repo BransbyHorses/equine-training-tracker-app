@@ -43,7 +43,7 @@ export default function LearnerTypes() {
 				.then((data) => {
 					setEditValue(undefined);
 					const mappedLearnerTypes = learnerTypes.map((lt) => {
-						if (lt.id === data.id) return data;
+						return lt.id === data.id ? data : lt;
 					});
 					setLearnerTypes(mappedLearnerTypes);
 				})

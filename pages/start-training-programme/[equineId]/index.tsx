@@ -11,7 +11,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
 import { TrainingCategory, TrainingProgramme } from "../../../utils/types";
 import { useEquine } from "../../../utils/hooks/equine";
 import { saveData } from "../../../utils/helpers";
@@ -22,13 +22,10 @@ import { saveData } from "../../../utils/helpers";
 export default function StartTrainingProgramme() {
 
 	const router = useRouter();
-	const [trainingCategories, setTrainingCategories] = useState<TrainingCategory[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [trainingCategoryId, setTrainingCategoryId] = useState<number>();
 
-	const {fetchingData, collection } = getCollection(
-		'training-categories'
-	);
+	const {fetchingData, trainingCategories, error } = useTrainingCategories();
 	const { equine } = useEquine(
 		router.isReady,
 		equineId
@@ -38,7 +35,6 @@ export default function StartTrainingProgramme() {
 	useEffect(() => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
-			setTrainingCategories(collection);
 		}
 	}, [router.isReady]);
 

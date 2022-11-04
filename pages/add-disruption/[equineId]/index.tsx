@@ -7,7 +7,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import {getCollection} from "../../../utils/hooks/getCollection";
 import { DisruptionSimplified, Equine } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 
@@ -29,6 +29,7 @@ export default function AddDisruption() {
 	}, [router.isReady]);
 
 	const handleChange = (event: any) => {
+		event.preventDefault
 		setDisruptionId(event.target.value);
 	};
 
@@ -51,6 +52,7 @@ export default function AddDisruption() {
 
 	return (
 		<>
+			<BackBreadcrumb/>
 			<PageTitle title="Add disruption" />
 
 			<RadioButtonsForm items={disruptions} handleChange={handleChange} />

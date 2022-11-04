@@ -6,7 +6,7 @@ import PrimaryButton from  '../../../components/PrimaryButton';
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import {getCollection} from "../../../utils/hooks/getCollection";
 import { Equine, LearnerType } from "../../../utils/types";
 import { saveData } from "../../../utils/helpers";
 

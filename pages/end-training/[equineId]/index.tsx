@@ -7,7 +7,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import { getCollection } from "../../../utils/hooks/getCollection";
 import { Status } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 

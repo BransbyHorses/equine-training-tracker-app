@@ -51,7 +51,7 @@ export default function ChangeHandlingStatus() {
 	} 
 
 	return (
-			<PageContainer>
+			<>
 				<BackBreadcrumb />
 				<PageTitle title="Change handling status" />
 				<FormControl>
@@ -79,6 +79,6 @@ export default function ChangeHandlingStatus() {
 					link="/"
 					handleChange={updateEquineLearnerType}
 				/>
-			</PageContainer>
+			</>
 	);
 };

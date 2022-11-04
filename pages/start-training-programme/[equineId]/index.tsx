@@ -60,11 +60,7 @@ export default function StartTrainingProgramme() {
 	}
 
 	return (
-		<Grid 
-			item xs={12} 
-			sm={6} 
-			>
-			<PageContainer>
+			<>
 				<BackBreadcrumb />
 				<PageTitle title="Start a new training programme" />
     
@@ -82,7 +78,6 @@ export default function StartTrainingProgramme() {
 					handleChange={updateTrainingProgramme}
 				/>
 
-			</PageContainer>
-		</Grid>
+			</>
 	);
 };

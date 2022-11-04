@@ -17,34 +17,22 @@ export default function ChangeHandlingStatus() {
 
 	const router = useRouter();
 	const [learnerTypes, setLearnerTypes] = useState<LearnerType[]>([]);
-	const [equine, setEquine] = useState<Equine | undefined>(undefined);
+	const [learnerType, setLearnerType] = useState<LearnerType>();
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const { fetchingData, collection, error } = getCollection(
 		'learner-types'
 	);
-	const [learnerType, setLearnerType] = useState<LearnerType>();
 
 	useEffect(() => {
 		if (router.isReady) {
-			getEquineFromId(router.query.equineId);
+			setEquineId(router.query.equineId as string);
 			setLearnerTypes(collection);
-			setLearnerType(equine?.learnerType);
 		}
 	}, [router.isReady]);
 
-	const getEquineFromId = async (id:any) => {        
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${id}`)
-            .then(response => response.json())
-            .then(data => setEquine(data))
-            .catch(rejected => {
-                console.log(rejected);
-            });
-		console.log("equine set to")
-		console.log(equine);
-    }
 
-	const updateEquine = async () => {
-		equine!.learnerType = learnerType!;
-		saveData(equine!, `equines/${equine!.id}`, 'PUT');
+	const updateEquineLearnerType = async () => {
+		saveData("", `/equines/${equineId}/learner-type/${learnerType?.id}`, 'PATCH');
 		router.push('/');
 	}
 
@@ -89,7 +77,7 @@ export default function ChangeHandlingStatus() {
 				<PrimaryButton 
 					buttonText="Save" 
 					link="/"
-					handleChange={updateEquine}
+					handleChange={updateEquineLearnerType}
 				/>
 			</PageContainer>
 	);

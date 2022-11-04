@@ -17,35 +17,25 @@ export default function AddDisruption() {
 	const router = useRouter();
 	const [disruptions, setDisruptions] = useState<DisruptionSimplified[]>([]);
 	const [disruptionId, setDisruptionId] = useState<string>();
-	const [equine, setEquine] = useState<Equine | undefined>(undefined);
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const { fetchingData, collection, error } = getCollection(
 		'disruptions'
 	);
 
 	useEffect(() => {
 		if (router.isReady) {
-			getEquineFromId(router.query.equineId as string);
+			setEquineId(router.query.equineId as string);
 			collection.forEach(convertEnumStringKeyToName)
 			setDisruptions(collection);
 		}
 	}, [router.isReady]);
-
-	const getEquineFromId = async (id:any) => {     
-		console.log("id is " + id);
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${id}`)
-            .then(response => response.json())
-            .then(data => setEquine(data))
-            .catch(rejected => {
-                console.log(rejected);
-            });
-    }
 
 	const handleChange = (event:any) => {
 		setDisruptionId(event.target.value);
 	}
 
 	const updateDisruption = async () => {
-		saveData("", `/equines/${equine?.id}/disruptions/${disruptionId}/start`, 'POST');
+		saveData("", `/equines/${equineId}/disruptions/${disruptionId}/start`, 'POST');
 		router.push('/');
     }
 

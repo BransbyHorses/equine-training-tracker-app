@@ -135,7 +135,7 @@ export default function Home() {
 					</small>
 				</Typography>
 			</Box>
-			<EquineListGrid equines={equines} />
+			<EquineListGrid equines={tableData} />
 		</>
 	);
 }

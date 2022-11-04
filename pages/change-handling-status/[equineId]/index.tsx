@@ -21,11 +21,8 @@ export default function ChangeHandlingStatus() {
 	}, [router.isReady]);
 
 	const updateEquineLearnerType = () => {
-		saveData(
-			"",
-			`equines/${equineId}/learner-types/${learnerType}`,
-			"PATCH"
-		);
+		if (learnerType === "") return;
+		saveData("", `equines/${equineId}/learner-types/${learnerType}`, "PATCH");
 		router.push(`/equines/${equineId}`);
 	};
 

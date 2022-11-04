@@ -31,7 +31,7 @@ const AddLearnerTypes: React.FC = (props) => {
 
 	return (
 		<AdminAddPage
-			entity="Learner Type"
+			entity="Handling Status"
 			saveFunction={saveLearnerType}
 			success={successMessage}
 			error={errorMessage}

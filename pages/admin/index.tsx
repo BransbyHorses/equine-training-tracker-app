@@ -15,17 +15,10 @@ interface MyComponentProps extends WithRouterProps {}
 
 const AdminDashboard: FC<MyComponentProps> = (props) => {
 	return (
-		<Container
-			sx={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<PageTitle title={"Dashboard"} />
+		<>
+			<PageTitle title="Manage" />
 			<InfoGrid listItems={adminActions} />
-		</Container>
+		</>
 	);
 };
 

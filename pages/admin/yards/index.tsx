@@ -1,98 +1,94 @@
-import Link from 'next/link';
-import { Typography, Container, Grid } from '@mui/material';
-import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
-import LinkButton from '../../../components/LinkButton';
-import EntityCard from '../../../components/EntityCard';
-import AutoCompleteBox from '../../../components/AutoCompleteBox';
-import PageTitle from '../../../components/PageTitle';
+import Link from "next/link";
+import axios from "axios";
+import { Typography, Container, Grid, Divider } from "@mui/material";
+import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
+import LinkButton from "../../../components/LinkButton";
+import EntityCard from "../../../components/EntityCard";
+import AutoCompleteBox from "../../../components/AutoCompleteBox";
+import PageTitle from "../../../components/PageTitle";
+import { Yard } from "../../../utils/types";
+import AdminPageTitle from "../../../components/pages/admin/AdminPageTitle";
+import AdminContentBlock from "../../../components/pages/admin/AdminContentBlock";
 
-export default function Yards() {
-    interface MyYards {
-        id: number;
-        name: string;
-    }
-    const [yards, setYards] = useState<MyYards[]>([]);
+export default function YardsAdminPage() {
+	const [yards, setYards] = useState<Yard[] | []>([]);
+	const [editValue, setEditValue] = useState<Yard>();
 
-    function getYards() {
-        fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
-            .then(response => response.json())
-            .then(data => setYards(data))
-            .catch(rejected => {
-                console.log(rejected);
-            });
-    }
+	function getYards() {
+		fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`)
+			.then((response) => response.json())
+			.then((data) => setYards(data))
+			.catch((rejected) => {
+				console.log(rejected);
+			});
+	}
 
-    useEffect(() => {
-        getYards();
-    }, []);
+	useEffect(() => {
+		getYards();
+	}, []);
 
-    return (
-			<Container>
-				<PageTitle title={"Yards"} />
-				<AutoCompleteBox
-					options={yards.map((yard) => ({
-						optionName: yard.name,
-						optionId: yard.id,
-					}))}
-					label="Search for a yard"
-					linkName={"yards"}
-				/>
-				{yards.length > 0 ? (
-					<Grid
-						container
-						rowSpacing={4}
-						columnSpacing={{ xs: 2, sm: 2, md: 3 }}
-						spacing={{ xs: 4, md: 3 }}
-						columns={{ xs: 4, sm: 8, md: 12 }}
-						direction="row"
-						justifyContent="space-evenly"
-						alignItems="stretch"
-						paddingBottom="20px"
-					>
-						{yards.map((yard) => {
-							return (
-								<Grid item xs={2} sm={4} md={4} key={yard.id}>
-									<EntityCard
-										link={`yards/${yard.id}`}
-										title={yard.name}
-									/>
-								</Grid>
-							);
-						})}
-					</Grid>
-				) : (
-					<Typography
-						variant="h5"
-						color="#616161"
-						gutterBottom
-						sx={{ my: "1rem", mx: "1rem" }}
-					>
-						No yards here...☹️...yet!
-					</Typography>
-				)}
+	const showEditForm = (id: any) => {
+		setEditValue(yards.find((yard) => yard.id === id));
+	};
 
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-around",
-					}}
-				>
-					<LinkButton
-						color="lightBlue[50]"
-						variant="contained"
-						buttonHref="/admin/yards/add-yard"
-						buttonTitle="Create new yard"
-					></LinkButton>
+	const saveEditedYard = (newYardName: string) => {
+		if (newYardName === editValue!.name) {
+			setEditValue(undefined);
+			return;
+		}
+		const updatedYard: Yard = {
+			id: editValue!.id,
+			name: newYardName,
+		};
+		axios
+			.put(
+				`${process.env.NEXT_PUBLIC_URL}data/yards/${editValue!.id}`,
+				updatedYard
+			)
+			.then(({ data }) => {
+				setEditValue(undefined);
+				const updatedYards = yards.map((yard) => {
+					return yard.id === data.id ? data : yard;
+				});
+				setYards(updatedYards);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
 
-					<LinkButton
-						color="lightBlue[50]"
-						variant="contained"
-						buttonHref="/admin"
-						buttonTitle="Back to Dashboard"
-					></LinkButton>
-				</Box>
-			</Container>
-		);
+	const deleteYard = async (id: any) => {
+		await fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards/${id}`, {
+			method: "DELETE",
+		})
+			.then(() => {
+				setYards(yards.filter((yard) => yard.id != id));
+			})
+			.catch((rejected) => {
+				console.error(rejected);
+			});
+	};
+
+	return (
+		<>
+			<AdminPageTitle
+				title="Manage Yards"
+				buttonLink="/admin/yards/add-yard"
+				contentLength={yards.length}
+			/>
+			{yards.map((yard) => {
+				return (
+					<AdminContentBlock
+						key={yard.id}
+						content={yard}
+						editValue={editValue}
+						saveFunction={saveEditedYard}
+						editAction={showEditForm}
+						deleteFunction={deleteYard}
+					/>
+				);
+			})}
+		</>
+	);
 }

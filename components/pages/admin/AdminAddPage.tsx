@@ -74,7 +74,7 @@ const AdminAddPage = ({
 					value={inputValue}
 					focused
 					required
-					sx={{ my: 3 }}
+					sx={{ mb: 3 }}
 				/>
 				<ResponsiveButton
 					desktopstyles={{

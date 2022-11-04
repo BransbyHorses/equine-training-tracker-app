@@ -8,7 +8,7 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 const BackBreadcrumb = ({ link }: { link?: string }) => {
 	const router = useRouter();
 	return (
-		<Breadcrumbs>
+		<Breadcrumbs sx={{ mb: 2 }}>
 			<Link
 				underline="hover"
 				color="inherit"

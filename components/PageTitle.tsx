@@ -3,8 +3,7 @@ import { Typography, Box, Paper } from '@mui/material';
 
 export default function PageTitle(props: any) {
     return (
-            <Box
-                py={2} 
+            <Box 
                 sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography
                     variant="h4"

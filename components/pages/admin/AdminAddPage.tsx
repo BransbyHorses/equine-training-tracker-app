@@ -4,6 +4,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import ResponsiveButton from "../../ResponsiveButton";
+import PageTitle from "../../PageTitle";
 
 const AdminAddPage = ({
 	entity,
@@ -43,7 +44,7 @@ const AdminAddPage = ({
 					},
 				}}
 			>
-				<Typography variant="h6">Add New {entity}</Typography>
+				<PageTitle title={`Add New ${entity}`} />
 				{success && (
 					<Box sx={{ display: "flex", alignItems: "center" }}>
 						<CheckCircleOutlineIcon

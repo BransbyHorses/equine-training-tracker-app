@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import PageTitle from "../../../components/PageTitle";
-import PageContainer from "../../../components/PageContainer";
-import PrimaryButton from "../../../components/PrimaryButton";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
@@ -14,7 +12,6 @@ import ResponsiveButton from "../../../components/ResponsiveButton";
 
 export default function AddDisruption() {
 
-	console.log("STATE")
 	const router = useRouter();
 	const [disruptions, setDisruptions] = useState<DisruptionSimplified[]>([]);
 	const [disruptionId, setDisruptionId] = useState<string>();

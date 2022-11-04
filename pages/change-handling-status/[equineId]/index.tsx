@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select, Box } from "@mui/material";
 import PageTitle from "../../../components/PageTitle";
-import PageContainer from "../../../components/PageContainer";
-import PrimaryButton from "../../../components/PrimaryButton";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import {getCollection} from "../../../utils/hooks/getCollection";
-import { Equine, LearnerType } from "../../../utils/types";
+import { LearnerType } from "../../../utils/types";
 import { saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";
 

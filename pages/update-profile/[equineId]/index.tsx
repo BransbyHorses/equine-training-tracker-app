@@ -35,7 +35,7 @@ export default function UpdateProfile() {
 					/>
 					<SecondaryButton 
 						buttonText="Change handling status"
-						link={`/change-type-of-learner/${equineId}`}
+						link={`/change-handling-status/${equineId}`}
 						/>
 					<SecondaryButton 
 						buttonText="Add disruption"

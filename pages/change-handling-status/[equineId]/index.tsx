@@ -13,7 +13,7 @@ import { saveData } from "../../../utils/helpers";
 
 
 
-export default function ChangeTypeOfLearner() {
+export default function ChangeHandlingStatus() {
 
 	const router = useRouter();
 	const [learnerTypes, setLearnerTypes] = useState<LearnerType[]>([]);

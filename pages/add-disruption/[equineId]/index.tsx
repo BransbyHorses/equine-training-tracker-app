@@ -26,7 +26,6 @@ export default function AddDisruption() {
 		if (router.isReady) {
 			getEquineFromId(router.query.equineId as string);
 			collection.forEach(convertEnumStringKeyToName)
-			console.log(collection);
 			setDisruptions(collection);
 		}
 	}, [router.isReady]);

@@ -150,7 +150,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 					</Box>
 				)}
 				<ResponsiveButton
-					desktopStyles={{
+					desktopstyles={{
 						width: "20%",
 					}}
 					type="submit"

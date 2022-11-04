@@ -71,6 +71,7 @@ const EditEquineStatus = ({
 					{endTrainingOptions.map((endTrainingOption) => {
 						return (
 							<FormControlLabel
+								key={endTrainingOption.id}
 								value={endTrainingOption.id}
 								control={<Radio />}
 								label={endTrainingOption.string}

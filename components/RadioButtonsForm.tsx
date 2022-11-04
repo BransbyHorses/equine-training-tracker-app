@@ -18,7 +18,7 @@ export default function RadioButtonsForm (props: any) {
                 return (
             <FormControlLabel 
                 key={id} 
-                value={name} 
+                value={id} 
                 control={<Radio/>} 
                 label={name}
                  />

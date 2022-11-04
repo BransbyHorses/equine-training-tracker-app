@@ -1,49 +1,68 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
-import PageTitle from '../../../components/PageTitle';
-import PageContainer from '../../../components/PageContainer';
-import PrimaryButton from  '../../../components/PrimaryButton';
+import { Box, Grid } from "@mui/material";
+import PageTitle from "../../../components/PageTitle";
+import PageContainer from "../../../components/PageContainer";
+import PrimaryButton from "../../../components/PrimaryButton";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
 import getCollection from "../../../utils/hooks/getCollection";
-import { Disruption } from "../../../utils/types";
-
+import { Status } from "../../../utils/types";
+import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 
 export default function EndTraining() {
-
 	const router = useRouter();
-	const [endConditions, setEndConditions] = useState<Disruption[]>([]);
-	const { fetchingData, collection, error } = getCollection(
-		'disruptions'
+
+	const [equineStatuses, setEquineStatuses] = useState<Status[]>([]);
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	const [equineStatusId, setEquineStatusId] = useState<Status | undefined>(
+		undefined
 	);
+	const { fetchingData, collection, error } = getCollection("equine-statuses");
+	console.log("State is");
+	console.log(equineStatusId);
 
 	useEffect(() => {
 		if (router.isReady) {
-			setEndConditions(collection);
+			setEquineId(router.query.equineId as string);
+			collection.forEach(convertEnumStringKeyToName);
+			setEquineStatuses(collection);
 		}
 	}, [router.isReady]);
 
+	const handleChange = (event: any) => {
+		setEquineStatusId(event.target.value);
+	};
+
+	const updateStatus = async () => {
+		saveData(
+			"",
+			`equines/${equineId}/equine-status/${equineStatusId}`,
+			"PATCH"
+		);
+		router.push("/");
+	};
+
+	if (fetchingData) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<LoadingSpinner />
+			</Box>
+		);
+	}
+
 	return (
-		<Grid 
-			item xs={12} 
-			sm={6} 
-			>
-			<PageContainer>
-				<BackBreadcrumb />
-				<PageTitle title="End training permanently" />
-    
-				<RadioButtonsForm
-					items={endConditions} 
-				/>
-	
+		<>
+			<BackBreadcrumb />
+			<PageTitle title="End training permanently" />
 
-				<PrimaryButton 
-					buttonText="Save" 
-					link="/"
-				/>
+			<RadioButtonsForm
+				items={equineStatuses.filter((status) => !status.categorisedAsTraining)}
+				handleChange={handleChange}
+			/>
 
-			</PageContainer>
-		</Grid>
+			<PrimaryButton handleChange={updateStatus} buttonText="Save" link="/" />
+		</>
 	);
-};
+}

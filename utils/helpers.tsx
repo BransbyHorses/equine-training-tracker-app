@@ -74,3 +74,8 @@ export const saveData = async (data:any, path:string, method:string) => {
 			console.log(rejected);
 		});
 }
+
+export const convertEnumStringKeyToName = (item:any) => {
+	item['name'] = item['string'];
+	delete item['string'];
+}

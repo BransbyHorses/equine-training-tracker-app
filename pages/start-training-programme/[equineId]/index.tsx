@@ -24,7 +24,7 @@ export default function StartTrainingProgramme() {
 	const router = useRouter();
 	const [trainingCategories, setTrainingCategories] = useState<TrainingCategory[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	const [trainingCategory, setTrainingCategory] = useState<TrainingCategory | undefined>(undefined);
+	const [trainingCategoryId, setTrainingCategoryId] = useState<number>();
 
 	const {fetchingData, collection } = getCollection(
 		'training-categories'
@@ -43,12 +43,11 @@ export default function StartTrainingProgramme() {
 	}, [router.isReady]);
 
 	const handleChange = (event:any) => {
-		let updatedTrainingCategory = trainingCategories.find(category => event.target.value == category.name);
-		setTrainingCategory(updatedTrainingCategory);
+		setTrainingCategoryId(event.target.value);
 	}
 
 	const updateTrainingProgramme = async () => {
-		saveData("", `training-programmes/${trainingCategory?.id}/equine/${equine?.id}`, 'POST');
+		saveData("", `training-programmes/${trainingCategoryId}/equine/${equine?.id}`, 'POST');
 		router.push('/');
     }
 
@@ -61,11 +60,7 @@ export default function StartTrainingProgramme() {
 	}
 
 	return (
-		<Grid 
-			item xs={12} 
-			sm={6} 
-			>
-			<PageContainer>
+			<>
 				<BackBreadcrumb />
 				<PageTitle title="Start a new training programme" />
     
@@ -83,7 +78,6 @@ export default function StartTrainingProgramme() {
 					handleChange={updateTrainingProgramme}
 				/>
 
-			</PageContainer>
-		</Grid>
+			</>
 	);
 };

@@ -5,6 +5,18 @@ export interface Disruption {
 	endDate?: string;
 }
 
+export interface DisruptionSimplified {
+	id: number;
+	name: string;
+}
+
+
+export interface Status {
+	id: number,
+	name: string;
+	categorisedAsTraining: boolean
+}
+
 export interface Equine {
 	id: number;
 	name: string;

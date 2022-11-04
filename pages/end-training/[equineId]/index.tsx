@@ -20,8 +20,6 @@ export default function EndTraining() {
 		undefined
 	);
 	const { fetchingData, collection, error } = getCollection("equine-statuses");
-	console.log("State is");
-	console.log(equineStatusId);
 
 	useEffect(() => {
 		if (router.isReady) {

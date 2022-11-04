@@ -19,7 +19,7 @@ const NewEquineHealthAndSafetyFlags = ({ equine }: { equine: Equine }) => {
 				healthAndSafetyFlags={[]}
 			/>
 			<ResponsiveButton
-				desktopStyles={{
+				desktopstyles={{
 					mt: 3,
 					width: "20%",
 				}}

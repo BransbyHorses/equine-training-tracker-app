@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import {
 	NewTrainingSessionContext,
 	NewSkillTrainingSessionType,
-} from "../../../utils/reducers/trainingSessionReducer";
+} from "../../../../utils/reducers/trainingSessionReducer";
 
-import ResponsiveButton from "../../ResponsiveButton";
-import BackBreadcrumb from "../../BackBreadcrumb";
-import PageTitle from "../../PageTitle";
+import ResponsiveButton from "../../../ResponsiveButton";
+import BackBreadcrumb from "../../../BackBreadcrumb";
+import PageTitle from "../../../PageTitle";
 
 const NewTrainingSessionDate = () => {
 	const {
@@ -17,9 +17,7 @@ const NewTrainingSessionDate = () => {
 
 	return (
 		<>
-			<BackBreadcrumb
-				onClick={() => dispatch({ type: NewSkillTrainingSessionType.BACK })}
-			/>
+			<BackBreadcrumb />
 			<PageTitle title="What date was your training session?" />
 			<ResponsiveButton
 				disabled={date}

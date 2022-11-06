@@ -1,10 +1,21 @@
-import React, { Children, createContext, Dispatch, useReducer } from "react";
-import {
-	Skill,
-	SkillTrainingSession,
-	TrainingEnvironment,
-	TrainingMethod,
-} from "../types";
+import React, { Dispatch, useReducer } from "react";
+import { Skill, TrainingEnvironment, TrainingMethod } from "../types";
+
+interface NewTrainingSession {
+	date: string;
+	skill?: Skill;
+	environment?: TrainingEnvironment;
+	progressCode: string;
+	trainingMethod?: TrainingMethod;
+	trainingTime?: string;
+	notes: "";
+}
+
+interface NewTrainingSessionState {
+	formStage: string;
+	newTrainingSession: NewTrainingSession;
+}
+
 
 export enum NewSkillTrainingSessionType {
 	NEXT,
@@ -17,43 +28,10 @@ export enum NewSkillTrainingSessionType {
 	SET_TRAINING_TIME,
 	SET_NOTES,
 }
-
 interface NewSkillTrainingSessionAction {
 	type: NewSkillTrainingSessionType;
 	payload: any;
 }
-
-export const formStages = ["date", "skillMethod", "progress", "summary"];
-
-interface NewTrainingSession {
-	date: string;
-	skill?: Skill;
-	environment?: TrainingEnvironment;
-	progressCode: string;
-	trainingMethod?: TrainingMethod;
-	trainingTime?: string;
-	notes: "";
-}
-
-const newTrainingSession: NewTrainingSession = {
-	date: "",
-	skill: undefined,
-	environment: undefined,
-	progressCode: "",
-	trainingMethod: undefined,
-	trainingTime: undefined,
-	notes: "",
-};
-
-interface NewTrainingSessionState {
-	formStage: string;
-	newTrainingSession: NewTrainingSession;
-}
-
-export const newTrainingSessionState: NewTrainingSessionState = {
-	formStage: formStages[0],
-	newTrainingSession,
-};
 
 export function skillTrainingSessionReducer(
 	state: { formStage: string; newTrainingSession: NewTrainingSession },
@@ -130,15 +108,31 @@ interface NewTrainingSessionContextProps {
 	dispatch: Dispatch<NewSkillTrainingSessionAction>;
 }
 
+const formStages = ["date", "skillMethod", "progress", "summary"];
+const newTrainingSession: NewTrainingSession = {
+	date: "",
+	skill: undefined,
+	environment: undefined,
+	progressCode: "",
+	trainingMethod: undefined,
+	trainingTime: undefined,
+	notes: "",
+};
+
+export const newTrainingSessionInitialState: NewTrainingSessionState = {
+	formStage: formStages[0],
+	newTrainingSession,
+};
+
 export const NewTrainingSessionContext = React.createContext({
-	state: newTrainingSessionState,
+	state: newTrainingSessionInitialState,
 	dispatch: () => null,
 } as NewTrainingSessionContextProps);
 
 export const NewTrainingSessionProvider = (props: any) => {
 	const [state, dispatch] = useReducer(
 		skillTrainingSessionReducer,
-		newTrainingSessionState
+		newTrainingSessionInitialState
 	);
 	return (
 		<NewTrainingSessionContext.Provider value={{ state, dispatch }}>

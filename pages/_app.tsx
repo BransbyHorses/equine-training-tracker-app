@@ -1,14 +1,15 @@
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react";
+import { NewTrainingSessionProvider } from "../utils/reducers/trainingSessionReducer";
 
+import "../public/css/main.css";
 import Header from "../components/Header";
 const Navbar = dynamic(() => import("../components/Navbar"));
 import Footer from "../components/Footer";
 
-import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import "../public/css/main.css";
+import Container from "@mui/material/Container";
 
 const Theme = createTheme({
 	components: {
@@ -68,14 +69,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={Theme}>
 			<SessionProvider session={pageProps.session}>
-				<Header />
-				<Navbar />
-				<Container>
-					<main>
-						<Component {...pageProps} />
-					</main>
-				</Container>
-				<Footer />
+				<NewTrainingSessionProvider>
+					<Header />
+					<Navbar />
+					<Container>
+						<main>
+							<Component {...pageProps} />
+						</main>
+					</Container>
+					<Footer />
+				</NewTrainingSessionProvider>
 			</SessionProvider>
 		</ThemeProvider>
 	);

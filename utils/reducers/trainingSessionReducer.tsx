@@ -97,7 +97,14 @@ export function skillTrainingSessionReducer(
 	}
 }
 
-const formStages = ["date", "skillMethod", "progress", "summary", "success"];
+const formStages = [
+	"date",
+	"skillMethod",
+	"environment",
+	"progress",
+	"summary",
+	"success",
+];
 const newTrainingSession: NewTrainingSession = {
 	date: "",
 	skill: undefined,
@@ -139,3 +146,13 @@ export const NewTrainingSessionProvider = (props: any) => {
 		</NewTrainingSessionContext.Provider>
 	);
 };
+
+export function useNewSkillTrainingSession() {
+	const context = React.useContext(NewTrainingSessionContext);
+	if (context === undefined) {
+		throw new Error(
+			"useNewSkillTrainingSession must be used within a NewTrainingSessionProvider"
+		);
+	}
+	return context;
+}

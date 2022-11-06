@@ -1,21 +1,49 @@
-import { Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+
 import { useRouter } from "next/router";
-import React, { useEffect, useReducer, useState } from "react";
-import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import NewTrainingSessionDate from "../../../components/pages/equines/NewTrainingSessionDate";
-import {
-	NewTrainingSessionProvider,
-	newTrainingSessionState,
-	skillTrainingSessionReducer,
-} from "../../../utils/reducers/trainingSessionReducer";
+import dynamic from "next/dynamic";
+
+import { useNewSkillTrainingSession } from "../../../utils/reducers/trainingSessionReducer";
+
+import NewTrainingSessionDate from "../../../components/pages/equines/new-training-session/NewTrainingSessionDate";
+const NewTrainingSessionSkillMethod = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/new-training-session/NewTrainingSessionSkillMethod"
+		)
+);
+const NewTrainingSessionEnvironment = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/new-training-session/NewTrainingSessionEnvironment"
+		)
+);
+const NewTrainingSessionProgress = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/new-training-session/NewTrainingSessionProgress"
+		)
+);
+const NewTrainingSessionSummary = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/new-training-session/NewTrainingSessionSummary"
+		)
+);
+const NewTrainingSessionSuccess = dynamic(
+	() =>
+		import(
+			"../../../components/pages/equines/new-training-session/NewTrainingSessionSuccess"
+		)
+);
 
 const AddTrainingSessionPage = () => {
 	const router = useRouter();
-	const [newTrainingSession, dispatch] = useReducer(
-		skillTrainingSessionReducer,
-		newTrainingSessionState
-	);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	
+	const {
+		state: { formStage },
+	} = useNewSkillTrainingSession();
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -23,11 +51,24 @@ const AddTrainingSessionPage = () => {
 		}
 	}, [router.isReady]);
 
-	return (
-		<NewTrainingSessionProvider>
-			<NewTrainingSessionDate />
-		</NewTrainingSessionProvider>
-	);
+	const renderForm = (formStage: string) => {
+		switch (formStage) {
+			case "date":
+				return <NewTrainingSessionDate />;
+			case "skillMethod":
+				return <NewTrainingSessionSkillMethod />;
+			case "environment":
+				return <NewTrainingSessionEnvironment />;
+			case "progress":
+				return <NewTrainingSessionProgress />;
+			case "summary":
+				return <NewTrainingSessionSummary />;
+			case "succdess":
+				return <NewTrainingSessionSuccess />;
+		}
+	};
+
+	return <>{renderForm(formStage)}</>;
 };
 
 export default AddTrainingSessionPage;

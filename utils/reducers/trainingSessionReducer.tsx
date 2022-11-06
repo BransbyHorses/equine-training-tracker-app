@@ -11,11 +11,6 @@ interface NewTrainingSession {
 	notes: "";
 }
 
-interface NewTrainingSessionState {
-	formStage: string;
-	newTrainingSession: NewTrainingSession;
-}
-
 export enum NewSkillTrainingSessionType {
 	NEXT,
 	BACK,
@@ -102,11 +97,6 @@ export function skillTrainingSessionReducer(
 	}
 }
 
-interface NewTrainingSessionContextProps {
-	state: NewTrainingSessionState;
-	dispatch: Dispatch<NewSkillTrainingSessionAction>;
-}
-
 const formStages = ["date", "skillMethod", "progress", "summary", "success"];
 const newTrainingSession: NewTrainingSession = {
 	date: "",
@@ -118,10 +108,20 @@ const newTrainingSession: NewTrainingSession = {
 	notes: "",
 };
 
+interface NewTrainingSessionState {
+	formStage: string;
+	newTrainingSession: NewTrainingSession;
+}
+
 export const newTrainingSessionInitialState: NewTrainingSessionState = {
 	formStage: formStages[0],
 	newTrainingSession,
 };
+
+interface NewTrainingSessionContextProps {
+	state: NewTrainingSessionState;
+	dispatch: Dispatch<NewSkillTrainingSessionAction>;
+}
 
 export const NewTrainingSessionContext = React.createContext({
 	state: newTrainingSessionInitialState,

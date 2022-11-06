@@ -16,7 +16,6 @@ interface NewTrainingSessionState {
 	newTrainingSession: NewTrainingSession;
 }
 
-
 export enum NewSkillTrainingSessionType {
 	NEXT,
 	BACK,
@@ -30,7 +29,7 @@ export enum NewSkillTrainingSessionType {
 }
 interface NewSkillTrainingSessionAction {
 	type: NewSkillTrainingSessionType;
-	payload: any;
+	payload?: any;
 }
 
 export function skillTrainingSessionReducer(
@@ -108,7 +107,7 @@ interface NewTrainingSessionContextProps {
 	dispatch: Dispatch<NewSkillTrainingSessionAction>;
 }
 
-const formStages = ["date", "skillMethod", "progress", "summary"];
+const formStages = ["date", "skillMethod", "progress", "summary", "success"];
 const newTrainingSession: NewTrainingSession = {
 	date: "",
 	skill: undefined,

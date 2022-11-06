@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-import { useRouter } from "next/router";
+import React from "react";
 import dynamic from "next/dynamic";
 
 import { useNewSkillTrainingSession } from "../../../utils/reducers/trainingSessionReducer";
@@ -37,19 +35,10 @@ const NewTrainingSessionSuccess = dynamic(
 		)
 );
 
-const AddTrainingSessionPage = () => {
-	const router = useRouter();
-	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	
+const AddTrainingSessionPage = () => {	
 	const {
 		state: { formStage },
 	} = useNewSkillTrainingSession();
-
-	useEffect(() => {
-		if (router.isReady) {
-			setEquineId(router.query["equineId"] as string);
-		}
-	}, [router.isReady]);
 
 	const renderForm = (formStage: string) => {
 		switch (formStage) {

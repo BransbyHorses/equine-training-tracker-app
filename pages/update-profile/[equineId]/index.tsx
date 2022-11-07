@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid } from "@mui/material";
+import {Grid } from "@mui/material";
 import SecondaryButton from "../../../components/SecondaryButton";
 import PageTitle from "../../../components/PageTitle";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import PageContainer from "../../../components/PageContainer";
 import { useRouter } from "next/router";
-import { useEquine } from "../../../utils/hooks/equine";
 
 export default function UpdateProfile() {
 	const router = useRouter();

@@ -45,7 +45,12 @@ const NewTrainingSessionSummary = () => {
 				<Typography
 					color={!props.value ? "red" : "#42a5f5"}
 					sx={{ cursor: "pointer" }}
-					onClick={props.handleChangeClick}
+					onClick={() =>
+						dispatch({
+							type: NewSkillTrainingSessionType.GO_TO,
+							payload: props.goTo,
+						})
+					}
 				>
 					<small>{!props.value ? "Add" : "Change"}</small>
 				</Typography>
@@ -61,43 +66,23 @@ const NewTrainingSessionSummary = () => {
 				<SummaryRow
 					title="Date"
 					value={convertDateToString(newTrainingSession.date?.toISOString())}
-					handleChangeClick={() =>
-						dispatch({
-							type: NewSkillTrainingSessionType.GO_TO,
-							payload: "date",
-						})
-					}
+					goTo="date"
 				/>
 				<SummaryRow title="Skill" value={newTrainingSession.skill?.name} />
 				<SummaryRow
 					title="Training Method"
 					value={newTrainingSession.trainingMethod?.name}
-					handleChangeClick={() =>
-						dispatch({
-							type: NewSkillTrainingSessionType.GO_TO,
-							payload: "skillMethod",
-						})
-					}
+					goTo="skillMethod"
 				/>
 				<SummaryRow
 					title="Environment"
 					value={newTrainingSession.environment?.name}
-					handleChangeClick={() =>
-						dispatch({
-							type: NewSkillTrainingSessionType.GO_TO,
-							payload: "skillMethod",
-						})
-					}
+					goTo="skillMethod"
 				/>
 				<SummaryRow
 					title="Skill Level"
 					value={newTrainingSession.progressCode}
-					handleChangeClick={() =>
-						dispatch({
-							type: NewSkillTrainingSessionType.GO_TO,
-							payload: "progress",
-						})
-					}
+					goTo="progress"
 				/>
 				<SummaryRow title="Comments" value={newTrainingSession.notes} />
 			</Box>

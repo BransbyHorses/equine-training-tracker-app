@@ -16,6 +16,7 @@ interface NewTrainingSession {
 export enum NewSkillTrainingSessionType {
 	NEXT,
 	BACK,
+	GO_TO,
 	SET_DATE,
 	SET_SKILL,
 	SET_ENVIRONMENT,
@@ -23,7 +24,7 @@ export enum NewSkillTrainingSessionType {
 	SET_TRAINING_METHOD,
 	SET_TRAINING_TIME,
 	SET_NOTES,
-	SAVE_NEW_TRAINING_SESSION
+	SAVE_NEW_TRAINING_SESSION,
 }
 interface NewSkillTrainingSessionAction {
 	type: NewSkillTrainingSessionType;
@@ -44,6 +45,11 @@ export function skillTrainingSessionReducer(
 			return {
 				...state,
 				formStage: formStages[formStages.indexOf(state.formStage) - 1],
+			};
+		case NewSkillTrainingSessionType.GO_TO:
+			return {
+				...state,
+				formStage: action.payload,
 			};
 		case NewSkillTrainingSessionType.SET_DATE:
 			return {
@@ -94,7 +100,7 @@ export function skillTrainingSessionReducer(
 					...state.newTrainingSession,
 					notes: action.payload,
 				},
-			};			
+			};
 		default:
 			return state;
 	}

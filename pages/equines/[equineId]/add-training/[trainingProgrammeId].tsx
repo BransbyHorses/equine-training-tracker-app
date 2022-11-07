@@ -5,6 +5,7 @@ import { useNewSkillTrainingSession } from "../../../../utils/reducers/trainingS
 
 import NewTrainingSessionDate from "../../../../components/pages/equines/new-training-session/NewTrainingSessionDate";
 import { useRouter } from "next/router";
+import { useTrainingProgramme } from "../../../../utils/hooks/trainingProgrammes";
 const NewTrainingSessionSkillMethod = dynamic(
 	() =>
 		import(
@@ -41,9 +42,11 @@ const AddTrainingSessionPage = () => {
 	const {
 		state: { formStage },
 	} = useNewSkillTrainingSession();
-	const [trainingProgrammeId, setTrainingProgrammeId] = useState<
-		string | undefined
-	>(undefined);
+	const [trainingProgrammeId, setTrainingProgrammeId] = useState<string>();
+	const { trainingProgramme } = useTrainingProgramme(
+		router.isReady,
+		trainingProgrammeId
+	);
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -64,7 +67,7 @@ const AddTrainingSessionPage = () => {
 			case "summary":
 				return (
 					<NewTrainingSessionSummary
-						trainingProgrammeId={trainingProgrammeId || ""}
+						trainingProgramme={trainingProgramme || undefined}
 					/>
 				);
 			case "succdess":

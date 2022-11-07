@@ -9,11 +9,12 @@ import { Box, Typography } from "@mui/material";
 import { convertDateToString } from "../../../../utils/helpers";
 import ResponsiveButton from "../../../ResponsiveButton";
 import axios from "axios";
+import { TrainingProgramme } from "../../../../utils/types";
 
 const NewTrainingSessionSummary = ({
-	trainingProgrammeId,
+	trainingProgramme,
 }: {
-	trainingProgrammeId: string;
+	trainingProgramme?: TrainingProgramme;
 }) => {
 	const {
 		state: { newTrainingSession },
@@ -39,7 +40,9 @@ const NewTrainingSessionSummary = ({
 	const submitNewTrainingSession = async () => {
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${trainingProgrammeId}/skill-training-session`,
+				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${
+					trainingProgramme!.id
+				}/skill-training-session`,
 				{
 					...newTrainingSession,
 					date: convertDayJsDateToString(newTrainingSession.date),
@@ -89,6 +92,14 @@ const NewTrainingSessionSummary = ({
 		<>
 			<BackBreadcrumb />
 			<PageTitle title="Check details" />
+			<Box sx={{ mb: 1, pl: 2, py: 0.5, borderLeft: "5px solid lightGray" }}>
+				<Typography color="gray" fontWeight={600}>
+					{trainingProgramme?.equine.name}
+				</Typography>
+				<Typography color="gray">
+					{trainingProgramme?.trainingCategory.name}
+				</Typography>
+			</Box>
 			<Box sx={{ mb: 2, maxWidth: "500px" }}>
 				<SummaryRow
 					title="Date"

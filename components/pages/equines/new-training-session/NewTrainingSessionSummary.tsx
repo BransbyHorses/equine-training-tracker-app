@@ -22,19 +22,28 @@ const NewTrainingSessionSummary = ({
 	const [disableSubmit, setDisableSubmit] = useState(false);
 
 	useEffect(() => {
-		Object.values(newTrainingSession).every((v) => {
+		for (const [_, v] of Object.entries(newTrainingSession)) {
 			if (!v) {
 				setDisableSubmit(true);
-				return false;
+				break;
 			}
-		});
-	});
+		}
+	}, []);
+
+	const convertDayJsDateToString = (date: any) => {
+		return `${date.$y}-${date.$M + 1}-${date.$D} ${date.$H}:${date.$m}:${
+			date.$s
+		}`;
+	};
 
 	const submitNewTrainingSession = async () => {
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/training-programme/${trainingProgrammeId}/skill-training-session`,
-				newTrainingSession
+				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${trainingProgrammeId}/skill-training-session`,
+				{
+					...newTrainingSession,
+					date: convertDayJsDateToString(newTrainingSession.date),
+				}
 			)
 			.then(({ data }) => {
 				dispatch({ type: NewSkillTrainingSessionType.NEXT });

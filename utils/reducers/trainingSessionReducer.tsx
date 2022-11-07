@@ -31,6 +31,15 @@ interface NewSkillTrainingSessionAction {
 	payload?: any;
 }
 
+const formStages = [
+	"date",
+	"skillMethod",
+	"environment",
+	"progress",
+	"summary",
+	"success",
+];
+
 export function skillTrainingSessionReducer(
 	state: { formStage: string; newTrainingSession: NewTrainingSession },
 	action: NewSkillTrainingSessionAction
@@ -60,7 +69,13 @@ export function skillTrainingSessionReducer(
 				},
 			};
 		case NewSkillTrainingSessionType.SET_SKILL:
-			return { ...state, skill: action.payload };
+			return {
+				...state,
+				newTrainingSession: {
+					...state.newTrainingSession,
+					skill: action.payload,
+				},
+			};
 		case NewSkillTrainingSessionType.SET_ENVIRONMENT:
 			return {
 				...state,
@@ -106,14 +121,7 @@ export function skillTrainingSessionReducer(
 	}
 }
 
-const formStages = [
-	"date",
-	"skillMethod",
-	"environment",
-	"progress",
-	"summary",
-	"success",
-];
+
 const newTrainingSession: NewTrainingSession = {
 	date: undefined,
 	skill: undefined,

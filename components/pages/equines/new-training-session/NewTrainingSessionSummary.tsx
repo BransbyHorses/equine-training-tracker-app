@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	NewSkillTrainingSessionType,
 	useNewSkillTrainingSession,
@@ -7,17 +7,21 @@ import BackBreadcrumb from "../../../BackBreadcrumb";
 import PageTitle from "../../../PageTitle";
 import { Box, Typography } from "@mui/material";
 import { convertDateToString } from "../../../../utils/helpers";
-import Link from "next/link";
 import ResponsiveButton from "../../../ResponsiveButton";
+import axios from "axios";
 
-const NewTrainingSessionSummary = () => {
+const NewTrainingSessionSummary = ({
+	trainingProgrammeId,
+}: {
+	trainingProgrammeId: string;
+}) => {
 	const {
 		state: { newTrainingSession },
 		dispatch,
 	} = useNewSkillTrainingSession();
 	const [disableSubmit, setDisableSubmit] = useState(false);
 
-	useState(() => {
+	useEffect(() => {
 		Object.values(newTrainingSession).every((v) => {
 			if (!v) {
 				setDisableSubmit(true);
@@ -25,6 +29,20 @@ const NewTrainingSessionSummary = () => {
 			}
 		});
 	});
+
+	const submitNewTrainingSession = async () => {
+		axios
+			.post(
+				`${process.env.NEXT_PUBLIC_URL}data/training-programme/${trainingProgrammeId}/skill-training-session`,
+				newTrainingSession
+			)
+			.then(({ data }) => {
+				dispatch({ type: NewSkillTrainingSessionType.NEXT });
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	};
 
 	const SummaryRow = (props: any) => {
 		return (
@@ -86,7 +104,12 @@ const NewTrainingSessionSummary = () => {
 				/>
 				<SummaryRow title="Comments" value={newTrainingSession.notes} />
 			</Box>
-			<ResponsiveButton disabled={disableSubmit}>Submit</ResponsiveButton>
+			<ResponsiveButton
+				disabled={disableSubmit}
+				onClick={submitNewTrainingSession}
+			>
+				Submit
+			</ResponsiveButton>
 		</>
 	);
 };

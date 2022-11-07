@@ -21,6 +21,7 @@ const NewTrainingSessionSummary = ({
 		dispatch,
 	} = useNewSkillTrainingSession();
 	const [disableSubmit, setDisableSubmit] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	useEffect(() => {
 		for (const [_, v] of Object.entries(newTrainingSession)) {
@@ -38,6 +39,7 @@ const NewTrainingSessionSummary = ({
 	};
 
 	const submitNewTrainingSession = async () => {
+		setIsSubmitting(true);
 		axios
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${
@@ -49,9 +51,11 @@ const NewTrainingSessionSummary = ({
 				}
 			)
 			.then(({ data }) => {
+				setIsSubmitting(false);
 				dispatch({ type: NewSkillTrainingSessionType.NEXT });
 			})
 			.catch((err) => {
+				setIsSubmitting(false);
 				console.error(err);
 			});
 	};
@@ -90,7 +94,6 @@ const NewTrainingSessionSummary = ({
 
 	return (
 		<>
-			<BackBreadcrumb />
 			<PageTitle title="Check details" />
 			<Box sx={{ mb: 1, pl: 2, py: 0.5, borderLeft: "5px solid lightGray" }}>
 				<Typography color="gray" fontWeight={600}>
@@ -123,13 +126,14 @@ const NewTrainingSessionSummary = ({
 					goTo="progress"
 				/>
 				<SummaryRow title="Comments" value={newTrainingSession.notes} />
+				<ResponsiveButton
+					disabled={disableSubmit || isSubmitting}
+					onClick={submitNewTrainingSession}
+					desktopstyles={{ width: "100%", mt: 3 }}
+				>
+					Submit
+				</ResponsiveButton>
 			</Box>
-			<ResponsiveButton
-				disabled={disableSubmit}
-				onClick={submitNewTrainingSession}
-			>
-				Submit
-			</ResponsiveButton>
 		</>
 	);
 };

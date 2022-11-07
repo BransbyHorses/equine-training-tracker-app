@@ -5,7 +5,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import useCollection from "../../../utils/hooks/useCollection";
 import { Status } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";
@@ -17,7 +17,7 @@ export default function EndTraining() {
 	const [equineStatusId, setEquineStatusId] = useState<Status | undefined>(
 		undefined
 	);
-	const { fetchingData, collection, error } = getCollection("equine-statuses");
+	const { fetchingData, collection, error } = useCollection("equine-statuses");
 
 	useEffect(() => {
 		if (router.isReady) {

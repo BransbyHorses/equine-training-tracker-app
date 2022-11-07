@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const getCollection = (
+const useCollection = (
 	endpoint?: string
 ): {
 	fetchingData: boolean;
@@ -23,7 +23,7 @@ const getCollection = (
 				})
 				.catch((err) => {
 					console.error(
-						`Failed to fetch training programmes. Failed with error message: ${err}.`
+						`Failed to fetch collection. Failed with error message: ${err}.`
 					);
 					setFetchingData(false);
 					setError(true);
@@ -38,4 +38,4 @@ const getCollection = (
 	};
 };
 
-export default getCollection;
+export default useCollection;

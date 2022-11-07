@@ -5,7 +5,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import useCollection from "../../../utils/hooks/useCollection";
 import { DisruptionSimplified, Equine } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";
@@ -14,7 +14,7 @@ export default function AddDisruption() {
 	const router = useRouter();
 	const [disruptionId, setDisruptionId] = useState<string>();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	const { fetchingData, collection, error } = getCollection("disruptions");
+	const { fetchingData, collection, error } = useCollection("disruptions");
 
 	useEffect(() => {
 		if (router.isReady) {

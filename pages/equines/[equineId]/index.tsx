@@ -64,7 +64,7 @@ const EquineProfile = () => {
 		setActiveDisruption(findActiveDisruption(equine?.disruptions || []));
 	}, [equine]);
 
-	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
+	const currentTrainingProgramme = findCurrentTrainingProgramme(equine?.trainingProgrammes);
 
 	const endDisruption = () => {
 		axios
@@ -205,10 +205,12 @@ const EquineProfile = () => {
 				/>
 			)}
 			<Grid container rowSpacing={3} columnSpacing={2}>
-				{isInTraining && !activeDisruption && (
+				{currentTrainingProgramme && !activeDisruption && (
 					<Grid item xs={12} sm={6}>
 						<Paper>
-							<Link href={`/equines/${equineId}/add-training`}>
+							<Link
+								href={`/equines/${equineId}/add-training/${currentTrainingProgramme.id}`}
+							>
 								<Box
 									px={2}
 									py={2}

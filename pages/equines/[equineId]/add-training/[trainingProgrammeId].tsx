@@ -57,8 +57,7 @@ const AddTrainingSessionPage = () => {
 	const renderForm = (formStage: string) => {
 		switch (formStage) {
 			case "date":
-				// return <NewTrainingSessionDate />;
-				return <NewTrainingSessionSuccess isOpen={true} />;
+				return <NewTrainingSessionDate />;
 			case "skillMethod":
 				return <NewTrainingSessionSkillMethod />;
 			case "environment":
@@ -71,8 +70,6 @@ const AddTrainingSessionPage = () => {
 						trainingProgramme={trainingProgramme || undefined}
 					/>
 				);
-			case "success":
-			// return <NewTrainingSessionSuccess />;
 		}
 	};
 

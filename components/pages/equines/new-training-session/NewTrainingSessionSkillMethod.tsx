@@ -54,7 +54,6 @@ const NewTrainingSessionSkillMethod = () => {
 		});
 	};
 
-
 	return (
 		<>
 			<BackBreadcrumb
@@ -80,7 +79,7 @@ const NewTrainingSessionSkillMethod = () => {
 				</Select>
 			</FormControl>
 
-			<Box sx={{ m: 20 }} />
+			<Box sx={{ m: 15 }} />
 
 			<PageTitle title="What method did you use?" />
 

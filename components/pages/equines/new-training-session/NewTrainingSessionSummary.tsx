@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import {
 	NewSkillTrainingSessionType,
 	useNewSkillTrainingSession,
@@ -11,6 +12,10 @@ import ResponsiveButton from "../../../ResponsiveButton";
 import axios from "axios";
 import { TrainingProgramme } from "../../../../utils/types";
 
+const NewTrainingSessionSuccessModal = dynamic(
+	() => import("../new-training-session/NewTrainingSessionSuccessModal")
+);
+
 const NewTrainingSessionSummary = ({
 	trainingProgramme,
 }: {
@@ -20,13 +25,18 @@ const NewTrainingSessionSummary = ({
 		state: { newTrainingSession },
 		dispatch,
 	} = useNewSkillTrainingSession();
-	const [disableSubmit, setDisableSubmit] = useState(false);
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitState, setSubmitState] = useState({
+		disabled: false,
+		submitting: false,
+		success: false,
+		error: false,
+	});
 
 	useEffect(() => {
-		for (const [_, v] of Object.entries(newTrainingSession)) {
+		for (const [k, v] of Object.entries(newTrainingSession)) {
+			if (k === "notes") continue;
 			if (!v) {
-				setDisableSubmit(true);
+				setSubmitState({ ...submitState, disabled: true });
 				break;
 			}
 		}
@@ -39,7 +49,7 @@ const NewTrainingSessionSummary = ({
 	};
 
 	const submitNewTrainingSession = async () => {
-		setIsSubmitting(true);
+		setSubmitState({ ...submitState, submitting: true });
 		axios
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${
@@ -51,12 +61,11 @@ const NewTrainingSessionSummary = ({
 				}
 			)
 			.then(({ data }) => {
-				setIsSubmitting(false);
-				dispatch({ type: NewSkillTrainingSessionType.NEXT });
+				setSubmitState({ ...submitState, submitting: false, success: true });
 			})
 			.catch((err) => {
-				setIsSubmitting(false);
 				console.error(err);
+				setSubmitState({ ...submitState, submitting: false, error: true });
 			});
 	};
 
@@ -77,7 +86,7 @@ const NewTrainingSessionSummary = ({
 					<Typography fontWeight={300}>{props.value}</Typography>
 				</Box>
 				<Typography
-					color={!props.value ? "red" : "#42a5f5"}
+					color={!props.value && !props.notRequired ? "red" : "#42a5f5"}
 					sx={{ cursor: "pointer" }}
 					onClick={() =>
 						dispatch({
@@ -94,6 +103,10 @@ const NewTrainingSessionSummary = ({
 
 	return (
 		<>
+			<NewTrainingSessionSuccessModal
+				isSubmitting={submitState.submitting}
+				success={submitState.success}
+			/>
 			<PageTitle title="Check details" />
 			<Box sx={{ mb: 1, pl: 2, py: 0.5, borderLeft: "5px solid lightGray" }}>
 				<Typography color="gray" fontWeight={600}>
@@ -125,9 +138,13 @@ const NewTrainingSessionSummary = ({
 					value={newTrainingSession.progressCode}
 					goTo="progress"
 				/>
-				<SummaryRow title="Comments" value={newTrainingSession.notes} />
+				<SummaryRow
+					title="Comments"
+					value={newTrainingSession.notes}
+					notRequired
+				/>
 				<ResponsiveButton
-					disabled={disableSubmit || isSubmitting}
+					// disabled={submitState.disabled}
 					onClick={submitNewTrainingSession}
 					desktopstyles={{ width: "100%", mt: 3 }}
 				>

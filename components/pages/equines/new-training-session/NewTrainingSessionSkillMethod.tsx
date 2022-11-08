@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import BackBreadcrumb from "../../../BackBreadcrumb";
+import ResponsiveButton from "../../../ResponsiveButton";
 import {
 	NewSkillTrainingSessionType,
 	useNewSkillTrainingSession,
@@ -100,6 +101,13 @@ const NewTrainingSessionSkillMethod = () => {
 					})}
 				</Select>
 			</FormControl>
+
+			<ResponsiveButton
+				disabled={!newTrainingSession.skill || !newTrainingSession.trainingMethod}
+				onClick={() => dispatch({ type: NewSkillTrainingSessionType.NEXT })}
+			>
+				Continue
+			</ResponsiveButton>
 		</>
 	);
 };

@@ -6,7 +6,7 @@ import {
 } from "../../../../utils/reducers/trainingSessionReducer";
 import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import useCollection from "../../../../utils/hooks/useCollection";
-import {Skill} from "../../../../utils/types";
+import {Skill, TrainingMethod} from "../../../../utils/types";
 
 import PageTitle from "../../../PageTitle";
 
@@ -16,24 +16,40 @@ const NewTrainingSessionSkillMethod = () => {
 		dispatch,
 	} = useNewSkillTrainingSession();
 
-	const { fetchingData, collection, error } = useCollection("skills");
+	const { 
+		fetchingData: fetchingSkillsData, 
+		collection: skills, 
+		error: skillError 
+	} = useCollection("skills");
 
-	useEffect(() => {
-		if (!newTrainingSession.skill) {
-			dispatch({
-				type: NewSkillTrainingSessionType.SET_SKILL,
-				payload: "",
-			});
-		}
-	}, []);
+	const { 
+		fetchingData: fetchingTrainingMethodData, 
+		collection: trainingMethods, 
+		error: trainingMethodError 
+	} = useCollection("training-methods");
 
-	const changeSkill = (e) => {
-		console.log("TARGET");
-		console.log(e);
-		const newSkill : Skill = collection.find(skill => e.target.value = skill.id);
+	// useEffect(() => {
+	// 	if (!newTrainingSession.skill) {
+	// 		dispatch({
+	// 			type: NewSkillTrainingSessionType.SET_SKILL,
+	// 			payload: "",
+	// 		});
+	// 	}
+	// }, []);
+
+	const changeSkill = (e:any) => {
+		const newSkill : Skill = skills.find(skill => e.target.value = skill.id);
 		dispatch({
 			type: NewSkillTrainingSessionType.SET_SKILL,
 			payload: newSkill,
+		});
+	};
+
+	const changeTrainingMethod = (e:any) => {
+		const newTrainingMethod : TrainingMethod = trainingMethods.find(method => e.target.value = method.id);
+		dispatch({
+			type: NewSkillTrainingSessionType.SET_TRAINING_METHOD,
+			payload: newTrainingMethod,
 		});
 	};
 
@@ -53,7 +69,29 @@ const NewTrainingSessionSkillMethod = () => {
 					label="Skill"
 					onChange={changeSkill}
 				>
-					{collection.map(({ id, name }) => {
+					{skills.map(({ id, name }) => {
+						return (
+							<MenuItem key={id} value={id}>
+								{name}
+							</MenuItem>
+						);
+					})}
+				</Select>
+			</FormControl>
+
+			<Box sx={{ m: 20 }} />
+
+			<PageTitle title="What method did you use?" />
+
+			<FormControl fullWidth>
+				<InputLabel id="method-selection">Training Method</InputLabel>
+				<Select
+					value={newTrainingSession.trainingMethod?.id || ""}
+					name={newTrainingSession.trainingMethod?.name}
+					label="Training Method"
+					onChange={changeTrainingMethod}
+				>
+					{trainingMethods.map(({ id, name }) => {
 						return (
 							<MenuItem key={id} value={id}>
 								{name}

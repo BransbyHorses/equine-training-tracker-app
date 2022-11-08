@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useCollection = (
-	endpoint?: string
+	endpoint?: string,
 ): {
 	fetchingData: boolean;
 	collection: any[] | [];

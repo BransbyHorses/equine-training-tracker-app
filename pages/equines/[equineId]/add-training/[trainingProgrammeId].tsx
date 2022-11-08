@@ -70,6 +70,10 @@ const AddTrainingSessionPage = () => {
 						trainingProgramme={trainingProgramme || undefined}
 					/>
 				);
+			default:
+				throw new Error(
+					"Invalid formStage argument passed to renderForm function"
+				);
 		}
 	};
 

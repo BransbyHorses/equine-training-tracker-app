@@ -15,7 +15,7 @@ export const useTrainingProgramme = (
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
-		if (routerReady) {
+		if (routerReady && trainingProgrammeId) {
 			setFetchingData(true);
 			axios
 				.get(

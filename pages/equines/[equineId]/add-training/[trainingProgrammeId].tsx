@@ -1,49 +1,18 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-import { useNewSkillTrainingSession } from "../../../../utils/reducers/trainingSessionReducer";
+import { NewTrainingSessionProvider } from "../../../../utils/reducers/trainingSessionReducer";
 
-import NewTrainingSessionDate from "../../../../components/pages/equines/new-training-session/NewTrainingSessionDate";
 import { useRouter } from "next/router";
-import { useTrainingProgramme } from "../../../../utils/hooks/trainingProgrammes";
-const NewTrainingSessionSkillMethod = dynamic(
-	() =>
-		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionSkillMethod"
-		)
-);
-const NewTrainingSessionEnvironment = dynamic(
-	() =>
-		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionEnvironment"
-		)
-);
-const NewTrainingSessionProgress = dynamic(
-	() =>
-		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionProgress"
-		)
-);
-const NewTrainingSessionSummary = dynamic(
-	() =>
-		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionSummary"
-		)
-);
-const NewTrainingSessionSuccess = dynamic(
-	() =>
-		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionSuccessModal"
-		)
-);
+import { useTrainingProgramme } from "../../../../utils/hooks/useTrainingProgramme";
+import NewTrainingSessionSwitch from "../../../../components/pages/equines/new-training-session/NewTrainingSessionSwitch";
+import { Box } from "@mui/material";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 
 const AddTrainingSessionPage = () => {
 	const router = useRouter();
-	const {
-		state: { formStage },
-	} = useNewSkillTrainingSession();
 	const [trainingProgrammeId, setTrainingProgrammeId] = useState<string>();
-	const { trainingProgramme } = useTrainingProgramme(
+	const { trainingProgramme, fetchingData } = useTrainingProgramme(
 		router.isReady,
 		trainingProgrammeId
 	);
@@ -54,30 +23,21 @@ const AddTrainingSessionPage = () => {
 		}
 	}, [router.isReady]);
 
-	const renderForm = (formStage: string) => {
-		switch (formStage) {
-			case "date":
-				return <NewTrainingSessionDate />;
-			case "skillMethod":
-				return <NewTrainingSessionSkillMethod />;
-			case "environment":
-				return <NewTrainingSessionEnvironment />;
-			case "progress":
-				return <NewTrainingSessionProgress />;
-			case "summary":
-				return (
-					<NewTrainingSessionSummary
-						trainingProgramme={trainingProgramme || undefined}
-					/>
-				);
-			default:
-				throw new Error(
-					"Invalid formStage argument passed to renderForm function"
-				);
-		}
-	};
+	if (fetchingData) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<LoadingSpinner />
+			</Box>
+		);
+	}
 
-	return <>{renderForm(formStage)}</>;
+	return (
+		<NewTrainingSessionProvider>
+			<NewTrainingSessionSwitch
+				trainingProgramme={trainingProgramme || undefined}
+			/>
+		</NewTrainingSessionProvider>
+	);
 };
 
 export default AddTrainingSessionPage;

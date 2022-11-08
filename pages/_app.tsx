@@ -1,7 +1,6 @@
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react";
-import { NewTrainingSessionProvider } from "../utils/reducers/trainingSessionReducer";
 
 import "../public/css/main.css";
 import Header from "../components/Header";
@@ -69,7 +68,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={Theme}>
 			<SessionProvider session={pageProps.session}>
-				<NewTrainingSessionProvider>
 					<Header />
 					<Navbar />
 					<Container>
@@ -78,7 +76,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 						</main>
 					</Container>
 					<Footer />
-				</NewTrainingSessionProvider>
 			</SessionProvider>
 		</ThemeProvider>
 	);

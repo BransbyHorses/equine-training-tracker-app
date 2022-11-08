@@ -16,13 +16,9 @@ const NewTrainingSessionSuccessModal = dynamic(
 	() => import("../new-training-session/NewTrainingSessionSuccessModal")
 );
 
-const NewTrainingSessionSummary = ({
-	trainingProgramme,
-}: {
-	trainingProgramme?: TrainingProgramme;
-}) => {
+const NewTrainingSessionSummary = () => {
 	const {
-		state: { newTrainingSession },
+		state: { newTrainingSession, trainingProgramme },
 		dispatch,
 	} = useNewSkillTrainingSession();
 	const [submitState, setSubmitState] = useState({

@@ -23,10 +23,12 @@ const NewTrainingSessionDate = () => {
 	} = React.useContext(NewTrainingSessionContext);
 
 	useEffect(() => {
-		dispatch({
-			type: NewSkillTrainingSessionType.SET_DATE,
-			payload: dayjs(),
-		});
+		if (!newTrainingSession.date) {
+			dispatch({
+				type: NewSkillTrainingSessionType.SET_DATE,
+				payload: dayjs(),
+			});
+		}
 	}, []);
 
 	const changeDate = (newDate: Dayjs | null) => {

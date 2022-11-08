@@ -1,7 +1,12 @@
 import axios from "axios";
 import { Dayjs } from "dayjs";
 import React, { Dispatch, useReducer } from "react";
-import { Skill, TrainingEnvironment, TrainingMethod } from "../types";
+import {
+	Skill,
+	TrainingEnvironment,
+	TrainingMethod,
+	TrainingProgramme,
+} from "../types";
 
 interface NewTrainingSession {
 	date?: Dayjs;
@@ -17,6 +22,7 @@ export enum NewSkillTrainingSessionType {
 	NEXT,
 	BACK,
 	GO_TO,
+	SET_TRAINING_PROGRAMME,
 	SET_DATE,
 	SET_SKILL,
 	SET_ENVIRONMENT,
@@ -42,7 +48,7 @@ const formStages = [
 ];
 
 export function skillTrainingSessionReducer(
-	state: { formStage: string; newTrainingSession: NewTrainingSession },
+	state: NewTrainingSessionState,
 	action: NewSkillTrainingSessionAction
 ) {
 	switch (action.type) {
@@ -60,6 +66,11 @@ export function skillTrainingSessionReducer(
 			return {
 				...state,
 				formStage: action.payload,
+			};
+		case NewSkillTrainingSessionType.SET_TRAINING_PROGRAMME:
+			return {
+				...state,
+				trainingProgramme: action.payload,
 			};
 		case NewSkillTrainingSessionType.SET_DATE:
 			return {
@@ -139,11 +150,13 @@ const newTrainingSession: NewTrainingSession = {
 interface NewTrainingSessionState {
 	formStage: string;
 	newTrainingSession: NewTrainingSession;
+	trainingProgramme?: TrainingProgramme;
 }
 
 export const newTrainingSessionInitialState: NewTrainingSessionState = {
 	formStage: formStages[0],
 	newTrainingSession,
+	trainingProgramme: undefined,
 };
 
 interface NewTrainingSessionContextProps {

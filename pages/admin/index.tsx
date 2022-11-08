@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { withRouter, NextRouter } from "next/router";
-import { Container } from "@mui/material";
 import options from "../../properties/properties";
 import PageTitle from "../../components/PageTitle";
-import InfoGrid from "../../components/InfoGrid";
+import NavigationGrid from "../../components/NavigationGrid";
+import NavigationCard from "../../components/NavigationCard";
 
 interface WithRouterProps {
 	router: NextRouter;
@@ -17,7 +17,17 @@ const AdminDashboard: FC<MyComponentProps> = (props) => {
 	return (
 		<>
 			<PageTitle title="Manage" />
-			<InfoGrid listItems={adminActions} />
+			<NavigationGrid>
+				{adminActions.map((listItem: any, index: number) => {
+					return (
+						<NavigationCard
+							key={index}
+							link={listItem.link}
+							title={listItem.title}
+						/>
+					);
+				})}
+			</NavigationGrid>
 		</>
 	);
 };

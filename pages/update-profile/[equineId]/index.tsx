@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
 import PageTitle from "../../../components/PageTitle";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { useRouter } from "next/router";
 import NavigationCard from "../../../components/NavigationCard";
+import NavigationGrid from "../../../components/NavigationGrid";
 
 export default function UpdateProfile() {
 	const router = useRouter();
@@ -19,7 +19,7 @@ export default function UpdateProfile() {
 		<>
 			<BackBreadcrumb />
 			<PageTitle title="Update profile" />
-			<Grid container rowSpacing={3} columnSpacing={3}>
+			<NavigationGrid>
 				<NavigationCard
 					title="Start training programme"
 					link={`/start-training-programme/${equineId}`}
@@ -36,7 +36,7 @@ export default function UpdateProfile() {
 					title="End training permanently"
 					link={`/end-training/${equineId}`}
 				/>
-			</Grid>
+			</NavigationGrid>
 		</>
 	);
 }

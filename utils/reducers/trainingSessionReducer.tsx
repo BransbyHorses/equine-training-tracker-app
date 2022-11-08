@@ -25,6 +25,7 @@ export enum NewSkillTrainingSessionType {
 	SET_TRAINING_TIME,
 	SET_NOTES,
 	SAVE_NEW_TRAINING_SESSION,
+	RESET,
 }
 interface NewSkillTrainingSessionAction {
 	type: NewSkillTrainingSessionType;
@@ -116,11 +117,14 @@ export function skillTrainingSessionReducer(
 					notes: action.payload,
 				},
 			};
+		case NewSkillTrainingSessionType.RESET:
+			return {
+				...newTrainingSessionInitialState,
+			};
 		default:
 			return state;
 	}
 }
-
 
 const newTrainingSession: NewTrainingSession = {
 	date: undefined,

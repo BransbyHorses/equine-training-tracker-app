@@ -33,7 +33,7 @@ const NewTrainingSessionSummary = dynamic(
 const NewTrainingSessionSuccess = dynamic(
 	() =>
 		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionSuccess"
+			"../../../../components/pages/equines/new-training-session/NewTrainingSessionSuccessModal"
 		)
 );
 
@@ -57,7 +57,8 @@ const AddTrainingSessionPage = () => {
 	const renderForm = (formStage: string) => {
 		switch (formStage) {
 			case "date":
-				return <NewTrainingSessionDate />;
+				// return <NewTrainingSessionDate />;
+				return <NewTrainingSessionSuccess isOpen={true} />;
 			case "skillMethod":
 				return <NewTrainingSessionSkillMethod />;
 			case "environment":
@@ -70,8 +71,8 @@ const AddTrainingSessionPage = () => {
 						trainingProgramme={trainingProgramme || undefined}
 					/>
 				);
-			case "succdess":
-				return <NewTrainingSessionSuccess />;
+			case "success":
+			// return <NewTrainingSessionSuccess />;
 		}
 	};
 

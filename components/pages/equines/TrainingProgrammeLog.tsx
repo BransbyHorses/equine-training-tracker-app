@@ -180,10 +180,6 @@ const TrainingProgrammeLog = ({
 			});
 	};
 
-	if (!skillTrainingSessions || skillTrainingSessions.length === 0) {
-		return <></>;
-	}
-
 	return (
 		<>
 			<Box
@@ -230,15 +226,21 @@ const TrainingProgrammeLog = ({
 				</FormControl>
 			</Box>
 			<hr style={{ margin: "16px 0 0 0" }} />
-			<PaginationContainer
-				count={
-					showNotes
-						? skillTrainingSessions.filter((sts) => sts.notes).length
-						: skillTrainingSessions.length
-				}
-			>
-				{showNotes ? mapTrainerNotes() : mapTrainingSessions()}
-			</PaginationContainer>
+			{!skillTrainingSessions || skillTrainingSessions.length === 0 ? (
+				<Typography sx={{ mt: 2 }}>
+					<em>No training session data available</em>
+				</Typography>
+			) : (
+				<PaginationContainer
+					count={
+						showNotes
+							? skillTrainingSessions.filter((sts) => sts.notes).length
+							: skillTrainingSessions.length
+					}
+				>
+					{showNotes ? mapTrainerNotes() : mapTrainingSessions()}
+				</PaginationContainer>
+			)}
 		</>
 	);
 };

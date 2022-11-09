@@ -68,14 +68,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProvider theme={Theme}>
 			<SessionProvider session={pageProps.session}>
-					<Header />
-					<Navbar />
-					<Container>
-						<main>
-							<Component {...pageProps} />
-						</main>
-					</Container>
-					<Footer />
+				<Header />
+				<Navbar />
+				<Container>
+					<Component {...pageProps} />
+				</Container>
+				<Footer />
 			</SessionProvider>
 		</ThemeProvider>
 	);

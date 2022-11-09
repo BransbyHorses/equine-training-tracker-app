@@ -42,6 +42,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
+import NavigationCard from "../../../components/NavigationCard";
+import NavigationGrid from "../../../components/NavigationGrid";
 
 const EquineProfile = () => {
 	const router = useRouter();
@@ -204,74 +206,23 @@ const EquineProfile = () => {
 					endFunction={endDisruption}
 				/>
 			)}
-			<Grid container rowSpacing={3} columnSpacing={2}>
-				{currentTrainingProgramme && !activeDisruption && (
-					<Grid item xs={12} sm={6}>
-						<Paper>
-							<Link
-								href={`/equines/${equineId}/add-training/${currentTrainingProgramme.id}`}
-							>
-								<Box
-									px={2}
-									py={2}
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-										cursor: "pointer",
-									}}
-								>
-									<Typography variant="h6">Add Training</Typography>
-									<IconButton>
-										<AddCircleIcon fontSize="large" color="success" />
-									</IconButton>
-								</Box>
-							</Link>
-						</Paper>
-					</Grid>
+			<NavigationGrid>
+				{isInTraining && !activeDisruption && (
+					<NavigationCard
+						link={`/equines/${equineId}/add-training`}
+						title="Add Training"
+						icon={<AddCircleIcon fontSize="large" color="success" />}
+					/>
 				)}
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Link href={`/equines/${equineId}/training-history`}>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-									cursor: "pointer",
-								}}
-							>
-								<Typography variant="h6">Training History</Typography>
-								<IconButton>
-									<ArrowRightIcon fontSize="large" />
-								</IconButton>
-							</Box>
-						</Link>
-					</Paper>
-				</Grid>
-				<Grid item xs={12} sm={6}>
-					<Paper>
-						<Link href={`/update-profile/${equine?.id}`}>
-							<Box
-								px={2}
-								py={2}
-								sx={{
-									display: "flex",
-									justifyContent: "space-between",
-									alignItems: "center",
-								}}
-							>
-								<Typography variant="h6">Update Profile</Typography>
-								<IconButton>
-									<ArrowRightIcon fontSize="large" />
-								</IconButton>
-							</Box>
-						</Link>
-					</Paper>
-				</Grid>
-			</Grid>
+				<NavigationCard
+					link={`/equines/${equineId}/training-history`}
+					title="Training History"
+				/>
+				<NavigationCard
+					link={`/update-profile/${equine?.id}`}
+					title="Update Profile"
+				/>
+			</NavigationGrid>
 		</>
 	);
 };

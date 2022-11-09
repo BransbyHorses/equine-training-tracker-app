@@ -23,7 +23,7 @@ const PaginationContainer = ({
 			{React.Children.map(children, (child, index) => {
 				if (index + 1 >= resultsFrom && index + 1 <= resultsTo) return child;
 			})}
-			<Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+			<Box sx={{ display: count === 0 ? "none" : "flex", justifyContent: "flex-end" }}>
 				<Pagination
 					sx={{ mt: 3 }}
 					page={page}

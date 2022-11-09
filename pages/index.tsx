@@ -12,7 +12,6 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
 import EquineListGrid from "../components/EquineListGrid";
-import PaginationContainer from "../components/PaginationContainer";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();

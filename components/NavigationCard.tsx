@@ -1,14 +1,19 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Typography, Grid, Paper, Box, IconButton } from "@mui/material";
 import Link from "next/link";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export interface NavigationCardProps {
 	link: string;
 	title: string;
+	icon?: ReactNode;
 }
 
-export default function NavigationCard({ link, title }: NavigationCardProps) {
+export default function NavigationCard({
+	link,
+	title,
+	icon,
+}: NavigationCardProps) {
 	return (
 		<Grid item xs={12} sm={6}>
 			<Paper>
@@ -25,7 +30,7 @@ export default function NavigationCard({ link, title }: NavigationCardProps) {
 					>
 						<Typography variant="h6">{title}</Typography>
 						<IconButton>
-							<ArrowRightIcon fontSize="large" />
+							{icon ? icon : <KeyboardArrowRightIcon fontSize="large" />}
 						</IconButton>
 					</Box>
 				</Link>

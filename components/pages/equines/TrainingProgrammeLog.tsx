@@ -20,6 +20,7 @@ import { convertDateToString } from "../../../utils/helpers";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentIcon from "@mui/icons-material/Comment";
+import PaginationContainer from "../../PaginationContainer";
 
 const TrainingProgrammeLog = ({
 	skillTrainingSessions,
@@ -229,7 +230,15 @@ const TrainingProgrammeLog = ({
 				</FormControl>
 			</Box>
 			<hr style={{ margin: "16px 0 0 0" }} />
-			{showNotes ? mapTrainerNotes() : mapTrainingSessions()}
+			<PaginationContainer
+				count={
+					showNotes
+						? skillTrainingSessions.filter((sts) => sts.notes).length
+						: skillTrainingSessions.length
+				}
+			>
+				{showNotes ? mapTrainerNotes() : mapTrainingSessions()}
+			</PaginationContainer>
 		</>
 	);
 };

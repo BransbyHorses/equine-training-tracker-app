@@ -29,14 +29,7 @@ const NewTrainingSessionSkillMethod = () => {
 		error: trainingMethodError 
 	} = useCollection("training-methods");
 
-	// useEffect(() => {
-	// 	if (!newTrainingSession.skill) {
-	// 		dispatch({
-	// 			type: NewSkillTrainingSessionType.SET_SKILL,
-	// 			payload: "",
-	// 		});
-	// 	}
-	// }, []);
+
 
 	const changeSkill = (e:any) => {
 		const newSkill : Skill = skills.find(skill => e.target.value = skill.id);

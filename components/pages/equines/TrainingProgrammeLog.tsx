@@ -9,11 +9,11 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
-	Button,
 	useTheme,
 	FormControlLabel,
 	Checkbox,
 	FormGroup,
+	Grid,
 } from "@mui/material";
 import { SkillTrainingSession } from "../../../utils/types";
 import { convertDateToString } from "../../../utils/helpers";
@@ -30,6 +30,31 @@ const TrainingProgrammeLog = ({
 	const theme = useTheme();
 	const [trainingLogFilter, setTrainingLogFilter] = useState("Most recent");
 	const [showNotes, setShowNotes] = useState(false);
+
+	const TrainingSessionDetail = ({
+		title,
+		content,
+		isLast,
+	}: {
+		title: string;
+		content?: string;
+		isLast?: boolean;
+	}) => {
+		return (
+			<Box borderBottom={isLast ? "none" : "1px solid lightGray"} py={1}>
+				<Grid container columnSpacing={{ xs: 1, md: 0 }}>
+					<Grid item xs={4} md={3} lg={2}>
+						<Typography fontWeight={600} mr={1}>
+							{title}
+						</Typography>
+					</Grid>
+					<Grid item xs={8} lg={10}>
+						<Typography>{content ? content : <em>Not provided</em>}</Typography>
+					</Grid>
+				</Grid>
+			</Box>
+		);
+	};
 
 	const mapTrainingSessions = () => {
 		return skillTrainingSessions
@@ -74,79 +99,33 @@ const TrainingProgrammeLog = ({
 									</Box>
 								</Box>
 							</AccordionSummary>
-							<AccordionDetails>
-								<Box
-									sx={{
-										display: "flex",
-										borderBottom: "1px solid lightGray",
-									}}
-									pb={1}
-								>
-									<Typography fontWeight={600} mr={1}>
-										Time:
-									</Typography>
-									<Typography>
-										{skillTrainingSession.trainingTime} minutes
-									</Typography>
-								</Box>
-								<Box
-									sx={{
-										display: "flex",
-										borderBottom: "1px solid lightGray",
-									}}
-									pb={1}
-									mt={1}
-								>
-									<Typography fontWeight={600} mr={1}>
-										Progress Marked:
-									</Typography>
-									<Typography>
-										{skillTrainingSession.progressCode.string}
-									</Typography>
-								</Box>
-								<Box
-									sx={{
-										display: "flex",
-										borderBottom: "1px solid lightGray",
-									}}
-									pb={1}
-									mt={1}
-								>
-									<Typography fontWeight={600} mr={1}>
-										Method Used:
-									</Typography>
-									<Typography>
-										{skillTrainingSession.trainingMethod.name}
-									</Typography>
-								</Box>
-								<Box
-									sx={{
-										display: "flex",
-										borderBottom: "1px solid lightGray",
-									}}
-									pb={1}
-									mt={1}
-								>
-									<Typography fontWeight={600} mr={1}>
-										Environment:
-									</Typography>
-									<Typography>
-										{skillTrainingSession.environment.name}
-									</Typography>
-								</Box>
-								<Box sx={{ display: "flex" }} pb={1} mt={1}>
-									<Typography fontWeight={600} mr={1}>
-										Trainer Notes:
-									</Typography>
-									<Typography>
-										{" "}
-										{skillTrainingSession.notes.length > 0 ? (
-											<span>{skillTrainingSession.notes}</span>
-										) : (
-											<em>No trainer notes provided</em>
-										)}
-									</Typography>
-								</Box>
+							<AccordionDetails
+								sx={{
+									mb: 3,
+									[theme.breakpoints.between("xs", "md")]: { p: 0 },
+								}}
+							>
+								<TrainingSessionDetail
+									title="Training Time"
+									content={skillTrainingSession.trainingTime.toString()}
+								/>
+								<TrainingSessionDetail
+									title="Level marked"
+									content={skillTrainingSession.progressCode.string}
+								/>
+								<TrainingSessionDetail
+									title="Method Used"
+									content={skillTrainingSession.trainingMethod.name}
+								/>
+								<TrainingSessionDetail
+									title="Environment"
+									content={skillTrainingSession.environment.name}
+								/>
+								<TrainingSessionDetail
+									title="Trainer notes"
+									content={skillTrainingSession.notes}
+									isLast
+								/>
 							</AccordionDetails>
 						</Accordion>
 					</Box>

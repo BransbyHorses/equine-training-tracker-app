@@ -71,9 +71,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<Header />
 				<Navbar />
 				<Container>
-					<main>
-						<Component {...pageProps} />
-					</main>
+					<Component {...pageProps} />
 				</Container>
 				<Footer />
 			</SessionProvider>

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import PageTitle from "../../../components/PageTitle";
-import PageContainer from "../../../components/PageContainer";
-import PrimaryButton from "../../../components/PrimaryButton";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
-import { TrainingCategory, TrainingProgramme } from "../../../utils/types";
 import { useEquine } from "../../../utils/hooks/equine";
 import { saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";

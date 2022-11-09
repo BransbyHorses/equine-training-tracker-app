@@ -6,6 +6,7 @@ import {
 import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import {TrainingEnvironment} from "../../../../utils/types";
 import ResponsiveButton from "../../../ResponsiveButton";
+import NewTrainingSessionSelect from './NewTrainingSessionSelect';
 import useCollection from "../../../../utils/hooks/useCollection";
 
 
@@ -39,23 +40,13 @@ const NewTrainingSessionEnvironment = () => {
                 onClick={() => dispatch({ type: NewSkillTrainingSessionType.BACK })}
             />
             <PageTitle title="Where did you do this training?" />
-            <FormControl fullWidth>
-				<InputLabel id="environment-selection">Environment</InputLabel>
-				<Select
-					value={newTrainingSession.environment || ""}
-					name={newTrainingSession.environment?.name}
-					label="Environment"
-					onChange={changeEnvironment}
-				>
-					{environments.map(environment => {
-						return (
-							<MenuItem key={environment.id} value={environment}>
-								{environment.name}
-							</MenuItem>
-						);
-					})}
-				</Select>
-			</FormControl>
+			<NewTrainingSessionSelect 
+				id="environment-selection"
+				newTrainingSessionCategory={newTrainingSession.environment}
+				label="Environment"
+				handleChange={changeEnvironment}
+				categories={environments}
+				/>
             <ResponsiveButton
 				disabled={!newTrainingSession.environment}
 				onClick={() => dispatch({ type: NewSkillTrainingSessionType.NEXT })}

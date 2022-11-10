@@ -65,7 +65,7 @@ export function skillTrainingSessionReducer(
 		case NewSkillTrainingSessionType.GO_TO:
 			return {
 				...state,
-				formStage: action.payload,
+				formStage: formStages[formStages.indexOf(action.payload)],
 			};
 		case NewSkillTrainingSessionType.SET_TRAINING_PROGRAMME:
 			return {

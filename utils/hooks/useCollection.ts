@@ -18,6 +18,7 @@ const useCollection = (
 			axios
 				.get(`${process.env.NEXT_PUBLIC_URL}data/${endpoint}`)
 				.then(({ data }) => {
+					console.log(data);
 					setCollection(data);
 					setFetchingData(false);
 				})

@@ -190,6 +190,5 @@ export function useNewSkillTrainingSession() {
 			"useNewSkillTrainingSession must be used within a NewTrainingSessionProvider"
 		);
 	}
-	console.log(context);
 	return context;
 }

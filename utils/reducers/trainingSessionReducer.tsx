@@ -14,7 +14,7 @@ interface NewTrainingSession {
 	environment?: TrainingEnvironment;
 	progressCode: string;
 	trainingMethod?: TrainingMethod;
-	trainingTime?: string;
+	trainingTime?: Number;
 	notes: "";
 }
 
@@ -143,7 +143,7 @@ const newTrainingSession: NewTrainingSession = {
 	environment: undefined,
 	progressCode: "",
 	trainingMethod: undefined,
-	trainingTime: undefined,
+	trainingTime: 0,
 	notes: "",
 };
 
@@ -182,13 +182,11 @@ export const NewTrainingSessionProvider = (props: any) => {
 };
 
 export function useNewSkillTrainingSession() {
-	console.log("CONTEXT!!");
 	const context = React.useContext(NewTrainingSessionContext);
 	if (context === undefined) {
 		throw new Error(
 			"useNewSkillTrainingSession must be used within a NewTrainingSessionProvider"
 		);
 	}
-	console.log(context);
 	return context;
 }

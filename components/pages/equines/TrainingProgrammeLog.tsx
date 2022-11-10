@@ -80,24 +80,10 @@ const TrainingProgrammeLog = ({
 										borderBottom: "1px solid lightGray",
 									}}
 									pb={1}
-								>
-									<Typography fontWeight={600} mr={1}>
-										Time:
-									</Typography>
-									<Typography>
-										{skillTrainingSession.trainingTime} minutes
-									</Typography>
-								</Box>
-								<Box
-									sx={{
-										display: "flex",
-										borderBottom: "1px solid lightGray",
-									}}
-									pb={1}
 									mt={1}
 								>
 									<Typography fontWeight={600} mr={1}>
-										Progress Marked:
+										Level Marked:
 									</Typography>
 									<Typography>
 										{skillTrainingSession.progressCode.string}

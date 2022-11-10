@@ -1,23 +1,28 @@
-import { useEffect, useState } from "react";
 import EquineListGrid from "../../../components/EquineListGrid";
-import { Equine } from "../../../utils/types";
 import AdminPageTitle from "../../../components/pages/admin/AdminPageTitle";
+import AutoCompleteBox from "../../../components/AutoCompleteBox";
+import { useEquines } from "../../../utils/hooks/equine";
+import LoadingSpinner from "../../../components/LoadingSpinner";
+import { Box, Alert } from "@mui/material";
 
 export default function Equines() {
-	const [equines, setEquines] = useState<Equine[]>([]);
+	const { fetchingData, equines, error } = useEquines();
 
-	function getEquines() {
-		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`)
-			.then((response) => response.json())
-			.then((data) => setEquines(data))
-			.catch((rejected) => {
-				console.log(rejected);
-			});
+	if (fetchingData) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<LoadingSpinner />
+			</Box>
+		);
 	}
 
-	useEffect(() => {
-		getEquines();
-	}, []);
+	if (error) {
+		return (
+			<Box sx={{ display: "flex", justifyContent: "center" }}>
+				<Alert severity="error">An unexpected error occurred</Alert>
+			</Box>
+		);
+	}
 
 	return (
 		<>
@@ -25,6 +30,13 @@ export default function Equines() {
 				title="Manage Equines"
 				buttonLink="/admin/equines/add-equine"
 				contentLength={equines.length}
+			/>
+			<AutoCompleteBox
+				options={equines.map((equine) => {
+					return { optionName: equine.name, optionId: equine.id };
+				})}
+				label="Search equines"
+				linkName="equines"
 			/>
 			{equines.length > 0 && <EquineListGrid equines={equines} />}
 		</>

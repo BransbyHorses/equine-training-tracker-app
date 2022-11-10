@@ -86,7 +86,7 @@ const ChangeTrainingProgramme = ({
 				</Select>
 			</FormControl>
 			<ResponsiveButton
-				desktopstyles={{ width: "20%" }}
+				desktopstyles={{ width: "20%", mt: 3 }}
 				onClick={changeEquineTrainingProgramme}
 			>
 				Save

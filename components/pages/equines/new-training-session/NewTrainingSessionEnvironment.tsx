@@ -35,26 +35,27 @@ const NewTrainingSessionEnvironment = () => {
 	};
 
     return (
-        <>
-            <BackBreadcrumb
-                onClick={() => dispatch({ type: NewSkillTrainingSessionType.BACK })}
-            />
-            <PageTitle title="Where did you do this training?" />
-			<NewTrainingSessionSelect 
-				id="environment-selection"
-				newTrainingSessionCategory={newTrainingSession.environment}
-				label="Environment"
-				handleChange={changeEnvironment}
-				categories={environments}
+			<>
+				<BackBreadcrumb
+					onClick={() => dispatch({ type: NewSkillTrainingSessionType.BACK })}
 				/>
-            <ResponsiveButton
-				disabled={!newTrainingSession.environment}
-				onClick={() => dispatch({ type: NewSkillTrainingSessionType.NEXT })}
-			>
-				Continue
-			</ResponsiveButton>
-        </>
-    );
+				<PageTitle title="Where did you do this training?" />
+				<NewTrainingSessionSelect
+					id="environment-selection"
+					newTrainingSessionCategory={newTrainingSession.environment}
+					label="Environment"
+					handleChange={changeEnvironment}
+					categories={environments}
+				/>
+				<ResponsiveButton
+					disabled={!newTrainingSession.environment}
+					onClick={() => dispatch({ type: NewSkillTrainingSessionType.NEXT })}
+					desktopstyles={{ width: "20%", mt: 3 }}
+				>
+					Continue
+				</ResponsiveButton>
+			</>
+		);
 };
 
 export default NewTrainingSessionEnvironment;

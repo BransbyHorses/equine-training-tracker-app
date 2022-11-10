@@ -209,7 +209,7 @@ const EquineProfile = () => {
 			<NavigationGrid>
 				{isInTraining && !activeDisruption && (
 					<NavigationCard
-						link={`/equines/${equineId}/add-training`}
+						link={`/equines/${equineId}/add-training/${isInTraining.id}`}
 						title="Add Training"
 						icon={<AddCircleIcon fontSize="large" color="success" />}
 					/>

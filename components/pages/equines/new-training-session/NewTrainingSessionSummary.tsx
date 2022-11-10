@@ -4,13 +4,11 @@ import {
 	NewSkillTrainingSessionType,
 	useNewSkillTrainingSession,
 } from "../../../../utils/reducers/trainingSessionReducer";
-import BackBreadcrumb from "../../../BackBreadcrumb";
 import PageTitle from "../../../PageTitle";
 import { Box, Typography } from "@mui/material";
 import { convertDateToString } from "../../../../utils/helpers";
 import ResponsiveButton from "../../../ResponsiveButton";
 import axios from "axios";
-import { TrainingProgramme } from "../../../../utils/types";
 
 const NewTrainingSessionSuccessModal = dynamic(
 	() => import("../new-training-session/NewTrainingSessionSuccessModal")
@@ -65,7 +63,8 @@ const NewTrainingSessionSummary = () => {
 			});
 	};
 
-	const SummaryRow = (props: any) => {
+	const SummaryRow = ({ title, value, notRequired, goTo }: any) => {
+		console.log(goTo);
 		return (
 			<Box
 				sx={{
@@ -78,20 +77,20 @@ const NewTrainingSessionSummary = () => {
 				}}
 			>
 				<Box>
-					<Typography fontWeight={700}>{props.title}</Typography>
-					<Typography fontWeight={300}>{props.value}</Typography>
+					<Typography fontWeight={700}>{title}</Typography>
+					<Typography fontWeight={300}>{value}</Typography>
 				</Box>
 				<Typography
-					color={!props.value && !props.notRequired ? "red" : "#42a5f5"}
+					color={!value && !notRequired ? "red" : "#42a5f5"}
 					sx={{ cursor: "pointer" }}
 					onClick={() =>
 						dispatch({
 							type: NewSkillTrainingSessionType.GO_TO,
-							payload: props.goTo,
+							payload: goTo,
 						})
 					}
 				>
-					<small>{!props.value ? "Add" : "Change"}</small>
+					<small>{!value ? "Add" : "Change"}</small>
 				</Typography>
 			</Box>
 		);
@@ -118,7 +117,11 @@ const NewTrainingSessionSummary = () => {
 					value={convertDateToString(newTrainingSession.date?.toISOString())}
 					goTo="date"
 				/>
-				<SummaryRow title="Skill" value={newTrainingSession.skill?.name} />
+				<SummaryRow
+					title="Skill"
+					value={newTrainingSession.skill?.name}
+					goTo="skillMethod"
+				/>
 				<SummaryRow
 					title="Training Method"
 					value={newTrainingSession.trainingMethod?.name}
@@ -127,7 +130,7 @@ const NewTrainingSessionSummary = () => {
 				<SummaryRow
 					title="Environment"
 					value={newTrainingSession.environment?.name}
-					goTo="skillMethod"
+					goTo="environment"
 				/>
 				<SummaryRow
 					title="Skill Level"

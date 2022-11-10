@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 import {
 	Box,
@@ -67,7 +67,10 @@ const TrainingProgrammeLog = ({
 			})
 			.map((skillTrainingSession) => {
 				return (
-					<Box sx={{ borderBottom: "0.5px solid lightGray" }}>
+					<Box
+						sx={{ borderBottom: "0.5px solid lightGray" }}
+						key={skillTrainingSession.id}
+					>
 						<Accordion elevation={0} sx={{ backgroundColor: "transparent" }}>
 							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}

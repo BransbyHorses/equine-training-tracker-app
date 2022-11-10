@@ -3,7 +3,7 @@ import {
 	convertDateToString,
 	findLastTrainingSession,
 } from "./helpers";
-import { SkillTrainingSession, TrainingProgramme } from "./types";
+import { TrainingProgramme } from "./types";
 
 describe("find latest training programme in array", () => {
 	test("returns only training programme without an end date", () => {

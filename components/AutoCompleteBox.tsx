@@ -21,7 +21,7 @@ const AutoCompleteBox: React.FC<MyComponentProps> = (props: any) => {
 		if (e.target.id !== "") {
 			props.options.find((option: any) => {
 				if (option.optionName === e.target.innerText) {
-					props.router.push(`/${props.linkName}/${option.optionId}`);
+					props.router.push(`${props.linkName}/${option.optionId}`);
 				}
 			});
 		}
@@ -35,7 +35,10 @@ const AutoCompleteBox: React.FC<MyComponentProps> = (props: any) => {
 			size="small"
 			id="combo-box-demo"
 			options={selectOptions}
-			sx={{ width: "100%", marginBottom: "10px" }}
+			sx={{
+				width: "100%",
+				marginBottom: 2,
+			}}
 			renderInput={(params: any) => (
 				<TextField {...params} label={props.label} />
 			)}

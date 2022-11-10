@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-
 import { useEquines } from "../utils/hooks/equine";
 import { Equine, Yard } from "../utils/types";
 import useYards from "../utils/hooks/useYards";
-
 import Box from "@mui/material/Box";
-import { Grid, IconButton, Typography } from "@mui/material";
-import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
@@ -15,7 +11,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import EquineListGrid from "../components/EquineListGrid";
 
 export default function Home() {
@@ -136,6 +131,7 @@ export default function Home() {
 				</Typography>
 			</Box>
 			<EquineListGrid equines={tableData} />
+			
 		</>
 	);
 }

@@ -45,12 +45,20 @@ const equineStatuses = [
 ]
 
 const equine = {
-    "name": "Claude",
-    "yard": `${yards[0]}`,
-    "learnerType": `${learnerTypes[0]}`,
+    "id": 0,
+    "name": "Testquine",
+    "yard": {
+        "id": 2,
+        "name": "Barlings"
+    },
+    "equineStatus": null,
     "trainingProgrammes": [],
-    "disruptions": [],
-    "equineStatus":  `${equineStatuses[0]}`
+    "learnerType": {
+        "id": 8,
+        "name": "Handled youngster <4yrs"
+    },
+    "healthAndSafetyFlags": [],
+    "disruptions": []
 }
 
 

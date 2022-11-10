@@ -66,7 +66,7 @@ const EquineProfile = () => {
 		setActiveDisruption(findActiveDisruption(equine?.disruptions || []));
 	}, [equine]);
 
-	const currentTrainingProgramme = findCurrentTrainingProgramme(equine?.trainingProgrammes);
+	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
 
 	const endDisruption = () => {
 		axios

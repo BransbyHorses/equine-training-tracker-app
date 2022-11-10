@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Pagination from "@mui/material/Pagination";
+import PaginationContainer from "./PaginationContainer";
 
 const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 	const router = useRouter();
@@ -18,12 +20,12 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 	}, []);
 
 	return (
-		<Paper>
-			<Box pl={2} pr={1} sx={{ backgroundColor: "white" }}>
+		<>
+			<PaginationContainer count={equines.length}>
 				{equines
-					.sort((equineA, equineB) => {
-						if (equineA.name < equineB.name) return -1;
-						if (equineA.name > equineB.name) return 1;
+					?.sort((a, b) => {
+						if (a.name < b.name) return -1;
+						if (a.name > b.name) return 1;
 						return 0;
 					})
 					.map((equine, i, arr) => {
@@ -37,7 +39,7 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 								key={equine.id}
 							>
 								<Box
-									py={2}
+									p={2}
 									sx={{
 										display: "flex",
 										justifyContent: "space-between",
@@ -45,6 +47,7 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 										borderBottom:
 											i === arr.length - 1 ? "0" : "0.5px solid lightGray",
 										cursor: "pointer",
+										backgroundColor: "white",
 									}}
 								>
 									<Grid container>
@@ -72,8 +75,8 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 							</Link>
 						);
 					})}
-			</Box>
-		</Paper>
+			</PaginationContainer>
+		</>
 	);
 };
 export default EquineListGrid;

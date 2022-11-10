@@ -42,7 +42,7 @@ const NewTrainingSessionDate = () => {
 		<>
 			<BackBreadcrumb />
 			<PageTitle title="What date was your training session?" />
-			<Box sx={{ my: 4 }}>
+			<Box sx={{ mt: 4 }}>
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
 					<MobileDatePicker
 						label="Training Date"
@@ -56,6 +56,7 @@ const NewTrainingSessionDate = () => {
 			<ResponsiveButton
 				disabled={!newTrainingSession.date}
 				onClick={() => dispatch({ type: NewSkillTrainingSessionType.NEXT })}
+				desktopstyles={{ width: "20%", mt: 3 }}
 			>
 				Continue
 			</ResponsiveButton>

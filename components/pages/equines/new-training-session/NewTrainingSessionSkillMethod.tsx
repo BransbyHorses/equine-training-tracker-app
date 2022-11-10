@@ -52,32 +52,35 @@ const NewTrainingSessionSkillMethod = () => {
 	return (
 		<>
 			<BackBreadcrumb
-                onClick={() => dispatch({ type: NewSkillTrainingSessionType.BACK })}
-            />
-            <PageTitle title="What skill did you train?" />
+				onClick={() => dispatch({ type: NewSkillTrainingSessionType.BACK })}
+			/>
+			<PageTitle title="What skill did you train?" />
 
-			<NewTrainingSessionSelect 
+			<NewTrainingSessionSelect
 				id="skill-selection"
 				newTrainingSessionCategory={newTrainingSession.skill}
 				label="Skill"
 				handleChange={changeSkill}
 				categories={skills}
-				/>
-			<Box sx={{ m: 15 }} />
+			/>
+			<Box sx={{ m: 10 }} />
 
 			<PageTitle title="What method did you use?" />
 
-			<NewTrainingSessionSelect 
+			<NewTrainingSessionSelect
 				id="method-selection"
 				newTrainingSessionCategory={newTrainingSession.trainingMethod}
 				label="Training method"
 				handleChange={changeTrainingMethod}
 				categories={trainingMethods}
-				/>
+			/>
 
 			<ResponsiveButton
-				disabled={!newTrainingSession.skill || !newTrainingSession.trainingMethod}
+				disabled={
+					!newTrainingSession.skill || !newTrainingSession.trainingMethod
+				}
 				onClick={() => dispatch({ type: NewSkillTrainingSessionType.NEXT })}
+				desktopstyles={{ width: "20%", mt: 3 }}
 			>
 				Continue
 			</ResponsiveButton>

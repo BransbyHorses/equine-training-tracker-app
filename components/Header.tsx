@@ -13,13 +13,13 @@ export default function Header() {
 
             <link rel="manifest" href="/manifest.json" />
             <link
-                href="/icons/favicon-16x16.png"
+                href="/icons/favicon.ico"
                 rel="icon"
                 type="image/png"
                 sizes="16x16"
             />
             <link
-                href="/icons/favicon-32x32.png"
+                href="/icons/favicon.ico"
                 rel="icon"
                 type="image/png"
                 sizes="32x32"

@@ -12,7 +12,6 @@ const SkillLog = dynamic(
 	() => import("../../../components/pages/equines/SkillLog")
 );
 
-
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
@@ -131,10 +130,7 @@ const TrainingHistoryPage = () => {
 						sx={{ borderBottom: 1, borderColor: "divider", marginTop: "16px" }}
 					>
 						<Tab label={`Skills`} value={0}></Tab>
-						<Tab
-							label={`Training History (${trainingHistoryCount})`}
-							value={1}
-						></Tab>
+						<Tab label="Training History" value={1}></Tab>
 					</Tabs>
 					<TabPanel value={tabView} index={0}>
 						{!trainingHistory.trainingProgramme ? (

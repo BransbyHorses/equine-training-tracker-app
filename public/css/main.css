@@ -4,9 +4,3 @@ body {
     min-height: 100vh;
     background-color: rgba(242, 242, 242, 0.711);
 }
-
-.fixed-button-bottom {
-    position: absolute;
-    bottom: 0;
-    width: 85%;
-}

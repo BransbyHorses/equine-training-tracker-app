@@ -10,11 +10,10 @@ export interface DisruptionSimplified {
 	name: string;
 }
 
-
 export interface Status {
-	id: number,
+	id: number;
 	name: string;
-	categorisedAsTraining: boolean
+	categorisedAsTraining: boolean;
 }
 
 export interface Equine {
@@ -66,7 +65,7 @@ export interface SkillTrainingSession {
 	trainingProgramme: TrainingProgramme;
 	skill: Skill;
 	environment: TrainingEnvironment;
-	progressCode: { string: ProgressCode };
+	progressCode: { string: string };
 	trainingMethod: TrainingMethod;
 	trainingTime: number;
 	notes: string;

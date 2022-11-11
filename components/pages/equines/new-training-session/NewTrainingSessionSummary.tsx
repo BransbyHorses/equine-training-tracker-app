@@ -14,6 +14,17 @@ const NewTrainingSessionSuccessModal = dynamic(
 	() => import("../new-training-session/NewTrainingSessionSuccessModal")
 );
 
+export const convertDayJsDateToString = (date: any) => {
+	const year = date.$y;
+	const month = date.$M + 1;
+	const day = `${date.$D.toString().length === 1 ? "0" : ""}${date.$D}`;
+	const hour = date.$H;
+	const minutes = date.$m;
+	const seconds = `${date.$s.toString().length === 1 ? "0" : ""}${date.$s}`;
+
+	return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+};
+
 const NewTrainingSessionSummary = () => {
 	const {
 		state: { newTrainingSession, trainingProgramme },
@@ -35,12 +46,6 @@ const NewTrainingSessionSummary = () => {
 			}
 		}
 	}, []);
-
-	const convertDayJsDateToString = (date: any) => {
-		return `${date.$y}-${date.$M + 1}-${date.$D} ${date.$H}:${date.$m}:${
-			date.$s
-		}`;
-	};
 
 	const submitNewTrainingSession = async () => {
 		setSubmitState({ ...submitState, submitting: true });
@@ -64,7 +69,6 @@ const NewTrainingSessionSummary = () => {
 	};
 
 	const SummaryRow = ({ title, value, notRequired, goTo }: any) => {
-		console.log(goTo);
 		return (
 			<Box
 				sx={{

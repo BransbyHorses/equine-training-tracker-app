@@ -130,7 +130,9 @@ export function skillTrainingSessionReducer(
 			};
 		case NewSkillTrainingSessionType.RESET:
 			return {
-				...newTrainingSessionInitialState,
+				trainingProgramme: state.trainingProgramme,
+				formStage: formStages[0],
+				newTrainingSession: newTrainingSessionInitialState.newTrainingSession,
 			};
 		default:
 			return state;

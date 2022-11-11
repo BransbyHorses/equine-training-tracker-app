@@ -49,6 +49,7 @@ const NewTrainingSessionSuccessModal = ({
 						position: "absolute" as "absolute",
 						display: "flex",
 						flexDirection: "column",
+						justifyContent: "center",
 						top: "50%",
 						left: "50%",
 						transform: "translate(-50%, -50%)",
@@ -84,7 +85,7 @@ const NewTrainingSessionSuccessModal = ({
 							return to equine profile
 						</Button>
 						<Button
-							variant="outlined"
+								variant="outlined"
 							onClick={() =>
 								dispatch({ type: NewSkillTrainingSessionType.RESET })
 							}

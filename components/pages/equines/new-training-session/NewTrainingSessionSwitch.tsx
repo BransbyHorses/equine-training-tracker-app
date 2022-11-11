@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 
 import {
 	NewSkillTrainingSessionType,
-	NewTrainingSessionProvider,
 	useNewSkillTrainingSession,
 } from "../../../../utils/reducers/trainingSessionReducer";
 
 import NewTrainingSessionDate from "../../../../components/pages/equines/new-training-session/NewTrainingSessionDate";
-import { useRouter } from "next/router";
-import { useTrainingProgramme } from "../../../../utils/hooks/useTrainingProgramme";
 import { TrainingProgramme } from "../../../../utils/types";
 const NewTrainingSessionSkillMethod = dynamic(
 	() =>

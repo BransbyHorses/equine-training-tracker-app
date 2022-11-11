@@ -5,7 +5,6 @@ import {
 	NewSkillTrainingSessionType,
 	useNewSkillTrainingSession,
 } from "../../../../utils/reducers/trainingSessionReducer";
-import { FormControl, InputLabel, MenuItem, Select, Box } from "@mui/material";
 import NewTrainingSessionSelect from "./NewTrainingSessionSelect";
 import useCollection from "../../../../utils/hooks/useCollection";
 

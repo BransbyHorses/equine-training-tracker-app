@@ -10,9 +10,7 @@ import {
 	RadioGroup,
 	Radio,
 	TextField,
-	Typography,
 } from "@mui/material";
-import { TrainingEnvironment } from "../../../../utils/types";
 import ResponsiveButton from "../../../ResponsiveButton";
 import useCollection from "../../../../utils/hooks/useCollection";
 

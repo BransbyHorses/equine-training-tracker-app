@@ -49,7 +49,7 @@ const TrainingProgrammeLog = ({
 						</Typography>
 					</Grid>
 					<Grid item xs={8} lg={10}>
-						<Typography>{content ? content : <em>Not provided</em>}</Typography>
+						<Typography>{content ? content : <></>}</Typography>
 					</Grid>
 				</Grid>
 			</Box>

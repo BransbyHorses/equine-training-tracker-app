@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-
 import { NewTrainingSessionProvider } from "../../../../utils/reducers/trainingSessionReducer";
-
 import { useRouter } from "next/router";
 import { useTrainingProgramme } from "../../../../utils/hooks/useTrainingProgramme";
 import NewTrainingSessionSwitch from "../../../../components/pages/equines/new-training-session/NewTrainingSessionSwitch";

@@ -7,6 +7,7 @@ import {
 } from "../../../../utils/reducers/trainingSessionReducer";
 import NewTrainingSessionSelect from "./NewTrainingSessionSelect";
 import useCollection from "../../../../utils/hooks/useCollection";
+import Box from "@mui/material/Box";
 
 import PageTitle from "../../../PageTitle";
 

@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
 	NewSkillTrainingSessionType,
 	useNewSkillTrainingSession,
 } from "../../../../utils/reducers/trainingSessionReducer";
-import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import {TrainingEnvironment} from "../../../../utils/types";
 import ResponsiveButton from "../../../ResponsiveButton";
 import NewTrainingSessionSelect from './NewTrainingSessionSelect';
 import useCollection from "../../../../utils/hooks/useCollection";
@@ -26,8 +24,17 @@ const NewTrainingSessionEnvironment = () => {
 		error: environmentsError 
 	} = useCollection("environments");
 
+	const [environmentId, setEnvironmentId] = useState<number>(0);
+
+
+	useEffect(() => {
+		setEnvironmentId(newTrainingSession.environment?.id ? newTrainingSession.environment?.id : 0);
+	})
+
     const changeEnvironment = (e:any) => {
-		const newEnvironment = e.target.value;
+		setEnvironmentId(e.target.value);
+		const newEnvironment = environments.find(environment => e.target.value == environment.id) 
+		console.log(newEnvironment)
 		dispatch({
 			type: NewSkillTrainingSessionType.SET_ENVIRONMENT,
 			payload: newEnvironment,
@@ -41,11 +48,11 @@ const NewTrainingSessionEnvironment = () => {
 				/>
 				<PageTitle title="Where did you do this training?" />
 				<NewTrainingSessionSelect
-					id="environment-selection"
-					newTrainingSessionCategory={newTrainingSession.environment}
-					label="Environment"
-					handleChange={changeEnvironment}
-					categories={environments}
+					 id="environment-selection"
+					 newTrainingSessionCategory={environmentId}
+					 label="Environment"
+					 handleChange={changeEnvironment}
+					 categories={environments}
 				/>
 				<ResponsiveButton
 					disabled={!newTrainingSession.environment}

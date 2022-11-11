@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import BackBreadcrumb from "../../../BackBreadcrumb";
 import ResponsiveButton from "../../../ResponsiveButton";
 import {
@@ -30,11 +30,20 @@ const NewTrainingSessionSkillMethod = () => {
 		error: trainingMethodError 
 	} = useCollection("training-methods");
 
-	
+	const [skillId, setSkillId] = useState<number>(0);
+	const [trainingMethodId, setTrainingMethodId] = useState<number>(0);
+
+
+	useEffect(() => {
+		setSkillId(newTrainingSession.skill?.id ? newTrainingSession.skill?.id : 0 );
+		setTrainingMethodId(newTrainingSession.trainingMethod?.id ? newTrainingSession.trainingMethod?.id  : 0);
+	})
 
 
 	const changeSkill = (e:any) => {
-		const newSkill = e.target.value;
+		setSkillId(e.target.value)
+		var newSkill = skills.find(skill => e.target.value == skill.id);
+		console.log(newSkill);
 		dispatch({
 			type: NewSkillTrainingSessionType.SET_SKILL,
 			payload: newSkill,
@@ -42,7 +51,8 @@ const NewTrainingSessionSkillMethod = () => {
 	};
 
 	const changeTrainingMethod = (e:any) => {
-		const newTrainingMethod = e.target.value;
+		setTrainingMethodId(e.target.value);
+		var newTrainingMethod = trainingMethods.find(method => e.target.value == method.id);
 		dispatch({
 			type: NewSkillTrainingSessionType.SET_TRAINING_METHOD,
 			payload: newTrainingMethod,
@@ -58,7 +68,7 @@ const NewTrainingSessionSkillMethod = () => {
 
 			<NewTrainingSessionSelect
 				id="skill-selection"
-				newTrainingSessionCategory={newTrainingSession.skill}
+				newTrainingSessionCategory={skillId}
 				label="Skill"
 				handleChange={changeSkill}
 				categories={skills}
@@ -69,7 +79,7 @@ const NewTrainingSessionSkillMethod = () => {
 
 			<NewTrainingSessionSelect
 				id="method-selection"
-				newTrainingSessionCategory={newTrainingSession.trainingMethod}
+				newTrainingSessionCategory={trainingMethodId}
 				label="Training method"
 				handleChange={changeTrainingMethod}
 				categories={trainingMethods}

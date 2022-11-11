@@ -144,6 +144,7 @@ const NewTrainingSessionSummary = () => {
 				<SummaryRow
 					title="Comments"
 					value={newTrainingSession.notes}
+					goTo="progress"
 					notRequired
 				/>
 				<ResponsiveButton

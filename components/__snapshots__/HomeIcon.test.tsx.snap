@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeIcon renders 1`] = `
+<div
+  className="MuiBox-root css-194zdsd"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+>
+  <span
+    style={
+      {
+        "background": "none",
+        "border": 0,
+        "bottom": 0,
+        "boxSizing": "border-box",
+        "display": "block",
+        "height": "initial",
+        "left": 0,
+        "margin": 0,
+        "opacity": 1,
+        "overflow": "hidden",
+        "padding": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "width": "initial",
+      }
+    }
+  >
+    <img
+      data-nimg="fill"
+      decoding="async"
+      onError={[Function]}
+      onLoad={[Function]}
+      sizes="100vw"
+      src="/assets/bransbyLogo.svg"
+      srcSet="/assets/bransbyLogo.svg 640w, /assets/bransbyLogo.svg 750w, /assets/bransbyLogo.svg 828w, /assets/bransbyLogo.svg 1080w, /assets/bransbyLogo.svg 1200w, /assets/bransbyLogo.svg 1920w, /assets/bransbyLogo.svg 2048w, /assets/bransbyLogo.svg 3840w"
+      style={
+        {
+          "border": "none",
+          "bottom": 0,
+          "boxSizing": "border-box",
+          "display": "block",
+          "height": 0,
+          "left": 0,
+          "margin": "auto",
+          "maxHeight": "100%",
+          "maxWidth": "100%",
+          "minHeight": "100%",
+          "minWidth": "100%",
+          "objectFit": undefined,
+          "objectPosition": undefined,
+          "padding": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 0,
+        }
+      }
+    />
+  </span>
+</div>
+`;

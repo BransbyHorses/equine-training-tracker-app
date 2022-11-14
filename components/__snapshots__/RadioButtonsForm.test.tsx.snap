@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButtonsForm renders with minimum props 1`] = `
+<div
+  className="MuiFormControl-root css-1nrlq1o-MuiFormControl-root"
+>
+  <div
+    className="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
+    role="radiogroup"
+  />
+</div>
+`;

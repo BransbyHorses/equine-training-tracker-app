@@ -26,7 +26,7 @@ export default function ButtonAppBar() {
 
 	const signOutUser = () => {
 		signOut({
-			callbackUrl: `${window.location.origin}/`,
+			callbackUrl: `/`,
 		});
 	};
 

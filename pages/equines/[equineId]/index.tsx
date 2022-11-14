@@ -24,7 +24,6 @@ const EquineDisruption = dynamic(
 	{ suspense: true }
 );
 
-import CurrentTrainingProgramme from "../../../components/pages/equines/CurrentTrainingProgramme";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
 import Alert from "@mui/material/Alert";
@@ -39,7 +38,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import IconButton from "@mui/material/IconButton";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FlagIcon from "@mui/icons-material/Flag";
 import NavigationCard from "../../../components/NavigationCard";
@@ -66,7 +64,9 @@ const EquineProfile = () => {
 		setActiveDisruption(findActiveDisruption(equine?.disruptions || []));
 	}, [equine]);
 
-	const isInTraining = findCurrentTrainingProgramme(equine?.trainingProgrammes);
+	const currentTrainingProgramme = findCurrentTrainingProgramme(
+		equine?.trainingProgrammes
+	);
 
 	const endDisruption = () => {
 		axios
@@ -168,9 +168,17 @@ const EquineProfile = () => {
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Typography variant="h6">Training Programme</Typography>
-							<CurrentTrainingProgramme
-								trainingProgrammes={equine?.trainingProgrammes}
-							/>
+							{currentTrainingProgramme ? (
+								<Typography>
+									{currentTrainingProgramme.trainingCategory.name}
+								</Typography>
+							) : (
+								<Typography color="gray">
+									<small>
+										<em>No Training Programme</em>
+									</small>
+								</Typography>
+							)}
 						</Grid>
 						<Grid item xs={12} md={6}>
 							<Typography variant="h6">Yard</Typography>
@@ -207,9 +215,9 @@ const EquineProfile = () => {
 				/>
 			)}
 			<NavigationGrid>
-				{isInTraining && !activeDisruption && (
+				{currentTrainingProgramme && !activeDisruption && (
 					<NavigationCard
-						link={`/equines/${equineId}/add-training`}
+						link={`/equines/${equineId}/add-training/${currentTrainingProgramme.id}`}
 						title="Add Training"
 						icon={<AddCircleIcon fontSize="large" color="success" />}
 					/>

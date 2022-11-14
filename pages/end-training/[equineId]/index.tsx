@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { 
+	Box, 
+	FormControl, 
+	FormControlLabel, 
+	Radio, 
+	RadioGroup } from "@mui/material";
 import PageTitle from "../../../components/PageTitle";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import RadioButtonsForm from "../../../components/RadioButtonsForm";
 import { useRouter } from "next/router";
-import getCollection from "../../../utils/hooks/getCollection";
+import useCollection from "../../../utils/hooks/useCollection";
 import { Status } from "../../../utils/types";
 import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
 import ResponsiveButton from "../../../components/ResponsiveButton";
 
 export default function EndTraining() {
 	const router = useRouter();
-	const [equineStatuses, setEquineStatuses] = useState<Status[]>([]);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [equineStatusId, setEquineStatusId] = useState<Status | undefined>(
 		undefined
 	);
-	const { fetchingData, collection, error } = getCollection("equine-statuses");
+	const { fetchingData, collection, error } = useCollection("equine-statuses");
 
 	useEffect(() => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
-			collection.forEach(convertEnumStringKeyToName);
-			setEquineStatuses(collection);
 		}
 	}, [router.isReady]);
 
@@ -53,10 +55,25 @@ export default function EndTraining() {
 			<BackBreadcrumb />
 			<PageTitle title="End training permanently" />
 
-			<RadioButtonsForm
-				items={equineStatuses.filter((status) => !status.categorisedAsTraining)}
-				handleChange={handleChange}
-			/>
+			<FormControl>
+        <RadioGroup
+            defaultValue="disruption-form"
+            name="disruption-buttons-group"
+            onChange={handleChange}>
+            {collection.map(({id, string}:any) => {
+                return (
+            <FormControlLabel 
+                key={id} 
+                value={id} 
+                control={<Radio/>} 
+                label={string}
+                 />
+                )
+            }
+            )
+        }
+        </RadioGroup>
+    </FormControl>
 			<Box>
 				<ResponsiveButton
 					desktopstyles={{ width: "20%", mt: 3 }}

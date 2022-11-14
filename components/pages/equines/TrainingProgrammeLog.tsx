@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 import {
 	Box,
@@ -49,7 +49,7 @@ const TrainingProgrammeLog = ({
 						</Typography>
 					</Grid>
 					<Grid item xs={8} lg={10}>
-						<Typography>{content ? content : <em>Not provided</em>}</Typography>
+						<Typography>{content ? content : <></>}</Typography>
 					</Grid>
 				</Grid>
 			</Box>
@@ -67,7 +67,10 @@ const TrainingProgrammeLog = ({
 			})
 			.map((skillTrainingSession) => {
 				return (
-					<Box sx={{ borderBottom: "0.5px solid lightGray" }}>
+					<Box
+						sx={{ borderBottom: "0.5px solid lightGray" }}
+						key={skillTrainingSession.id}
+					>
 						<Accordion elevation={0} sx={{ backgroundColor: "transparent" }}>
 							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
@@ -105,10 +108,6 @@ const TrainingProgrammeLog = ({
 									[theme.breakpoints.between("xs", "md")]: { p: 0 },
 								}}
 							>
-								<TrainingSessionDetail
-									title="Training Time"
-									content={skillTrainingSession.trainingTime.toString()}
-								/>
 								<TrainingSessionDetail
 									title="Level marked"
 									content={skillTrainingSession.progressCode.string}

@@ -58,7 +58,6 @@ export const generateTodaysDate = () => {
 const padZero = (num: number, pad: number) => num.toString().padStart(pad, '0');
 
 export const saveData = async (data:any, path:string, method:string) => {
-	console.log(data);
 	await fetch(`${process.env.NEXT_PUBLIC_URL}/data/${path}`, {
 		method: method,
 		headers: {
@@ -67,9 +66,7 @@ export const saveData = async (data:any, path:string, method:string) => {
 		body: JSON.stringify(data),
 	})
 		.then((response) => response.json())
-		.then((data) => {
-			console.log("success");
-		})
+		.then((data) => {})
 		.catch((rejected: any) => {
 			console.log(rejected);
 		});

@@ -59,7 +59,13 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 											</Typography>
 										</Grid>
 										{equine.yard ? (
-											<Grid item xs={5} md={4} lg={3}>
+											<Grid
+												item
+												xs={5}
+												md={4}
+												lg={3}
+												sx={{ display: "flex", alignItems: "center" }}
+											>
 												<Typography color="gray">{equine.yard.name}</Typography>
 											</Grid>
 										) : (

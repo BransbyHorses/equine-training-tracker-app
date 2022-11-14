@@ -2,13 +2,13 @@ import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react";
 
+import "../public/css/main.css";
 import Header from "../components/Header";
 const Navbar = dynamic(() => import("../components/Navbar"));
 import Footer from "../components/Footer";
 
-import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import "../public/css/main.css";
+import Container from "@mui/material/Container";
 
 const Theme = createTheme({
 	components: {

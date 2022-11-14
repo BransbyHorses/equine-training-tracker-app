@@ -2,12 +2,11 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { Equine } from "../../../../utils/types";
 import { useEquine } from "../../../../utils/hooks/equine";
 
 import EquineHealthAndSafety from "../../../../components/pages/equines/health-and-safety/EquineHealthAndSafety";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import CurrentTrainingProgramme from "../../../../components/pages/equines/CurrentTrainingProgramme";
+import { findCurrentTrainingProgramme } from "../../../../utils/helpers";
 
 import {
 	Box,
@@ -81,6 +80,10 @@ const EquineAdminPage: React.FC = (props) => {
 	const { fetchingData, equine, error, notFound } = useEquine(
 		router.isReady,
 		equineId
+	);
+
+	const currentTrainingProgramme = findCurrentTrainingProgramme(
+		equine?.trainingProgrammes
 	);
 
 	useEffect(() => {
@@ -182,9 +185,17 @@ const EquineAdminPage: React.FC = (props) => {
 						>
 							<Box>
 								<Typography variant="h6">Training Programme</Typography>
-								<CurrentTrainingProgramme
-									trainingProgrammes={equine?.trainingProgrammes}
-								/>
+								{currentTrainingProgramme ? (
+									<Typography>
+										{currentTrainingProgramme.trainingCategory.name}
+									</Typography>
+								) : (
+									<Typography color="gray">
+										<small>
+											<em>No Training Programme</em>
+										</small>
+									</Typography>
+								)}
 							</Box>
 							<ChangeLink role="trainingProgramme" />
 						</Grid>

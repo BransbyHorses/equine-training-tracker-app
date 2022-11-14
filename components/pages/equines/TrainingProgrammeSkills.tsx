@@ -92,7 +92,7 @@ const TrainingProgrammeSkills = ({
 							>
 								<Grid container>
 									<Grid item xs={7} sm={7} md={5} lg={3}>
-										<Typography fontWeight={500} color="primary.light">
+										<Typography fontWeight={600} color="primary.light">
 											{skillProgressRecord.skill.name}
 										</Typography>
 									</Grid>
@@ -104,7 +104,7 @@ const TrainingProgrammeSkills = ({
 										lg={3}
 										sx={{ display: "flex", alignItems: "center" }}
 									>
-										<Typography fontWeight={400}>
+										<Typography fontWeight={500}>
 											{skillProgressRecord.progressCode.string}
 										</Typography>
 									</Grid>

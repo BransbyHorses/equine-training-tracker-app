@@ -3,7 +3,7 @@ import {
 	convertDateToString,
 	findLastTrainingSession,
 } from "./helpers";
-import { TrainingProgramme } from "./types";
+import { SkillTrainingSession, TrainingProgramme } from "./types";
 
 describe("find latest training programme in array", () => {
 	test("returns only training programme without an end date", () => {
@@ -74,31 +74,27 @@ describe("print date to user friendly steing", () => {
 
 describe("find the last training session", () => {
 	test("returns last training session based on date", () => {
-		const skillTrainingSessions = [
+		const skillTrainingSessions: any[] = [
 			{
-				id: 1,
 				date: "2022-08-15",
 			},
 			{
-				id: 1,
 				date: "2022-06-15",
 			},
 			{
-				id: 1,
 				date: "2022-09-15",
 			},
 			{
-				id: 1,
 				date: "2022-07-15",
 			},
 		];
 		const latestTrainingSession = findLastTrainingSession(
 			skillTrainingSessions
 		);
-		expect(latestTrainingSession).toBe("2022-09-15");
+		expect(latestTrainingSession!.date).toBe("2022-09-15");
 	});
 	test("returns null is argument is falsy", () => {
-		const v = findLastTrainingSession(null);
+		const v = findLastTrainingSession(undefined);
 		expect(v).toBeNull();
 	});
 });

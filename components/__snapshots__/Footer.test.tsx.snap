@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders 1`] = `
+<div
+  className="MuiBox-root css-1x6rvtb"
+>
+  <footer />
+</div>
+`;

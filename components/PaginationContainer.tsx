@@ -14,7 +14,7 @@ const PaginationContainer = ({
 	const resultsFrom = (page - 1) * resultsPerpage + 1;
 	const resultsTo = page * resultsPerpage;
 
-	const handleNavigationChange = (event: any, value: any) => {
+	const handleNavigationChange = (_: any, value: any) => {
 		setPage(parseInt(value));
 	};
 
@@ -23,7 +23,12 @@ const PaginationContainer = ({
 			{React.Children.map(children, (child, index) => {
 				if (index + 1 >= resultsFrom && index + 1 <= resultsTo) return child;
 			})}
-			<Box sx={{ display: count === 0 ? "none" : "flex", justifyContent: "flex-end" }}>
+			<Box
+				sx={{
+					display: count === 0 ? "none" : "flex",
+					justifyContent: "flex-end",
+				}}
+			>
 				<Pagination
 					sx={{ mt: 3 }}
 					page={page}

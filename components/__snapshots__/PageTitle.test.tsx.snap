@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageTitle renders with title 1`] = `
+<h4
+  class="MuiTypography-root MuiTypography-h4 css-1lni2c2-MuiTypography-root"
+>
+  Test Page Title
+</h4>
+`;

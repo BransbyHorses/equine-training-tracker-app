@@ -32,7 +32,6 @@ describe("BackBreadcrumb", () => {
 				<BackBreadcrumb link="test" />
 			</RouterContext.Provider>
 		);
-		// click on back button
 		fireEvent.click(screen.getByTestId("ArrowLeftIcon"));
 		expect(router.push).toHaveBeenCalledWith("test");
 	});

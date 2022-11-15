@@ -57,31 +57,7 @@ describe("NewTrainingSessionSummary", () => {
 		const tree = renderer.create(<NewTrainingSessionSummary />);
 		expect(tree).toMatchSnapshot();
 	});
-	it("disables submit button when newTrainingSession has falsy values", () => {
-		(useNewSkillTrainingSession as jest.Mock).mockImplementation(() => {
-			return {
-				state: {
-					formStage: "summary",
-					newTrainingSession: {
-						date: undefined,
-						skill: undefined,
-						environment: undefined,
-						progressCode: "",
-						trainingMethod: undefined,
-						trainingTime: 0,
-						notes: "",
-					},
-					trainingProgramme: {
-						trainingCategory: { id: 1, name: "Test Category" },
-						equine: { id: 1, name: "Test Equine" },
-					},
-				},
-			};
-		});
-		render(<NewTrainingSessionSummary />);
-		expect(screen.getByRole("button", { name: "Submit" })).toBeDisabled();
-	});
-	it("allows submit button to be clicked when newTrainingSession values are complete", () => {
+	it("renders with completed newTrainingSession", () => {
 		(useNewSkillTrainingSession as jest.Mock).mockImplementation(() => {
 			return {
 				state: {
@@ -91,9 +67,9 @@ describe("NewTrainingSessionSummary", () => {
 						skill: { id: 1, name: "Test Skill" },
 						environment: { id: 1, name: "Test Environment" },
 						progressCode: "Ok",
-						trainingMethod: { id: 1, name: "Test Training Method" },
+						trainingMethod: { id: 1, name: "Test Method" },
 						trainingTime: 0,
-						notes: "",
+						notes: "Test notes.",
 					},
 					trainingProgramme: {
 						trainingCategory: { id: 1, name: "Test Category" },
@@ -102,10 +78,7 @@ describe("NewTrainingSessionSummary", () => {
 				},
 			};
 		});
-		render(<NewTrainingSessionSummary />);
-		expect(screen.getByRole("button", { name: "Submit" })).toHaveAttribute(
-			"disabled",
-			""
-		);
+		const tree = renderer.create(<NewTrainingSessionSummary />);
+		expect(tree).toMatchSnapshot();
 	});
 });

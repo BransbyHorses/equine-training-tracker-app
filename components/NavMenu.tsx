@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	justifyContent: "flex-start",
 }));
 
-interface NavMenuProps {
+export interface NavMenuProps {
 	drawerWidth: number;
 	open: boolean;
 	collapse: () => void;
@@ -39,7 +39,7 @@ const NavMenu = ({ drawerWidth, open, collapse, signOut }: NavMenuProps) => {
 
 	const handleMenuNavigation = (path: string) => {
 		collapse();
-		router.push(`${window.location.origin}/${path}`);
+		router.push(`/${path}`);
 	};
 
 	return (

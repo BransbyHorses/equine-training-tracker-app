@@ -148,7 +148,7 @@ const NewTrainingSessionSummary = () => {
 					notRequired
 				/>
 				<ResponsiveButton
-					// disabled={submitState.disabled}
+					disabled={submitState.disabled}
 					onClick={submitNewTrainingSession}
 					desktopstyles={{ width: "100%", mt: 3 }}
 				>

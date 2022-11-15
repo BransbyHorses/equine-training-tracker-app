@@ -85,7 +85,7 @@ const NewTrainingSessionSuccessModal = ({
 							return to equine profile
 						</Button>
 						<Button
-								variant="outlined"
+							variant="outlined"
 							onClick={() =>
 								dispatch({ type: NewSkillTrainingSessionType.RESET })
 							}

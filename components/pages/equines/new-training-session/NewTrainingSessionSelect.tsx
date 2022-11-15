@@ -1,7 +1,6 @@
-import { FormControl, InputLabel, MenuItem, Select, Box } from "@mui/material";
-import LoadingSpinner from "../../../LoadingSpinner";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-interface NewTrainingSessionSelectProps {
+export interface NewTrainingSessionSelectProps {
 	categories: any[];
 	label: string;
 	id: string;

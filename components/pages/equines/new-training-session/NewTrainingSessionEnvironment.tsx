@@ -22,8 +22,8 @@ const NewTrainingSessionEnvironment = () => {
 
 	useEffect(() => {
 		setEnvironmentId(
-			newTrainingSession.environment?.id
-				? newTrainingSession.environment?.id
+			newTrainingSession.environment
+				? newTrainingSession.environment.id
 				: ""
 		);
 	}, []);

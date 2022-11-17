@@ -45,7 +45,7 @@ test("will add zero to single digit month value", () => {
 	expect(formattedDate).toBe("2022-01-10 16:30:09");
 });
 test("will add zero to single digit minute value", () => {
-	const dateString = "2022-01-10T16:o3:09";
+	const dateString = "2022-01-10T16:03:09";
 	const dayJsDate = dayjs(dateString);
 	const formattedDate = convertDayJsDateToString(dayJsDate);
 	expect(formattedDate).toBe("2022-01-10 16:03:09");

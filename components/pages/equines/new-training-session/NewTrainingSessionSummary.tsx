@@ -49,7 +49,6 @@ const NewTrainingSessionSummary = () => {
 
 	const submitNewTrainingSession = async () => {
 		setSubmitState({ ...submitState, submitting: true });
-		console.log(convertDayJsDateToString(newTrainingSession.date));
 		axios
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${

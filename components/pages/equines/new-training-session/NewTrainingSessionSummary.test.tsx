@@ -18,7 +18,7 @@ test("will convert dayJs date to string for request", () => {
 });
 
 test("will add zero to single digit hour value", () => {
-	const dateString = "2022-1-10T07:30:09";
+	const dateString = "2022-1-10T7:30:09";
 	const dayJsDate = dayjs(dateString);
 	const formattedDate = convertDayJsDateToString(dayJsDate);
 	expect(formattedDate).toBe("2022-01-10 07:30:09");
@@ -43,6 +43,12 @@ test("will add zero to single digit month value", () => {
 	const dayJsDate = dayjs(dateString);
 	const formattedDate = convertDayJsDateToString(dayJsDate);
 	expect(formattedDate).toBe("2022-01-10 16:30:09");
+});
+test("will add zero to single digit minute value", () => {
+	const dateString = "2022-01-10T16:o3:09";
+	const dayJsDate = dayjs(dateString);
+	const formattedDate = convertDayJsDateToString(dayJsDate);
+	expect(formattedDate).toBe("2022-01-10 16:03:09");
 });
 
 describe("NewTrainingSessionSummary", () => {

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.92% </span>
+                <span class="strong">80.95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/41</span>
+                <span class='fraction'>34/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/12</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.21% </span>
+                <span class="strong">82.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/38</span>
+                <span class='fraction'>32/39</span>
             </div>
         
             
@@ -224,31 +224,32 @@
 <a name='L159'></a><a href='#L159'>159</a>
 <a name='L160'></a><a href='#L160'>160</a>
 <a name='L161'></a><a href='#L161'>161</a>
-<a name='L162'></a><a href='#L162'>162</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -274,6 +275,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -386,6 +388,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect } from "react";
+import axios from "axios";
 import dynamic from "next/dynamic";
 import {
 	NewSkillTrainingSessionType,
@@ -395,7 +398,6 @@ import PageTitle from "../../../PageTitle";
 import { Box, Typography } from "@mui/material";
 import { convertDateToString } from "../../../../utils/helpers";
 import ResponsiveButton from "../../../ResponsiveButton";
-import axios from "axios";
 &nbsp;
 const NewTrainingSessionSuccessModal = dynamic(
 	() =&gt; import("../new-training-session/NewTrainingSessionSuccessModal")
@@ -403,10 +405,10 @@ const NewTrainingSessionSuccessModal = dynamic(
 &nbsp;
 export const convertDayJsDateToString = (date: any) =&gt; {
 	const year = date.$y;
-	const month = date.$M + 1;
+	const month = `${date.$M + 1 &lt; 10 ? "0" : ""}${date.$M + 1}`;
 	const day = `${date.$D.toString().length === 1 ? "0" : ""}${date.$D}`;
-	const hour = date.$H;
-	const minutes = date.$m;
+	const hour = `${date.$H.toString().length === 1 ? "0" : ""}${date.$H}`;
+	const minutes = `${date.$m.toString().length === 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >"0" </span>: ""}${date.$m}`;
 	const seconds = `${date.$s.toString().length === 1 ? "0" : ""}${date.$s}`;
 &nbsp;
 	return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
@@ -436,6 +438,7 @@ const NewTrainingSessionSummary = () =&gt; {
 &nbsp;
 	const submitNewTrainingSession = <span class="fstat-no" title="function not covered" >async () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >		setSubmitState({ ...submitState, submitting: true });</span>
+<span class="cstat-no" title="statement not covered" >		console.log(convertDayJsDateToString(newTrainingSession.date));</span>
 <span class="cstat-no" title="statement not covered" >		axios</span>
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${
@@ -553,7 +556,7 @@ export default NewTrainingSessionSummary;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-15T14:43:23.977Z
+                at 2022-11-17T14:29:00.872Z
             </div>
         <script src="prettify.js"></script>
         <script>

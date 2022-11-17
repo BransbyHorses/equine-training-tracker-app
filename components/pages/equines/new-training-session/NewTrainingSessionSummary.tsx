@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import dynamic from "next/dynamic";
 import {
 	NewSkillTrainingSessionType,
@@ -8,7 +9,6 @@ import PageTitle from "../../../PageTitle";
 import { Box, Typography } from "@mui/material";
 import { convertDateToString } from "../../../../utils/helpers";
 import ResponsiveButton from "../../../ResponsiveButton";
-import axios from "axios";
 
 const NewTrainingSessionSuccessModal = dynamic(
 	() => import("../new-training-session/NewTrainingSessionSuccessModal")
@@ -16,10 +16,10 @@ const NewTrainingSessionSuccessModal = dynamic(
 
 export const convertDayJsDateToString = (date: any) => {
 	const year = date.$y;
-	const month = date.$M + 1;
+	const month = `${date.$M + 1 < 10 ? "0" : ""}${date.$M + 1}`;
 	const day = `${date.$D.toString().length === 1 ? "0" : ""}${date.$D}`;
-	const hour = date.$H;
-	const minutes = date.$m;
+	const hour = `${date.$H.toString().length === 1 ? "0" : ""}${date.$H}`;
+	const minutes = `${date.$m.toString().length === 1 ? "0" : ""}${date.$m}`;
 	const seconds = `${date.$s.toString().length === 1 ? "0" : ""}${date.$s}`;
 
 	return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
@@ -49,6 +49,7 @@ const NewTrainingSessionSummary = () => {
 
 	const submitNewTrainingSession = async () => {
 		setSubmitState({ ...submitState, submitting: true });
+		console.log(convertDayJsDateToString(newTrainingSession.date));
 		axios
 			.post(
 				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${

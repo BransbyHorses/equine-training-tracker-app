@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Dayjs } from "dayjs";
 import React, { Dispatch, useReducer } from "react";
 import {
@@ -149,7 +148,7 @@ const newTrainingSession: NewTrainingSession = {
 	notes: "",
 };
 
-interface NewTrainingSessionState {
+export interface NewTrainingSessionState {
 	formStage: string;
 	newTrainingSession: NewTrainingSession;
 	trainingProgramme?: TrainingProgramme;

@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Box, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import PageTitle from "../../../components/PageTitle";
-import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import LoadingSpinner from "../../../components/LoadingSpinner";
+import {
+	Box,
+	FormControl,
+	FormControlLabel,
+	Radio,
+	RadioGroup,
+} from "@mui/material";
+import PageTitle from "../../../../components/PageTitle";
+import BackBreadcrumb from "../../../../components/BackBreadcrumb";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import useCollection from "../../../utils/hooks/useCollection";
-import { convertEnumStringKeyToName, saveData } from "../../../utils/helpers";
-import ResponsiveButton from "../../../components/ResponsiveButton";
+import useCollection from "../../../../utils/hooks/useCollection";
+import { saveData } from "../../../../utils/helpers";
+import ResponsiveButton from "../../../../components/ResponsiveButton";
 
 export default function AddDisruption() {
 	const router = useRouter();
@@ -49,24 +55,23 @@ export default function AddDisruption() {
 			<PageTitle title="Add disruption" />
 
 			<FormControl>
-        <RadioGroup
-            defaultValue="disruption-form"
-            name="disruption-buttons-group"
-            onChange={handleChange}>
-            {collection.map(({id, string}:any) => {
-                return (
-            <FormControlLabel 
-                key={id} 
-                value={id} 
-                control={<Radio/>} 
-                label={string}
-                 />
-                )
-            }
-            )
-        }
-        </RadioGroup>
-    </FormControl>
+				<RadioGroup
+					defaultValue="disruption-form"
+					name="disruption-buttons-group"
+					onChange={handleChange}
+				>
+					{collection.map(({ id, string }: any) => {
+						return (
+							<FormControlLabel
+								key={id}
+								value={id}
+								control={<Radio />}
+								label={string}
+							/>
+						);
+					})}
+				</RadioGroup>
+			</FormControl>
 
 			<Box>
 				<ResponsiveButton

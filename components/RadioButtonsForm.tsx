@@ -19,8 +19,9 @@ export default function RadioButtonsForm(props: any) {
 						<FormControlLabel
 							key={id}
 							value={id}
+							disabled={props.disabledId === id}
 							control={<Radio />}
-							label={name}
+							label={`${name}${props.disabledId === id ? " (Current)" : ""}`}
 						/>
 					);
 				})}

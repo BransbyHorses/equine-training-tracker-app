@@ -227,7 +227,7 @@ const EquineProfile = () => {
 					title="Training History"
 				/>
 				<NavigationCard
-					link={`/update-profile/${equine?.id}`}
+					link={`/equines/${equine?.id}/update-profile`}
 					title="Update Profile"
 				/>
 			</NavigationGrid>

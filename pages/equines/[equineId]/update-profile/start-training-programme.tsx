@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-import PageTitle from "../../../components/PageTitle";
-import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import RadioButtonsForm from "../../../components/RadioButtonsForm";
-import LoadingSpinner from "../../../components/LoadingSpinner";
+import PageTitle from "../../../../components/PageTitle";
+import BackBreadcrumb from "../../../../components/BackBreadcrumb";
+import RadioButtonsForm from "../../../../components/RadioButtonsForm";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
-import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
-import { useEquine } from "../../../utils/hooks/equine";
-import { saveData } from "../../../utils/helpers";
-import ResponsiveButton from "../../../components/ResponsiveButton";
+import useTrainingCategories from "../../../../utils/hooks/useTrainingCategories";
+import { useEquine } from "../../../../utils/hooks/equine";
+import {
+	findCurrentTrainingProgramme,
+	saveData,
+} from "../../../../utils/helpers";
+import ResponsiveButton from "../../../../components/ResponsiveButton";
 
-export default function StartTrainingProgramme() {
+export default function StartTrainingProgrammePage() {
 	const router = useRouter();
 
-  const [equineId, setEquineId] = useState<string | undefined>(undefined);
+	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [trainingCategoryId, setTrainingCategoryId] = useState<number>();
 
-	const {fetchingData, trainingCategories, error } = useTrainingCategories();
-	const { equine } = useEquine(
-		router.isReady,
-		equineId
-	);
+	const { fetchingData, trainingCategories, error } = useTrainingCategories();
+	const { equine } = useEquine(router.isReady, equineId);
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -53,13 +53,16 @@ export default function StartTrainingProgramme() {
 		<>
 			<BackBreadcrumb />
 			<PageTitle title="Start a new training programme" />
-
 			<Typography sx={{ mb: 2 }} color="gray">
 				This will end the current training programme
 			</Typography>
 			<RadioButtonsForm
 				items={trainingCategories}
 				handleChange={handleChange}
+				disabledId={
+					findCurrentTrainingProgramme(equine?.trainingProgrammes)
+						?.trainingCategory.id
+				}
 			/>
 			<Box>
 				<ResponsiveButton

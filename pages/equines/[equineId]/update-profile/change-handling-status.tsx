@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select, Box } from "@mui/material";
-import PageTitle from "../../../components/PageTitle";
-import BackBreadcrumb from "../../../components/BackBreadcrumb";
-import LoadingSpinner from "../../../components/LoadingSpinner";
+import PageTitle from "../../../../components/PageTitle";
+import BackBreadcrumb from "../../../../components/BackBreadcrumb";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 
-import { saveData } from "../../../utils/helpers";
-import ResponsiveButton from "../../../components/ResponsiveButton";
-import useLearnerTypes from "../../../utils/hooks/useLearnerTypes";
+import { saveData } from "../../../../utils/helpers";
+import ResponsiveButton from "../../../../components/ResponsiveButton";
+import useLearnerTypes from "../../../../utils/hooks/useLearnerTypes";
 
 export default function ChangeHandlingStatus() {
 	const router = useRouter();

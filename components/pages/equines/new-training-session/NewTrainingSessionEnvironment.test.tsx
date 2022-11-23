@@ -8,7 +8,7 @@ jest.mock("../../../../utils/reducers/trainingSessionReducer.tsx", () => ({
 	useNewSkillTrainingSession: jest.fn(),
 }));
 describe("NewTrainingSessionEnvironment", () => {
-	it("renders with no value", () => {
+	it("renders with no values", () => {
 		(useNewSkillTrainingSession as jest.Mock).mockImplementation(() => {
 			return {
 				state: {
@@ -28,26 +28,5 @@ describe("NewTrainingSessionEnvironment", () => {
 		});
 		const tree = renderer.create(<NewTrainingSessionEnvironment />);
 		expect(tree).toMatchSnapshot();
-	});
-	it("renders with pre-populated value", () => {
-		(useNewSkillTrainingSession as jest.Mock).mockImplementation(() => {
-			return {
-				state: {
-					formStage: "environment",
-					newTrainingSession: {
-						date: undefined,
-						skill: undefined,
-						environment: { id: 1, name: "Environment" },
-						progressCode: "",
-						trainingMethod: undefined,
-						trainingTime: 0,
-						notes: "",
-					},
-					trainingProgramme: undefined,
-				},
-			};
-		});
-		render(<NewTrainingSessionEnvironment />);
-		expect(screen.getByRole("option")).toHaveAttribute("value", "1");
 	});
 });

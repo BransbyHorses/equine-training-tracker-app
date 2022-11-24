@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
-import useYards from "../../../utils/hooks/useYards";
+import React, { useState } from "react";
 import LoadingSpinner from "../../LoadingSpinner";
 import {
 	Box,
-	Button,
 	Select,
-	useTheme,
 	FormControl,
 	MenuItem,
 	InputLabel,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { LearnerType, Yard } from "../../../utils/types";
+import { LearnerType } from "../../../utils/types";
 import useLearnerTypes from "../../../utils/hooks/useLearnerTypes";
 import ResponsiveButton from "../../ResponsiveButton";
 
@@ -24,9 +21,8 @@ const EditHandlingStatus = ({
 	currentStatus?: LearnerType;
 }) => {
 	const router = useRouter();
-	const theme = useTheme();
 	const [newLearnerTypeId, setNewLearnerTypeId] = useState("");
-	const { learnerTypes, fetchingData, error } = useLearnerTypes();
+	const { learnerTypes, fetchingData } = useLearnerTypes();
 
 	if (fetchingData) {
 		return (
@@ -39,7 +35,7 @@ const EditHandlingStatus = ({
 	const assignEquineANewHandlingStatus = () => {
 		axios
 			.patch(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/learner-types/${newLearnerTypeId}`
+				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/learner-type/${newLearnerTypeId}`
 			)
 			.then(() => {
 				router.push(`/admin/equines/${equineId}`);

@@ -1,0 +1,422 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTrainingSessionSummary renders with completed newTrainingSession 1`] = `
+[
+  <div
+    className="MuiBox-root css-17tcgb"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-1lni2c2-MuiTypography-root"
+    >
+      Check details
+    </h4>
+  </div>,
+  <div
+    className="MuiBox-root css-1g8r6et"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1 css-440ypw-MuiTypography-root"
+    >
+      Test Equine
+    </p>
+    <p
+      className="MuiTypography-root MuiTypography-body1 css-1rfn1w6-MuiTypography-root"
+    >
+      Test Category
+    </p>
+  </div>,
+  <div
+    className="MuiBox-root css-6mbq14"
+  >
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Date
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        >
+          23 November 2022
+        </p>
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Change
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Skill
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        >
+          Test Skill
+        </p>
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Change
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Training Method
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        >
+          Test Method
+        </p>
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Change
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Environment
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        >
+          Test Environment
+        </p>
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Change
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Skill Level
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        >
+          Ok
+        </p>
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Change
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Comments
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        >
+          Test notes.
+        </p>
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Change
+        </small>
+      </p>
+    </div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-ttddr6-MuiButtonBase-root-MuiButton-root"
+      desktopstyles={
+        {
+          "mt": 3,
+          "width": "100%",
+        }
+      }
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      Submit
+      <span
+        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
+  </div>,
+]
+`;
+
+exports[`NewTrainingSessionSummary renders with no newTrainingSession 1`] = `
+[
+  <div
+    className="MuiBox-root css-17tcgb"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-1lni2c2-MuiTypography-root"
+    >
+      Check details
+    </h4>
+  </div>,
+  <div
+    className="MuiBox-root css-1g8r6et"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1 css-440ypw-MuiTypography-root"
+    >
+      Test Equine
+    </p>
+    <p
+      className="MuiTypography-root MuiTypography-body1 css-1rfn1w6-MuiTypography-root"
+    >
+      Test Category
+    </p>
+  </div>,
+  <div
+    className="MuiBox-root css-6mbq14"
+  >
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Date
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1dcmq85-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Add
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Skill
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1dcmq85-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Add
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Training Method
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1dcmq85-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Add
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Environment
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1dcmq85-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Add
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Skill Level
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1dcmq85-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Add
+        </small>
+      </p>
+    </div>
+    <div
+      className="MuiBox-root css-t1q99u"
+    >
+      <div
+        className="MuiBox-root css-0"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-ndaqpv-MuiTypography-root"
+        >
+          Comments
+        </p>
+        <p
+          className="MuiTypography-root MuiTypography-body1 css-b9dwom-MuiTypography-root"
+        />
+      </div>
+      <p
+        className="MuiTypography-root MuiTypography-body1 css-1kojf41-MuiTypography-root"
+        onClick={[Function]}
+      >
+        <small>
+          Add
+        </small>
+      </p>
+    </div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-ttddr6-MuiButtonBase-root-MuiButton-root"
+      desktopstyles={
+        {
+          "mt": 3,
+          "width": "100%",
+        }
+      }
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      Submit
+    </button>
+  </div>,
+]
+`;

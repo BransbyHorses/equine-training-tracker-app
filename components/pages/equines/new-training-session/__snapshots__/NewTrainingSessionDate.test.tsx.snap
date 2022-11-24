@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTrainingSessionDate renders with minimum props 1`] = `
+[
+  <nav
+    className="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-7a84y9-MuiTypography-root-MuiBreadcrumbs-root"
+  >
+    <ol
+      className="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+    >
+      <li
+        className="MuiBreadcrumbs-li"
+      >
+        <a
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1qt0ygz-MuiTypography-root-MuiLink-root"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ArrowLeftIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="m14 7-5 5 5 5V7z"
+            />
+          </svg>
+           Back
+        </a>
+      </li>
+    </ol>
+  </nav>,
+  <div
+    className="MuiBox-root css-17tcgb"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-1lni2c2-MuiTypography-root"
+    >
+      What date was your training session?
+    </h4>
+  </div>,
+  <div
+    className="MuiBox-root css-h5fkc8"
+  >
+    <div
+      className="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+      onClick={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink={false}
+        htmlFor=":r0:"
+        id=":r0:-label"
+      >
+        Training Date
+      </label>
+      <div
+        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-readOnly css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+        onClick={[Function]}
+      >
+        <input
+          aria-invalid={false}
+          aria-label="Choose date"
+          aria-readonly={true}
+          autoFocus={false}
+          className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-readOnly css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          id=":r0:"
+          onAnimationStart={[Function]}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          readOnly={true}
+          required={false}
+          type="text"
+          value="2022/11/23"
+        />
+        <fieldset
+          aria-hidden={true}
+          className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            className="css-1ftyaf0"
+          >
+            <span>
+              Training Date
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>,
+  <button
+    className="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1g0d0b8-MuiButtonBase-root-MuiButton-root"
+    desktopstyles={
+      {
+        "mt": 3,
+        "width": "20%",
+      }
+    }
+    disabled={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onContextMenu={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    Continue
+  </button>,
+]
+`;

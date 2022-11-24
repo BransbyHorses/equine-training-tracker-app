@@ -3,6 +3,7 @@ import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
+import AutoCompleteBox from "../../AutoCompleteBox";
 
 const AdminPageTitle = ({
 	title,
@@ -17,7 +18,7 @@ const AdminPageTitle = ({
 
 	return (
 		<>
-			<BackBreadcrumb />
+			<BackBreadcrumb link="/admin" />
 			<Box
 				my={3}
 				sx={{
@@ -46,6 +47,7 @@ const AdminPageTitle = ({
 					</Button>
 				</Link>
 			</Box>
+			<hr style={{ margin: "20px 0" }} />
 		</>
 	);
 };

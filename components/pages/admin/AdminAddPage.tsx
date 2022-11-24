@@ -3,6 +3,8 @@ import { TextField, Button, Typography, Box, useTheme } from "@mui/material";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ResponsiveButton from "../../ResponsiveButton";
+import PageTitle from "../../PageTitle";
 
 const AdminAddPage = ({
 	entity,
@@ -42,7 +44,7 @@ const AdminAddPage = ({
 					},
 				}}
 			>
-				<Typography variant="h6">Add New {entity}</Typography>
+				<PageTitle title={`Add New ${entity}`} />
 				{success && (
 					<Box sx={{ display: "flex", alignItems: "center" }}>
 						<CheckCircleOutlineIcon
@@ -72,11 +74,16 @@ const AdminAddPage = ({
 					value={inputValue}
 					focused
 					required
-					sx={{ my: 2 }}
+					sx={{ mb: 3 }}
 				/>
-				<Button type="submit" variant="contained">
-					Save
-				</Button>
+				<ResponsiveButton
+					desktopstyles={{
+						width: "20%",
+					}}
+					type="submit"
+				>
+					save
+				</ResponsiveButton>
 			</form>
 		</>
 	);

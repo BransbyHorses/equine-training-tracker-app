@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-
 import { useEquines } from "../utils/hooks/equine";
 import { Equine, Yard } from "../utils/types";
 import useYards from "../utils/hooks/useYards";
-
 import Box from "@mui/material/Box";
-import { Grid, IconButton, Typography } from "@mui/material";
-import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
@@ -15,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import EquineListGrid from "../components/EquineListGrid";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
@@ -28,50 +24,6 @@ export default function Home() {
 	useEffect(() => {
 		setTableData(equines);
 	}, [equines]);
-
-	const mapEquineRows = (equineArray: Equine[]) => {
-		return equineArray
-			.sort((equineA, equineB) => {
-				if (equineA.name < equineB.name) return -1;
-				if (equineA.name > equineB.name) return 1;
-				return 0;
-			})
-			.map((equine, i, arr) => {
-				return (
-					<Link href={`/equines/${equine.id}`} key={equine.id}>
-						<Box
-							py={2}
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-								borderBottom:
-									i === arr.length - 1 ? "0" : "0.5px solid lightGray",
-								cursor: "pointer",
-							}}
-						>
-							<Grid container>
-								<Grid item xs={6} md={4} lg={3}>
-									<Typography fontWeight={500} color="primary.light">
-										{equine.name}
-									</Typography>
-								</Grid>
-								{equine.yard ? (
-									<Grid item xs={5} md={4} lg={3}>
-										<Typography color="gray">{equine.yard.name}</Typography>
-									</Grid>
-								) : (
-									<></>
-								)}
-							</Grid>
-							<IconButton>
-								<KeyboardArrowRightIcon fontSize="large" />
-							</IconButton>
-						</Box>
-					</Link>
-				);
-			});
-	};
 
 	const mapYardOptions = (yardsArray: Yard[]) => {
 		if (yardDataError) {
@@ -178,11 +130,8 @@ export default function Home() {
 					</small>
 				</Typography>
 			</Box>
-			<Paper>
-				<Box pl={2} pr={1} sx={{ backgroundColor: "white" }}>
-					{mapEquineRows(tableData)}
-				</Box>
-			</Paper>
+			<EquineListGrid equines={tableData} />
+			
 		</>
 	);
 }

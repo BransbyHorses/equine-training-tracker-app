@@ -1,32 +1,56 @@
 import React, { FC } from "react";
-import { withRouter, NextRouter } from "next/router";
-import { Container } from "@mui/material";
-import options from "../../properties/properties";
 import PageTitle from "../../components/PageTitle";
-import InfoGrid from "../../components/InfoGrid";
+import NavigationGrid from "../../components/NavigationGrid";
+import NavigationCard from "../../components/NavigationCard";
 
-interface WithRouterProps {
-	router: NextRouter;
-}
+const adminActions = [
+	{
+		title: "Equines",
+		link: "/admin/equines",
+	},
+	{
+		title: "Skills",
+		link: "/admin/skills",
+	},
+	{
+		title: "Yards",
+		link: "/admin/yards",
+	},
+	{
+		title: "Training Methods",
+		link: "/admin/training-methods",
+	},
+	{
+		title: "Training Environments",
+		link: "/admin/training-environments",
+	},
+	{
+		title: "Handling Statuses",
+		link: "/admin/handling-statuses",
+	},
+	{
+		title: "Training Categories",
+		link: "/admin/training-categories",
+	},
+];
 
-const adminActions = options.adminActions;
-
-interface MyComponentProps extends WithRouterProps {}
-
-const AdminDashboard: FC<MyComponentProps> = (props) => {
+const AdminDashboard: FC = () => {
 	return (
-		<Container
-			sx={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<PageTitle title={"Dashboard"} />
-			<InfoGrid listItems={adminActions} />
-		</Container>
+		<>
+			<PageTitle title="Manage" />
+			<NavigationGrid>
+				{adminActions.map((listItem: any, index: number) => {
+					return (
+						<NavigationCard
+							key={index}
+							link={listItem.link}
+							title={listItem.title}
+						/>
+					);
+				})}
+			</NavigationGrid>
+		</>
 	);
 };
 
-export default withRouter(AdminDashboard);
+export default AdminDashboard;

@@ -2,13 +2,13 @@ import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react";
 
+import "../public/css/main.css";
 import Header from "../components/Header";
 const Navbar = dynamic(() => import("../components/Navbar"));
 import Footer from "../components/Footer";
 
-import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import "../public/css/main.css";
+import Container from "@mui/material/Container";
 
 const Theme = createTheme({
 	components: {
@@ -56,6 +56,11 @@ const Theme = createTheme({
 		info: {
 			main: "#5B5B5B",
 		},
+		warning: {
+			main: "#ffa726",
+			dark: "#f57c00",
+			light: "rgba(255, 183, 77, 0.5)",
+		},
 	},
 });
 
@@ -66,9 +71,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<Header />
 				<Navbar />
 				<Container>
-					<main>
-						<Component {...pageProps} />
-					</main>
+					<Component {...pageProps} />
 				</Container>
 				<Footer />
 			</SessionProvider>

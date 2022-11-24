@@ -13,20 +13,19 @@ import {
 	Box,
 	useTheme,
 } from "@mui/material";
-import { EquineStatus, LearnerType, Yard, Equine } from "../../../utils/types";
+import { LearnerType, Yard, Equine } from "../../../utils/types";
 import BackBreadcrumb from "../../BackBreadcrumb";
+import ResponsiveButton from "../../ResponsiveButton";
 
 const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	const theme = useTheme();
 	const [newEquine, setNewEquine] = useState({
 		name: "",
 		yard: "",
-		equineStatus: "",
 		learnerType: "",
 	});
 
 	const [yards, setYards] = useState<Yard[] | []>([]);
-	const [equineStatuses, setequineStatuses] = useState<EquineStatus[] | []>([]);
 	const [learnerTypes, setLearnerTypes] = useState<LearnerType[] | []>([]);
 	const [formSubmitting, setFormSubmitting] = useState(false);
 	const [formError, setFormError] = useState("");
@@ -34,14 +33,12 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	const getEquineOptions = async () => {
 		try {
 			const res = await Promise.all([
-				fetch(`${process.env.NEXT_PUBLIC_URL}/data/equine-statuses`),
 				fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`),
 				fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`),
 			]);
 			const data = await Promise.all(res.map((r) => r.json()));
-			setequineStatuses(data[0]);
-			setYards(data[1]);
-			setLearnerTypes(data[2]);
+			setYards(data[0]);
+			setLearnerTypes(data[1]);
 		} catch (error) {
 			console.error(error);
 		}
@@ -60,12 +57,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 			yard: newEquine.yard
 				? yards.find((yard) => yard.id === parseInt(newEquine.yard))
 				: null,
-			equineStatus: newEquine.equineStatus
-				? equineStatuses.find(
-						(equineStatus) =>
-							equineStatus.id === parseInt(newEquine.equineStatus)
-				  )
-				: null,
+			equineStatus: "Awaiting Training",
 			learnerType: newEquine.learnerType
 				? learnerTypes.find(
 						(learnerType) => learnerType.id === parseInt(newEquine.learnerType)
@@ -95,7 +87,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	};
 
 	return (
-		<Container>
+		<>
 			<Box mb={3}>
 				<BackBreadcrumb />
 			</Box>
@@ -133,25 +125,6 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 						</Select>
 					</FormControl>
 					<FormControl>
-						<InputLabel id="equine-status">Training Status</InputLabel>
-						<Select
-							id="equine-status"
-							label="Training Status"
-							name="equineStatus"
-							value={newEquine.equineStatus}
-							onChange={handleChange}
-							sx={{ mb: 4 }}
-						>
-							{equineStatuses.map((equineStatus: EquineStatus) => {
-								return (
-									<MenuItem value={equineStatus.id} key={equineStatus.id}>
-										{equineStatus.name}
-									</MenuItem>
-								);
-							})}
-						</Select>
-					</FormControl>
-					<FormControl>
 						<InputLabel id="handling-status">Handing Status</InputLabel>
 						<Select
 							id="handling-status"
@@ -176,20 +149,17 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 						<Alert severity="error">{formError}</Alert>
 					</Box>
 				)}
-				<Button
-					sx={{
-						[theme.breakpoints.between("xs", "md")]: {
-							width: "100%",
-						},
+				<ResponsiveButton
+					desktopstyles={{
+						width: "20%",
 					}}
-					variant="contained"
 					type="submit"
 					disabled={formSubmitting}
 				>
 					Save & Continue
-				</Button>
+				</ResponsiveButton>
 			</form>
-		</Container>
+		</>
 	);
 };
 

@@ -14,7 +14,7 @@ export const useEquines = (): {
 
 	useEffect(() => {
 		console.log(`${process.env.NEXT_PUBLIC_URL}/data/equines`);
-		
+
 		setFetchingData(true);
 		axios
 			.get(`${process.env.NEXT_PUBLIC_URL}/data/equines`)
@@ -54,7 +54,7 @@ export const useEquine = (
 	const [notFound, setNotFound] = useState(false);
 
 	useEffect(() => {
-		if (routerReady) {
+		if (routerReady && id) {
 			setFetchingData(true);
 			axios
 				.get(`${process.env.NEXT_PUBLIC_URL}/data/equines/${id}`)

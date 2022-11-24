@@ -1,6 +1,19 @@
 export interface Disruption {
 	id: number;
+	reason: { string: DisruptionCode; id: number };
+	startDate: string;
+	endDate?: string;
+}
+
+export interface DisruptionSimplified {
+	id: number;
 	name: string;
+}
+
+export interface Status {
+	id: number;
+	name: string;
+	categorisedAsTraining: boolean;
 }
 
 export interface Equine {
@@ -11,11 +24,19 @@ export interface Equine {
 	trainingProgrammes: TrainingProgramme[];
 	learnerType: LearnerType;
 	healthAndSafetyFlags: HealthAndSafetyFlag[];
+	disruptions: Disruption[];
 }
 
 export interface EquineStatus {
-	id: number;
-	name: string;
+	string:
+		| "Awaiting Training"
+		| "In Training"
+		| "Returned To Owner"
+		| "Rehomed"
+		| "Euthanised"
+		| "Other";
+	id: 1 | 2 | 3 | 4 | 5 | 6;
+	categorisedAsTraining: boolean;
 }
 
 export interface LearnerType {
@@ -44,7 +65,7 @@ export interface SkillTrainingSession {
 	trainingProgramme: TrainingProgramme;
 	skill: Skill;
 	environment: TrainingEnvironment;
-	progressCode: { string: ProgressCode };
+	progressCode: { string: string };
 	trainingMethod: TrainingMethod;
 	trainingTime: number;
 	notes: string;
@@ -63,7 +84,6 @@ export interface TrainingEnvironment {
 export interface TrainingMethod {
 	id: number;
 	name: string;
-	description: string;
 }
 
 export interface TrainingProgramme {
@@ -92,4 +112,13 @@ export enum ProgressCode {
 	"Limited",
 	"Ok",
 	"Confident",
+}
+
+export enum DisruptionCode {
+	"Vetinary Review",
+	"Team Low",
+	"Weather",
+	"Yard Busy",
+	"Equine Wellbeing",
+	"Other",
 }

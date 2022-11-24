@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTrainingSessionSkillMethod renders 1`] = `
+[
+  <nav
+    className="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-7a84y9-MuiTypography-root-MuiBreadcrumbs-root"
+  >
+    <ol
+      className="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+    >
+      <li
+        className="MuiBreadcrumbs-li"
+      >
+        <a
+          className="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1qt0ygz-MuiTypography-root-MuiLink-root"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ArrowLeftIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="m14 7-5 5 5 5V7z"
+            />
+          </svg>
+           Back
+        </a>
+      </li>
+    </ol>
+  </nav>,
+  <div
+    className="MuiBox-root css-17tcgb"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-1lni2c2-MuiTypography-root"
+    >
+      What skill did you train?
+    </h4>
+  </div>,
+  <div
+    className="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
+  >
+    <label
+      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink={false}
+    >
+      Select a Skill
+    </label>
+    <div
+      className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl  css-1ualgfl-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      onClick={[Function]}
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <span
+          className="notranslate"
+        >
+          ​
+        </span>
+      </div>
+      <input
+        aria-hidden={true}
+        className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        disabled={false}
+        onAnimationStart={[Function]}
+        onChange={[Function]}
+        required={false}
+        tabIndex={-1}
+        value=""
+      />
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden={true}
+        className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          className="css-1ftyaf0"
+        >
+          <span>
+            Select a Skill
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>,
+  <div
+    className="MuiBox-root css-uy5y4h"
+  />,
+  <div
+    className="MuiBox-root css-17tcgb"
+  >
+    <h4
+      className="MuiTypography-root MuiTypography-h4 css-1lni2c2-MuiTypography-root"
+    >
+      What training method did you use?
+    </h4>
+  </div>,
+  <div
+    className="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
+  >
+    <label
+      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink={false}
+    >
+      Selct a Training Method
+    </label>
+    <div
+      className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl  css-1ualgfl-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      onClick={[Function]}
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <span
+          className="notranslate"
+        >
+          ​
+        </span>
+      </div>
+      <input
+        aria-hidden={true}
+        className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        disabled={false}
+        onAnimationStart={[Function]}
+        onChange={[Function]}
+        required={false}
+        tabIndex={-1}
+        value=""
+      />
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden={true}
+        className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          className="css-1ftyaf0"
+        >
+          <span>
+            Selct a Training Method
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>,
+  <button
+    className="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1g0d0b8-MuiButtonBase-root-MuiButton-root"
+    desktopstyles={
+      {
+        "mt": 3,
+        "width": "20%",
+      }
+    }
+    disabled={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onContextMenu={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    Continue
+  </button>,
+]
+`;

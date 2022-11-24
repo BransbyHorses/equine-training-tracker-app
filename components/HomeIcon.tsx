@@ -1,20 +1,16 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-
-import NavLogoContainer from './styles/navLogoContainer';
-import bransbyLog from '../assets/svg/bransbyLogo.svg';
-
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Box } from "@mui/material";
 
 const HomeIcon = () => {
-    return (
-        <NavLogoContainer>
-            <Image
-                src={bransbyLog}
-                layout="fill"
-            />
-        </NavLogoContainer>
-    );
-}
+	return (
+		<Link href="/">
+			<Box sx={{ height: "50px", width: "120px", position: "relative" }}>
+				<Image src="/assets/bransbyLogo.svg" layout="fill" priority />
+			</Box>
+		</Link>
+	);
+};
 
 export default HomeIcon;

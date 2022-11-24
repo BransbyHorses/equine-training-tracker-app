@@ -18,12 +18,11 @@ export default function AddDisruption() {
 	const router = useRouter();
 	const [disruptionId, setDisruptionId] = useState<string>();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	const { fetchingData, collection, error } = useCollection("disruptions");
+	const { fetchingData, collection } = useCollection("disruptions");
 
 	useEffect(() => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
-			console.log(collection);
 		}
 	}, [router.isReady]);
 

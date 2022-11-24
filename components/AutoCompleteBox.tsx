@@ -34,7 +34,6 @@ const AutoCompleteBox = (props: AutoCompleteBoxProps) => {
 			options={selectOptions}
 			sx={{
 				width: "100%",
-				marginBottom: 2,
 			}}
 			renderInput={(params: any) => (
 				<TextField {...params} label={props.label} />

@@ -12,7 +12,7 @@ import BackBreadcrumb from "../../../../components/BackBreadcrumb";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import { useRouter } from "next/router";
 import useCollection from "../../../../utils/hooks/useCollection";
-import { Equine, EquineStatus, Status } from "../../../../utils/types";
+import { Status } from "../../../../utils/types";
 import { saveData } from "../../../../utils/helpers";
 import ResponsiveButton from "../../../../components/ResponsiveButton";
 
@@ -23,7 +23,7 @@ export default function EndTraining() {
 		undefined
 	);
 	const { fetchingData, collection } =
-		useCollection<EquineStatus>("equine-statuses");
+		useCollection("equine-statuses");
 
 	useEffect(() => {
 		if (router.isReady) {

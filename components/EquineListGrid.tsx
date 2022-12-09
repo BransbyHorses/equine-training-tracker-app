@@ -5,11 +5,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import PaginationContainer from "./PaginationContainer";
 
 const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
+	const theme = useTheme();
 	const router = useRouter();
 	const [isAdmin, setIsAdmin] = useState<boolean>();
 
@@ -49,7 +51,13 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 									}}
 								>
 									<Grid container>
-										<Grid item xs={6} md={4} lg={3}>
+										<Grid
+											item
+											xs={5}
+											md={4}
+											lg={3}
+											sx={{ display: "flex", alignItems: "center" }}
+										>
 											<Typography
 												variant="h6"
 												fontWeight={500}
@@ -61,12 +69,27 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 										{equine.yard ? (
 											<Grid
 												item
-												xs={5}
+												xs={6}
 												md={4}
 												lg={3}
-												sx={{ display: "flex", alignItems: "center" }}
+												sx={{
+													display: "flex",
+													alignItems: "center",
+													[theme.breakpoints.between("xs", "sm")]: {
+														fontSize: "10px",
+													},
+												}}
 											>
-												<Typography color="gray">{equine.yard.name}</Typography>
+												<Typography
+													color="gray"
+													sx={{
+														[theme.breakpoints.between("xs", "sm")]: {
+															fontSize: "0.8rem",
+														},
+													}}
+												>
+													{equine.yard.name}
+												</Typography>
 											</Grid>
 										) : (
 											<></>

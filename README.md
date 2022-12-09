@@ -1,6 +1,6 @@
 # Equine Training Tracker Application
 
-Next.js interface for Bransby Equine Training Tracker Application.
+Next.js app for Bransby Equine Training Tracker Application.
 
 ### Prerequisites
 

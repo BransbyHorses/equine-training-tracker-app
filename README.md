@@ -1,20 +1,37 @@
 # Equine Training Tracker Application
 
-Application for tracking the time spent training and rehabilitating equines at Bransby Horses Home.
+Next.js interface for Bransby Equine Training Tracker Application.
+
+### Prerequisites
+
+  * Node
+  * Docker
 
 ### Getting started
-Make sure you have cloned the back end application and got it running. See [here](https://github.com/BransbyHorses/equine-training-tracker-api) for details.
 
-Once you have that up and running clone this repo by finding the directory you want to use on the command line and typing the following;
-`git clone https://github.com/BransbyHorses/equine-training-tracker-api.git`
-Then cd into that folder
-`cd equine-training-tracker-app`
-and then run
-`npm run dev`
+  1. Git clone the repo.
+  2. Git clone the Springboot API and run with Docker. See repository [README.md](https://github.com/BransbyHorses/equine-training-tracker-api).
+  3. Set up an .env file as below to enable authentication with Azure AD using [NextAuth.js](https://next-auth.js.org/).
+  
+```bash
+# env variables required for NextAuth authentication. Values taken from auth token provider.
+NEXT_PUBLIC_URL=
+NEXT_PUBLIC_COGNITO_CLIENT_ID=
+NEXT_PUBLIC_COGNITO_CLIENT_SECRET=
+NEXT_PUBLIC_COGNITO_DOMAIN=
+NEXT_PUBLIC_COGNITO_ISSUER=
 
-### Equine upload tool
+NEXTAUTH_URL= # canonical url of site
+NEXTAUTH_SECRET= # generate random key - openssl rand -base64 32
+```
+### Development
 
-Use upload-equines.js in devtools to populate the database with a given number of equines, alongside the fields that are required to make an equine (skill, category, programme and yard). 
+<details>
+<summary>
+About the Equine upload tool
+</summary>
+
+Use upload-equines.js in ./devtools to populate the database with test data (requires SpringBoot api and Postgres to be running).
 
 #### Instructions
 
@@ -24,9 +41,8 @@ Use upload-equines.js in devtools to populate the database with a given number o
 
 - To run the script from the project's root folder, type `node devtools/upload-equines.js <"fields">` into the command line.
 
-    - `fields`: Determines if the script populates the DB with skill, category, programme and yard entries. This has to be passed the first time.
+  - `fields`: Determines if the script populates the DB with skill, category, programme and yard entries. This has to be passed the first time.
 
-#### Usage examples
 
 On first instance, pass "fields" to the script to add the required data. (Note: The API might throw an error if the DB contains duplicate fields - just ignore it).
 
@@ -40,5 +56,4 @@ Then run the script without any arguments to upload 100 equines:
 node devtools/upload-equines.js
 ``` 
 
-
-  
+</details>

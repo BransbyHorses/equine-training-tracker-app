@@ -14,8 +14,8 @@ Next.js interface for Bransby Equine Training Tracker Application.
   3. Set up an .env file as below to enable authentication with Azure AD using [NextAuth.js](https://next-auth.js.org/).
   
 ```bash
+NEXT_PUBLIC_URL= # REST API domain
 # env variables required for NextAuth authentication. Values taken from auth token provider.
-NEXT_PUBLIC_URL=
 NEXT_PUBLIC_COGNITO_CLIENT_ID=
 NEXT_PUBLIC_COGNITO_CLIENT_SECRET=
 NEXT_PUBLIC_COGNITO_DOMAIN=

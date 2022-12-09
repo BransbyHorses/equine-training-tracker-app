@@ -15,11 +15,10 @@ Next.js app for Bransby Equine Training Tracker Application.
   
 ```bash
 NEXT_PUBLIC_URL= # REST API domain
-# env variables required for NextAuth authentication. Values taken from auth token provider.
-NEXT_PUBLIC_COGNITO_CLIENT_ID=
-NEXT_PUBLIC_COGNITO_CLIENT_SECRET=
-NEXT_PUBLIC_COGNITO_DOMAIN=
-NEXT_PUBLIC_COGNITO_ISSUER=
+# env variables required for NextAuth authentication. Values taken from auth token provider - Azure AD.
+AZURE_AD_CLIENT_ID=
+AZURE_AD_CLIENT_SECRET=
+AZURE_AD_TENANT_ID=
 
 NEXTAUTH_URL= # canonical url of site
 NEXTAUTH_SECRET= # generate random key - openssl rand -base64 32

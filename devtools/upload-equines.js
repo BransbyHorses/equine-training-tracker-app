@@ -65,11 +65,26 @@ const equine = {
 
 
 
+<<<<<<< HEAD
+// node devtools/upload-equines.js
+
+function uploadData(endPoint, jsonModel) {
+   return axios
+         .post(`https://bransby-api.azurewebsites.net/data/${endPoint}`, jsonModel)
+         .then(res => {
+           console.log(`${endPoint} upload successful: ${res.status}`);
+            //console.log(res);
+        })
+        .catch(error => {
+            return console.log(error.status + " " + endPoint);
+        });
+=======
 function uploadData(endPoint, jsonModels) {
  for (let i = 0; i < jsonModels.length; i++ ) 
  {
     makePostRequest(endPoint, jsonModels[i]);
  }
+>>>>>>> f416d4e3d12102ef5500f9c7767086d1ee5eb70a
 };
 
 function makePostRequest(endPoint, jsonModel) {

@@ -8,10 +8,8 @@ module.exports = withPWA({
     runtimeCaching,
   },
   reactStrictMode: true,
+  experimental: {
+    outputStandalone: true
+  },  
 })
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-	enabled: process.env.ANALYZE === "true",
-});
-
-module.exports = withBundleAnalyzer({});

@@ -6,16 +6,16 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Alert from "@mui/material/Alert";
-import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
 import EquineListGrid from "../components/EquineListGrid";
+import AutoCompleteBox from "../components/AutoCompleteBox";
 
 export default function Home() {
 	const { fetchingData, equines, error } = useEquines();
-	const { fetchingYardData, yards, error: yardDataError } = useYards();
+	const { yards, error: yardDataError } = useYards();
 	const theme = useTheme();
 
 	const [tableData, setTableData] = useState<Equine[]>([]);
@@ -102,13 +102,12 @@ export default function Home() {
 						{mapYardOptions(yards)}
 					</Select>
 				</FormControl>
-				<TextField
-					id="outlined-basic"
+				<AutoCompleteBox
 					label="Search equines"
-					variant="outlined"
-					size="small"
-					fullWidth
-					onChange={filterEquinesByName}
+					linkName="equines"
+					options={equines.map((equine) => {
+						return { optionName: equine.name, optionId: equine.id };
+					})}
 				/>
 			</Box>
 			<Box
@@ -131,7 +130,6 @@ export default function Home() {
 				</Typography>
 			</Box>
 			<EquineListGrid equines={tableData} />
-			
 		</>
 	);
 }

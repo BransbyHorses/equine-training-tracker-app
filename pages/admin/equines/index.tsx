@@ -38,6 +38,7 @@ export default function Equines() {
 				label="Search equines"
 				linkName="equines"
 			/>
+			<Box mb={2} />
 			{equines.length > 0 && <EquineListGrid equines={equines} />}
 		</>
 	);

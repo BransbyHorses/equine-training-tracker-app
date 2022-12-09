@@ -22,7 +22,7 @@ const EditEquinePage = () => {
 	const router = useRouter();
 	const [editValue, setEditValue] = useState<string | undefined>(undefined);
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	const { fetchingData, equine, error, notFound } = useEquine(
+	const { equine } = useEquine(
 		router.isReady,
 		equineId
 	);

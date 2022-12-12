@@ -62,8 +62,9 @@ const NewTrainingSessionSuccessModal = ({
 				>
 					<Image
 						src="/assets/circle-check-solid.svg"
-						width="100%"
-						height="100%"
+						alt="Form success icon"
+						width="200"
+						height="200"
 					/>
 					<Typography variant="h5" color="gray" sx={{ my: 2, mx: "auto" }}>
 						Training added

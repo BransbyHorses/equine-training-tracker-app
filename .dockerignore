@@ -1,1 +1,11 @@
-devtools/*
+devtools
+assets
+node_modules
+.next
+.git
+.idea
+test-coverage
+Dockerfile
+.dockerignore
+npm-debug.log
+README.md

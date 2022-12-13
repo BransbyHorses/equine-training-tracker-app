@@ -50,6 +50,7 @@ const EquineHealthAndSafety = ({
 			})
 			.catch((err) => {
 				setApiError(true);
+				console.error(err);
 			})
 			.finally(() => {
 				setSendingRequest(false);
@@ -72,7 +73,7 @@ const EquineHealthAndSafety = ({
 					)
 				);
 			})
-			.catch((err) => {});
+			.catch((err) => {console.error(err);});
 	};
 
 	return (

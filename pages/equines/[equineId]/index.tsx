@@ -58,7 +58,7 @@ const EquineProfile = () => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query.equineId]);
 
 	useEffect(() => {
 		setActiveDisruption(findActiveDisruption(equine?.disruptions || []));
@@ -75,7 +75,7 @@ const EquineProfile = () => {
 					activeDisruption!.id
 				}/end`
 			)
-			.then(({ data }) => {
+			.then(() => {
 				setActiveDisruption(null);
 			})
 			.catch((err) => {

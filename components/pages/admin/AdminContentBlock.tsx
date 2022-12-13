@@ -70,9 +70,9 @@ const AdminContentBlock = ({
 }: {
 	editValue?: { id: number; name: string };
 	content: { id: number; name: string };
-	saveFunction: (content: string) => void;
-	editAction: (id: number) => void;
-	deleteFunction: (id: number) => void;
+	saveFunction: (_content: string) => void;
+	editAction: (_id: number) => void;
+	deleteFunction: (_id: number) => void;
 }) => {
 	return (
 		<Paper>

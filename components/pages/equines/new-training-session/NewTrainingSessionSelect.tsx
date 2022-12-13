@@ -4,7 +4,7 @@ export interface NewTrainingSessionSelectProps {
 	categories: any[];
 	label: string;
 	id: string;
-	handleChange: (e: any) => void;
+	handleChange: (_e: any) => void;
 	value: any;
 }
 

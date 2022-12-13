@@ -5,7 +5,6 @@ import { Disruption } from "../../../utils/types";
 
 import { Box, Typography, Paper, useTheme } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const EquineDisruption = ({
 	disruption,

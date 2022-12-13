@@ -29,7 +29,7 @@ const NewTrainingSessionDate = () => {
 				payload: dayjs(),
 			});
 		}
-	}, []);
+	}, [newTrainingSession.date, dispatch]);
 
 	const changeDate = (newDate: Dayjs | null) => {
 		dispatch({

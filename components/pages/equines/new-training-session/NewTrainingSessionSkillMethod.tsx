@@ -30,7 +30,7 @@ const NewTrainingSessionSkillMethod = () => {
 				? newTrainingSession.trainingMethod?.id
 				: ""
 		);
-	}, []);
+	}, [newTrainingSession.skill, newTrainingSession.trainingMethod]);
 
 	const changeSkill = (e: any) => {
 		setSkillId(e.target.value);

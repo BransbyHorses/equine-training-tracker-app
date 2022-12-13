@@ -33,13 +33,6 @@ const NewTrainingSessionSummary = dynamic(
 		)
 );
 
-const NewTrainingSessionSuccess = dynamic(
-	() =>
-		import(
-			"../../../../components/pages/equines/new-training-session/NewTrainingSessionSuccessModal"
-		)
-);
-
 const NewTrainingSessionSwitch = ({
 	trainingProgramme,
 }: {
@@ -57,7 +50,7 @@ const NewTrainingSessionSwitch = ({
 				payload: trainingProgramme,
 			});
 		}
-	}, [trainingProgramme]);
+	}, [trainingProgramme, dispatch]);
 
 	const renderForm = (formStage: string) => {
 		switch (formStage) {

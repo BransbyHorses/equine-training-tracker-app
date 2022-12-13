@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
-import { TrainingCategory } from "../../../utils/types";
 
 const AddTrainingCategoryPage = () => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
@@ -12,7 +11,7 @@ const AddTrainingCategoryPage = () => {
 			.post(`${process.env.NEXT_PUBLIC_URL}data/training-categories`, {
 				name: trainingCategory,
 			})
-			.then(({ data }: { data: TrainingCategory }) => {
+			.then(() => {
 				setSuccessMessage(true);
 				setTimeout(() => {
 					setSuccessMessage(false);

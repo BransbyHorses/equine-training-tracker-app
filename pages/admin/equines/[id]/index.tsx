@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -20,7 +20,6 @@ import {
 	IconButton,
 	MenuItem,
 	Menu,
-	Icon,
 } from "@mui/material";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 
@@ -74,7 +73,7 @@ export const OptionsMenu = ({ deleteEquine }: { deleteEquine: () => void }) => {
 	);
 };
 
-const EquineAdminPage: React.FC = (props) => {
+const EquineAdminPage: React.FC = () => {
 	const router = useRouter();
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const { fetchingData, equine, error, notFound } = useEquine(
@@ -90,7 +89,7 @@ const EquineAdminPage: React.FC = (props) => {
 		if (router.isReady) {
 			setEquineId(router.query.id as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query.id]);
 
 	const deleteEquine = () => {
 		fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines/${equine!.id}`, {

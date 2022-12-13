@@ -1,13 +1,12 @@
 import React from "react";
 import { Equine } from "../../../utils/types";
-import { Button, Container, Typography, useTheme, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 import EquineHealthAndSafety from "../equines/health-and-safety/EquineHealthAndSafety";
 import { useRouter } from "next/router";
 import ResponsiveButton from "../../ResponsiveButton";
 
 const NewEquineHealthAndSafetyFlags = ({ equine }: { equine: Equine }) => {
 	const router = useRouter();
-	const theme = useTheme();
 
 	return (
 		<>

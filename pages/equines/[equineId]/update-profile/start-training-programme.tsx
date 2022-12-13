@@ -19,14 +19,14 @@ export default function StartTrainingProgrammePage() {
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
 	const [trainingCategoryId, setTrainingCategoryId] = useState<number>();
 
-	const { fetchingData, trainingCategories, error } = useTrainingCategories();
+	const { fetchingData, trainingCategories } = useTrainingCategories();
 	const { equine } = useEquine(router.isReady, equineId);
 
 	useEffect(() => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query.equineId]);
 
 	const handleChange = (event: any) => {
 		setTrainingCategoryId(event.target.value);

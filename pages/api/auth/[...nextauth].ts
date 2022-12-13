@@ -1,5 +1,5 @@
 import NextAuth from "next-auth"
-import AzureADProvider from "next-auth/providers/azure-ad";
+// import AzureADProvider from "next-auth/providers/azure-ad";
 import CognitoProvider from "next-auth/providers/cognito";
 import jwt_decode from 'jwt-decode'
 

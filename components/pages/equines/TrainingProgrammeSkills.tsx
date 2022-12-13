@@ -28,7 +28,7 @@ const TrainingProgrammeSkills = ({
 }: {
 	skillProgressRecords: SkillProgressRecord[];
 	skillTrainingSessions: SkillTrainingSession[];
-	setSkillsFocus: (id: number) => void;
+	setSkillsFocus: (_id: number) => void;
 }) => {
 	const theme = useTheme();
 	const [skillsFilter, setSkillsFilter] = useState("all");
@@ -45,7 +45,7 @@ const TrainingProgrammeSkills = ({
 						(skillProgressRecord: SkillProgressRecord) =>
 							skillProgressRecord.progressCode.string === event.target.value
 					)
-			  );
+			);
 	};
 
 	const mapProgressCodeToOptions = () => {
@@ -67,7 +67,7 @@ const TrainingProgrammeSkills = ({
 				if (a.skill.name > b.skill.name) return 1;
 				return 0;
 			})
-			.map((skillProgressRecord, i) => {
+			.map((skillProgressRecord) => {
 				const lastTrainingSession = findLastTrainingSession(
 					skillTrainingSessions.filter(
 						(sts) => sts.skill.id === skillProgressRecord.skill.id
@@ -184,7 +184,7 @@ const TrainingProgrammeSkills = ({
 				{trainingProgrammeSkills && mapSkillProgressRecords()}
 				{trainingProgrammeSkills && trainingProgrammeSkills.length === 0 && (
 					<Typography>
-						<em>No skills are marked as "{skillsFilter}"</em>
+						<em>No skills are marked as &quot;{skillsFilter}&quot;</em>
 					</Typography>
 				)}
 			</Box>

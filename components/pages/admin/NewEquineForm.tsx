@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-	Button,
 	Select,
 	Typography,
-	Container,
 	TextField,
 	MenuItem,
 	FormControl,
@@ -11,14 +9,12 @@ import {
 	InputLabel,
 	Alert,
 	Box,
-	useTheme,
 } from "@mui/material";
 import { LearnerType, Yard, Equine } from "../../../utils/types";
 import BackBreadcrumb from "../../BackBreadcrumb";
 import ResponsiveButton from "../../ResponsiveButton";
 
-const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
-	const theme = useTheme();
+const NewEquineForm = ({ nextStep }: { nextStep: (_e: Equine) => void }) => {
 	const [newEquine, setNewEquine] = useState({
 		name: "",
 		yard: "",
@@ -33,8 +29,8 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 	const getEquineOptions = async () => {
 		try {
 			const res = await Promise.all([
-				fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`),
-				fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`),
+				fetch(`${process.env.NEXT_PUBLIC_URL}data/yards`),
+				fetch(`${process.env.NEXT_PUBLIC_URL}data/learner-types`),
 			]);
 			const data = await Promise.all(res.map((r) => r.json()));
 			setYards(data[0]);
@@ -50,6 +46,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 
 	const saveEquine = async (e: any) => {
 		e.preventDefault();
+		setFormSubmitting(true);
 		setFormError("");
 
 		const equineToPost = {
@@ -61,13 +58,13 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 			learnerType: newEquine.learnerType
 				? learnerTypes.find(
 						(learnerType) => learnerType.id === parseInt(newEquine.learnerType)
-				  )
+				)
 				: null,
 			trainingProgrammes: [],
 			healthAndSafetyFlags: [],
 		};
 
-		await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`, {
+		await fetch(`${process.env.NEXT_PUBLIC_URL}data/equines`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -75,8 +72,12 @@ const NewEquineForm = ({ nextStep }: { nextStep: (e: Equine) => void }) => {
 			body: JSON.stringify(equineToPost),
 		})
 			.then((response) => response.json())
-			.then((data) => nextStep(data))
+			.then((data) => {
+				setFormSubmitting(true);
+				nextStep(data);
+			})
 			.catch((err: any) => {
+				setFormSubmitting(true);
 				console.error(err);
 				setFormError("Unable to save equine. Please try again.");
 			});

@@ -8,7 +8,7 @@ import LoadingSpinner from "../../../components/LoadingSpinner";
 import AdminContentBlock from "../../../components/pages/admin/AdminContentBlock";
 
 const TrainingCategoriesAdminPage = () => {
-  const { fetchingData, trainingCategories, error } = useTrainingCategories();
+  const { fetchingData, trainingCategories } = useTrainingCategories();
   const [editValue, setEditValue] = useState<TrainingCategory | undefined>(
     undefined
   );
@@ -48,7 +48,7 @@ const TrainingCategoriesAdminPage = () => {
           });
           setUpdatedTrainingCategories(trainingCategories);
         })
-        .catch((err) => {});
+        .catch((err) => {console.error(err)});
     }
   };
 

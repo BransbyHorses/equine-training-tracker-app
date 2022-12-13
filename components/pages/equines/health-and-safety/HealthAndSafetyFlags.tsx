@@ -59,7 +59,7 @@ const HealthAndSafetyFlags = ({
 }: {
 	closeFlags: () => void;
 	healthAndSafetyFlags: HealthAndSafetyFlag[];
-	deleteFlag: (id: number) => void;
+	deleteFlag: (_id: number) => void;
 }) => {
 	return (
 		<>

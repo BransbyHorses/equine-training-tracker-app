@@ -3,9 +3,7 @@ import useYards from "../../../utils/hooks/useYards";
 import LoadingSpinner from "../../LoadingSpinner";
 import {
 	Box,
-	Button,
 	Select,
-	useTheme,
 	FormControl,
 	MenuItem,
 	InputLabel,
@@ -23,9 +21,8 @@ const EditEquineYard = ({
 	currentYard?: Yard;
 }) => {
 	const router = useRouter();
-	const theme = useTheme();
 	const [yardId, setYardId] = useState("");
-	const { yards, fetchingYardData, error } = useYards();
+	const { yards, fetchingYardData } = useYards();
 
 	if (fetchingYardData) {
 		return (

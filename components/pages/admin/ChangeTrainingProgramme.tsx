@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
-import useYards from "../../../utils/hooks/useYards";
+import React, { useState } from "react";
 import LoadingSpinner from "../../LoadingSpinner";
 import {
 	Box,
-	Button,
 	Select,
-	useTheme,
 	FormControl,
 	MenuItem,
 	InputLabel,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { LearnerType, TrainingCategory, Yard } from "../../../utils/types";
-import useLearnerTypes from "../../../utils/hooks/useLearnerTypes";
+import { TrainingCategory } from "../../../utils/types";
 import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
 import ResponsiveButton from "../../ResponsiveButton";
 
@@ -25,9 +21,8 @@ const ChangeTrainingProgramme = ({
 	currentTrainingCategory?: TrainingCategory;
 }) => {
 	const router = useRouter();
-	const theme = useTheme();
 	const [newTrainingCategory, setNewTrainingCategory] = useState("");
-	const { trainingCategories, error, fetchingData } = useTrainingCategories();
+	const { trainingCategories, fetchingData } = useTrainingCategories();
 
 	if (fetchingData) {
 		return (

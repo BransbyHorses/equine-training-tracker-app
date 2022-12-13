@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddNewSkillPage: React.FC = (props) => {
+const AddNewSkillPage: React.FC = () => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 

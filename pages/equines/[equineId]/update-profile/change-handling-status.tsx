@@ -13,13 +13,13 @@ export default function ChangeHandlingStatus() {
 	const router = useRouter();
 	const [learnerType, setLearnerType] = useState<number | string>("");
 	const [equineId, setEquineId] = useState<string | undefined>(undefined);
-	const { learnerTypes, fetchingData, error } = useLearnerTypes();
+	const { learnerTypes, fetchingData } = useLearnerTypes();
 
 	useEffect(() => {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query.equineId]);
 
 	const updateEquineLearnerType = () => {
 		if (learnerType === "") return;

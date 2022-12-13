@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import LoadingSpinner from "../../../LoadingSpinner";
+import { display } from "@mui/system";
 
 const NewTrainingSessionSuccessModal = ({
 	isSubmitting,
@@ -60,12 +61,20 @@ const NewTrainingSessionSuccessModal = ({
 						},
 					}}
 				>
-					<Image
-						src="/assets/circle-check-solid.svg"
-						alt="Form success icon"
-						width="200"
-						height="200"
-					/>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<Image
+							src="/assets/circle-check-solid.svg"
+							alt="Form success icon"
+							width="150"
+							height="150"
+						/>
+					</Box>
 					<Typography variant="h5" color="gray" sx={{ my: 2, mx: "auto" }}>
 						Training added
 					</Typography>

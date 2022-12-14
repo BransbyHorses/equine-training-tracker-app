@@ -35,7 +35,7 @@ export interface NavMenuProps {
 const NavMenu = ({ drawerWidth, open, collapse, signOut }: NavMenuProps) => {
 	const theme = useTheme();
 	const router = useRouter();
-	const session = useSession();
+	const session: any = useSession();
 
 	const handleMenuNavigation = (path: string) => {
 		collapse();

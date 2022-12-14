@@ -1,6 +1,10 @@
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: rgba(242, 242, 242, 0.711);
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	background-color: rgba(242, 242, 242, 0.711);
+}
+a {
+	text-decoration: none;
+	color: inherit;
 }

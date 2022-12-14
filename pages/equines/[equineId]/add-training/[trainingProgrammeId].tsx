@@ -18,7 +18,7 @@ const AddTrainingSessionPage = () => {
 		if (router.isReady) {
 			setTrainingProgrammeId(router.query["trainingProgrammeId"] as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query]);
 
 	if (fetchingData) {
 		return (

@@ -17,7 +17,7 @@ const EquineListGrid = ({ equines }: { equines: Equine[] }) => {
 
 	useEffect(() => {
 		router.pathname.includes("admin") ? setIsAdmin(true) : setIsAdmin(false);
-	}, []);
+	}, [router.pathname]);
 
 	return (
 		<>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddNewEquineStatusPage: React.FC = (props) => {
+const AddNewEquineStatusPage: React.FC = () => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
@@ -16,7 +16,7 @@ const AddNewEquineStatusPage: React.FC = (props) => {
 			.then((response) => {
 				response.json();
 			})
-			.then((data) => {
+			.then(() => {
 				setSuccessMessage(true);
 				setTimeout(() => {
 					setSuccessMessage(false);

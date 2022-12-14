@@ -36,7 +36,7 @@ const NewTrainingSessionProgress = () => {
 				: "",
 			notes: newTrainingSession.notes,
 		});
-	}, []);
+	}, [newTrainingSession.notes, newTrainingSession.progressCode]);
 
 	const changeProgressCode = (e: any) => {
 		setFormValues({ ...formValues, progress: e.target.value });

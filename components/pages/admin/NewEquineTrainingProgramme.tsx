@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import {
 	Typography,
-	Container,
 	FormControl,
 	InputLabel,
 	Select,
 	MenuItem,
-	Button,
 	Box,
 	Alert,
-	IconButton,
-	useTheme,
 } from "@mui/material";
 import { Equine } from "../../../utils/types";
 import useTrainingCategories from "../../../utils/hooks/useTrainingCategories";
@@ -23,27 +18,28 @@ const NewEquineTrainingProgramme = ({
 	nextStep,
 }: {
 	equine: Equine;
-	nextStep: (e: Equine) => void;
+	nextStep: (_e: Equine) => void;
 }) => {
-	const router = useRouter();
-	const theme = useTheme();
 	const [trainingCategory, setTrainingCategory] = useState<string | number>(0);
-	const { trainingCategories, fetchingData, error } = useTrainingCategories();
+	const { trainingCategories } = useTrainingCategories();
 	const [formSubmitting, setFormSubmitting] = useState(false);
 	const [formError, setFormError] = useState("");
 
 	const saveEquineTrainingProgramme = () => {
+		setFormSubmitting(true)
 		if (trainingCategory === 0) {
 			nextStep(equine);
 		} else {
 			axios
 				.post(
-					`${process.env.NEXT_PUBLIC_URL}/data/training-programmes/${trainingCategory}/equine/${equine.id}`
+					`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${trainingCategory}/equine/${equine.id}`
 				)
-				.then(({ data }) => {
+				.then(() => {
+					setFormSubmitting(false);
 					nextStep(equine);
 				})
 				.catch((err) => {
+					setFormSubmitting(false);
 					setFormError("Unable to save training programme. Please try again.");
 					console.error(err);
 				});
@@ -65,7 +61,7 @@ const NewEquineTrainingProgramme = ({
 					onChange={(e) => setTrainingCategory(e.target.value)}
 				>
 					<MenuItem value={0}> No Training Programme</MenuItem>
-					{trainingCategories.map((trainingCategory, i) => {
+					{trainingCategories.map((trainingCategory) => {
 						return (
 							<MenuItem value={trainingCategory.id} key={trainingCategory.id}>
 								{trainingCategory.name}

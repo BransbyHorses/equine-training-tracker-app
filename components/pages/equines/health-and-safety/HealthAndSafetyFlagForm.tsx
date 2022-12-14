@@ -18,7 +18,7 @@ const HealthAndSafetyFlagForm = ({
 	success,
 	waiting,
 }: {
-	saveFunction: (c: string) => void;
+	saveFunction: (_c: string) => void;
 	closeForm: () => void;
 	error: boolean;
 	success: boolean;

@@ -45,7 +45,7 @@ const NewTrainingSessionSummary = () => {
 				break;
 			}
 		}
-	}, []);
+	}, [newTrainingSession, submitState]);
 
 	const submitNewTrainingSession = async () => {
 		setSubmitState({ ...submitState, submitting: true });
@@ -59,7 +59,7 @@ const NewTrainingSessionSummary = () => {
 					date: convertDayJsDateToString(newTrainingSession.date),
 				}
 			)
-			.then(({ data }) => {
+			.then(() => {
 				setSubmitState({ ...submitState, submitting: false, success: true });
 			})
 			.catch((err) => {

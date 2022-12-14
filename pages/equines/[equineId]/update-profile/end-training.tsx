@@ -29,7 +29,7 @@ export default function EndTraining() {
 		if (router.isReady) {
 			setEquineId(router.query.equineId as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query.equineId]);
 
 	const handleChange = (event: any) => {
 		setEquineStatusId(event.target.value);

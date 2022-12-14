@@ -35,7 +35,7 @@ const EditEquinePage = () => {
 		if (router.isReady) {
 			setEquineId(router.query.id as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query.id]);
 
 	useEffect(() => {
 		if (router.query["value"]) {

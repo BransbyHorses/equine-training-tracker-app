@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddLearnerTypes: React.FC = (props) => {
+const AddLearnerTypes: React.FC = () => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
@@ -14,7 +14,7 @@ const AddLearnerTypes: React.FC = (props) => {
 			body: JSON.stringify({ name }),
 		})
 			.then((response) => response.json())
-			.then((data) => {
+			.then(() => {
 				setSuccessMessage(true);
 				setTimeout(() => {
 					setSuccessMessage(false);

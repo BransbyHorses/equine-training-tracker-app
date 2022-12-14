@@ -26,7 +26,7 @@ const NewTrainingSessionEnvironment = () => {
 				? newTrainingSession.environment.id
 				: ""
 		);
-	}, []);
+	}, [newTrainingSession.environment]);
 
 	const changeEnvironment = (e: any) => {
 		setEnvironmentId(e.target.value);

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { withRouter, NextRouter } from "next/router";
-import Link from "next/link";
-import { Button, Typography, Container, TextField, Grid } from "@mui/material";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddNewYardPage: React.FC = (props) => {
+const AddNewYardPage: React.FC = () => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
@@ -19,7 +16,7 @@ const AddNewYardPage: React.FC = (props) => {
 			.then((response) => {
 				response.json();
 			})
-			.then((data) => {
+			.then(() => {
 				setSuccessMessage(true);
 				setTimeout(() => {
 					setSuccessMessage(false);

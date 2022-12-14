@@ -52,7 +52,7 @@ const TrainingHistoryPage = () => {
 		if (router.isReady) {
 			setEquineId(router.query["equineId"] as string);
 		}
-	}, [router.isReady]);
+	}, [router.isReady, router.query]);
 
 	useEffect(() => {
 		if (router.query["skill"]) {
@@ -69,12 +69,6 @@ const TrainingHistoryPage = () => {
 			{ shallow: true }
 		);
 	};
-
-	const trainingHistoryCount =
-		!trainingHistory.skillTrainingSessions ||
-		trainingHistory.skillTrainingSessions.length === 0
-			? "0"
-			: `${trainingHistory.skillTrainingSessions.length}`;
 
 	if (error) {
 		return (

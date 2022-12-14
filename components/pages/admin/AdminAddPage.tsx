@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button, Typography, Box, useTheme } from "@mui/material";
+import { TextField, Typography, Box, useTheme } from "@mui/material";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
@@ -13,7 +13,7 @@ const AdminAddPage = ({
 	error,
 }: {
 	entity: string;
-	saveFunction: (n: string) => void;
+	saveFunction: (_s: string) => void;
 	success?: boolean;
 	error?: boolean;
 }) => {

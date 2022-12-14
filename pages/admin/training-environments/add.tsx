@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AdminAddPage from "../../../components/pages/admin/AdminAddPage";
 
-const AddTrainingEnvironment: React.FC = (props) => {
+const AddTrainingEnvironment: React.FC = () => {
 	const [successMessage, setSuccessMessage] = useState<boolean>();
 	const [errorMessage, setErrorMessage] = useState<boolean>();
 
@@ -14,7 +14,7 @@ const AddTrainingEnvironment: React.FC = (props) => {
 			body: JSON.stringify({ name: newTrainingEnvironment }),
 		})
 			.then((response) => response.json())
-			.then((data) => {
+			.then(() => {
 				setSuccessMessage(true);
 				setTimeout(() => {
 					setSuccessMessage(false);

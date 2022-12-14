@@ -30,7 +30,7 @@ export default function Home() {
 			return <MenuItem disabled>Unavailable</MenuItem>;
 		}
 
-		return yardsArray.map((yard, i) => {
+		return yardsArray.map((yard) => {
 			return (
 				<MenuItem key={yard.id} value={yard.name}>
 					{yard.name}
@@ -48,14 +48,7 @@ export default function Home() {
 					equines.filter(
 						(equine) => equine.yard && equine.yard.name === event.target.value
 					)
-			  );
-	};
-
-	const filterEquinesByName = (event: any) => {
-		let filteredEquines: Equine[] = equines.filter(
-			(equine) => equine.name.toLowerCase().indexOf(event.target.value) > -1
-		);
-		setTableData(filteredEquines);
+			);
 	};
 
 	if (fetchingData) {

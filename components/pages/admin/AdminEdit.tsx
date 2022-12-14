@@ -6,7 +6,7 @@ const AdminEdit = ({
 	saveFunction,
 }: {
 	editValue: any;
-	saveFunction: (n: string) => void;
+	saveFunction: (_n: string) => void;
 }) => {
 	const theme = useTheme();
 	const [inputValue, setInputValue] = useState(editValue.name || "");

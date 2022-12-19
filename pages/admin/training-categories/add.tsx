@@ -8,7 +8,7 @@ const AddTrainingCategoryPage = () => {
 
 	const saveFunction = (trainingCategory: string) => {
 		axios
-			.post(`${process.env.NEXT_PUBLIC_URL}data/training-categories`, {
+			.post(`${process.env.NEXT_PUBLIC_URL}/data/training-categories`, {
 				name: trainingCategory,
 			})
 			.then(() => {

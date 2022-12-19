@@ -15,7 +15,7 @@ const useCollection = (
 	useEffect(() => {
 		setFetchingData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}data/${endpoint}`)
+			.get(`${process.env.NEXT_PUBLIC_URL}/data/${endpoint}`)
 			.then(({ data }) => {
 				setCollection(data);
 				setFetchingData(false);

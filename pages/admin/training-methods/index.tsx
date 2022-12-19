@@ -40,7 +40,7 @@ export default function TrainingMethods() {
 
     axios
       .put(
-        `${process.env.NEXT_PUBLIC_URL}data/training-methods/${editValue!.id}`,
+        `${process.env.NEXT_PUBLIC_URL}/data/training-methods/${editValue!.id}`,
         saveEditedTrainingMethod
       )
       .then(({ data }) => {

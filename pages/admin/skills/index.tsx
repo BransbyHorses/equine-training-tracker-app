@@ -35,7 +35,7 @@ export default function SkillsAdminPage() {
 
     axios
       .put(
-        `${process.env.NEXT_PUBLIC_URL}data/skills/${editValue!.id}`,
+        `${process.env.NEXT_PUBLIC_URL}/data/skills/${editValue!.id}`,
         editedSkill
       )
       .then(({ data }) => {

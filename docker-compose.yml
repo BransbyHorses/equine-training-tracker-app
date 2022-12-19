@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  front-end:
+    image: edbentho/bransby-app:v4.6.2
+    container_name: bransby-front-end
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_PUBLIC_URL=https://bransby-api.azurewebsites.net
+      - NEXTAUTH_URL=https://bransby-training.azurewebsites.net
+      - NEXTAUTH_SECRET=uBNNFL2dlOLnsap1UEE6NMtrGPtJ4cvgNJnaGkEO7K4=
+      - AZURE_AD_CLIENT_ID=898540da-cd46-46be-b40b-d6713b478ee9
+      - AZURE_AD_CLIENT_SECRET=aLy8Q~sVGngg62sGxio3lxkuyfbaXzwgRCz_Obw1
+      - AZURE_AD_TENANT_ID=f4324983-ead8-43aa-934a-58ddca1049c6
+

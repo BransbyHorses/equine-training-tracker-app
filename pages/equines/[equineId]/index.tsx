@@ -71,7 +71,7 @@ const EquineProfile = () => {
 	const endDisruption = () => {
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/disruptions/${
+				`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/disruptions/${
 					activeDisruption!.id
 				}/end`
 			)

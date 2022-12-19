@@ -39,7 +39,7 @@ const EquineHealthAndSafety = ({
 		setSendingRequest(true);
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/health-and-safety-flags`,
+				`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/health-and-safety-flags`,
 				{
 					content,
 				}
@@ -63,7 +63,7 @@ const EquineHealthAndSafety = ({
 	const deleteHealhAndSafetyFlag = (healthAndSafetyFlagId: number) => {
 		axios
 			.delete(
-				`${process.env.NEXT_PUBLIC_URL}data/health-and-safety-flags/${healthAndSafetyFlagId}`
+				`${process.env.NEXT_PUBLIC_URL}/data/health-and-safety-flags/${healthAndSafetyFlagId}`
 			)
 			.then(() => {
 				setUpdatedhealthAndSafetyFlags(

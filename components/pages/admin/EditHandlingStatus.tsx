@@ -35,7 +35,7 @@ const EditHandlingStatus = ({
 	const assignEquineANewHandlingStatus = () => {
 		axios
 			.patch(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/learner-type/${newLearnerTypeId}`
+				`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/learner-type/${newLearnerTypeId}`
 			)
 			.then(() => {
 				router.push(`/admin/equines/${equineId}`);

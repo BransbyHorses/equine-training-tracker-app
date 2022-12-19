@@ -35,7 +35,7 @@ const EditEquineYard = ({
 	const assignEquineToYard = () => {
 		axios
 			.patch(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/yards/${yardId}`
+				`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/yards/${yardId}`
 			)
 			.then(() => {
 				router.push(`/admin/equines/${equineId}`);

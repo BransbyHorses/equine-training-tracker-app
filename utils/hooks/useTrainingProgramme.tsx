@@ -19,7 +19,7 @@ export const useTrainingProgramme = (
 			setFetchingData(true);
 			axios
 				.get(
-					`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${trainingProgrammeId}`
+					`${process.env.NEXT_PUBLIC_URL}/data/training-programmes/${trainingProgrammeId}`
 				)
 				.then(({ data }) => {
 					setTrainingProgramme(data);

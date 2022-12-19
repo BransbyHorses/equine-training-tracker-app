@@ -29,7 +29,7 @@ export default function LearnerTypes() {
       setEditValue(undefined);
     } else {
       fetch(
-        `${process.env.NEXT_PUBLIC_URL}data/learner-types/${editValue!.id}`,
+        `${process.env.NEXT_PUBLIC_URL}/data/learner-types/${editValue!.id}`,
         {
           method: "PUT",
           headers: {

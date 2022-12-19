@@ -14,7 +14,7 @@ const useLearnerTypes = (): {
 	useEffect(() => {
 		setFetchingData(true);
 		axios
-			.get(`${process.env.NEXT_PUBLIC_URL}data/learner-types`)
+			.get(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`)
 			.then(({ data }) => {
 				setError(false);
 				setFetchingData(false);

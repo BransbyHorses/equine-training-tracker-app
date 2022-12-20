@@ -50,7 +50,7 @@ const EditEquineStatus = ({
 		if (equineStatusId === "") return;
 		axios
 			.patch(
-				`${process.env.NEXT_PUBLIC_URL}data/equines/${equineId}/equine-status/${equineStatusId}`
+				`${process.env.NEXT_PUBLIC_URL}/data/equines/${equineId}/equine-status/${equineStatusId}`
 			)
 			.then(() => {
 				router.push(`/admin/equines/${equineId}`);

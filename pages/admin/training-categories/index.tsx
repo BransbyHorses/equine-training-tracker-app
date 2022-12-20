@@ -38,7 +38,7 @@ const TrainingCategoriesAdminPage = () => {
       };
       axios
         .put(
-          `${process.env.NEXT_PUBLIC_URL}data/training-categories/${editedTrainingCategory.id}`,
+          `${process.env.NEXT_PUBLIC_URL}/data/training-categories/${editedTrainingCategory.id}`,
           editedTrainingCategory
         )
         .then(({ data }) => {
@@ -54,7 +54,7 @@ const TrainingCategoriesAdminPage = () => {
 
   const deleteTrainingCategory = (id: any) => {
     axios
-      .delete(`${process.env.NEXT_PUBLIC_URL}data/training-categories/${id}`)
+      .delete(`${process.env.NEXT_PUBLIC_URL}/data/training-categories/${id}`)
       .then(({ statusText }) => {
         if (statusText === "OK") {
           setUpdatedTrainingCategories(

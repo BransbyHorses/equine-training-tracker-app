@@ -438,7 +438,7 @@ const NewTrainingSessionSummary = () =&gt; {
 <span class="cstat-no" title="statement not covered" >		setSubmitState({ ...submitState, submitting: true });</span>
 <span class="cstat-no" title="statement not covered" >		axios</span>
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${
+				`${process.env.NEXT_PUBLIC_URL}/data/training-programmes/${
 					trainingProgramme!.id
 				}/skill-training-session`,
 				{

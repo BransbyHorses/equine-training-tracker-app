@@ -36,7 +36,7 @@ export default function TrainingEnvironmentsAdminPage() {
     };
     axios
       .patch(
-        `${process.env.NEXT_PUBLIC_URL}data/environments/${editValue!.id}`,
+        `${process.env.NEXT_PUBLIC_URL}/data/environments/${editValue!.id}`,
         updatedTrainingEnvironment
       )
       .then(({ data }) => {

@@ -29,8 +29,8 @@ const NewEquineForm = ({ nextStep }: { nextStep: (_e: Equine) => void }) => {
 	const getEquineOptions = async () => {
 		try {
 			const res = await Promise.all([
-				fetch(`${process.env.NEXT_PUBLIC_URL}data/yards`),
-				fetch(`${process.env.NEXT_PUBLIC_URL}data/learner-types`),
+				fetch(`${process.env.NEXT_PUBLIC_URL}/data/yards`),
+				fetch(`${process.env.NEXT_PUBLIC_URL}/data/learner-types`),
 			]);
 			const data = await Promise.all(res.map((r) => r.json()));
 			setYards(data[0]);
@@ -64,7 +64,7 @@ const NewEquineForm = ({ nextStep }: { nextStep: (_e: Equine) => void }) => {
 			healthAndSafetyFlags: [],
 		};
 
-		await fetch(`${process.env.NEXT_PUBLIC_URL}data/equines`, {
+		await fetch(`${process.env.NEXT_PUBLIC_URL}/data/equines`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

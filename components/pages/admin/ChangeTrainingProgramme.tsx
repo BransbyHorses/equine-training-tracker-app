@@ -36,7 +36,7 @@ const ChangeTrainingProgramme = ({
 		if (newTrainingCategory === "") return;
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${newTrainingCategory}/equine/${equineId}`
+				`${process.env.NEXT_PUBLIC_URL}/data/training-programmes/${newTrainingCategory}/equine/${equineId}`
 			)
 			.then(() => {
 				router.push(`/admin/equines/${equineId}`);

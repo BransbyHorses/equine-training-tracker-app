@@ -51,7 +51,7 @@ const NewTrainingSessionSummary = () => {
 		setSubmitState({ ...submitState, submitting: true });
 		axios
 			.post(
-				`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${
+				`${process.env.NEXT_PUBLIC_URL}/data/training-programmes/${
 					trainingProgramme!.id
 				}/skill-training-session`,
 				{

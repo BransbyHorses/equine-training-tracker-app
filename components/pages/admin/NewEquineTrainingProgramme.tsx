@@ -32,7 +32,7 @@ const NewEquineTrainingProgramme = ({
 		} else {
 			axios
 				.post(
-					`${process.env.NEXT_PUBLIC_URL}data/training-programmes/${trainingCategory}/equine/${equine.id}`
+					`${process.env.NEXT_PUBLIC_URL}/data/training-programmes/${trainingCategory}/equine/${equine.id}`
 				)
 				.then(() => {
 					setFormSubmitting(false);

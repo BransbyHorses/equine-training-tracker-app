@@ -36,7 +36,7 @@ export default function YardsAdminPage() {
     };
     axios
       .put(
-        `${process.env.NEXT_PUBLIC_URL}data/yards/${editValue!.id}`,
+        `${process.env.NEXT_PUBLIC_URL}/data/yards/${editValue!.id}`,
         updatedYard
       )
       .then(({ data }) => {

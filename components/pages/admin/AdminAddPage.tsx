@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TextField, Typography, Box, useTheme } from "@mui/material";
 import BackBreadcrumb from "../../../components/BackBreadcrumb";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import Notification from "../../Notification";
 import ResponsiveButton from "../../ResponsiveButton";
 import PageTitle from "../../PageTitle";
 
@@ -45,26 +45,8 @@ const AdminAddPage = ({
 				}}
 			>
 				<PageTitle title={`Add New ${entity}`} />
-				{success && (
-					<Box sx={{ display: "flex", alignItems: "center" }}>
-						<CheckCircleOutlineIcon
-							fontSize="small"
-							color="success"
-							sx={{ mr: 1 }}
-						/>
-						<Typography color="success">
-							<small>New {entity.toLowerCase()} saved</small>
-						</Typography>
-					</Box>
-				)}
-				{error && (
-					<Box sx={{ display: "flex", alignItems: "center" }}>
-						<ErrorOutlineIcon fontSize="small" color="error" sx={{ mr: 1 }} />
-						<Typography color="error">
-							<small>Unable to save training category</small>
-						</Typography>
-					</Box>
-				)}
+				{success && <Notification state="success" message={`New ${entity.toLowerCase()} created`} />}
+				{error && <Notification state="error" />}
 			</Box>
 			<form onSubmit={handleSubmit}>
 				<TextField

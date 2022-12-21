@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { HealthAndSafetyFlag } from "../../../../utils/types";
 
-import {
-	Button,
-	Box,
-	Typography,
-	TextField,
-} from "@mui/material";
+import { Button, Box, TextField } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import Notification from "../../../Notification";
 
 const HealthAndSafetyFlagForm = ({
 	saveFunction,
@@ -45,30 +39,8 @@ const HealthAndSafetyFlagForm = ({
 					onClick={closeForm}
 					sx={{ cursor: "pointer" }}
 				/>
-				{success && (
-					<Box sx={{ display: "flex", alignItems: "center" }}>
-						<CheckCircleOutlineIcon
-							fontSize="small"
-							color="success"
-							sx={{ marginRight: "5px" }}
-						/>
-						<Typography color="success">
-							<small>New health & safety flag added.</small>
-						</Typography>
-					</Box>
-				)}
-				{error && (
-					<Box sx={{ display: "flex", alignItems: "center" }}>
-						<ErrorOutlineIcon
-							fontSize="small"
-							color="error"
-							sx={{ marginRight: "5px" }}
-						/>
-						<Typography color="error">
-							<small>An error occurred. Please try again.</small>
-						</Typography>
-					</Box>
-				)}
+				{success && <Notification state="success" message="New health & safety flag saved" />}
+				{error && <Notification state="error" />}
 			</Box>
 			<Box mt={2} sx={{ display: "flex", flexDirection: "column" }}>
 				<TextField

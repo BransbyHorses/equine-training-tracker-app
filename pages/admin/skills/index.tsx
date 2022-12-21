@@ -13,7 +13,7 @@ export default function SkillsAdminPage() {
 			.then((response) => response.json())
 			.then((data) => setSkills(data))
 			.catch((rejected) => {
-				console.log(rejected);
+				console.error(rejected);
 			});
 	}
 

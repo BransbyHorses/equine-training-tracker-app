@@ -13,7 +13,7 @@ export default function TrainingEnvironmentsAdminPage() {
 			.then((response) => response.json())
 			.then((data) => setEnvironments(data))
 			.catch((rejected) => {
-				console.log(rejected);
+				console.error(rejected);
 			});
 	}
 

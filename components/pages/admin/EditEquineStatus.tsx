@@ -46,7 +46,6 @@ const EditEquineStatus = ({
 	const [equineStatusId, setEquineStatusId] = useState("");
 
 	const setEquineStatusToEndTraining = () => {
-		console.log(equineStatusId);
 		if (equineStatusId === "") return;
 		axios
 			.patch(

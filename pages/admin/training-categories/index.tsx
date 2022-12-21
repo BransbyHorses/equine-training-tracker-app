@@ -70,9 +70,7 @@ const TrainingCategoriesAdminPage = () => {
 	if (fetchingData) {
 		return <LoadingSpinner />;
 	}
-
-	console.log(updatedTrainingCategories);
-
+	
 	return (
 		<>
 			<AdminPageTitle

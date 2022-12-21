@@ -47,7 +47,7 @@ export default function LearnerTypes() {
 					setLearnerTypes(mappedLearnerTypes);
 				})
 				.catch((rejected) => {
-					console.log(rejected);
+					console.error(rejected);
 				});
 		}
 	};

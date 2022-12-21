@@ -13,7 +13,7 @@ export default function YardsAdminPage() {
 			.then((response) => response.json())
 			.then((data) => setYards(data))
 			.catch((rejected) => {
-				console.log(rejected);
+				console.error(rejected);
 			});
 	}
 

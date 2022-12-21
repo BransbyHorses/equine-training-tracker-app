@@ -1,11 +1,9 @@
 {
-	"extends": [
-		"eslint:recommended",
-		"next"
-	],
+	"extends": ["eslint:recommended", "next"],
 	"plugins": ["@typescript-eslint"],
 	"ignorePatterns": ["**/*.test.ts", "**/*.test.tsx"],
 	"rules": {
+		"no-console": [2, { "allow": ["warn", "error"] }],
 		"no-mixed-spaces-and-tabs": 0,
 		"no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
 		"@typescript-eslint/no-unused-vars": [

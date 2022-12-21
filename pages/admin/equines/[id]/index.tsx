@@ -99,7 +99,7 @@ const EquineAdminPage: React.FC = () => {
 				router.push("/admin/equines");
 			})
 			.catch((rejected) => {
-				console.log(rejected);
+				console.error(rejected);
 			});
 	};
 
